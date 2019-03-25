@@ -12,8 +12,8 @@ import java.util.Optional;
 @Controller
 @RequestMapping(path="/sponsoren")
 public class MainController {
-    @Autowired
-    private SponsorRepository sponsorRepository;
+    @Autowired private SponsorRepository sponsorRepository;
+    @Autowired private SponsorVeranstaltungRepository sponsorVeranstaltungRepository;
 
     // GET sponsor.Werbetext
     @GetMapping(path="/werbetext")
@@ -36,5 +36,11 @@ public class MainController {
     @GetMapping(path="/all")
     public @ResponseBody Iterable<SponsorEntity> getAllSponsors() {
         return sponsorRepository.findAll();
+    }
+
+    // GET list of sponsor_veeanstaltung
+    @GetMapping(path="/veranst")
+    public @ResponseBody Iterable<SponsorVeranstaltungEntity> getAllVeranst() {
+        return sponsorVeranstaltungRepository.findAll();
     }
 }

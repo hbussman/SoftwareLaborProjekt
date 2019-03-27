@@ -55,7 +55,7 @@ public class SponsorEntity {
         this.adresse = adresse;
     }
 
-    @Basic
+    /*@Basic
     @Column(name = "AnsprechpartnerNachname")
     public String getAnsprechpartnerNachname() {
         return ansprechpartnerNachname;
@@ -73,7 +73,7 @@ public class SponsorEntity {
 
     public void setAnsprechpartnerVorname(String ansprechpartnerVorname) {
         this.ansprechpartnerVorname = ansprechpartnerVorname;
-    }
+    }*/
 
     @Basic
     @Column(name = "Email")

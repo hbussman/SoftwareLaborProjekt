@@ -14,9 +14,11 @@ import java.util.Optional;
 public class MainController {
     @Autowired private SponsorRepository sponsorRepository;
     @Autowired private SponsorVeranstaltungRepository sponsorVeranstaltungRepository;
+    @Autowired private LocationRepository locationRepository;
+    @Autowired private AccountRepository accountRepository;
 
     // GET sponsor.Werbetext
-    @GetMapping(path="/werbetext")
+    @GetMapping(path="/sponsor/werbetext")
     public @ResponseBody String getSponsorWerbetext(@RequestParam String name) {
         if(name.isEmpty())
             return "missing request parameter ?name="; // TODO use error result code
@@ -33,14 +35,26 @@ public class MainController {
 
 
     // GET list of all sponsors
-    @GetMapping(path="/all")
+    @GetMapping(path="/sponsor/all")
     public @ResponseBody Iterable<SponsorEntity> getAllSponsors() {
         return sponsorRepository.findAll();
     }
 
+    // GET list of all locations
+    @GetMapping(path="/location/all")
+    public @ResponseBody Iterable<LocationEntity> getAllLocations() {
+        return locationRepository.findAll();
+    }
+
+    // GET list of all accounts
+    @GetMapping(path="/account/all")
+    public @ResponseBody Iterable<AccountEntity> getAllAccounts() {
+        return accountRepository.findAll();
+    }
+
     // GET list of sponsor_veeanstaltung
-    @GetMapping(path="/veranst")
+    /*@GetMapping(path="/sponsor_veranstaltung/all")
     public @ResponseBody Iterable<SponsorVeranstaltungEntity> getAllVeranst() {
         return sponsorVeranstaltungRepository.findAll();
-    }
+    }*/
 }

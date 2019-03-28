@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import sponsoren.orm.AccountEntity;
 import sponsoren.orm.LocationEntity;
 import sponsoren.orm.SponsorEntity;
+import sponsoren.orm.SponsorVeranstaltungEntity;
 
 import java.util.Optional;
 
@@ -17,16 +18,6 @@ public class MainController {
     @Autowired private LocationRepository locationRepository;
     @Autowired private AccountRepository accountRepository;
 
-    // GET root
-    @RequestMapping(value = "/index", method = RequestMethod.GET)
-    public String index() {
-        return "index";
-    }
-    @RequestMapping(value = "/staticPage", method = RequestMethod.GET)
-    public String redirect() {
-        return "redirect:/pages/final.htm";
-    }
-
     // GET sponsor.Werbetext
     @GetMapping(path="/sponsor/werbetext")
     public @ResponseBody String getSponsorWerbetext(@RequestParam String name) {
@@ -37,7 +28,7 @@ public class MainController {
         if(s.isPresent())
         {
             // sponsor found in database
-            return s.get().getWerbetext();
+            return jsonify(s.get().getWerbetext());
         }
         else
             return "Unknown Sponsor '" + name + "'"; // TODO use error result code
@@ -63,8 +54,12 @@ public class MainController {
     }
 
     // GET list of sponsor_veeanstaltung
-    /*@GetMapping(path="/sponsor_veranstaltung/all")
+    @GetMapping(path="/sponsor_veranstaltung/all")
     public @ResponseBody Iterable<SponsorVeranstaltungEntity> getAllVeranst() {
         return sponsorVeranstaltungRepository.findAll();
-    }*/
+    }
+
+    private String jsonify( String value) {
+        return String.format("{\"text\":\"%s\"}", value);
+    }
 }

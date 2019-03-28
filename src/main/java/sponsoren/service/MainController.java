@@ -10,7 +10,7 @@ import sponsoren.orm.SponsorEntity;
 import java.util.Optional;
 
 @Controller
-@RequestMapping(path="/sponsoren")
+@RequestMapping(path="/api")
 public class MainController {
     @Autowired private SponsorRepository sponsorRepository;
     @Autowired private SponsorVeranstaltungRepository sponsorVeranstaltungRepository;

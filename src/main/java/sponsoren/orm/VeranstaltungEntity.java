@@ -1,4 +1,4 @@
-package sponsoren;
+package sponsoren.orm;
 
 import javax.persistence.*;
 import java.sql.Timestamp;

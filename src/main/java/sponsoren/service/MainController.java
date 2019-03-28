@@ -1,11 +1,11 @@
-package sponsoren;
+package sponsoren.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+import sponsoren.orm.AccountEntity;
+import sponsoren.orm.LocationEntity;
+import sponsoren.orm.SponsorEntity;
 
 import java.util.Optional;
 
@@ -16,6 +16,16 @@ public class MainController {
     @Autowired private SponsorVeranstaltungRepository sponsorVeranstaltungRepository;
     @Autowired private LocationRepository locationRepository;
     @Autowired private AccountRepository accountRepository;
+
+    // GET root
+    @RequestMapping(value = "/index", method = RequestMethod.GET)
+    public String index() {
+        return "index";
+    }
+    @RequestMapping(value = "/staticPage", method = RequestMethod.GET)
+    public String redirect() {
+        return "redirect:/pages/final.htm";
+    }
 
     // GET sponsor.Werbetext
     @GetMapping(path="/sponsor/werbetext")

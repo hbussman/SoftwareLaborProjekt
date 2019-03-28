@@ -2,11 +2,11 @@
 <persistence xmlns="http://java.sun.com/xml/ns/persistence" version="2.0">
 
     <persistence-unit name="NewPersistenceUnit">
-        <class>sponsoren.AccountEntity</class>
-        <class>sponsoren.LocationEntity</class>
-        <class>sponsoren.SponsorEntity</class>
-        <class>sponsoren.SponsorVeranstaltungEntity</class>
-        <class>sponsoren.VeranstaltungEntity</class>
+        <class>sponsoren.orm.AccountEntity</class>
+        <class>sponsoren.orm.LocationEntity</class>
+        <class>sponsoren.orm.SponsorEntity</class>
+        <class>sponsoren.orm.SponsorVeranstaltungEntity</class>
+        <class>sponsoren.orm.VeranstaltungEntity</class>
         <properties>
             <property name="toplink.jdbc.url" value="jdbc:mariadb://seserver.se.hs-heilbronn.de:3406/buga19sponsoren"/>
             <property name="toplink.jdbc.driver" value="org.mariadb.jdbc.Driver"/>

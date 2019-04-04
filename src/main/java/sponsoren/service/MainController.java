@@ -41,6 +41,19 @@ public class MainController {
         return sponsorRepository.findAll();
     }
 
+    //GET all table columns of sponsor
+    @GetMapping(path = "/sponsor/get_info")
+    public @ResponseBody SponsorEntity getSponsorInfo(@RequestParam  String name) {
+        Optional<SponsorEntity> optional = sponsorRepository.findById(name);
+        return optional.get();
+    }
+
+    //Save sponsor information
+    @PostMapping(path = "sponsor/set_Info")
+    public @ResponseBody void setSponsorInfo(@RequestBody SponsorEntity sponsor) {
+        sponsorRepository.save(sponsor);
+    }
+
     // GET list of all locations
     @GetMapping(path="/location/all")
     public @ResponseBody Iterable<LocationEntity> getAllLocations() {

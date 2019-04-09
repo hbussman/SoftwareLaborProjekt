@@ -31,6 +31,7 @@ function _get(what, args) {
 }
 
 function _post(what, args) {
+    console.log("_post " + args);
     return fetch('/api/' + what, {
         method: "POST", // *GET, POST, PUT, DELETE, etc.
         mode: "cors", // no-cors, cors, *same-origin
@@ -87,19 +88,8 @@ function db_get_sponsor_info(sponsor_name) {
  * @param telefon Telefonnummer
  * @returns {Promise<Response>}
  */
-function db_save_sponsor_info(sponsor_name,
-                              beschreibung, werbetext, adresse,
-                              anspr_nachname, anspr_vorname, email, telefon) {
-    return _post("sponsor/set_info", {
-        Name: sponsor_name,
-        Beschreibung: beschreibung,
-        Werbetext: werbetext,
-        Adresse: adresse,
-        AnsprechpartnerNachname: anspr_nachname,
-        AnsprechpartnerVorname: anspr_vorname,
-        Email: email,
-        Telefonnummer: telefon
-    });
+function db_save_sponsor_info(json_info) {
+    return _post("sponsor/set_info", json_info);
 }
 
 /**

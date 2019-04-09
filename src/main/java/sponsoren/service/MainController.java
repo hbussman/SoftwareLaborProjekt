@@ -45,11 +45,11 @@ public class MainController {
     @GetMapping(path = "/sponsor/get_info")
     public @ResponseBody SponsorEntity getSponsorInfo(@RequestParam  String name) {
         Optional<SponsorEntity> optional = sponsorRepository.findById(name);
-        return optional.get();
+        return optional.orElse(null);
     }
 
     //Save sponsor information
-    @PostMapping(path = "sponsor/set_Info")
+    @PostMapping(path = "sponsor/set_info")
     public @ResponseBody void setSponsorInfo(@RequestBody SponsorEntity sponsor) {
         sponsorRepository.save(sponsor);
     }

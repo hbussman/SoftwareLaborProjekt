@@ -9,7 +9,26 @@
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
+    <script src="/js/util.js"></script>
+    <script src="/js/api_client.js"></script>
+
     <title>Webinterface-login</title>
+
+    <script>
+        function DoLogin() {
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+
+            // TODO: send actual login request to backend
+
+            // pretend we logged in
+            setCookie("username", username, 180, "webinterface");
+
+            // redirect to dashboard
+            window.location.href = "webinterface-home.html";
+        }
+    </script>
+
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -43,7 +62,7 @@
                             </span>
 
                         </div>
-                        <input type="text" class="form-control" placeholder="Username" aria-label="Username"
+                        <input id="username" type="text" class="form-control" placeholder="Username" aria-label="Username"
                                aria-describedby="addon-wrapping">
                     </div>
                     <div class="input-group flex-nowrap">
@@ -52,11 +71,11 @@
                                 <i class="fa fa-unlock-alt"></i>
                             </span>
                         </div>
-                        <input type="password" class="form-control" placeholder="Password" aria-label="Password"
+                        <input id="password" type="password" class="form-control" placeholder="Password" aria-label="Password"
                                aria-describedby="addon-wrapping">
                     </div>
                     <p class="card-text"></p>
-                    <a href="webinterface-home.html" class="btn btn-primary">Enter</a>
+                    <a href="#" class="btn btn-primary" onclick="DoLogin()">Enter</a>
                 </div>
             </div>
         </div>

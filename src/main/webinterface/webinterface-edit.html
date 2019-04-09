@@ -14,27 +14,22 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <a class="navbar-brand" href="#">Home</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerHome"
-            aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarTogglerImage">
-        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-            <li class="nav-item active ml-1">
-                <a class="nav-link" href="#">
-                    <i class="far fa-edit"></i>
-                    <span class="sr-only">(current)</span></a>
-            </li>
-        </ul>
-    </div>
+    <a class="navbar-brand" href="webinterface-home.html">Home</a>
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+        <li class="nav-item active ml-1">
+            <a class="nav-link" href="webinterface-login.html">
+                <i class="fa fa-sign-out-alt"></i>
+                <span class="sr-only">(current)</span></a>
+        </li>
+    </ul>
 </nav>
 <div class="container mt-2">
     <div class="row">
         <div class="col-lg-4 col-md-4 col-sm-12">
-            <div class="card" style="width: 18rem;">
-                <img src="img-placeholder.jpg" class="card-img-top" alt="...">
+            <div class="card" style="width:100%">
+                <div class="text-center">
+                    <img src="img-placeholder.jpg" class="card-img-top" alt="...">
+                </div>
                 <div class="card-body">
                     <a href="#" class="btn btn-primary">Change Picture</a>
                 </div>
@@ -42,12 +37,14 @@
         </div>
         <div class="offset-lg-0 col-lg-8 offset-md-2 col-md-6 col-sm-12">
             <div class="form-group">
-                <textarea class="form-control" id="exampleFormControlTextarea3" rows="11" placeholder="Sponsoren Info-Text" aria-label="Username" aria-describedby="basic-addon1"></textarea>
+                <textarea class="form-control" id="exampleFormControlTextarea3" rows="11"
+                          placeholder="Sponsoren Info-Text" aria-label="Username"
+                          aria-describedby="basic-addon1"></textarea>
                 <div class="card-body">
                     <a href="#" class="btn btn-primary">Change Text</a>
                 </div>
+            </div>
         </div>
-    </div>
     </div>
 </div>
 </body>

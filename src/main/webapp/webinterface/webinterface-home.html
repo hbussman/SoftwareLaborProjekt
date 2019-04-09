@@ -10,9 +10,26 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
           integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
+    <script src="/js/util.js"></script>
+    <script src="/js/api_client.js"></script>
+
     <title>Webinterface-home</title>
+
+    <script>
+        function Init() {
+            var username = getCookie("username");
+
+            // ask database for information
+            db_get_sponsor_info(username).then(function (json_info) {
+                console.log(json_info);
+                document.getElementById("sponsor_name").innerText = json_info["name"];
+                document.getElementById("sponsor_info").innerText = json_info["beschreibung"];
+            });
+        }
+    </script>
+
 </head>
-<body>
+<body onload="Init()">
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <a class="navbar-brand" href="#">Home</a>
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
@@ -36,8 +53,8 @@
             <img src="img-placeholder.jpg" style="" class="card-img-top" alt="...">
             </div>
             <div class="card-body">
-                <h5 class="card-title">Sponsor</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                <h5 id="sponsor_name" class="card-title">Sponsor</h5>
+                <p id="sponsor_info" class="card-text">Some quick example text to build on the card title and make up the bulk of the
                     card's content.</p>
                 <a href="#" class="btn btn-primary">Go somewhere</a>
             </div>

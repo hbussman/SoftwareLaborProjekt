@@ -39,4 +39,8 @@ dependencies {
     // JPA Data (We are going to use Repositories, Entities, Hibernate, etc...)
     implementation 'org.mariadb.jdbc:mariadb-java-client:2.4.1'
     compile 'org.springframework.boot:spring-boot-starter-data-jpa'
+    
+    // To support jsp
+    compile("javax.servlet:jstl")
+    compile("org.apache.tomcat.embed:tomcat-embed-jasper")
 }

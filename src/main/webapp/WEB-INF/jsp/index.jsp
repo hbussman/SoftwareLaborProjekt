@@ -50,7 +50,7 @@
                          alt="${sponsor.getName()}Logo">
                     <div class="card-body">
                         <h5 class="card-title">${sponsor.getName()}</h5>
-                        <a href="sponsor-site.html" class="btn btn-primary">Mehr erfahren</a>
+                        <a href="${contextPath}/sponsor?name=${sponsor.name}" class="btn btn-primary">Mehr erfahren</a>
                     </div>
                 </div>
             </div>

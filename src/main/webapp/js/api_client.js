@@ -16,7 +16,7 @@ function _xwwwfurlenc(srcjson){
 }
 
 function _get(what, args) {
-    return fetch('/api/' + encodeURIComponent(what) + _xwwwfurlenc(args), {
+    return fetch('/api/' + what + _xwwwfurlenc(args), {
         method: "GET", // *GET, POST, PUT, DELETE, etc.
         mode: "cors", // no-cors, cors, *same-origin
         cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
@@ -31,7 +31,8 @@ function _get(what, args) {
 }
 
 function _post(what, args) {
-    return fetch('/api/' + encodeURIComponent(what), {
+    console.log("_post " + args);
+    return fetch('/api/' + what, {
         method: "POST", // *GET, POST, PUT, DELETE, etc.
         mode: "cors", // no-cors, cors, *same-origin
         cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
@@ -59,14 +60,14 @@ function _give_text(result) {
 
     Expected result data is json representing a row from the sponsor table with given key 'sponsor_name':
     {
-        Name: string,
-        Beschreibung: string,
-        Werbetext: string,
-        Adresse: string,
-        AnsprechpartnerNachname: string,
-        AnsprechpartnerVorname: string,
-        Email: string,
-        Telefonnummer: string
+        name: string,
+        beschreibung: string,
+        werbetext: string,
+        adresse: string,
+        ansprechpartnerNachname: string,
+        ansprechpartnerVorname: string,
+        email: string,
+        telefonnummer: string
     }
 
     @param sponsor_name Name of the sponsor, i.e. the key in the database
@@ -87,19 +88,8 @@ function db_get_sponsor_info(sponsor_name) {
  * @param telefon Telefonnummer
  * @returns {Promise<Response>}
  */
-function db_save_sponsor_info(sponsor_name,
-                              beschreibung, werbetext, adresse,
-                              anspr_nachname, anspr_vorname, email, telefon) {
-    return _post("sponsor/set_info", {
-        Name: sponsor_name,
-        Beschreibung: beschreibung,
-        Werbetext: werbetext,
-        Adresse: adresse,
-        AnsprechpartnerNachname: anspr_nachname,
-        AnsprechpartnerVorname: anspr_vorname,
-        Email: email,
-        Telefonnummer: telefon
-    });
+function db_save_sponsor_info(json_info) {
+    return _post("sponsor/set_info", json_info);
 }
 
 /**

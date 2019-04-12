@@ -19,7 +19,7 @@
     <title>Sponsoren Early Prototyp</title>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="#">Navigation</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse"
             data-target="#navbarTogglerDemo02"
@@ -50,7 +50,7 @@
                          alt="${sponsor.getName()}Logo">
                     <div class="card-body">
                         <h5 class="card-title">${sponsor.getName()}</h5>
-                        <a href="${contextPath}/sponsor?name=${sponsor.name}" class="btn btn-primary">Mehr erfahren</a>
+                        <a href="${contextPath}/sponsor?name=${sponsor.name}" class="btn btn-dark">Mehr erfahren</a>
                     </div>
                 </div>
             </div>

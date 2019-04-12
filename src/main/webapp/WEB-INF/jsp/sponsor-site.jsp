@@ -20,7 +20,7 @@
     <title>Sponsoren Early Prototyp</title>
 </head>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="#">Navigation</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
             aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
@@ -51,7 +51,7 @@
                 <div class="card-body">
                     <h5 class="card-title">${sponsor.name}</h5>
                     <p class="card-text">${sponsor.beschreibung}</p>
-                    <a href="https://www.lidl.de/" class="btn btn-primary">Website</a>
+                    <a href="https://www.lidl.de/" class="btn btn-dark">Website</a>
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">Werbetext</h5>

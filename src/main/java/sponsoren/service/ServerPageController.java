@@ -16,22 +16,31 @@ public class ServerPageController {
   @Autowired
   private SponsorRepository sponsorRepository;
 
+  private static void setCommon(Model model) {
+    model.addAttribute("imgPath", "/img");
+    model.addAttribute("jsPath", "/js");
+  }
+
   @GetMapping({"/", "/index"})
   public String getIndex(Model model) {
-    //get all Sponsors
+    setCommon(model);
+
+    // get all Sponsors
     Iterable<SponsorEntity> sponsorEntities = sponsorRepository.findAll();
     List<SponsorEntity> sponsors = new ArrayList<>();
-    //convert iterable to List
-    sponsorEntities.forEach(sponsors::add);
 
+    // convert iterable to List
+    sponsorEntities.forEach(sponsors::add);
     model.addAttribute("sponsors", sponsors);
     return "index";
   }
 
   @GetMapping("/sponsor")
-  public String getSponsorSite(Model model,@RequestParam String name) {
+  public String getSponsorSite(Model model, @RequestParam String name) {
+    setCommon(model);
+
     Optional<SponsorEntity> sponsor = sponsorRepository.findById(name);
-    model.addAttribute("sponsor", sponsor.get());
+    model.addAttribute("sponsor", sponsor.orElse(null));
     return "sponsor-site";
   }
 

@@ -47,7 +47,7 @@
                 <div class="card-body">
                     <h5 class="card-title">${sponsor.getName()}</h5>
                     <p class="card-text">${sponsor.getBeschreibung()}</p>
-                    <a href="https://www.lidl.de/" class="btn btn-dark">Website</a>
+                    <a href="${sponsor.getHomepage()}" class="btn btn-dark">Website</a>
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">Werbetext</h5>

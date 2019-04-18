@@ -1,7 +1,8 @@
-<%--@elvariable id="jsPath" type="String"--%>
-<%--@elvariable id="imgPath" type="String"--%>
+<%--@elvariable id="sponsor" type="sponsoren.orm.SponsorEntity"--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en">
+
+<!DOCTYPE html>
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -12,10 +13,11 @@
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <!-- own scripts -->
-    <script src="${jsPath}/api_client.js"></script>
+    <script src="/js/api_client.js"></script>
 
     <title>Sponsoren Early Prototyp</title>
 </head>
+
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="#">Navigation</a>
@@ -42,27 +44,53 @@
         <div class="col-12">
             <div class="card">
                 <div class="text-center">
-                    <img src="${imgPath}/${sponsor.getName()}_scaled.png" style="max-height: 250px; max-width: 250px" class="card-img-thumbnail" alt="...">
+                    <img src="img/${sponsor.name}_scaled.png" style="max-height: 250px; max-width: 250px" class="card-img-thumbnail" alt="...">
                 </div>
                 <div class="card-body">
-                    <h5 class="card-title">${sponsor.getName()}</h5>
-                    <p class="card-text">${sponsor.getBeschreibung()}</p>
-                    <a href="${sponsor.getHomepage()}" class="btn btn-dark">Website</a>
+                    <h5 class="card-title">${sponsor.name}</h5>
+                    <p class="card-text">${sponsor.beschreibung}</p>
+                    <a href="${sponsor.homepage}" class="btn btn-dark">Website</a>
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">Werbetext</h5>
-                    <p class="card-text">${sponsor.getWerbetext()}</p>
+                    <p class="card-text">${sponsor.werbetext}</p>
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">Kontakt</h5>
-                    <p class="card-text">${sponsor.getAnsprechpartnerVorname()}, ${sponsor.getAnsprechpartnerNachname()} </p>
-                    <p class="card-text">${sponsor.getEmail()} </p>
-                    <p class="card-text">${sponsor.getTelefonnummer()}</p>
-                    <p class="card-text">${sponsor.getAdresse()}</p>
+                    <p class="card-text">${sponsor.ansprechpartnerVorname}, ${sponsor.ansprechpartnerNachname} </p>
+                    <p class="card-text">${sponsor.email} </p>
+                    <p class="card-text">${sponsor.telefonnummer}</p>
+                    <p class="card-text">${sponsor.adresse}</p>
                 </div>
             </div>
         </div>
     </div>
+
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card-body">
+                <h2 class="text-start">Veranstaltungen</h2>
+            </div>
+        </div>
+        <div class="col-12 col-md-6">
+            <div class="card-body">
+                <h5 class="card-title">Kinder Hüpfburg</h5>
+                <p class="card-text">Hüpfburg für Kinder zwischen 7 und 13 jahren</p>
+                <p class="card-text">Ort: Lidlblumenbeet</p>
+                <p class="card-text">Zeit: 9:30 - 16:30, 01.05.19- 07.05.19</p>
+            </div>
+        </div>
+        <div class="col-12 col-md-6">
+            <div class="card-body">
+                <h5 class="card-title">Lidl Gratenwerkzeug Präsentation</h5>
+                <p class="card-text">Vorführung und selbstausprobier von speziell für die BuGa angefertigtem Lidl Gartenwerkzeug</p>
+                <p class="card-text">Ort: Lidlblumenbeet</p>
+                <p class="card-text">Zeit: 9:30 - 16:30, 01.05.19- 07.05.19</p>
+            </div>
+        </div>
+    </div>
+
 </div>
 
 

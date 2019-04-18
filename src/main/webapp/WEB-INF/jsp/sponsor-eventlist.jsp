@@ -12,13 +12,13 @@
           integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
     <!-- own scripts -->
-    <script src="js/api_client.js"></script>
+    <script src="/js/api_client.js"></script>
 
     <title>Sponsor-Eventlist</title>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="sponsor-summary.html">Home</a>
+    <a class="navbar-brand" href="/sponsoren">Home</a>
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
         <li class="nav-item active ml-1">
 

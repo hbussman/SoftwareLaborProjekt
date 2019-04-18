@@ -1,5 +1,3 @@
-<%--@elvariable id="jsPath" type="String"--%>
-<%--@elvariable id="imgPath" type="String"--%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE HTML>
@@ -16,7 +14,7 @@
           crossorigin="anonymous">
 
     <!-- own scripts -->
-    <script src="${jsPath}/api_client.js"></script>
+    <script src="/js/api_client.js"></script>
 
     <title>Sponsoren Early Prototyp</title>
 </head>
@@ -49,10 +47,10 @@
         <c:forEach items="${sponsors}" var="sponsor">
             <div class="col-lg-2 col-md-3 col-sm-6 pb-md-4 pb-sm-3">
                 <div class="card">
-                    <img src="${imgPath}/${sponsor.getName()}_scaled.png" class="card-img-top" alt="${sponsor.getName()}Logo">
+                    <img src="img/${sponsor.name}_scaled.png" class="card-img-top" alt="${sponsor.name}Logo">
                     <div class="card-body">
-                        <h5 class="card-title">${sponsor.getName()}</h5>
-                        <a href="${contextPath}/sponsor?name=${sponsor.getName()}" class="btn btn-dark">Mehr erfahren</a>
+                        <h5 class="card-title">${sponsor.name}</h5>
+                        <a href="/sponsor?name=${sponsor.name}" class="btn btn-dark">Mehr erfahren</a>
                     </div>
                 </div>
             </div>

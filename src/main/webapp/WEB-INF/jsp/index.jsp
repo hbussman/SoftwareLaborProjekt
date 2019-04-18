@@ -1,3 +1,5 @@
+<%--@elvariable id="jsPath" type="String"--%>
+<%--@elvariable id="imgPath" type="String"--%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE HTML>
@@ -14,12 +16,12 @@
           crossorigin="anonymous">
 
     <!-- own scripts -->
-    <script src="js/api_client.js"></script>
+    <script src="${jsPath}/api_client.js"></script>
 
     <title>Sponsoren Early Prototyp</title>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="#">Navigation</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse"
             data-target="#navbarTogglerDemo02"
@@ -43,14 +45,14 @@
 
 <div class="container-fluid">
     <div class="row">
+        <%--@elvariable id="sponsors" type="java.util.List"--%>
         <c:forEach items="${sponsors}" var="sponsor">
             <div class="col-lg-2 col-md-3 col-sm-6 pb-md-4 pb-sm-3">
                 <div class="card">
-                    <img src="${contextPath}/${sponsor.getName()}_scaled.png" class="card-img-top"
-                         alt="${sponsor.getName()}Logo">
+                    <img src="${imgPath}/${sponsor.getName()}_scaled.png" class="card-img-top" alt="${sponsor.getName()}Logo">
                     <div class="card-body">
                         <h5 class="card-title">${sponsor.getName()}</h5>
-                        <a href="${contextPath}/sponsor?name=${sponsor.name}" class="btn btn-primary">Mehr erfahren</a>
+                        <a href="${contextPath}/sponsor?name=${sponsor.getName()}" class="btn btn-dark">Mehr erfahren</a>
                     </div>
                 </div>
             </div>

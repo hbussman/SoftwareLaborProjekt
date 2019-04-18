@@ -1,10 +1,7 @@
+<%--@elvariable id="jsPath" type="String"--%>
+<%--@elvariable id="imgPath" type="String"--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Sponsor-page</title>
-</head>
-<body>
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -15,12 +12,12 @@
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <!-- own scripts -->
-    <script src="js/api_client.js"></script>
+    <script src="${jsPath}/api_client.js"></script>
 
     <title>Sponsoren Early Prototyp</title>
 </head>
-
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="#">Navigation</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
             aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,7 +27,7 @@
     <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
             <li class="nav-item active">
-                <a class="nav-link" href="sponsor-summary.html">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="/sponsor">Home <span class="sr-only">(current)</span></a>
             </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
@@ -45,24 +42,23 @@
         <div class="col-12">
             <div class="card">
                 <div class="text-center">
-                    <img src="${contextPath}/${sponsor.getName()}_scaled.png" style="max-height: 250px; max-width: 250px" class="card-img-thumbnail"
-                         alt="...">
+                    <img src="${imgPath}/${sponsor.getName()}_scaled.png" style="max-height: 250px; max-width: 250px" class="card-img-thumbnail" alt="...">
                 </div>
                 <div class="card-body">
-                    <h5 class="card-title">${sponsor.name}</h5>
-                    <p class="card-text">${sponsor.beschreibung}</p>
-                    <a href="https://www.lidl.de/" class="btn btn-primary">Website</a>
+                    <h5 class="card-title">${sponsor.getName()}</h5>
+                    <p class="card-text">${sponsor.getBeschreibung()}</p>
+                    <a href="${sponsor.getHomepage()}" class="btn btn-dark">Website</a>
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">Werbetext</h5>
-                    <p class="card-text">${sponsor.werbetext}</p>
+                    <p class="card-text">${sponsor.getWerbetext()}</p>
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">Kontakt</h5>
-                    <p class="card-text">${sponsor.ansprechpartnerVorname}, ${sponsor.ansprechpartnerNachname} </p>
-                    <p class="card-text">${sponsor.email} </p>
-                    <p class="card-text">${sponsor.telefonnummer}</p>
-                    <p class="card-text">${sponsor.adresse}</p>
+                    <p class="card-text">${sponsor.getAnsprechpartnerVorname()}, ${sponsor.getAnsprechpartnerNachname()} </p>
+                    <p class="card-text">${sponsor.getEmail()} </p>
+                    <p class="card-text">${sponsor.getTelefonnummer()}</p>
+                    <p class="card-text">${sponsor.getAdresse()}</p>
                 </div>
             </div>
         </div>

@@ -1,11 +1,10 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: felix
-  Date: 23.04.2019
-  Time: 14:43
-  To change this template use File | Settings | File Templates.
---%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%--@elvariable id="event" type="sponsoren.orm.VeranstaltungEntity"--%>
+<%--@elvariable id="eventSponsors" type="java.util.List<sponsoren.orm.SponsorEntity>"--%>
+<%--@elvariable id="locations" type="java.util.Map<Integer, sponsoren.orm.LocationEntity>"--%>
+
+<!DOCTYPE html>
 <html>
 <head>
     <!-- Required meta tags -->
@@ -39,15 +38,23 @@
             <div class="card">
                 <div class="card-body">
                     <div class="text-center">
-                        <h5 class="card-title">Veranstaltungsname</h5>
-                        <p class="card-text">Veranstaltungsbeschreibung</p>
+                        <h5 class="card-title">${event.name}</h5>
+                        <p class="card-text">${event.beschreibung}</p>
+                        <p class="card-title">Wo? ${locations.get(event.locationID).name}</p>
+                        <p class="card-title">von ${event.start} bis ${event.ende}</p>
                     </div>
+
+                    <p class="card-title">Veranstaltet von</p>
                     <div class="text-center">
-                        <div class="card-body">
-                            <h5 class="card-title">Sponsorname</h5>
-                            <img src="">
-                            <a href="SPONSORENSEITE" class="btn btn-dark">Sponsorenseite</a>
-                        </div>
+                        <c:forEach items="${eventSponsors}" var="sponsor">
+                            <div class="card-body">
+                                <h5 class="card-title">${sponsor.name}</h5>
+                                <div class="text-center">
+                                    <img src="/img/${sponsor.name}_scaled.png" alt="${sponsor.name} logo" width="200px" height="200px">
+                                </div>
+                                <a href="/sponsor?name=${sponsor.name}" class="btn btn-dark">Zur Sponsorenseite</a>
+                            </div>
+                        </c:forEach>
                     </div>
                 </div>
             </div>

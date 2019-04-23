@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%--@elvariable id="events" type="java.lang.List<sponsoren.orm.VeranstaltungEntity>"--%>
 <%--@elvariable id="locations" type="java.util.Map<Integer, sponsoren.orm.LocationEntity>"--%>
 
 <!DOCTYPE html>
@@ -37,10 +38,9 @@
     </tr>
     </thead>
     <tbody>
-    <%--@elvariable id="events" type="java.lang.List<sponsoren.orm.VeranstaltungEntity>"--%>
     <c:forEach items="${events}" var="event">
         <tr>
-            <td><a href="#" class="text-decoration-none">${event.name}</a></td>
+            <td><a href="/event?id=${event.id}" class="text-decoration-none">${event.name}</a></td>
             <td>${locations.get(event.locationID).name}</td>
             <td>${event.start} bis ${event.ende}</td>
         </tr>

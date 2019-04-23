@@ -1,5 +1,6 @@
 package sponsoren.service;
 
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,10 +29,10 @@ public class ServerPageController {
     }
 
     private void publishSponsorEvents(Model model, String sponsorName) {
-        // get Veranstaltungen of this Sponsor
+        // get sponsor-event mapping
         Iterable<SponsorVeranstaltungEntity> sponsorEventEntities = sponsorVeranstaltungRepository.findAll();
 
-        // convert iterable to List, resolving the foreign key association
+        // convert iterable to List, resolving the foreign key association to event
         List<VeranstaltungEntity> sponsorEvents = new ArrayList<>();
         sponsorEventEntities.forEach(sponsorVeranstaltungEntity -> {
             if(sponsorVeranstaltungEntity.getSponsorName().equals(sponsorName)) {
@@ -50,6 +51,21 @@ public class ServerPageController {
         List<VeranstaltungEntity> events = new ArrayList<>();
         eventEntities.forEach(events::add);
         model.addAttribute("events", events);
+    }
+
+    private void publishEventSponsors(Model model, Integer id) {
+        // get sponsor-event mapping
+        Iterable<SponsorVeranstaltungEntity> sponsorEventEntities = sponsorVeranstaltungRepository.findAll();
+
+        // convert iterable to List, resolving foreign key association to sponsor
+        List<SponsorEntity> eventSponsors = new ArrayList<>();
+        sponsorEventEntities.forEach(sponsorVeranstaltungEntity -> {
+            if(sponsorVeranstaltungEntity.getVeranstaltungId() == id) {
+                Optional<SponsorEntity> sponsor = sponsorRepository.findById(sponsorVeranstaltungEntity.getSponsorName());
+                sponsor.ifPresent(eventSponsors::add);
+            }
+        });
+        model.addAttribute("eventSponsors", eventSponsors);
     }
 
     private void publishLocations(Model model) {
@@ -93,9 +109,13 @@ public class ServerPageController {
         return "sponsor-eventlist";
     }
 
-    @GetMapping("/eventsite")
-    public String getEventSite(Model model) {
+    @GetMapping("/event")
+    public String getEventSite(Model model, @RequestParam Integer id) {
+        Optional<VeranstaltungEntity> event = veranstaltungRepository.findById(id);
+        model.addAttribute("event", event.orElse(null));
 
+        publishLocations(model);
+        publishEventSponsors(model, id);
         return "event-site";
     }
 

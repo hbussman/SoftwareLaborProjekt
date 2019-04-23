@@ -70,7 +70,7 @@
         <c:forEach items="${sponsorEvents}" var="event">
             <div class="col-12 col-md-6">
                 <div class="card-body">
-                    <h5 class="card-title"><a href="">${event.name}</a></h5>
+                    <h5 class="card-title"><a href="/event?id=${event.id}">${event.name}</a></h5>
                     <p class="card-text">${event.beschreibung}</p>
                     <p class="card-text">Ort: ${locations.get(event.locationID).name}</p>
                     <p class="card-text">Zeit: ${event.start} bis ${event.ende}</p>

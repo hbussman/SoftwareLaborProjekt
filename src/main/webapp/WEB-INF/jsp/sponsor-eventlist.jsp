@@ -40,7 +40,7 @@
     <%--@elvariable id="events" type="java.lang.List<sponsoren.orm.VeranstaltungEntity>"--%>
     <c:forEach items="${events}" var="event">
         <tr>
-            <td>${event.name}</td>
+            <td><a href="#" class="text-decoration-none">${event.name}</a></td>
             <td>${locations.get(event.locationID).name}</td>
             <td>${event.start} bis ${event.ende}</td>
         </tr>

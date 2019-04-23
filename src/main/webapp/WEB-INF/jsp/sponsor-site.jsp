@@ -1,8 +1,11 @@
-<%--@elvariable id="sponsor" type="sponsoren.orm.SponsorEntity"--%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html lang="en">
+<%--@elvariable id="sponsor" type="sponsoren.orm.SponsorEntity"--%>
+<%--@elvariable id="sponsorEvents" type="java.util.List<sponsoren.orm.VeranstaltungEntity>"--%>
+<%--@elvariable id="locations" type="java.util.Map<Integer, sponsoren.orm.LocationEntity>"--%>
 
 <!DOCTYPE html>
+<html lang="en">
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -64,22 +67,16 @@
                 <h2 class="text-start">Veranstaltungen</h2>
             </div>
         </div>
-        <div class="col-12 col-md-6">
-            <div class="card-body">
-                <h5 class="card-title">Kinder Hüpfburg</h5>
-                <p class="card-text">Hüpfburg für Kinder zwischen 7 und 13 jahren</p>
-                <p class="card-text">Ort: Lidlblumenbeet</p>
-                <p class="card-text">Zeit: 9:30 - 16:30, 01.05.19- 07.05.19</p>
+        <c:forEach items="${sponsorEvents}" var="event">
+            <div class="col-12 col-md-6">
+                <div class="card-body">
+                    <h5 class="card-title"><a href="">${event.name}</a></h5>
+                    <p class="card-text">${event.beschreibung}</p>
+                    <p class="card-text">Ort: ${locations.get(event.locationID).name}</p>
+                    <p class="card-text">Zeit: ${event.start} bis ${event.ende}</p>
+                </div>
             </div>
-        </div>
-        <div class="col-12 col-md-6">
-            <div class="card-body">
-                <h5 class="card-title">Lidl Gratenwerkzeug Präsentation</h5>
-                <p class="card-text">Vorführung und selbstausprobier von speziell für die BuGa angefertigtem Lidl Gartenwerkzeug</p>
-                <p class="card-text">Ort: Lidlblumenbeet</p>
-                <p class="card-text">Zeit: 9:30 - 16:30, 01.05.19- 07.05.19</p>
-            </div>
-        </div>
+        </c:forEach>
     </div>
 
 </div>

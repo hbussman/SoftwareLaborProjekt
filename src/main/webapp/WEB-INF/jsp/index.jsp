@@ -22,13 +22,12 @@
     <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
             <li class="nav-item active">
-                <a class="nav-link" href="sponsor-summary.jsp">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="sponsoren">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/webinterface/webinterface-login.html">Login <span class="sr-only">(current)</span></a>
             </li>
         </ul>
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Suchen">
-            <button class="btn btn-secondary" type="submit">Suchen</button>
-        </form>
     </div>
 </nav>
 

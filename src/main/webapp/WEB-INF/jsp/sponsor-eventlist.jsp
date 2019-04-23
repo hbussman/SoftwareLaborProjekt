@@ -1,3 +1,6 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%--@elvariable id="locations" type="java.util.Map<Integer, sponsoren.orm.LocationEntity>"--%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,35 +24,27 @@
     <a class="navbar-brand" href="/sponsoren">Home</a>
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
         <li class="nav-item active ml-1">
-            <a class="nav-link" href="sponsor-eventlist.html">
-                <span class="sr-only">(current)</span></a>
+
         </li>
     </ul>
 </nav>
-<table class="table table-bordered">
+<table class="table table-bordered table-striped">
     <thead>
     <tr>
-        <th scope="col">Veranstaltung</th>
-        <th scope="col">Ort</th>
-        <th scope="col">Datum</th>
+        <th style="width: 150px;">Veranstaltung</th>
+        <th style="width: 150px;">Ort?</th>
+        <th style="width: 150px;">Datum</th>
     </tr>
     </thead>
     <tbody>
-    <tr>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-    </tr>
-    <tr>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
-    </tr>
-    <tr>
-        <td>Larry the Bird</td>
-        <td>@twitter</td>
-        <td>lmao</td>
-    </tr>
+    <%--@elvariable id="events" type="java.lang.List<sponsoren.orm.VeranstaltungEntity>"--%>
+    <c:forEach items="${events}" var="event">
+        <tr>
+            <td>${event.name}</td>
+            <td>${locations.get(event.locationID).name}</td>
+            <td>${event.start} bis ${event.ende}</td>
+        </tr>
+    </c:forEach>
     </tbody>
 </table>
 </body>

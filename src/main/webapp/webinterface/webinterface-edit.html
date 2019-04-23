@@ -63,20 +63,39 @@
         <div class="col-lg-4 col-md-4 col-sm-12">
             <div class="card" style="width:100%">
                 <div class="text-center">
-                    <img src="img-placeholder.jpg" class="card-img-top" alt="...">
+                    <div class="input-group input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-sm">Name</span>
+                        </div>
+                        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-default">Ort</span>
+                        </div>
+                        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                    </div>
+
+                    <div class="input-group input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-lg">Datum</span>
+                        </div>
+                        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+                    </div>
                 </div>
                 <div class="card-body">
-                    <a href="#" class="btn btn-dark">Change Picture</a>
+                    <a href="#" class="btn btn-dark">Veranstaltung hinzufügen</a>
                 </div>
             </div>
         </div>
         <div class="offset-lg-0 col-lg-8 offset-md-2 col-md-6 col-sm-12">
             <div class="form-group">
-                <textarea id="info_text" class="form-control" rows="11"
+                <textarea id="info_text" class="form-control" rows="6"
                           placeholder="Sponsoren Info-Text" aria-label="Username"
                           aria-describedby="basic-addon1"></textarea>
                 <div class="card-body">
-                    <a href="#" class="btn btn-dark" onclick="Save()">Change Text</a>
+                    <a href="#" class="btn btn-dark" onclick="Save()">Text ändern</a>
                 </div>
                 <div id="ResultStatus"></div>
             </div>

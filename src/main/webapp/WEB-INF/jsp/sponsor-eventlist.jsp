@@ -21,23 +21,34 @@
     <a class="navbar-brand" href="/sponsoren">Home</a>
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
         <li class="nav-item active ml-1">
-
+            <a class="nav-link" href="sponsor-eventlist.html">
+                <span class="sr-only">(current)</span></a>
         </li>
     </ul>
 </nav>
-<table class="table table-bordered table-striped">
+<table class="table table-bordered">
     <thead>
     <tr>
-        <th style="width: 150px;">Veranstaltung</th>
-        <th style="width: 150px;">Ort?</th>
-        <th style="width: 150px;">Datum</th>
+        <th scope="col">Veranstaltung</th>
+        <th scope="col">Ort</th>
+        <th scope="col">Datum</th>
     </tr>
     </thead>
     <tbody>
     <tr>
-        <td>PLACEHOLDER</td>
-        <td>PLACEHOLDER</td>
-        <td>PLACEHOLDER</td>
+        <td>Mark</td>
+        <td>Otto</td>
+        <td>@mdo</td>
+    </tr>
+    <tr>
+        <td>Jacob</td>
+        <td>Thornton</td>
+        <td>@fat</td>
+    </tr>
+    <tr>
+        <td>Larry the Bird</td>
+        <td>@twitter</td>
+        <td>lmao</td>
     </tr>
     </tbody>
 </table>

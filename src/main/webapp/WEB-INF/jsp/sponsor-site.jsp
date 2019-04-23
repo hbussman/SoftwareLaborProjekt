@@ -24,7 +24,7 @@
 
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="">Home</a>
+    <a class="navbar-brand" href="/sponsoren">Home</a>
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
         <li class="nav-item active ml-1">
             <a class="nav-link" href="/events">
@@ -70,7 +70,7 @@
         <c:forEach items="${sponsorEvents}" var="event">
             <div class="col-12 col-md-6">
                 <div class="card-body">
-                    <h5 class="card-title"><a href="">${event.name}</a></h5>
+                    <h5 class="card-title"><a href="#" class="text-decoration-none">${event.name}</a></h5>
                     <p class="card-text">${event.beschreibung}</p>
                     <p class="card-text">Ort: ${locations.get(event.locationID).name}</p>
                     <p class="card-text">Zeit: ${event.start} bis ${event.ende}</p>

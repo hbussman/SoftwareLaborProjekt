@@ -76,4 +76,10 @@ public class ServerPageController {
         return "sponsor-eventlist";
     }
 
+    @GetMapping("/eventsite")
+    public String getEventSite(Model model) {
+
+        return "event-site";
+    }
+
 }

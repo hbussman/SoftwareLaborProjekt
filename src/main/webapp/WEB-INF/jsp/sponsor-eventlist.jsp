@@ -1,3 +1,6 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%--@elvariable id="locations" type="java.util.Map<Integer, sponsoren.orm.LocationEntity>"--%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,11 +37,14 @@
     </tr>
     </thead>
     <tbody>
-    <tr>
-        <td>PLACEHOLDER</td>
-        <td>PLACEHOLDER</td>
-        <td>PLACEHOLDER</td>
-    </tr>
+    <%--@elvariable id="events" type="java.lang.List<sponsoren.orm.VeranstaltungEntity>"--%>
+    <c:forEach items="${events}" var="event">
+        <tr>
+            <td>${event.name}</td>
+            <td>${locations.get(event.locationID).name}</td>
+            <td>${event.start} bis ${event.ende}</td>
+        </tr>
+    </c:forEach>
     </tbody>
 </table>
 </body>

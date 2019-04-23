@@ -13,6 +13,7 @@ public class VeranstaltungEntity {
     private Timestamp start;
     private Timestamp ende;
     private String discriminator;
+    private Integer locationID;
 
     @Id
     @Column(name = "ID")
@@ -72,6 +73,16 @@ public class VeranstaltungEntity {
 
     public void setDiscriminator(String discriminator) {
         this.discriminator = discriminator;
+    }
+
+    @Basic
+    @Column(name = "LocationID")
+    public Integer getLocationID() {
+        return locationID;
+    }
+
+    public void setLocationID(Integer locationID) {
+        this.locationID = locationID;
     }
 
     @Override

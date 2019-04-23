@@ -5,17 +5,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import sponsoren.orm.LocationEntity;
 import sponsoren.orm.SponsorEntity;
+import sponsoren.orm.VeranstaltungEntity;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Controller
 public class ServerPageController {
 
-    @Autowired
-    private SponsorRepository sponsorRepository;
+    @Autowired private SponsorRepository sponsorRepository;
+    @Autowired private VeranstaltungRepository veranstaltungRepository;
+    @Autowired private LocationRepository locationRepository;
 
     private void publishSponsors(Model model) {
         // get all Sponsors
@@ -26,6 +27,27 @@ public class ServerPageController {
         sponsorEntities.forEach(sponsors::add);
         model.addAttribute("sponsors", sponsors);
     }
+
+    private void publishEvents(Model model) {
+        // get all Veranstaltungen
+        Iterable<VeranstaltungEntity> eventEntities = veranstaltungRepository.findAll();
+        List<VeranstaltungEntity> events = new ArrayList<>();
+
+        // convert iterable to List
+        eventEntities.forEach(events::add);
+        model.addAttribute("events", events);
+    }
+
+    private void publishLocations(Model model) {
+        // get all Locations
+        Iterable<LocationEntity> locationEntities = locationRepository.findAll();
+        Map<Integer, LocationEntity> locations = new HashMap<>();
+
+        // convert iterable to Map
+        locationEntities.forEach(location -> locations.put(location.getId(), location));
+        model.addAttribute("locations", locations);
+    }
+
 
     @GetMapping({"/", "/index"})
     public String getIndex(Model model) {
@@ -48,6 +70,9 @@ public class ServerPageController {
     @GetMapping("/events")
     public String getEventlist(Model model) {
         publishSponsors(model);
+        publishEvents(model);
+        publishLocations(model);
+
         return "sponsor-eventlist";
     }
 

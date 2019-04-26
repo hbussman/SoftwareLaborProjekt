@@ -61,6 +61,52 @@
                 }
             })
         }
+
+        function sendVeranstaltung() {
+            var username = getCookie("username");
+            console.log("send veranstaltung of " + username);
+
+            var resultElem = document.getElementById('veranstaltung-success-text');
+
+            var name = document.getElementById('veranstaltung-name').value;
+            var ort = document.getElementById('veranstaltung-ort').value;
+            var start = document.getElementById('veranstaltung-start').value;
+            var ende = document.getElementById('veranstaltung-ende').value;
+
+            // make sure all fields are filled out
+            if(name == "" || ort == "" || start == "" || ende == "") {
+                resultElem.style = "color: red;";
+                resultElem.innerText = "Bitte alle Felder ausfüllen!";
+                return;
+            }
+
+            db_send_new_veranstaltung(username, name, ort, start, ende).then(result => {
+                if(result.ok) {
+                    // success
+                    resultElem.style = "color: darkgreen;";
+                    resultElem.innerText = "Veranstaltung erfolgreich erstellt!";
+                    document.getElementById('veranstaltung-info').innerHTML =
+                        "Name: " + name + "<br>" +
+                            "Ort: " + ort + "<br>" +
+                            "Zeitraum: " + start + " - " + ende;
+
+                    // clear out input fields
+                    document.getElementById('veranstaltung-name').value = "";
+                    document.getElementById('veranstaltung-ort').value = "";
+                    document.getElementById('veranstaltung-start').value = "";
+                    document.getElementById('veranstaltung-ende').value = "";
+
+                } else {
+                    // error occurred
+                    resultElem.style = "color: red;";
+
+                    result.text().then(value => {
+                        resultElem.innerText = "Es ist ein Fehler aufgetreten: " + result.status + " (" +
+                            value + ")";
+                    });
+                }
+            });
+        }
     </script>
 
 </head>
@@ -85,7 +131,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="inputGroup-sizing-sm">Name</span>
                         </div>
-                        <input type="text" class="form-control" aria-label="Sizing example input"
+                        <input id="veranstaltung-name" type="text" class="form-control" aria-label="Sizing example input"
                                aria-describedby="inputGroup-sizing-sm">
                     </div>
 
@@ -93,25 +139,28 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="inputGroup-sizing-default">Ort</span>
                         </div>
-                        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                        <input id="veranstaltung-ort" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                     </div>
 
                     <div class="input-group input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="inputGroup-sizing-lg">Start-Datum</span>
                         </div>
-                        <input data-provide="datepicker" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+                        <input id="veranstaltung-start" data-provide="datepicker" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
                     </div>
 
                     <div class="input-group input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="inputGroup-sizing-lg">End-Datum</span>
                         </div>
-                        <input data-provide="datepicker" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+                        <input id="veranstaltung-ende" data-provide="datepicker" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
                     </div>
+
+                    <p style="" id="veranstaltung-success-text"></p>
+                    <div id="veranstaltung-info"></div>
                 </div>
                 <div class="card-body">
-                    <a href="#" class="btn btn-dark">Veranstaltung hinzufügen</a>
+                    <a href="#" class="btn btn-dark" onclick="sendVeranstaltung();">Veranstaltung hinzufügen</a>
                 </div>
             </div>
         </div>

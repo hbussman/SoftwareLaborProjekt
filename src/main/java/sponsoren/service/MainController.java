@@ -1,19 +1,24 @@
 package sponsoren.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import sponsoren.orm.AccountEntity;
-import sponsoren.orm.LocationEntity;
-import sponsoren.orm.SponsorEntity;
-import sponsoren.orm.SponsorVeranstaltungEntity;
+import sponsoren.orm.*;
 
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Map;
 import java.util.Optional;
 
 @Controller
 @RequestMapping(path="/api")
 public class MainController {
     @Autowired private SponsorRepository sponsorRepository;
+    @Autowired private VeranstaltungRepository veranstaltungRepository;
     @Autowired private SponsorVeranstaltungRepository sponsorVeranstaltungRepository;
     @Autowired private LocationRepository locationRepository;
     @Autowired private AccountRepository accountRepository;
@@ -72,7 +77,86 @@ public class MainController {
         return sponsorVeranstaltungRepository.findAll();
     }
 
-    private String jsonify( String value) {
+    @PostMapping(path="/event/new", consumes="application/json")
+    public ResponseEntity createNewVeranstaltung(@RequestBody Map<String, String> event) {
+        // create Veranstaltung
+        VeranstaltungEntity veranstaltung = new VeranstaltungEntity();
+        veranstaltung.setName(event.get("name"));
+        try {
+            veranstaltung.setStart(parseDate(event.get("start")));
+        } catch(ParseException e) {
+            e.printStackTrace();
+            return ResponseEntity.unprocessableEntity().body("Fehlerhaftes Datumsformat " + event.get("start") + " - "
+                    + e.getMessage());
+        }
+        try {
+            veranstaltung.setEnde(parseDate(event.get("ende")));
+        } catch(ParseException e) {
+            e.printStackTrace();
+            return ResponseEntity.unprocessableEntity().body("Fehlerhaftes Datumsformat " + event.get("ende") + " - "
+                    + e.getMessage());
+        }
+
+        String ort = event.get("ort");
+        LocationEntity location = findLocation(ort);
+        if(location == null)
+            return ResponseEntity.unprocessableEntity().body("Ort '" + ort + "' existiert nicht");
+        veranstaltung.setLocationID(location.getId());
+
+        // save Veranstaltung to database
+        veranstaltung.setDiscriminator("Veranstaltung");
+        veranstaltungRepository.save(veranstaltung);
+        veranstaltung = findNewestVeranstaltung();
+        System.out.println("Veranstaltung saved; ID=" + veranstaltung.getId());
+
+        // create veranstaltung-sponsor association
+        String creator = event.get("creator");
+        SponsorVeranstaltungEntity sponsorVeranstaltung = new SponsorVeranstaltungEntity();
+        sponsorVeranstaltung.setSponsorName(creator);
+        sponsorVeranstaltung.setVeranstaltungId(veranstaltung.getId());
+
+        // save veranstaltung-sponsor association to database
+        sponsorVeranstaltungRepository.save(sponsorVeranstaltung);
+
+        return ResponseEntity.accepted().body(null);
+    }
+
+
+    private Timestamp parseDate(String dateString) throws ParseException {
+        DateFormat fmt = new SimpleDateFormat("MM/dd/yyy");
+        Date date = fmt.parse(dateString);
+//        System.out.println("parseDate " + dateString + " -> " + date.toString());
+        return new Timestamp(date.getTime());
+    }
+
+    private LocationEntity findLocation(String name) {
+        Iterable<LocationEntity> locations = locationRepository.findAll();
+
+        for(LocationEntity location : locations) {
+            if(location.getName().equals(name)) {
+                return location;
+            }
+        }
+
+        return null;
+    }
+
+    private VeranstaltungEntity findNewestVeranstaltung() {
+        Iterable<VeranstaltungEntity> veranstaltungen = veranstaltungRepository.findAll();
+
+        int maxId = -1;
+        VeranstaltungEntity max = null;
+        for(VeranstaltungEntity veranstaltung : veranstaltungen) {
+            if(veranstaltung.getId() > maxId) {
+                maxId = veranstaltung.getId();
+                max = veranstaltung;
+            }
+        }
+
+        return max;
+    }
+
+    private String jsonify(String value) {
         return String.format("{\"text\":\"%s\"}", value);
     }
 }

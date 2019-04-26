@@ -93,6 +93,24 @@ function db_save_sponsor_info(json_info) {
 }
 
 /**
+ * Sends a new Veranstaltung to the database
+ * @param creator Name of the Sponsor who created this Veranstaltung
+ * @param name
+ * @param ort
+ * @param start
+ * @param ende
+ */
+function db_send_new_veranstaltung(creator, name, ort, start, ende) {
+    return _post("event/new", {
+        creator: creator,
+        name: name,
+        ort: ort,
+        start: start,
+        ende: ende
+    });
+}
+
+/**
  * Returns the Werbetext of a Sponsor
  * @param sponsor_name Name of the sponsor, i.e. the key in the database
  * @returns {Promise<Response>}

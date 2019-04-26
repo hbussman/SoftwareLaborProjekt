@@ -10,6 +10,23 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
           integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.min.css"
+          crossorigin="anonymous">
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.min.js"
+            crossorigin="anonymous"></script>
+
+
     <script src="/js/util.js"></script>
     <script src="/js/api_client.js"></script>
 
@@ -62,12 +79,14 @@
     <div class="row">
         <div class="col-lg-4 col-md-4 col-sm-12">
             <div class="card" style="width:100%">
+                <p class="card-title">Neue Veranstlatung erstellen</p>
                 <div class="text-center">
                     <div class="input-group input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="inputGroup-sizing-sm">Name</span>
                         </div>
-                        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                        <input type="text" class="form-control" aria-label="Sizing example input"
+                               aria-describedby="inputGroup-sizing-sm">
                     </div>
 
                     <div class="input-group mb-3">
@@ -79,9 +98,16 @@
 
                     <div class="input-group input-group mb-3">
                         <div class="input-group-prepend">
-                            <span class="input-group-text" id="inputGroup-sizing-lg">Datum</span>
+                            <span class="input-group-text" id="inputGroup-sizing-lg">Start-Datum</span>
                         </div>
-                        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+                        <input data-provide="datepicker" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+                    </div>
+
+                    <div class="input-group input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-lg">End-Datum</span>
+                        </div>
+                        <input data-provide="datepicker" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
                     </div>
                 </div>
                 <div class="card-body">
@@ -91,7 +117,7 @@
         </div>
         <div class="offset-lg-0 col-lg-8 offset-md-2 col-md-6 col-sm-12">
             <div class="form-group">
-                <textarea id="info_text" class="form-control" rows="6"
+                <textarea id="info_text" class="form-control" rows="11"
                           placeholder="Sponsoren Info-Text" aria-label="Username"
                           aria-describedby="basic-addon1"></textarea>
                 <div class="card-body">

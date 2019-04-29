@@ -30,10 +30,15 @@
             // redirect to dashboard
             window.location.href = "/webinterface/home?sponsor=" + username;
         }
+
+        function Init() {
+            // logout
+            deleteCookie("username", "webinterface");
+        }
     </script>
 
 </head>
-<body>
+<body onload="Init()">
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="#">Sponsoren-Login</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"

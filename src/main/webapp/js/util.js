@@ -23,6 +23,6 @@ function getCookie(cname) {
     return null;
 }
 
-function deleteCookie(cname) {
-    setCookie(cname, "", -1);
+function deleteCookie(cname, path) {
+    setCookie(cname, "", -1, path);
 }

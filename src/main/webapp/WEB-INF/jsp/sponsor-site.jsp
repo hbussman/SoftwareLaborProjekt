@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%--@elvariable id="util" type="sponsoren.Util"--%>
 <%--@elvariable id="sponsor" type="sponsoren.orm.SponsorEntity"--%>
 <%--@elvariable id="sponsorEvents" type="java.util.List<sponsoren.orm.VeranstaltungEntity>"--%>
 <%--@elvariable id="locations" type="java.util.Map<Integer, sponsoren.orm.LocationEntity>"--%>
@@ -73,7 +74,7 @@
                     <h5 class="card-title"><a href="/event?id=${event.id}" class="text-decoration-none">${event.name}</a></h5>
                     <p class="card-text">${event.beschreibung}</p>
                     <p class="card-text">Ort: ${locations.get(event.locationID).name}</p>
-                    <p class="card-text">Zeit: ${event.start} bis ${event.ende}</p>
+                    <p class="card-text">Zeit: ${util.prettifyTimestamp(event.start)} bis ${util.prettifyTimestamp(event.ende)}</p>
                 </div>
             </div>
         </c:forEach>

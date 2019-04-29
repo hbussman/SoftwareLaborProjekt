@@ -20,6 +20,10 @@ public class ServerPageController {
     @Autowired private VeranstaltungRepository veranstaltungRepository;
     @Autowired private LocationRepository locationRepository;
 
+    private void publishUtil(Model model) {
+        model.addAttribute("util", new sponsoren.Util());
+    }
+
     private void publishSponsors(Model model) {
         // get all Sponsors
         Iterable<SponsorEntity> sponsorEntities = sponsorRepository.findAll();
@@ -91,6 +95,7 @@ public class ServerPageController {
         Optional<SponsorEntity> sponsor = sponsorRepository.findById(name);
         model.addAttribute("sponsor", sponsor.orElse(null));
 
+        publishUtil(model);
         publishSponsorEvents(model, name);
         publishLocations(model);
         return "sponsor-site";
@@ -104,6 +109,7 @@ public class ServerPageController {
 
     @GetMapping("/events")
     public String getEventlist(Model model) {
+        publishUtil(model);
         publishSponsors(model);
         publishEvents(model);
         publishLocations(model);
@@ -116,6 +122,7 @@ public class ServerPageController {
         Optional<VeranstaltungEntity> event = veranstaltungRepository.findById(id);
         model.addAttribute("event", event.orElse(null));
 
+        publishUtil(model);
         publishLocations(model);
         publishEventSponsors(model, id);
         return "event-site";

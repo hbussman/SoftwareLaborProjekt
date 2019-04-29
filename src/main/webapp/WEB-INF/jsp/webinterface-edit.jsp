@@ -33,7 +33,7 @@
     <script src="/js/util.js"></script>
     <script src="/js/api_client.js"></script>
 
-    <title>Webinterface-logo</title>
+    <title>Eigene Daten bearbeiten - Sponsoren</title>
 
     <script>
         var SponsorData;

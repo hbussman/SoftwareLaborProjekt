@@ -16,28 +16,19 @@
 
     <!-- own scripts -->
     <script src="/js/api_client.js"></script>
+    <script src="/js/util.js"></script>
 
-    <title>Sponsoren und Produkte</title>
+    <title>Weiterleitung...</title>
 </head>
 <body>
 
-    <!-- Temporary redirect until the index page is done -->
-    <script>
-        document.location = "/sponsoren";
-    </script>
-
-
-    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-            <li class="nav-item active">
-                <a class="nav-link" href="/sponsoren">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="/webinterface/login">Login <span class="sr-only">(current)</span></a>
-            </li>
-        </ul>
-    </div>
-</nav>
-
+<!-- Redirect to home if we are logged in or to login page otherwise -->
+<script>
+    var username = getCookie("username");
+    if(username == null) {
+        document.location = "/webinterface/login";
+    } else {
+        document.location = "/webinterface/home?sponsor=" + username;
+    }
+</script>
 </body>
-</html>

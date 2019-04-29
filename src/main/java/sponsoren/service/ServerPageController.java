@@ -24,6 +24,11 @@ public class ServerPageController {
         model.addAttribute("util", new sponsoren.Util());
     }
 
+    private void publishSponsor(Model model, String name) {
+        Optional<SponsorEntity> sponsor = sponsorRepository.findById(name);
+        model.addAttribute("sponsor", sponsor.orElse(null));
+    }
+
     private void publishSponsors(Model model) {
         // get all Sponsors
         Iterable<SponsorEntity> sponsorEntities = sponsorRepository.findAll();
@@ -92,9 +97,7 @@ public class ServerPageController {
 
     @GetMapping("/sponsor")
     public String getSponsorSite(Model model, @RequestParam String name) {
-        Optional<SponsorEntity> sponsor = sponsorRepository.findById(name);
-        model.addAttribute("sponsor", sponsor.orElse(null));
-
+        publishSponsor(model, name);
         publishUtil(model);
         publishSponsorEvents(model, name);
         publishLocations(model);
@@ -134,12 +137,18 @@ public class ServerPageController {
     }
 
     @GetMapping("/webinterface/home")
-    public String getWebinterfaceHome(Model model) {
+    public String getWebinterfaceHome(Model model, @RequestParam String sponsor) {
+        publishSponsor(model, sponsor);
         return "webinterface-home";
     }
 
     @GetMapping("/webinterface/edit")
     public String getWebinterfaceEdit(Model model) {
         return "webinterface-edit";
+    }
+
+    @GetMapping("/webinterface")
+    public String getWebinterface(Model model) {
+        return "webinterface-redirect";
     }
 }

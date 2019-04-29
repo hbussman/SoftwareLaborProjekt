@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%--@elvariable id="sponsor" type="sponsoren.orm.SponsorEntity"--%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -16,18 +17,11 @@
     <script src="/js/util.js"></script>
     <script src="/js/api_client.js"></script>
 
-    <title>Webinterface-home</title>
+    <title>Persönloche Seite - Sponsoren</title>
 
     <script>
         function Init() {
             var username = getCookie("username");
-
-            // ask database for information
-            db_get_sponsor_info(username).then(function (json_info) {
-                console.log(json_info);
-                document.getElementById("sponsor_name").innerText = json_info["name"];
-                document.getElementById("sponsor_info").innerText = json_info["beschreibung"];
-            });
         }
     </script>
 
@@ -53,13 +47,27 @@
         <div class="offset-md-2 col-md-8 offset-lg-2 col-lg-8 col-sm-12">
         <div class="card" style="width:100%">
             <div class="text-center">
-            <img src="/img/img-placeholder.jpg" style="" class="card-img-top" alt="...">
+            <img src="/img/${sponsor.name}_scaled.png" style="" class="card-img-top" alt="...">
             </div>
             <div class="card-body">
-                <h5 id="sponsor_name" class="card-title">Sponsor</h5>
-                <p id="sponsor_info" class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                    card's content.</p>
-                <a href="#" class="btn btn-dark">Go somewhere</a>
+                <h5 class="card-title">Willkommen, ${sponsor.name}</h5>
+
+                <p class="card-title"><u>Beschreibung</u></p>
+                <p class="card-text">${sponsor.beschreibung}</p>
+
+                <p class="card-title"><u>Werbetext</u></p>
+                <p class="card-text">${sponsor.werbetext}</p>
+
+                <p class="card-title"><u>Persönliche Daten</u></p>
+                <p class="card-text">Eigene Homepage: ${sponsor.homepage}</p>
+                <p class="card-text">
+                    Ansprechpartner<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${sponsor.ansprechpartnerVorname} ${sponsor.ansprechpartnerNachname}<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${sponsor.telefonnummer}<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${sponsor.adresse}
+                </p>
+
+                <!-- <a href="#" class="btn btn-dark">Go somewhere</a> -->
             </div>
 
         </div>

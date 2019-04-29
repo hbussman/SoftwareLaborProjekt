@@ -1,3 +1,6 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,7 +28,7 @@
             setCookie("username", username, 180, "webinterface");
 
             // redirect to dashboard
-            window.location.href = "webinterface-home.html";
+            window.location.href = "/webinterface/home";
         }
     </script>
 

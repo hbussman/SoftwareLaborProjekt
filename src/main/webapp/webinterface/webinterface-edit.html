@@ -86,9 +86,12 @@
                     resultElem.style = "color: darkgreen;";
                     resultElem.innerText = "Veranstaltung erfolgreich erstellt!";
                     document.getElementById('veranstaltung-info').innerHTML =
-                        "Name: " + name + "<br>" +
+                            "Name: " + name + "<br>" +
                             "Ort: " + ort + "<br>" +
-                            "Zeitraum: " + start + " - " + ende;
+                            "Zeitraum: " + start + " - " + ende + "<br>" +
+                            (result.headers.has("Location") ?
+                                '<a href="' + result.headers.get("Location") + '" target="_blank">Zur Veranstaltungsseite gehen</a>'
+                                : "");
 
                     // clear out input fields
                     document.getElementById('veranstaltung-name').value = "";
@@ -125,7 +128,7 @@
     <div class="row">
         <div class="col-lg-4 col-md-4 col-sm-12">
             <div class="card" style="width:100%">
-                <p class="card-title">Neue Veranstlatung erstellen</p>
+                <p class="card-title">Neue Veranstaltung erstellen</p>
                 <div class="text-center">
                     <div class="input-group input-group mb-3">
                         <div class="input-group-prepend">

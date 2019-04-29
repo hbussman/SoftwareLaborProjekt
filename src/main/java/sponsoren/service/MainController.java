@@ -6,6 +6,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import sponsoren.orm.*;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -118,7 +120,12 @@ public class MainController {
         // save veranstaltung-sponsor association to database
         sponsorVeranstaltungRepository.save(sponsorVeranstaltung);
 
-        return ResponseEntity.accepted().body(null);
+        try {
+            return ResponseEntity.created(new URI("/event?id=" + veranstaltung.getId())).body(null);
+        } catch(URISyntaxException e) {
+            e.printStackTrace();
+            return ResponseEntity.accepted().body(null);
+        }
     }
 
 

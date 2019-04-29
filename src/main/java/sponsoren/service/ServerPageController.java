@@ -128,4 +128,18 @@ public class ServerPageController {
         return "event-site";
     }
 
+    @GetMapping("/webinterface/login")
+    public String getWebinterfaceLogin(Model model) {
+        return "webinterface-login";
+    }
+
+    @GetMapping("/webinterface/home")
+    public String getWebinterfaceHome(Model model) {
+        return "webinterface-home";
+    }
+
+    @GetMapping("/webinterface/edit")
+    public String getWebinterfaceEdit(Model model) {
+        return "webinterface-edit";
+    }
 }

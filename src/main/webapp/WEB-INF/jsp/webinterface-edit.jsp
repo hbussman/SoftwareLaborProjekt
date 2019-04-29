@@ -116,10 +116,10 @@
 </head>
 <body onload="Init()">
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="webinterface-home.html">Persönliche Seite</a>
+    <a class="navbar-brand" href="/webinterface/home">Persönliche Seite</a>
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
         <li class="nav-item active ml-1">
-            <a class="nav-link" href="webinterface-login.html">
+            <a class="nav-link" href="/webinterface/login">
                 <i class="fa fa-sign-out-alt"></i>
                 <span class="sr-only">(current)</span></a>
         </li>

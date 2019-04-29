@@ -25,7 +25,7 @@
             setCookie("username", username, 180, "webinterface");
 
             // redirect to dashboard
-            window.location.href = "webinterface-home.html";
+            window.location.href = "/webinterface/home";
         }
     </script>
 

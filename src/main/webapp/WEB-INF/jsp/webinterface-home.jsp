@@ -1,3 +1,5 @@
+<%@ page pageEncoding="UTF-8" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,12 +36,12 @@
     <a class="navbar-brand" href="#">Persönliche Seite</a>
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
             <li class="nav-item active ml-1">
-                <a class="nav-link" href="webinterface-edit.html">
+                <a class="nav-link" href="/webinterface/edit">
                     <i class="far fa-edit"></i>
                     <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active ml-1">
-                <a class="nav-link" href="webinterface-login.html">
+                <a class="nav-link" href="/webinterface/login">
                     <i class="fa fa-sign-out-alt"></i>
                     <span class="sr-only">(current)</span></a>
             </li>
@@ -50,7 +52,7 @@
         <div class="offset-md-2 col-md-8 offset-lg-2 col-lg-8 col-sm-12">
         <div class="card" style="width:100%">
             <div class="text-center">
-            <img src="img-placeholder.jpg" style="" class="card-img-top" alt="...">
+            <img src="/img/img-placeholder.jpg" style="" class="card-img-top" alt="...">
             </div>
             <div class="card-body">
                 <h5 id="sponsor_name" class="card-title">Sponsor</h5>

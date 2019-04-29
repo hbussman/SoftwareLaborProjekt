@@ -1,6 +1,7 @@
 package sponsoren.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -97,6 +98,11 @@ public class MainController {
             e.printStackTrace();
             return ResponseEntity.unprocessableEntity().body("Fehlerhaftes Datumsformat " + event.get("ende") + " - "
                     + e.getMessage());
+        }
+
+        // make sure the start date is before the end date
+        if(veranstaltung.getStart().after(veranstaltung.getEnde())) {
+            return ResponseEntity.unprocessableEntity().body("Das Ende-Datum kann zeitlich nicht vor dem Start-Datum liegen!");
         }
 
         String ort = event.get("ort");

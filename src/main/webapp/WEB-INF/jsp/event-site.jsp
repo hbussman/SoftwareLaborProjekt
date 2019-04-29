@@ -33,7 +33,7 @@
         </li>
     </ul>
 </nav>
-<div class="container">
+<div class="container-fluid">
     <div class="row">
         <div class="col-12">
             <div class="card">
@@ -44,22 +44,32 @@
                         <p class="card-title">Wo? ${locations.get(event.locationID).name}</p>
                         <p class="card-title">von ${util.prettifyTimestamp(event.start)} bis ${util.prettifyTimestamp(event.ende)}</p>
                     </div>
-
-                    <p class="card-title">Veranstaltet von</p>
-                    <div class="text-center">
-                        <c:forEach items="${eventSponsors}" var="sponsor">
-                            <div class="card-body">
-                                <h5 class="card-title">${sponsor.name}</h5>
-                                <div class="text-center">
-                                    <img src="/img/${sponsor.name}_scaled.png" alt="${sponsor.name} logo" width="200px" height="200px">
-                                </div>
-                                <a href="/sponsor?name=${sponsor.name}" class="btn btn-dark">Zur Sponsorenseite</a>
-                            </div>
-                        </c:forEach>
-                    </div>
-                </div>
             </div>
         </div>
+        <p class="text-center">Veranstaltet von</p>
     </div>
+  </div>
+    <div class="row no-gutters justify-content-xs-center">
+       
+                         <c:forEach items="${eventSponsors}" var="sponsor">
+                          <div class="col col-lg-4 col-md-4 col-sm-4 col-6 pb-md-4 pb-sm-3 pl-md-4 pl-sm-3 d-flex align-items-stretch">
+                            <div class="card px-0">
+                            <img src="/img/${sponsor.name}_scaled.png" class="card-img-top" alt="${sponsor.name}-Logo">
+                                <div class="card-body  px-0 pt-0 pb-0">
+                           			<p class="text--nowrap">${sponsor.name}</p>		 
+                 			    </div>
+                 			    <div class="card-footer bg-transparent px-0 pt-0 pb-0 border-0">
+                           				<a href="/sponsor?name=${sponsor.name}" class="btn btn-dark mt-auto">Mehr Erfahren</a>
+                 			    </div>
+                            </div>
+                          </div>
+                        </c:forEach>
+                   
+               
+             </div>
+         
+                
+
+ </div>
 </body>
 </html>

@@ -151,4 +151,9 @@ public class ServerPageController {
     public String getWebinterface(Model model) {
         return "webinterface-redirect";
     }
+
+    @GetMapping("/webinterface/edit/create-event")
+    public String getCreateEvent(Model model) {
+        return "create-event";
+    }
 }

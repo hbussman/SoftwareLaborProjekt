@@ -131,45 +131,7 @@
 <div class="container mt-2">
     <div class="row">
         <div class="col-lg-4 col-md-4 col-sm-12">
-            <div class="card" style="width:100%">
-                <p class="card-title">Neue Veranstaltung erstellen</p>
-                <div class="text-center">
-                    <div class="input-group input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="inputGroup-sizing-sm">Name</span>
-                        </div>
-                        <input id="veranstaltung-name" type="text" class="form-control" aria-label="Sizing example input"
-                               aria-describedby="inputGroup-sizing-sm">
-                    </div>
 
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="inputGroup-sizing-default">Ort</span>
-                        </div>
-                        <input id="veranstaltung-ort" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-                    </div>
-
-                    <div class="input-group input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="inputGroup-sizing-lg">Start-Datum</span>
-                        </div>
-                        <input id="veranstaltung-start" data-provide="datepicker" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
-                    </div>
-
-                    <div class="input-group input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="inputGroup-sizing-lg">End-Datum</span>
-                        </div>
-                        <input id="veranstaltung-ende" data-provide="datepicker" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
-                    </div>
-
-                    <p style="" id="veranstaltung-success-text"></p>
-                    <div id="veranstaltung-info"></div>
-                </div>
-                <div class="card-body">
-                    <a href="#" class="btn btn-dark" onclick="sendVeranstaltung();">Veranstaltung hinzufügen</a>
-                </div>
-            </div>
         </div>
         <div class="offset-lg-0 col-lg-8 offset-md-2 col-md-6 col-sm-12">
             <div class="form-group">
@@ -178,6 +140,7 @@
                           aria-describedby="basic-addon1"></textarea>
                 <div class="card-body">
                     <a href="#" class="btn btn-dark" onclick="Save()">Text ändern</a>
+                    <a href="/webinterface/edit/create-event" class="btn btn-dark" >Veranstaltung hinzufügen</a>
                 </div>
                 <div id="ResultStatus"></div>
             </div>

@@ -32,7 +32,7 @@
         </li>
     </ul>
 </nav>
-<div class="container">
+<div class="container-fluid">
     <div class="row">
         <div class="col-12">
             <div class="card">
@@ -43,22 +43,30 @@
                         <p class="card-title">Wo? ${locations.get(event.locationID).name}</p>
                         <p class="card-title">von ${event.start} bis ${event.ende}</p>
                     </div>
-
-                    <p class="card-title">Veranstaltet von</p>
-                    <div class="text-center">
-                        <c:forEach items="${eventSponsors}" var="sponsor">
-                            <div class="card-body">
-                                <h5 class="card-title">${sponsor.name}</h5>
-                                <div class="text-center">
-                                    <img src="/img/${sponsor.name}_scaled.png" alt="${sponsor.name} logo" width="200px" height="200px">
-                                </div>
-                                <a href="/sponsor?name=${sponsor.name}" class="btn btn-dark">Zur Sponsorenseite</a>
-                            </div>
-                        </c:forEach>
-                    </div>
-                </div>
             </div>
         </div>
+        <p class="text-center">Veranstaltet von</p>
     </div>
+  </div>
+    <div class="row no-gutters justify-content-xs-center">
+       
+                         <c:forEach items="${eventSponsors}" var="sponsor">
+                          <div class="col col-lg-4 col-md-6 col-sm-6 col-12">
+                            <div class="card">
+                                <div class="card-body">
+                             		<img src="/img/${sponsor.name}_scaled.png" class="card-img-top" alt="${sponsor.name}-Logo">
+                           			<h5 class="text-start">${sponsor.name}</h5>
+                           			<a href="/sponsor?name=${sponsor.name}" class="btn btn-dark">Mehr Erfahren</a>
+                 			    </div>
+                            </div>
+                          </div>
+                        </c:forEach>
+                   
+               
+             </div>
+         
+                
+
+ </div>
 </body>
 </html>

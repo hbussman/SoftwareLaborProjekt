@@ -20,7 +20,7 @@
     <!-- own scripts -->
     <script src="/js/api_client.js"></script>
 
-    <title>Sponsor-Eventlist</title>
+    <title>Sponsoren-Veranstaltungsliste</title>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">

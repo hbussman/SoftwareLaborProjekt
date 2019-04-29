@@ -20,7 +20,7 @@
     <!-- own scripts -->
     <script src="/js/api_client.js"></script>
 
-    <title>Sponsoren Early Prototyp</title>
+    <title>${sponsor.name} - Sponsoren</title>
 </head>
 
 <body>

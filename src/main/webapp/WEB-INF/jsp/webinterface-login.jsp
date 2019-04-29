@@ -15,7 +15,7 @@
     <script src="/js/util.js"></script>
     <script src="/js/api_client.js"></script>
 
-    <title>Webinterface-login</title>
+    <title>Login für Sponsoren</title>
 
     <script>
         function DoLogin() {
@@ -28,7 +28,7 @@
             setCookie("username", username, 180, "webinterface");
 
             // redirect to dashboard
-            window.location.href = "/webinterface/home";
+            window.location.href = "/webinterface/home?sponsor=" + username;
         }
     </script>
 

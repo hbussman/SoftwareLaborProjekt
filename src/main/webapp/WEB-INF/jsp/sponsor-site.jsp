@@ -57,28 +57,29 @@
                     <p class="card-text">${sponsor.telefonnummer}</p>
                     <p class="card-text">${sponsor.adresse}</p>
                 </div>
-            </div>
-        </div>
-    </div>
-
-
-    <div class="row">
-        <div class="col-12">
-            <div class="card-body">
-                <h2 class="text-start">Veranstaltungen</h2>
-            </div>
-        </div>
-        <c:forEach items="${sponsorEvents}" var="event">
-            <div class="col-12 col-md-6">
-                <div class="card-body">
-                    <h5 class="card-title"><a href="/event?id=${event.id}" class="text-decoration-none">${event.name}</a></h5>
-                    <p class="card-text">${event.beschreibung}</p>
-                    <p class="card-text">Ort: ${locations.get(event.locationID).name}</p>
-                    <p class="card-text">Zeit: ${util.prettifyTimestamp(event.start)} bis ${util.prettifyTimestamp(event.ende)}</p>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card-body">
+                            <h2 class="text-start">Veranstaltungen</h2>
+                        </div>
+                    </div>
+                    <c:forEach items="${sponsorEvents}" var="event">
+                        <div class="col-12 col-md-6">
+                            <div class="card-body">
+                                <h5 class="card-title"><a href="/event?id=${event.id}" class="text-decoration-none">${event.name}</a></h5>
+                                <p class="card-text">${event.beschreibung}</p>
+                                <p class="card-text">Ort: ${locations.get(event.locationID).name}</p>
+                                <p class="card-text">Zeit: ${util.prettifyTimestamp(event.start)} bis ${util.prettifyTimestamp(event.ende)}</p>
+                            </div>
+                        </div>
+                    </c:forEach>
                 </div>
+
             </div>
-        </c:forEach>
+        </div>
     </div>
+
+
 
 </div>
 

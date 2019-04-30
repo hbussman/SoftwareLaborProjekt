@@ -102,7 +102,7 @@
                     <div class="input-group input-group-sm mb-3">
                         <div class="row">
                             <div class="col-3">
-                                <input type="text" placeholder="Name" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">${sponsor.ansprechpartnerVorname}
+                                <input type="text" placeholder="Name" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
                             </div>
                                 <div class="col-3">
                                 <div class="input-group-prepend">
@@ -118,11 +118,11 @@
                                 </div>
                             <div class="col-3">
                                 <span class="input-group-text">Start</span>
-                                <input type="text" placeholder="DD.MM.12:00(Uhrzeit)" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">${sponsor.ansprechpartnerVorname}
+                                <input type="text" placeholder="DD.MM.12:00(Uhrzeit)" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
                             </div>
                             <div class="col-3">
                                 <span class="input-group-text">Ende</span>
-                                <input type="text" placeholder="DD.MM.12:00(Uhrzeit)" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">${sponsor.ansprechpartnerVorname}
+                                <input type="text" placeholder="DD.MM.12:00(Uhrzeit)" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
                             </div>
                         </div>
                     </div>

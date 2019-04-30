@@ -47,7 +47,7 @@
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">Kontakt</h5>
-                    <p class="card-text">${sponsor.ansprechpartnerVorname}, ${sponsor.ansprechpartnerNachname} </p>
+                    <p class="card-text">${sponsor.ansprechpartnerNachname}<c:if test="${sponsor.ansprechpartnerVorname.length() > 0 && sponsor.ansprechpartnerNachname.length() > 0}">, </c:if>${sponsor.ansprechpartnerVorname}</p>
                     <p class="card-text">${sponsor.email} </p>
                     <p class="card-text">${sponsor.telefonnummer}</p>
                     <p class="card-text">${sponsor.adresse}</p>

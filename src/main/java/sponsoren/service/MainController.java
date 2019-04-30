@@ -60,6 +60,12 @@ public class MainController {
     // POST save sponsor information
     @PostMapping(path = "/sponsor/set_info")
     public @ResponseBody void setSponsorInfo(@RequestBody SponsorEntity sponsor) {
+        sponsor.setAdresse(sponsor.getAdresse().trim());
+        sponsor.setAnsprechpartnerNachname(sponsor.getAnsprechpartnerNachname().trim());
+        sponsor.setAnsprechpartnerVorname(sponsor.getAnsprechpartnerVorname().trim());
+        sponsor.setEmail(sponsor.getEmail().trim());
+        sponsor.setTelefonnummer(sponsor.getTelefonnummer().trim());
+        sponsor.setHomepage(sponsor.getHomepage().trim());
         sponsorRepository.save(sponsor);
     }
 

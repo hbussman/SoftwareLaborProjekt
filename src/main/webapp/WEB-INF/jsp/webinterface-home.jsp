@@ -20,29 +20,34 @@
     <title>Persönloche Seite - Sponsoren</title>
 
     <script>
-      var username
+        var username;
         function Init() {
             username = getCookie("username");
         }
         function Save() {
-          console.log("Save " + SponsorData);
-          var SponsorData = {
-            name: username,
-            beschreibung: document.getElementById("sponsor_beschreibung").value,
-            werbetext: document.getElementById("sponsor_werbetext").value,
-            adresse: document.getElementById("sponsor_adresse").value,
-            ansprechpartnerNachname: document.getElementById("sponsor_nachname").value,
-            ansprechpartnerVorname: document.getElementById("sponsor_vorname").value,
-            email: document.getElementById("sponsor_email").value,
-            telefonnummer: document.getElementById("sponsor_telefonnummer").value};
+            console.log("Save " + SponsorData);
+            var SponsorData = {
+                name: username,
+                beschreibung: document.getElementById("sponsor_beschreibung").value,
+                werbetext: document.getElementById("sponsor_werbetext").value,
+                adresse: document.getElementById("sponsor_adresse").value,
+                ansprechpartnerNachname: document.getElementById("sponsor_nachname").value,
+                ansprechpartnerVorname: document.getElementById("sponsor_vorname").value,
+                email: document.getElementById("sponsor_email").value,
+                telefonnummer: document.getElementById("sponsor_telefonnummer").value
+            };
 
-          db_save_sponsor_info(SponsorData).then(function (value) {
-            console.log(value.status);
-            var resDiv = document.getElementById("ResultStatus");
-            if(value.status == 200) {
-            } else {
-            }
-          })
+            db_save_sponsor_info(SponsorData).then(function (value) {
+                console.log(value.status);
+                var result = document.getElementById("ResultStatus");
+                if(value.status == 200) {
+                    result.style.color = "darkgreen";
+                    result.innerText = "Änderungen erfolgreich gespeichert!";
+                } else {
+                    result.style.color = "red";
+                    result.innerText = "Es ist ein Fehler aufgetreten";
+                }
+            })
         }
     </script>
 
@@ -124,7 +129,7 @@
                 </div>
                     <a class="btn btn-primary btn-block" href="#" onclick="Save()" role="button">Änderungen speichern</a>
                     <br>
-                    <br>
+                    <p id="ResultStatus"></p>
                     <br>
                 </div>
                 </div>

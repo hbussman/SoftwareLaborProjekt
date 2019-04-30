@@ -153,9 +153,4 @@ public class ServerPageController {
     public String getWebinterfaceEvents(Model model) {
         return "webinterface-events";
     }
-
-    @GetMapping("/webinterface/edit/create-event")
-    public String getCreateEvent(Model model) {
-        return "create-event";
-    }
 }

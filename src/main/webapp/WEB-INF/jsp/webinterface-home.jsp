@@ -30,10 +30,13 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" style="color: whitesmoke">Sponsoren-Webinterface</a>
             <ul class="nav navbar-nav ml-auto">
-                <li><button type="submit" class="btn navbar-btn btn-danger" name="logout" id="logout"  value="Log Out">
-                    <i class="fa fa-sign-out-alt"></i></button>
-                </li>
             </ul>
+    <div class="pr-2">
+    <a class="btn btn-primary btn-secondary" href="/webinterface/events" role="button">Veranstaltungen
+    </a>
+    </div>
+        <a class="btn btn-primary btn-danger" href="/webinterface/login" role="button"><i class="fa fa-sign-out-alt"></i>
+    </a>
 </nav>
 <div class="container">
     <div class="row">
@@ -54,90 +57,54 @@
                               placeholder="Sponsoren Info-Text" aria-label="Username"
                               aria-describedby="basic-addon1">${sponsor.werbetext}</textarea>
                 </div>
+                <div class="col-12">
+                    <div class="text-center">
+                    </div>
                 <div class="card-body">
                     <h5 class="card-title">Kontakt</h5>
                     <div class="input-group input-group-sm mb-3">
                         <div class="row">
                             <div class="col-6">
-                                <input type="text" placeholder="Vorname" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">${sponsor.ansprechpartnerVorname}
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Name</span>
+                                    <input type="text" placeholder="${sponsor.ansprechpartnerNachname}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                                </div>
                             </div>
                             <div class="col-6">
-                                <input type="text" placeholder="Nachname" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">${sponsor.ansprechpartnerNachname}
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Vorname</span>
+                                <input type="text" placeholder="${sponsor.ansprechpartnerVorname}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
                             </div>
+                        </div>
                         </div>
                     </div>
                     <div class="input-group input-group-sm mb-3">
                         <div class="row">
                             <div class="col-4">
-                                <input type="text" placeholder="Email" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">${sponsor.email}
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Email</span>
+                                <input type="text" placeholder="${sponsor.email}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                            </div>
                             </div>
                             <div class="col-4">
-                                <input type="text" placeholder="Telefonnummer" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">${sponsor.telefonnummer}
-                            </div>
-                            <div class="col-4">
-                                <input type="text" placeholder="Adresse" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">${sponsor.adresse}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card-body">
-                            <h2 class="text-start">Veranstaltungen</h2>
-                        </div>
-                    </div>
-                    <c:forEach items="${sponsorEvents}" var="event">
-                        <div class="col-12 col-md-6">
-                            <div class="card-body">
-                                <h5 class="card-title"><a href="/event?id=${event.id}" class="text-decoration-none">${event.name}</a></h5>
-                                <p class="card-text">${event.beschreibung}</p>
-                                <p class="card-text">Ort: ${locations.get(event.locationID).name}</p>
-                                <p class="card-text">Zeit: ${util.prettifyTimestamp(event.start)} bis ${util.prettifyTimestamp(event.ende)}</p>
-                            </div>
-                        </div>
-                    </c:forEach>
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">Veranstaltung hinzufügen</h5>
-                    <div class="input-group input-group-sm mb-3">
-                        <div class="row">
-                            <div class="col-3">
-                                <input type="text" placeholder="Name" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
-                            </div>
-                                <div class="col-3">
                                 <div class="input-group-prepend">
-                                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Veranstaltungsort</button>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="#">Action</a>
-                                        <a class="dropdown-item" href="#">Another action</a>
-                                        <a class="dropdown-item" href="#">Something else here</a>
-                                        <div role="separator" class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="#">Separated link</a>
-                                    </div>
+                                    <span class="input-group-text">Telefonnummer</span>
+                                    <input type="text" placeholder="${sponsor.telefonnummer}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
                                 </div>
-                                </div>
-                            <div class="col-3">
-                                <span class="input-group-text">Start</span>
-                                <input type="text" placeholder="DD.MM.12:00(Uhrzeit)" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
                             </div>
-                            <div class="col-3">
-                                <span class="input-group-text">Ende</span>
-                                <input type="text" placeholder="DD.MM.12:00(Uhrzeit)" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                            <div class="col-4">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Adresse</span>
+                                    <input type="text" placeholder="${sponsor.adresse}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-12">
-                    <textarea id="veranstaltung-beschreibung" class="form-control" rows="5"
-                                              placeholder="Beschreibung der Veranstaltung"></textarea>
-                </div>
-                <br>
-                <div class="col-12">
-                    <div class="text-center">
-                    <a class="btn btn-primary btn-block" href="#" role="button">Veranstaltung veröffentlichen</a>
-                        <br>
-                        <br>
-                        <br>
+                    <a class="btn btn-primary btn-block" href="#" role="button">Änderungen speichern</a>
+                    <br>
+                    <br>
+                    <br>
                 </div>
                 </div>
             </div>

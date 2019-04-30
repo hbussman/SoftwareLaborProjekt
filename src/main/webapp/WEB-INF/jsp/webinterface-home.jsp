@@ -53,7 +53,7 @@
 
 </head>
 <body onload="Init()">
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark justify-content-center">
     <a class="navbar-brand" style="color: whitesmoke">Sponsoren-Webinterface</a>
             <ul class="nav navbar-nav ml-auto">
             </ul>
@@ -69,7 +69,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="text-center">
-                    <img src="img/${sponsor.name}_scaled.png" style="max-height: 250px; max-width: 250px" class="card-img-thumbnail" alt="...">
+                    <img src="/img/${sponsor.name}_scaled.png" style="max-height: 250px; max-width: 250px" class="card-img-thumbnail" alt="...">
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">${sponsor.name}</h5>

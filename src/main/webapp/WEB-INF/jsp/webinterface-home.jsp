@@ -28,52 +28,124 @@
 </head>
 <body onload="Init()">
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">Persönliche Seite</a>
-        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-            <li class="nav-item active ml-1">
-                <a class="nav-link" href="/webinterface/edit">
-                    <i class="far fa-edit"></i>
-                    <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item active ml-1">
-                <a class="nav-link" href="/webinterface/login">
-                    <i class="fa fa-sign-out-alt"></i>
-                    <span class="sr-only">(current)</span></a>
-            </li>
-        </ul>
+    <a class="navbar-brand" style="color: whitesmoke">Sponsoren-Webinterface</a>
+            <ul class="nav navbar-nav ml-auto">
+                <li><button type="submit" class="btn navbar-btn btn-danger" name="logout" id="logout"  value="Log Out">
+                    <i class="fa fa-sign-out-alt"></i></button>
+                </li>
+            </ul>
 </nav>
-<div class="container mt-4">
+<div class="container">
     <div class="row">
-        <div class="offset-md-2 col-md-8 offset-lg-2 col-lg-8 col-sm-12">
-        <div class="card" style="width:100%">
-            <div class="text-center">
-            <img src="/img/${sponsor.name}_scaled.png" style="" class="card-img-top" alt="...">
+        <div class="col-12">
+            <div class="card">
+                <div class="text-center">
+                    <img src="img/${sponsor.name}_scaled.png" style="max-height: 250px; max-width: 250px" class="card-img-thumbnail" alt="...">
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">${sponsor.name}</h5>
+                    <textarea id="sponsor_beschreibung" class="form-control" rows="8"
+                              placeholder="Sponsoren Info-Text" aria-label="Username"
+                              aria-describedby="basic-addon1">${sponsor.beschreibung}</textarea>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Werbetext</h5>
+                    <textarea id="sponsor_werbetext" class="form-control" rows="5"
+                              placeholder="Sponsoren Info-Text" aria-label="Username"
+                              aria-describedby="basic-addon1">${sponsor.werbetext}</textarea>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Kontakt</h5>
+                    <div class="input-group input-group-sm mb-3">
+                        <div class="row">
+                            <div class="col-6">
+                                <input type="text" placeholder="Vorname" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">${sponsor.ansprechpartnerVorname}
+                            </div>
+                            <div class="col-6">
+                                <input type="text" placeholder="Nachname" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">${sponsor.ansprechpartnerNachname}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group input-group-sm mb-3">
+                        <div class="row">
+                            <div class="col-4">
+                                <input type="text" placeholder="Email" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">${sponsor.email}
+                            </div>
+                            <div class="col-4">
+                                <input type="text" placeholder="Telefonnummer" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">${sponsor.telefonnummer}
+                            </div>
+                            <div class="col-4">
+                                <input type="text" placeholder="Adresse" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">${sponsor.adresse}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card-body">
+                            <h2 class="text-start">Veranstaltungen</h2>
+                        </div>
+                    </div>
+                    <c:forEach items="${sponsorEvents}" var="event">
+                        <div class="col-12 col-md-6">
+                            <div class="card-body">
+                                <h5 class="card-title"><a href="/event?id=${event.id}" class="text-decoration-none">${event.name}</a></h5>
+                                <p class="card-text">${event.beschreibung}</p>
+                                <p class="card-text">Ort: ${locations.get(event.locationID).name}</p>
+                                <p class="card-text">Zeit: ${util.prettifyTimestamp(event.start)} bis ${util.prettifyTimestamp(event.ende)}</p>
+                            </div>
+                        </div>
+                    </c:forEach>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Veranstaltung hinzufügen</h5>
+                    <div class="input-group input-group-sm mb-3">
+                        <div class="row">
+                            <div class="col-3">
+                                <input type="text" placeholder="Name" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">${sponsor.ansprechpartnerVorname}
+                            </div>
+                                <div class="col-3">
+                                <div class="input-group-prepend">
+                                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Veranstaltungsort</button>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="#">Action</a>
+                                        <a class="dropdown-item" href="#">Another action</a>
+                                        <a class="dropdown-item" href="#">Something else here</a>
+                                        <div role="separator" class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="#">Separated link</a>
+                                    </div>
+                                </div>
+                                </div>
+                            <div class="col-3">
+                                <span class="input-group-text">Start</span>
+                                <input type="text" placeholder="DD.MM.12:00(Uhrzeit)" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">${sponsor.ansprechpartnerVorname}
+                            </div>
+                            <div class="col-3">
+                                <span class="input-group-text">Ende</span>
+                                <input type="text" placeholder="DD.MM.12:00(Uhrzeit)" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">${sponsor.ansprechpartnerVorname}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <textarea id="veranstaltung-beschreibung" class="form-control" rows="5"
+                                              placeholder="Beschreibung der Veranstaltung"></textarea>
+                </div>
+                <br>
+                <div class="col-12">
+                    <div class="text-center">
+                    <a class="btn btn-primary btn-block" href="#" role="button">Veranstaltung veröffentlichen</a>
+                        <br>
+                        <br>
+                        <br>
+                </div>
+                </div>
             </div>
-            <div class="card-body">
-                <h5 class="card-title">Willkommen, ${sponsor.name}</h5>
-
-                <p class="card-title"><u>Beschreibung</u></p>
-                <p class="card-text">${sponsor.beschreibung}</p>
-
-                <p class="card-title"><u>Werbetext</u></p>
-                <p class="card-text">${sponsor.werbetext}</p>
-
-                <p class="card-title"><u>Persönliche Daten</u></p>
-                <p class="card-text">Eigene Homepage: ${sponsor.homepage}</p>
-                <p class="card-text">
-                    Ansprechpartner<br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${sponsor.ansprechpartnerVorname} ${sponsor.ansprechpartnerNachname}<br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${sponsor.telefonnummer}<br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${sponsor.adresse}
-                </p>
-
-                <!-- <a href="#" class="btn btn-dark">Go somewhere</a> -->
-            </div>
-
-        </div>
     </div>
 </div>
 </div>
-
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 </html>

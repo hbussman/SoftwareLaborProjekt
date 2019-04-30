@@ -26,7 +26,9 @@ public class ServerPageController {
 
     private void publishSponsor(Model model, String name) {
         Optional<SponsorEntity> sponsor = sponsorRepository.findById(name);
-        model.addAttribute("sponsor", sponsor.orElse(null));
+        if(!sponsor.isPresent())
+            throw new RuntimeException("Sponsor '" + name + "' existiert nicht!");
+        model.addAttribute("sponsor", sponsor.get());
     }
 
     private void publishSponsors(Model model) {
@@ -150,10 +152,5 @@ public class ServerPageController {
     @GetMapping("/webinterface/events")
     public String getWebinterfaceEvents(Model model) {
         return "webinterface-events";
-    }
-
-    @GetMapping("/webinterface/edit/create-event")
-    public String getCreateEvent(Model model) {
-        return "create-event";
     }
 }

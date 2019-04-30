@@ -93,15 +93,7 @@ function db_get_sponsor_info(sponsor_name) {
 }
 
 /**
- *
- * @param sponsor_name Name of the sponsor, i.e. the key in the database
- * @param beschreibung Beschreibung
- * @param werbetext Werbetext
- * @param adresse Adresse
- * @param anspr_nachname AnsprechpartnerNachname
- * @param anspr_vorname AnsprechpartnerVorname
- * @param email Email
- * @param telefon Telefonnummer
+ * @param json_info must contain all the fields of SponsorEntitiy
  * @returns {Promise<Response>}
  */
 function db_save_sponsor_info(json_info) {

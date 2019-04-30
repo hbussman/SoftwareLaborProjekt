@@ -17,7 +17,7 @@
     <script src="/js/util.js"></script>
     <script src="/js/api_client.js"></script>
 
-    <title>Persönloche Seite - Sponsoren</title>
+    <title>Persönliche Seite - Sponsoren</title>
 
     <script>
         var username;
@@ -25,17 +25,28 @@
             username = getCookie("username");
         }
         function Save() {
-            console.log("Save " + SponsorData);
+
+            var sponsor_beschreibung = document.getElementById("sponsor_beschreibung");
+            var sponsor_werbetext = document.getElementById("sponsor_werbetext");
+            var sponsor_adresse = document.getElementById("sponsor_adresse");
+            var sponsor_nachname = document.getElementById("sponsor_nachname");
+            var sponsor_vorname = document.getElementById("sponsor_vorname");
+            var sponsor_email = document.getElementById("sponsor_email");
+            var sponsor_telefonnummer = document.getElementById("sponsor_telefonnummer");
+            var sponsor_homepage = document.getElementById("sponsor_homepage");
+
             var SponsorData = {
                 name: username,
-                beschreibung: document.getElementById("sponsor_beschreibung").value,
-                werbetext: document.getElementById("sponsor_werbetext").value,
-                adresse: document.getElementById("sponsor_adresse").value,
-                ansprechpartnerNachname: document.getElementById("sponsor_nachname").value,
-                ansprechpartnerVorname: document.getElementById("sponsor_vorname").value,
-                email: document.getElementById("sponsor_email").value,
-                telefonnummer: document.getElementById("sponsor_telefonnummer").value
+                beschreibung: sponsor_beschreibung.value || sponsor_beschreibung.placeholder,
+                werbetext: sponsor_werbetext.value || sponsor_werbetext.placeholder,
+                adresse: sponsor_adresse.value || sponsor_adresse.placeholder,
+                ansprechpartnerNachname: sponsor_nachname.value || sponsor_nachname.placeholder,
+                ansprechpartnerVorname: sponsor_vorname.value || sponsor_vorname.placeholder,
+                email: sponsor_email.value || sponsor_email.placeholder,
+                telefonnummer: sponsor_telefonnummer.value || sponsor_telefonnummer.placeholder,
+                homepage: sponsor_homepage.value || sponsor_homepage.placeholder
             };
+            console.log("Save " + SponsorData);
 
             db_save_sponsor_info(SponsorData).then(function (value) {
                 console.log(value.status);
@@ -43,6 +54,26 @@
                 if(value.status == 200) {
                     result.style.color = "darkgreen";
                     result.innerText = "Änderungen erfolgreich gespeichert!";
+
+                    sponsor_adresse.placeholder = SponsorData.adresse;
+                    sponsor_adresse.value = "";
+
+                    sponsor_nachname.placeholder = SponsorData.ansprechpartnerNachname;
+                    sponsor_nachname.value = "";
+
+                    sponsor_vorname.placeholder = SponsorData.ansprechpartnerVorname;
+                    sponsor_vorname.value = "";
+
+                    sponsor_email.placeholder = SponsorData.email;
+                    sponsor_email.value = "";
+
+                    sponsor_telefonnummer.placeholder = SponsorData.telefonnummer;
+                    sponsor_telefonnummer.value = "";
+
+                    sponsor_homepage.placeholder = SponsorData.homepage;
+                    sponsor_homepage.value = "";
+
+
                 } else {
                     result.style.color = "red";
                     result.innerText = "Es ist ein Fehler aufgetreten";
@@ -101,6 +132,11 @@
                                 <span class="input-group-text">Vorname</span>
                                 <input id="sponsor_vorname" type="text" placeholder="${sponsor.ansprechpartnerVorname}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
                             </div>
+                            <div class="col-6">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Homepage</span>
+                                <input id="sponsor_homepage" type="text" placeholder="${sponsor.homepage}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                            </div>
                         </div>
                         </div>
                     </div>
@@ -127,7 +163,7 @@
                         </div>
                     </div>
                 </div>
-                    <a class="btn btn-primary btn-block" href="#" onclick="Save()" role="button">Änderungen speichern</a>
+                    <a id=submit" class="btn btn-primary btn-block" href="#submit" onclick="Save()" role="button">Änderungen speichern</a>
                     <br>
                     <p id="ResultStatus"></p>
                     <br>

@@ -20,8 +20,29 @@
     <title>Persönloche Seite - Sponsoren</title>
 
     <script>
+      var username
         function Init() {
-            var username = getCookie("username");
+            username = getCookie("username");
+        }
+        function Save() {
+          console.log("Save " + SponsorData);
+          var SponsorData = {
+            name: username,
+            beschreibung: document.getElementById("sponsor_beschreibung").value,
+            werbetext: document.getElementById("sponsor_werbetext").value,
+            adresse: document.getElementById("sponsor_adresse").value,
+            ansprechpartnerNachname: document.getElementById("sponsor_nachname").value,
+            ansprechpartnerVorname: document.getElementById("sponsor_vorname").value,
+            email: document.getElementById("sponsor_email").value,
+            telefonnummer: document.getElementById("sponsor_telefonnummer").value};
+
+          db_save_sponsor_info(SponsorData).then(function (value) {
+            console.log(value.status);
+            var resDiv = document.getElementById("ResultStatus");
+            if(value.status == 200) {
+            } else {
+            }
+          })
         }
     </script>
 
@@ -67,13 +88,13 @@
                             <div class="col-6">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Name</span>
-                                    <input type="text" placeholder="${sponsor.ansprechpartnerNachname}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                                    <input id="sponsor_nachname" type="text" placeholder="${sponsor.ansprechpartnerNachname}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
                                 </div>
                             </div>
                             <div class="col-6">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">Vorname</span>
-                                <input type="text" placeholder="${sponsor.ansprechpartnerVorname}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                                <input id="sponsor_vorname" type="text" placeholder="${sponsor.ansprechpartnerVorname}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
                             </div>
                         </div>
                         </div>
@@ -83,25 +104,25 @@
                             <div class="col-4">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">Email</span>
-                                <input type="text" placeholder="${sponsor.email}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                                <input id="sponsor_email" type="text" placeholder="${sponsor.email}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
                             </div>
                             </div>
                             <div class="col-4">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Telefonnummer</span>
-                                    <input type="text" placeholder="${sponsor.telefonnummer}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                                    <input id="sponsor_telefonnummer" type="text" placeholder="${sponsor.telefonnummer}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
                                 </div>
                             </div>
                             <div class="col-4">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Adresse</span>
-                                    <input type="text" placeholder="${sponsor.adresse}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                                    <input id="sponsor_adresse" type="text" placeholder="${sponsor.adresse}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                    <a class="btn btn-primary btn-block" href="#" role="button">Änderungen speichern</a>
+                    <a class="btn btn-primary btn-block" href="#" onclick="Save()" role="button">Änderungen speichern</a>
                     <br>
                     <br>
                     <br>

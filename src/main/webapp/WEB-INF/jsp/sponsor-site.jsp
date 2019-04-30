@@ -25,7 +25,7 @@
 
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="/sponsoren">Sponsoren</a>
+    <a class="navbar-brand" href="/sponsoren">Sponsor</a>
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
     </ul>
 </nav>

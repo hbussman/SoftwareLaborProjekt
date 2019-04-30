@@ -24,7 +24,7 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="/sponsoren">Sponsoren</a>
+    <a class="navbar-brand" href="/sponsoren">Veranstaltung</a>
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
         <li class="nav-item active ml-1">
             <a class="nav-link" href="/events">

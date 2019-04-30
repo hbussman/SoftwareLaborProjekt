@@ -142,11 +142,6 @@ public class ServerPageController {
         return "webinterface-home";
     }
 
-    @GetMapping("/webinterface/edit")
-    public String getWebinterfaceEdit(Model model) {
-        return "webinterface-edit";
-    }
-
     @GetMapping("/webinterface")
     public String getWebinterface(Model model) {
         return "webinterface-redirect";

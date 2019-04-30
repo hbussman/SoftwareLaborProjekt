@@ -24,13 +24,10 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 	<a class="navbar-brand" href="/sponsoren">Sponsoren</a>
-	<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-		<li class="nav-item active ml-1">
-			<a class="nav-link" href="/events">
-				<i class="far fa-calendar"></i>
-				<span class="sr-only">(current)</span></a>
-		</li>
-	</ul>
+    <ul class="nav navbar-nav ml-auto">
+    </ul>
+            <a class="btn btn-primary btn-secondary" href="/events" role="button"><i class="far fa-calendar"></i>
+            </a>
 </nav>
 
 <div class="container-fluid">

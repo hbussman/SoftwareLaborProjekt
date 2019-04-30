@@ -64,7 +64,7 @@
                                 <h5 class="card-title"><a href="/event?id=${event.id}" class="text-decoration-none">${event.name}</a></h5>
                                 <p class="card-text">${event.beschreibung}</p>
                                 <p class="card-text">Ort: ${locations.get(event.locationID).name}</p>
-                                <p class="card-text">Zeit: ${util.prettifyTimestamp(event.start)} bis ${util.prettifyTimestamp(event.ende)}</p>
+                                <p class="card-text">Zeitraum: ${util.prettifyTimestamp(event.start)} bis ${util.prettifyTimestamp(event.ende)}</p>
                             </div>
                         </div>
                     </c:forEach>

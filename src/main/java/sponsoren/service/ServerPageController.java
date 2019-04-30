@@ -85,6 +85,11 @@ public class ServerPageController {
         // get all Locations
         Iterable<LocationEntity> locationEntities = locationRepository.findAll();
 
+        // convert iterable to List
+        List<LocationEntity> locationList = new ArrayList<>();
+        locationEntities.forEach(locationList::add);
+        model.addAttribute("locationList", locationList);
+
         // convert iterable to Map
         Map<Integer, LocationEntity> locations = new HashMap<>();
         locationEntities.forEach(location -> locations.put(location.getId(), location));
@@ -144,13 +149,17 @@ public class ServerPageController {
         return "webinterface-home";
     }
 
+    @GetMapping("/webinterface/events")
+    public String getWebinterfaceEvents(Model model, @RequestParam String sponsor) {
+        publishUtil(model);
+        publishLocations(model);
+        publishSponsor(model, sponsor);
+        publishSponsorEvents(model, sponsor);
+        return "webinterface-events";
+    }
+
     @GetMapping("/webinterface")
     public String getWebinterface(Model model) {
         return "webinterface-redirect";
-    }
-
-    @GetMapping("/webinterface/events")
-    public String getWebinterfaceEvents(Model model) {
-        return "webinterface-events";
     }
 }

@@ -1,10 +1,10 @@
 package sponsoren.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import sponsoren.Util;
 import sponsoren.orm.*;
 
 import java.net.URI;
@@ -14,6 +14,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
@@ -49,15 +50,15 @@ public class MainController {
         return sponsorRepository.findAll();
     }
 
-    //GET all table columns of sponsor
+    // GET all table columns of sponsor
     @GetMapping(path = "/sponsor/get_info")
     public @ResponseBody SponsorEntity getSponsorInfo(@RequestParam  String name) {
         Optional<SponsorEntity> optional = sponsorRepository.findById(name);
         return optional.orElse(null);
     }
 
-    //Save sponsor information
-    @PostMapping(path = "sponsor/set_info")
+    // POST save sponsor information
+    @PostMapping(path = "/sponsor/set_info")
     public @ResponseBody void setSponsorInfo(@RequestBody SponsorEntity sponsor) {
         sponsorRepository.save(sponsor);
     }
@@ -74,13 +75,14 @@ public class MainController {
         return accountRepository.findAll();
     }
 
-    // GET list of sponsor_veeanstaltung
+    // GET list of sponsor_veranstaltung
     @GetMapping(path="/sponsor_veranstaltung/all")
     public @ResponseBody Iterable<SponsorVeranstaltungEntity> getAllVeranst() {
         return sponsorVeranstaltungRepository.findAll();
     }
 
-    @PostMapping(path="/event/new", consumes="application/json")
+    // POST create new event
+    @PostMapping(path="/event/new", consumes="application/json", produces="application/json")
     public ResponseEntity createNewVeranstaltung(@RequestBody Map<String, String> event) {
         // create Veranstaltung
         VeranstaltungEntity veranstaltung = new VeranstaltungEntity();
@@ -126,19 +128,37 @@ public class MainController {
         // save veranstaltung-sponsor association to database
         sponsorVeranstaltungRepository.save(sponsorVeranstaltung);
 
+        Map<String, String> body = new HashMap<>();
+        body.put("name", veranstaltung.getName());
+        body.put("ort", location.getName());
+        body.put("start", new Util().prettifyTimestamp(veranstaltung.getStart().toString()));
+        body.put("ende", new Util().prettifyTimestamp(veranstaltung.getEnde().toString()));
         try {
-            return ResponseEntity.created(new URI("/event?id=" + veranstaltung.getId())).body(null);
+            return ResponseEntity.created(new URI("/event?id=" + veranstaltung.getId())).body(body);
         } catch(URISyntaxException e) {
             e.printStackTrace();
-            return ResponseEntity.accepted().body(null);
+            return ResponseEntity.accepted().body(body);
         }
     }
 
+    // DELETE an event
+    @DeleteMapping(path="/event/delete", consumes="application/json")
+    public ResponseEntity deleteVeranstaltung(@RequestBody Map<String, String> event) {
+        // if this event is organised by multiple sponsors, remove the sponsor from it
+        System.out.println(event.get("id"));
+        System.out.println(event.get("sponsor"));
+
+        // TODO
+
+        // otherwise, delete the entire event
+        return ResponseEntity.ok().body(null);
+    }
 
     private Timestamp parseDate(String dateString) throws ParseException {
-        DateFormat fmt = new SimpleDateFormat("MM/dd/yyy");
+        DateFormat fmt = new SimpleDateFormat("dd.MM. HH:mm");
         Date date = fmt.parse(dateString);
-//        System.out.println("parseDate " + dateString + " -> " + date.toString());
+        date.setYear(2019 - 1900);
+        System.out.println("parseDate " + dateString + " -> " + date.toString());
         return new Timestamp(date.getTime());
     }
 

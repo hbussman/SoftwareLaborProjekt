@@ -46,6 +46,22 @@ function _post(what, args) {
     });
 }
 
+function _delete(what, args) {
+    console.log("_delete " + args);
+    return fetch('/api/' + what, {
+        method: "DELETE", // *GET, POST, PUT, DELETE, etc.
+        mode: "cors", // no-cors, cors, *same-origin
+        cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: "same-origin", // include, *same-origin, omit
+        headers: {
+            "Content-Type": "application/json;charset=UTF-8"
+        },
+        redirect: "follow", // manual, *follow, error
+        referrer: "no-referrer", // no-referrer, *client
+        body: JSON.stringify(args) // body data type must match "Content-Type" header
+    });
+}
+
 function _give_json(result) {
     return result.json();
 }
@@ -107,6 +123,13 @@ function db_send_new_veranstaltung(creator, name, ort, start, ende) {
         ort: ort,
         start: start,
         ende: ende
+    });
+}
+
+function db_delete_veranstaltung(eventId, sponsorName) {
+    return _delete("event/delete", {
+        id: eventId,
+        sponsor: sponsorName
     });
 }
 

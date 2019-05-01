@@ -13,10 +13,7 @@ import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Controller
 @RequestMapping(path="/api")
@@ -193,11 +190,33 @@ public class MainController {
     // DELETE an event
     @DeleteMapping(path="/event/delete", consumes="application/json")
     public ResponseEntity deleteVeranstaltung(@RequestBody Map<String, String> event) {
-        // if this event is organised by multiple sponsors, remove the sponsor from it
         System.out.println(event.get("id"));
         System.out.println(event.get("sponsor"));
+        String sponsorName = event.get("sponsor");
+        int eventId = Integer.parseInt(event.get("id"));
 
-        // TODO
+        // receive veranstaltung
+        Optional<VeranstaltungEntity> veranstaltungEntity = veranstaltungRepository.findById(eventId);
+        if(!veranstaltungEntity.isPresent()) {
+            return ResponseEntity.badRequest().body("Veranstaltung mit ID=" + eventId + " wurde nicht gefunden!");
+        }
+        VeranstaltungEntity veranstaltung = veranstaltungEntity.get();
+
+        // get sponsor-veranstaltung mappings
+        Map<String, SponsorVeranstaltungEntity> sponsoren = new HashMap<>();
+        Iterable<SponsorVeranstaltungEntity> sponsorVeranstaltungEntities = sponsorVeranstaltungRepository.findAll();
+        sponsorVeranstaltungEntities.forEach(sponsorVeranstaltungEntity -> {
+            if(sponsorVeranstaltungEntity.getVeranstaltungId() == eventId) {
+                sponsoren.put(sponsorVeranstaltungEntity.getSponsorName(), sponsorVeranstaltungEntity);
+            }
+        });
+
+        // if this event is organised by multiple sponsors, remove the sponsor from it
+        sponsorVeranstaltungRepository.delete(sponsoren.get(sponsorName));
+        if(sponsoren.size() == 1) {
+            System.out.println("Lösche Veranstaltung " + veranstaltung.getName());
+            veranstaltungRepository.delete(veranstaltung);
+        }
 
         // otherwise, delete the entire event
         return ResponseEntity.ok().body(null);

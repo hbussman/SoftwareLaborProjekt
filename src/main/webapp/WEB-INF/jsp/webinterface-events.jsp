@@ -153,7 +153,7 @@
                                 <div class="col-3">
                                     <input id="veranstaltung-name" type="text" placeholder="Name" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
                                 </div>
-                                <div class="col-3">
+                                <div class="col-5">
                                     <div class="input-group-prepend">
                                         <button id="veranstaltung-ort" class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">[Veranstaltungsort]</button>
                                         <div class="dropdown-menu">
@@ -163,17 +163,30 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-3">
+                            </div>
+                        </div>
+                        <div class="row">
+
+                            <div class="col-3">
+                                <div class="input-group-prepend">
                                     <span class="input-group-text">Start</span>
-                                    <input id="veranstaltung-start" type="text" placeholder="dd.MM. HH:mm (Datum+Uhrzeit)" class="form-control" aria-label="Veranstaltung Start" aria-describedby="inputGroup-sizing-sm">
+                                    <input id="veranstaltung-start" type="datetime-local"
+                                           placeholder="dd/mm/yyyy HH:MM (Datum+Uhrzeit)"
+                                           class="form-control" aria-label="Veranstaltung Start" aria-describedby="inputGroup-sizing-sm">
                                 </div>
-                                <div class="col-3">
+                            </div>
+                            <div class="col-4">
+                                <div class="input-group-prepend">
                                     <span class="input-group-text">Ende</span>
-                                    <input id="veranstaltung-ende" type="text" placeholder="dd.MM. HH:mm (Datum+Uhrzeit)" class="form-control" aria-label="Veranstaltung Ende" aria-describedby="inputGroup-sizing-sm">
+                                    <input id="veranstaltung-ende" type="datetime-local"
+                                           placeholder="dd/mm/yyyy HH:MM (Datum+Uhrzeit)"
+                                           class="form-control" aria-label="Veranstaltung Ende" aria-describedby="inputGroup-sizing-sm">
                                 </div>
                             </div>
                         </div>
+
                     </div>
+
                     <div class="col-12">
                     <textarea id="veranstaltung-beschreibung" class="form-control" rows="5"
                               placeholder="Beschreibung der Veranstaltung"></textarea>

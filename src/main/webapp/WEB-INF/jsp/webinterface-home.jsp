@@ -141,46 +141,59 @@
                                                aria-label="Sizing example input"
                                                aria-describedby="inputGroup-sizing-sm">
                                     </div>
-                                    <div class="col-6">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text">Homepage</span>
-                                            <input id="sponsor_homepage" type="text" placeholder="${sponsor.homepage}"
-                                                   class="form-control" aria-label="Sizing example input"
-                                                   aria-describedby="inputGroup-sizing-sm">
-                                        </div>
-                                    </div>
+
                                 </div>
                             </div>
-                            <div class="input-group input-group-sm mb-3">
-                                <div class="row">
-                                    <div class="col-4">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text">Email</span>
-                                            <input id="sponsor_email" type="text" placeholder="${sponsor.email}"
-                                                   class="form-control" aria-label="Sizing example input"
-                                                   aria-describedby="inputGroup-sizing-sm">
-                                        </div>
+                        </div>
+
+                        <div class="input-group input-group-sm mb-3">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Email</span>
+                                        <input id="sponsor_email" type="text" placeholder="${sponsor.email}"
+                                               class="form-control" aria-label="Sizing example input"
+                                               aria-describedby="inputGroup-sizing-sm">
                                     </div>
-                                    <div class="col-4">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text">Telefonnummer</span>
-                                            <input id="sponsor_telefonnummer" type="text"
-                                                   placeholder="${sponsor.telefonnummer}" class="form-control"
-                                                   aria-label="Sizing example input"
-                                                   aria-describedby="inputGroup-sizing-sm">
-                                        </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Telefonnummer</span>
+                                        <input id="sponsor_telefonnummer" type="text"
+                                               placeholder="${sponsor.telefonnummer}" class="form-control"
+                                               aria-label="Sizing example input"
+                                               aria-describedby="inputGroup-sizing-sm">
                                     </div>
-                                    <div class="col-4">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text">Adresse</span>
-                                            <input id="sponsor_adresse" type="text" placeholder="${sponsor.adresse}"
-                                                   class="form-control" aria-label="Sizing example input"
-                                                   aria-describedby="inputGroup-sizing-sm">
-                                        </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                        <div class="input-group input-group-sm mb-3">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Homepage</span>
+                                        <input id="sponsor_homepage" type="text" placeholder="${sponsor.homepage}"
+                                               class="form-control" aria-label="Sizing example input"
+                                               aria-describedby="inputGroup-sizing-sm">
+                                    </div>
+                                </div>
+
+
+                                <div class="col-6">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Adresse</span>
+                                        <input id="sponsor_adresse" type="text" placeholder="${sponsor.adresse}"
+                                               class="form-control" aria-label="Sizing example input"
+                                               aria-describedby="inputGroup-sizing-sm">
                                     </div>
                                 </div>
                             </div>
                         </div>
+
+
                         <a id=submit" class="btn btn-primary btn-block" href="#submit" onclick="Save()" role="button">Änderungen
                             speichern</a>
                         <br>

@@ -40,14 +40,15 @@
             <div class="card border-0 pt-0">
                 <div class="card-body">
                     <div class="text-start">
-                        <p class="card-text"><ins>Beschreibung</ins>: ${event.beschreibung}</p>
-                        <p class="card-title">Ort: ${locations.get(event.locationID).name}</p>
-                        <p class="card-title">Datum: ${util.prettyDate(event.start)} - ${util.prettyDate(event.ende)}</p>
-                         <p class="card-title">Uhrzeit: ${util.prettyTime(event.start)} - ${util.prettyTime(event.ende)}</p>
+                        <p class="card-text">${event.beschreibung}</p>
+                        <p class="card-text">
+                            Ort: ${locations.get(event.locationID).name}<br>
+                            Zeitraum: ${util.prettifyTimestamp(event.start)} bis ${util.prettifyTimestamp(event.ende)}
+                        </p>
                     </div>
             </div>
         </div>
-        <p  class="h4">Gesponsort Durch</p>
+        <p  class="h4">Gesponsort durch</p>
     </div>
   </div>
     <div class="row no-gutters justify-content-xs-center">

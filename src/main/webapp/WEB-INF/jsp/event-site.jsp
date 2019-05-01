@@ -22,6 +22,7 @@
 
     <title>Event-site</title>
 </head>
+
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="/sponsoren">Veranstaltung</a>
@@ -33,45 +34,43 @@
         </li>
     </ul>
 </nav>
+
 <div class="container-fluid">
     <div class="row">
         <div class="col-12">
-        	<p class="h4 pt-4 pb-0">${event.name}<p>
-            <div class="card border-0 pt-0">
-                <div class="card-body">
-                    <div class="text-start">
-                        <p class="card-text">${event.beschreibung}</p>
-                        <p class="card-text">
-                            Ort: ${locations.get(event.locationID).name}<br>
-                            Zeitraum: ${util.prettifyTimestamp(event.start)} bis ${util.prettifyTimestamp(event.ende)}
-                        </p>
-                    </div>
+            <p class="h4 pt-4 pb-0">${event.name}
+            <p>
+                <div class="card border-0 pt-0">
+                    <div class="card-body">
+                        <div class="text-start">
+            <p class="card-text">${event.beschreibung}</p>
+            <p class="card-text">
+                Ort: ${locations.get(event.locationID).name}<br>
+                Zeitraum: ${util.prettifyTimestamp(event.start)} bis ${util.prettifyTimestamp(event.ende)}
+            </p>
+        </div>
+    </div>
+</div>
+
+<p class="h4">Gesponsort durch</p>
+<div class="row no-gutters justify-content-xs-center">
+
+    <c:forEach items="${eventSponsors}" var="sponsor">
+        <div class="col col-lg-4 col-md-4 col-sm-4 col-6 pb-md-4 pb-sm-3 pl-md-4 pl-sm-3 d-flex align-items-stretch">
+            <div class="card px-0">
+                <img src="/img/${sponsor.name}_scaled.png" class="card-img-top" alt="${sponsor.name}-Logo">
+                <div class="card-body  px-0 pt-0 pb-0">
+                    <p class="text--nowrap">${sponsor.name}</p>
+                </div>
+                <div class="card-footer bg-transparent px-0 pt-0 pb-0 border-0">
+                    <a href="/sponsor?name=${sponsor.name}" class="btn btn-dark mt-auto">Mehr Erfahren</a>
+                </div>
             </div>
         </div>
-        <p  class="h4">Gesponsort durch</p>
-    </div>
-  </div>
-    <div class="row no-gutters justify-content-xs-center">
-       
-                         <c:forEach items="${eventSponsors}" var="sponsor">
-                          <div class="col col-lg-4 col-md-4 col-sm-4 col-6 pb-md-4 pb-sm-3 pl-md-4 pl-sm-3 d-flex align-items-stretch">
-                            <div class="card px-0">
-                            <img src="/img/${sponsor.name}_scaled.png" class="card-img-top" alt="${sponsor.name}-Logo">
-                                <div class="card-body  px-0 pt-0 pb-0">
-                           			<p class="text--nowrap">${sponsor.name}</p>		 
-                 			    </div>
-                 			    <div class="card-footer bg-transparent px-0 pt-0 pb-0 border-0">
-                           				<a href="/sponsor?name=${sponsor.name}" class="btn btn-dark mt-auto">Mehr Erfahren</a>
-                 			    </div>
-                            </div>
-                          </div>
-                        </c:forEach>
-                   
-               
-             </div>
-         
-                
+    </c:forEach>
 
- </div>
+</div>
+
+
 </body>
 </html>

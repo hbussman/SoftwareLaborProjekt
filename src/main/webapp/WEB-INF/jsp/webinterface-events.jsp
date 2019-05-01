@@ -83,6 +83,30 @@
             });
         }
 
+        function saveVeranstaltung(eventId) {
+            // var name = document.getElementById('event' + eventId + '_name').innerText;
+            var beschreibung = document.getElementById('event' + eventId + '_beschreibung').value;
+            var ort = document.getElementById('event' + eventId + '_ort').innerText;
+            var start = document.getElementById('event' + eventId + '_start').value;
+            var ende = document.getElementById('event' + eventId + '_ende').value;
+
+            db_save_event_data(getCookie('username'), eventId, beschreibung, ort, start, ende).then(result => {
+                if(result.ok) {
+                    // success
+                    var resultElem = document.getElementById('event-action-result-' + eventId);
+                    resultElem.style = "color: darkgreen;";
+                    resultElem.innerText = "Änderungen gespeichert!";
+                } else {
+                    // error occurred
+                    result.text().then(value => {
+                        var resultElem = document.getElementById('event-action-result-' + eventId);
+                        resultElem.style = "color: red;";
+                        resultElem.innerText = "Es ist ein Fehler aufgetreten: " + result.status + " (" + value + ")";
+                    });
+                }
+            });
+        }
+
         function deleteVeranstaltung(eventId, eventName) {
 
             db_delete_veranstaltung(eventId, '${sponsor.name}').then(result => {
@@ -93,8 +117,9 @@
                 } else {
                     // error occurred
                     result.text().then(value => {
-                        document.getElementById('delete-event-error-' + eventId).innerText =
-                                "Es ist ein Fehler aufgetreten: " + result.status + " (" + value + ")";
+                        var resultElem = document.getElementById('event-action-result-' + eventId);
+                        resultElem.style = "color: red;";
+                        resultElem.innerText = "Es ist ein Fehler aufgetreten: " + result.status + " (" + value + ")";
                     });
                 }
                 // remove button
@@ -175,15 +200,48 @@
                     <c:forEach items="${sponsorEvents}" var="event">
                         <div class="col-12 col-md-6" id="event-display-${event.id}">
                             <div class="card-body">
-                                <h5 class="card-title"><a href="/event?id=${event.id}" class="text-decoration-none">${event.name}</a></h5>
-                                <p class="card-text">
-                                    <c:if test="${event.beschreibung.length() > 0}">${event.beschreibung}</c:if>
-                                    <c:if test="${event.beschreibung == null || event.beschreibung.length() == 0}"><i>(keine Beschreibung vorhanden)</i></c:if>
-                                </p>
-                                <p class="card-text">
-                                    Ort: ${locations.get(event.locationID).name}<br>
-                                    Zeitraum: ${util.prettifyTimestamp(event.start)} bis ${util.prettifyTimestamp(event.ende)}
-                                </p>
+                                <h5 class="card-title">
+                                    <a id="event${event.id}_name" href="/event?id=${event.id}" class="text-decoration-none">${event.name}</a>
+                                </h5>
+
+                                <!-- Beschreibung Edit -->
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Kurzbeschreibung</span>
+                                    <input id="event${event.id}_beschreibung" type="text"
+                                           value="${event.beschreibung}"
+                                           placeholder="" class="form-control"
+                                           aria-label="Sizing example input"
+                                           aria-describedby="inputGroup-sizing-sm">
+                                </div>
+
+                                <!-- Ort Edit -->
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Ort</span>
+                                    <button id="event${event.id}_ort" class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">${locations.get(event.locationID).name}</button>
+                                    <div class="dropdown-menu">
+                                        <c:forEach items="${locationList}" var="location">
+                                            <button class="dropdown-item" onclick="document.getElementById('event${event.id}_ort').innerText='${location.name}'">${location.name}</button>
+                                        </c:forEach>
+                                    </div>
+                                </div>
+
+                                <!-- Start Edit -->
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Start</span>
+                                    <input id="event${event.id}_start" type="datetime-local"
+                                           value="${util.parsableDatetimeForHTML(event.start)}"
+                                           placeholder="dd/mm/yyyy HH:MM (Datum+Uhrzeit)"
+                                           class="form-control" aria-label="Veranstaltung Start" aria-describedby="inputGroup-sizing-sm">
+                                </div>
+
+                                <!-- Ende Edit -->
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Ende</span>
+                                    <input id="event${event.id}_ende" type="datetime-local"
+                                           value="${util.parsableDatetimeForHTML(event.ende)}"
+                                           placeholder="dd/mm/yyyy HH:MM (Datum+Uhrzeit)"
+                                           class="form-control" aria-label="Veranstaltung Ende" aria-describedby="inputGroup-sizing-sm">
+                                </div>
 
                                 <script>
                                     function onClickDelete${event.id}() {
@@ -196,8 +254,9 @@
                                         }
                                     }
                                 </script>
+                                <button id="button-save-event-${event.id}" class="btn btn-primary btn-success" onclick="saveVeranstaltung(${event.id});" role="button">Änderungen speichern</button>
                                 <button id="button-delete-event-${event.id}" class="btn btn-primary btn-danger" onclick="onClickDelete${event.id}();" role="button">Löschen</button>
-                                <p id="delete-event-error-${event.id}" style="color: red;"></p>
+                                <p id="event-action-result-${event.id}"></p>
                             </div>
                         </div>
                     </c:forEach>

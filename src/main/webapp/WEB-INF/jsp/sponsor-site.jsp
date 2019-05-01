@@ -62,9 +62,14 @@
                         <div class="col-12 col-md-6">
                             <div class="card-body">
                                 <h5 class="card-title"><a href="/event?id=${event.id}" class="text-decoration-none">${event.name}</a></h5>
-                                <p class="card-text">${event.beschreibung}</p>
-                                <p class="card-text">Ort: ${locations.get(event.locationID).name}</p>
-                                <p class="card-text">Zeitraum: ${util.prettifyTimestamp(event.start)} bis ${util.prettifyTimestamp(event.ende)}</p>
+                                <p class="card-text">
+                                    <c:if test="${event.beschreibung.length() > 0}">${event.beschreibung}</c:if>
+                                    <c:if test="${event.beschreibung == null || event.beschreibung.length() == 0}"><i>(keine Beschreibung vorhanden)</i></c:if>
+                                </p>
+                                <p class="card-text">
+                                    Ort: ${locations.get(event.locationID).name}<br>
+                                    Zeitraum: ${util.prettifyTimestamp(event.start)} bis ${util.prettifyTimestamp(event.ende)}
+                                </p>
                             </div>
                         </div>
                     </c:forEach>

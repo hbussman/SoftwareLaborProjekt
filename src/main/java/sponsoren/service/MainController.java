@@ -113,6 +113,7 @@ public class MainController {
             return ResponseEntity.unprocessableEntity().body("Das Ende-Datum kann zeitlich nicht vor dem Start-Datum liegen!");
         }
 
+        // get location id from name
         String ort = event.get("ort");
         LocationEntity location = findLocation(ort);
         if(location == null)
@@ -147,6 +148,48 @@ public class MainController {
         }
     }
 
+    @PatchMapping(path="/event/edit", consumes="application/json")
+    public ResponseEntity editVeranstaltung(@RequestBody Map<String, String> event) {
+        Integer eventId = Integer.parseInt(event.get("id"));
+        Optional<VeranstaltungEntity> veranstaltungEntity = veranstaltungRepository.findById(eventId);
+        if(!veranstaltungEntity.isPresent()) {
+            return ResponseEntity.unprocessableEntity().body("Veranstaltung mit ID=" + eventId + " wurde nicht gefunden!");
+        }
+
+        VeranstaltungEntity veranstaltung = veranstaltungEntity.get();
+        veranstaltung.setBeschreibung(event.get("beschreibung"));
+        try {
+            veranstaltung.setStart(parseDate(event.get("start")));
+        } catch(ParseException e) {
+            e.printStackTrace();
+            return ResponseEntity.unprocessableEntity().body("Start: Fehlerhaftes Datumsformat " + event.get("start") + " - "
+                    + e.getMessage());
+        }
+        try {
+            veranstaltung.setEnde(parseDate(event.get("ende")));
+        } catch(ParseException e) {
+            e.printStackTrace();
+            return ResponseEntity.unprocessableEntity().body("Ende: Fehlerhaftes Datumsformat " + event.get("ende") + " - "
+                    + e.getMessage());
+        }
+
+        // make sure the start date is before the end date
+        if(veranstaltung.getStart().after(veranstaltung.getEnde())) {
+            return ResponseEntity.unprocessableEntity().body("Das Ende-Datum kann zeitlich nicht vor dem Start-Datum liegen!");
+        }
+
+        // get location id from name
+        LocationEntity location = findLocation(event.get("ort"));
+        if(location == null) {
+            return ResponseEntity.unprocessableEntity().body("Ort " + event.get("ort") + " existiert nicht!");
+        }
+
+        veranstaltung.setLocationID(location.getId());
+
+        veranstaltungRepository.save(veranstaltung);
+        return ResponseEntity.ok(null);
+    }
+
     // DELETE an event
     @DeleteMapping(path="/event/delete", consumes="application/json")
     public ResponseEntity deleteVeranstaltung(@RequestBody Map<String, String> event) {
@@ -161,9 +204,8 @@ public class MainController {
     }
 
     private Timestamp parseDate(String dateString) throws ParseException {
-        DateFormat fmt = new SimpleDateFormat("dd.MM. HH:mm");
-        Date date = fmt.parse(dateString);
-        date.setYear(2019 - 1900);
+        DateFormat fmt = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        Date date = fmt.parse(dateString.replace('T', ' '));
         System.out.println("parseDate " + dateString + " -> " + date.toString());
         return new Timestamp(date.getTime());
     }

@@ -31,7 +31,7 @@ function _get(what, args) {
 }
 
 function _post(what, args) {
-    console.log("_post " + args);
+    console.log("_post " + JSON.stringify(args));
     return fetch('/api/' + what, {
         method: "POST", // *GET, POST, PUT, DELETE, etc.
         mode: "cors", // no-cors, cors, *same-origin
@@ -46,8 +46,24 @@ function _post(what, args) {
     });
 }
 
+function _patch(what, args) {
+    console.log("_patch " + JSON.stringify(args));
+    return fetch('/api/' + what, {
+        method: "PATCH", // *GET, POST, PUT, DELETE, etc.
+        mode: "cors", // no-cors, cors, *same-origin
+        cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: "same-origin", // include, *same-origin, omit
+        headers: {
+            "Content-Type": "application/json;charset=UTF-8"
+        },
+        redirect: "follow", // manual, *follow, error
+        referrer: "no-referrer", // no-referrer, *client
+        body: JSON.stringify(args) // body data type must match "Content-Type" header
+    });
+}
+
 function _delete(what, args) {
-    console.log("_delete " + args);
+    console.log("_delete " + JSON.stringify(args));
     return fetch('/api/' + what, {
         method: "DELETE", // *GET, POST, PUT, DELETE, etc.
         mode: "cors", // no-cors, cors, *same-origin
@@ -112,6 +128,16 @@ function db_send_new_veranstaltung(creator, name, ort, start, ende) {
     return _post("event/new", {
         creator: creator,
         name: name,
+        ort: ort,
+        start: start,
+        ende: ende
+    });
+}
+
+function db_save_event_data(sponsor, eventId, beschreibung, ort, start, ende) {
+    return _patch("event/edit", {
+        id: eventId,
+        beschreibung: beschreibung,
         ort: ort,
         start: start,
         ende: ende

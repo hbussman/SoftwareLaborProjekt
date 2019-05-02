@@ -90,6 +90,8 @@ public class MainController {
         // create Veranstaltung
         VeranstaltungEntity veranstaltung = new VeranstaltungEntity();
         veranstaltung.setName(event.get("name"));
+        veranstaltung.setBeschreibung(event.get("beschreibung"));
+        System.out.println(event.get("beschreibung"));
         try {
             veranstaltung.setStart(parseDate(event.get("start")));
         } catch(ParseException e) {
@@ -137,6 +139,7 @@ public class MainController {
         body.put("ort", location.getName());
         body.put("start", new Util().prettifyTimestamp(veranstaltung.getStart().toString()));
         body.put("ende", new Util().prettifyTimestamp(veranstaltung.getEnde().toString()));
+        body.put("beschreibung", veranstaltung.getBeschreibung());
         try {
             return ResponseEntity.created(new URI("/event?id=" + veranstaltung.getId())).body(body);
         } catch(URISyntaxException e) {

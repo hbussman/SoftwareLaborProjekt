@@ -42,15 +42,16 @@
             var ort = document.getElementById('veranstaltung-ort').innerText;
             var start = document.getElementById('veranstaltung-start').value;
             var ende = document.getElementById('veranstaltung-ende').value;
+            var beschreibung = document.getElementById('veranstaltung-beschreibung').value;
 
             // make sure all fields are filled out
             if(name == "" || ort[0] == "[" || start == "" || ende == "") {
                 resultElem.style = "color: red;";
-                resultElem.innerText = "Bitte alle Felder ausfüllen!";
+                resultElem.innerText = "Bitte alle Pflichtfelder ausfüllen!";
                 return;
             }
 
-            db_send_new_veranstaltung(username, name, ort, start, ende).then(result => {
+            db_send_new_veranstaltung(username, name, ort, start, ende, beschreibung).then(result => {
                 if(result.ok) {
                     // success
                     resultElem.style = "color: darkgreen;";
@@ -71,6 +72,7 @@
                     document.getElementById('veranstaltung-ort').innerText = "[Veranstaltungsort]";
                     document.getElementById('veranstaltung-start').value = "";
                     document.getElementById('veranstaltung-ende').value = "";
+                    document.getElementById('veranstaltung-beschreibung').value = "";
 
                 } else {
                     // error occurred

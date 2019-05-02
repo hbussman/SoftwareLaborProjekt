@@ -50,7 +50,13 @@ public class ServerPageController {
         sponsorEventEntities.forEach(sponsorVeranstaltungEntity -> {
             if(sponsorVeranstaltungEntity.getSponsorName().equals(sponsorName)) {
                 Optional<VeranstaltungEntity> event = veranstaltungRepository.findById(sponsorVeranstaltungEntity.getVeranstaltungId());
-                event.ifPresent(sponsorEvents::add);
+                if(event.isPresent()) {
+                    if(event.get().getDiscriminator().equals("Veranstaltung")) {
+                        sponsorEvents.add(event.get());
+                    }
+
+                }
+
             }
         });
         model.addAttribute("sponsorEvents", sponsorEvents);
@@ -60,9 +66,13 @@ public class ServerPageController {
         // get all Veranstaltungen
         Iterable<VeranstaltungEntity> eventEntities = veranstaltungRepository.findAll();
 
-        // convert iterable to List
+        // convert iterable to List and filter by Discriminator
         List<VeranstaltungEntity> events = new ArrayList<>();
-        eventEntities.forEach(events::add);
+        eventEntities.forEach(event -> {
+            if(event.getDiscriminator().equals("Veranstaltung")) {
+                events.add(event);
+            }
+        });
         model.addAttribute("events", events);
     }
 

@@ -150,10 +150,10 @@
                         <h5 class="card-title">Veranstaltung hinzufügen</h5>
                         <div class="input-group input-group-sm mb-3">
                             <div class="row">
-                                <div class="col-3">
+                                <div class="col-6">
                                     <input id="veranstaltung-name" type="text" placeholder="Name" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
                                 </div>
-                                <div class="col-5">
+                                <div class="col-6">
                                     <div class="input-group-prepend">
                                         <button id="veranstaltung-ort" class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">[Veranstaltungsort]</button>
                                         <div class="dropdown-menu">
@@ -167,7 +167,7 @@
                         </div>
                         <div class="row">
 
-                            <div class="col-3">
+                            <div class="col-4">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Start</span>
                                     <input id="veranstaltung-start" type="datetime-local"

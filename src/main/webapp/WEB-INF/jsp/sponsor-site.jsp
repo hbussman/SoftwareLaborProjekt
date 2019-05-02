@@ -42,7 +42,7 @@
                     <a href="${sponsor.homepage}" class="btn btn-dark">Website</a>
                 </div>
                 <div class="card-body">
-                    <h5 class="card-title">Werbetext</h5>
+                    <h5 class="card-title">Rolle bei der BuGa</h5>
                     <p class="card-text">${sponsor.werbetext}</p>
                 </div>
                 <div class="card-body">

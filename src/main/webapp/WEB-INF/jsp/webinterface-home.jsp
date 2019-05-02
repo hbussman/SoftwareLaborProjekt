@@ -151,7 +151,7 @@
                                 <div class="col-6">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">Email</span>
-                                        <input id="sponsor_email" type="text" placeholder="${sponsor.email}"
+                                        <input id="sponsor_email" type="email" placeholder="${sponsor.email}"
                                                class="form-control" aria-label="Sizing example input"
                                                aria-describedby="inputGroup-sizing-sm">
                                     </div>
@@ -159,7 +159,7 @@
                                 <div class="col-6">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">Telefonnummer</span>
-                                        <input id="sponsor_telefonnummer" type="text"
+                                        <input id="sponsor_telefonnummer" type="tel"
                                                placeholder="${sponsor.telefonnummer}" class="form-control"
                                                aria-label="Sizing example input"
                                                aria-describedby="inputGroup-sizing-sm">
@@ -194,8 +194,8 @@
                         </div>
 
 
-                        <a id=submit" class="btn btn-primary btn-block" href="#submit" onclick="Save()" role="button">Änderungen
-                            speichern</a>
+                        <button id=submit" class="btn btn-primary btn-block" onclick="Save()" role="button">Änderungen
+                            speichern</button>
                         <br>
                         <p id="ResultStatus"></p>
                         <br>

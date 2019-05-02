@@ -158,7 +158,7 @@
                                         <button id="veranstaltung-ort" class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">[Veranstaltungsort]</button>
                                         <div class="dropdown-menu">
                                             <c:forEach items="${locationList}" var="location">
-                                                <a class="dropdown-item" href="#" onclick="document.getElementById('veranstaltung-ort').innerText='${location.name}'">${location.name}</a>
+                                                <button class="dropdown-item" onclick="document.getElementById('veranstaltung-ort').innerText='${location.name}'">${location.name}</button>
                                             </c:forEach>
                                         </div>
                                     </div>

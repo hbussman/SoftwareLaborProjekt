@@ -55,27 +55,31 @@
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">Login</h5>
-                    <div class="input-group flex-nowrap">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">
-                                <i class="fa fa-user"></i>
-                            </span>
 
+                    <form action="javascript:DoLogin();">
+                        <div class="input-group flex-nowrap">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <i class="fa fa-user"></i>
+                                </span>
+
+                            </div>
+                            <input id="username" type="text" class="form-control" placeholder="Username" aria-label="Username"
+                                   aria-describedby="addon-wrapping">
                         </div>
-                        <input id="username" type="text" class="form-control" placeholder="Username" aria-label="Username"
-                               aria-describedby="addon-wrapping">
-                    </div>
-                    <div class="input-group flex-nowrap">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">
-                                <i class="fa fa-unlock-alt"></i>
-                            </span>
+                        <div class="input-group flex-nowrap">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <i class="fa fa-unlock-alt"></i>
+                                </span>
+                            </div>
+                            <input id="password" type="password" class="form-control" placeholder="Password" aria-label="Password"
+                                   aria-describedby="addon-wrapping">
                         </div>
-                        <input id="password" type="password" class="form-control" placeholder="Password" aria-label="Password"
-                               aria-describedby="addon-wrapping">
-                    </div>
-                    <p class="card-text"></p>
-                    <a href="#" class="btn btn-dark" onclick="DoLogin()">Enter</a>
+                        <p class="card-text"></p>
+                        <input type="submit" class="btn btn-dark" onclick="DoLogin()" value="Anmelden">
+                    </form>
+
                 </div>
             </div>
         </div>

@@ -12,6 +12,13 @@ buildscript {
     }
 }
 
+configurations {
+    developmentOnly
+    runtimeClasspath {
+        extendsFrom developmentOnly
+    }
+}
+
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
@@ -35,8 +42,13 @@ dependencies {
     // Spring
     compile("org.springframework.boot:spring-boot-starter-web")
     testCompile('org.springframework.boot:spring-boot-starter-test')
+    developmentOnly("org.springframework.boot:spring-boot-devtools")
 
     // JPA Data (We are going to use Repositories, Entities, Hibernate, etc...)
     implementation 'org.mariadb.jdbc:mariadb-java-client:2.4.1'
     compile 'org.springframework.boot:spring-boot-starter-data-jpa'
+    
+    // To support jsp
+    compile("javax.servlet:jstl")
+    compile("org.apache.tomcat.embed:tomcat-embed-jasper")
 }

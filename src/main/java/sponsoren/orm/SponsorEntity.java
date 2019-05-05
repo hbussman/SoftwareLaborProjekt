@@ -14,6 +14,7 @@ public class SponsorEntity {
     private String ansprechpartnerVorname;
     private String email;
     private String telefonnummer;
+    private String homepage;
 
     @Id
     @Column(name = "Name")
@@ -93,6 +94,16 @@ public class SponsorEntity {
 
     public void setTelefonnummer(String telefonnummer) {
         this.telefonnummer = telefonnummer;
+    }
+
+    @Basic
+    @Column(name = "Homepage")
+    public String getHomepage() {
+        return homepage;
+    }
+
+    public void setHomepage(String homepage) {
+        this.homepage = homepage;
     }
 
     @Override

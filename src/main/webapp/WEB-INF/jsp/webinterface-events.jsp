@@ -5,6 +5,7 @@
 <%--@elvariable id="sponsorEvents" type="java.util.List<sponsoren.orm.VeranstaltungEntity>"--%>
 <%--@elvariable id="locations" type="java.util.Map<Integer, sponsoren.orm.LocationEntity>"--%>
 <%--@elvariable id="locationList" type="java.util.List<sponsoren.orm.LocationEntity>"--%>
+<c:set var="context" value="${pageContext.request.contextPath}" />
 
 <!DOCTYPE html>
 <html lang="en">

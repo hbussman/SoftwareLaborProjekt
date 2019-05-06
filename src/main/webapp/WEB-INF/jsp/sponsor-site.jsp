@@ -4,6 +4,7 @@
 <%--@elvariable id="sponsor" type="sponsoren.orm.SponsorEntity"--%>
 <%--@elvariable id="sponsorEvents" type="java.util.List<sponsoren.orm.VeranstaltungEntity>"--%>
 <%--@elvariable id="locations" type="java.util.Map<Integer, sponsoren.orm.LocationEntity>"--%>
+<c:set var="context" value="${pageContext.request.contextPath}" />
 
 <!DOCTYPE html>
 <html lang="en">
@@ -18,14 +19,14 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
           integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <!-- own scripts -->
-    <script src="/js/api_client.js"></script>
+    <script src="${context}/js/api_client.js"></script>
 
     <title>${sponsor.name} - Sponsoren</title>
 </head>
 
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="/sponsoren">Sponsor</a>
+    <a class="navbar-brand" href="${context}/sponsoren">Sponsor</a>
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
     </ul>
 </nav>
@@ -61,7 +62,7 @@
                     <c:forEach items="${sponsorEvents}" var="event">
                         <div class="col-12 col-md-6">
                             <div class="card-body">
-                                <h5 class="card-title"><a href="/event?id=${event.id}" class="text-decoration-none">${event.name}</a></h5>
+                                <h5 class="card-title"><a href="${context}/event?id=${event.id}" class="text-decoration-none">${event.name}</a></h5>
                                 <p class="card-text">
                                     <c:if test="${event.beschreibung.length() > 0}">${event.beschreibung}</c:if>
                                     <c:if test="${event.beschreibung == null || event.beschreibung.length() == 0}"><i>(keine Beschreibung vorhanden)</i></c:if>

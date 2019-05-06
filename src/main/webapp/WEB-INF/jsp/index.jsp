@@ -24,7 +24,7 @@
 
     <!-- Temporary redirect until the index page is done -->
     <script>
-        document.location = "${context}sponsoren";
+        document.location = "${context}/sponsoren";
     </script>
 
 

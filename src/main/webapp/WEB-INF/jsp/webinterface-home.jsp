@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%--@elvariable id="sponsor" type="sponsoren.orm.SponsorEntity"--%>
+<c:set var="context" value="${pageContext.request.contextPath}" />
 
 <!DOCTYPE html>
 <html lang="en">
@@ -14,8 +15,8 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
           integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
-    <script src="/js/util.js"></script>
-    <script src="/js/api_client.js"></script>
+    <script src="${context}/js/util.js"></script>
+    <script src="${context}/js/api_client.js"></script>
 
     <title>Persönliche Seite - Sponsoren</title>
 
@@ -91,10 +92,10 @@
     <ul class="nav navbar-nav ml-auto">
     </ul>
     <div class="pr-2">
-        <a class="btn btn-primary btn-secondary" href="/webinterface/events?sponsor=${sponsor.name}" role="button">Veranstaltungen
+        <a class="btn btn-primary btn-secondary" href="${context}/webinterface/events?sponsor=${sponsor.name}" role="button">Veranstaltungen
         </a>
     </div>
-    <a class="btn btn-primary btn-danger" href="/webinterface/login" role="button"><i class="fa fa-sign-out-alt"></i>
+    <a class="btn btn-primary btn-danger" href="${context}/webinterface/login" role="button"><i class="fa fa-sign-out-alt"></i>
     </a>
 </nav>
 <div class="container">
@@ -102,7 +103,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="text-center">
-                    <img src="/img/${sponsor.name}_scaled.png" style="max-height: 250px; max-width: 250px"
+                    <img src="${context}/img/${sponsor.name}_scaled.png" style="max-height: 250px; max-width: 250px"
                          class="card-img-thumbnail" alt="...">
                 </div>
                 <div class="card-body">

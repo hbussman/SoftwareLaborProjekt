@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<c:set var="context" value="${pageContext.request.contextPath}" />
 
 <!DOCTYPE HTML>
 <html>
@@ -15,8 +16,8 @@
           crossorigin="anonymous">
 
     <!-- own scripts -->
-    <script src="/js/api_client.js"></script>
-    <script src="/js/util.js"></script>
+    <script src="${context}/js/api_client.js"></script>
+    <script src="${context}/js/util.js"></script>
 
     <title>Weiterleitung...</title>
 </head>
@@ -26,9 +27,9 @@
 <script>
     var username = getCookie("username");
     if(username == null) {
-        document.location = "/webinterface/login";
+        document.location = "${context}/webinterface/login";
     } else {
-        document.location = "/webinterface/home?sponsor=" + username;
+        document.location = "${context}/webinterface/home?sponsor=" + username;
     }
 </script>
 </body>

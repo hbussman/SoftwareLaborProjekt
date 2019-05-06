@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<c:set var="context" value="${pageContext.request.contextPath}" />
 
 <!DOCTYPE HTML>
 <html>
@@ -15,7 +16,7 @@
           crossorigin="anonymous">
 
     <!-- own scripts -->
-    <script src="/js/api_client.js"></script>
+    <script src="${context}/js/api_client.js"></script>
 
     <title>Sponsoren und Produkte</title>
 </head>
@@ -23,7 +24,7 @@
 
     <!-- Temporary redirect until the index page is done -->
     <script>
-        document.location = "/sponsoren";
+        document.location = "${context}/sponsoren";
     </script>
 
 

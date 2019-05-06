@@ -43,6 +43,7 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-web")
     testCompile('org.springframework.boot:spring-boot-starter-test')
     developmentOnly("org.springframework.boot:spring-boot-devtools")
+    providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 
     // JPA Data (We are going to use Repositories, Entities, Hibernate, etc...)
     implementation 'org.mariadb.jdbc:mariadb-java-client:2.4.1'
@@ -51,4 +52,6 @@ dependencies {
     // To support jsp
     compile("javax.servlet:jstl")
     compile("org.apache.tomcat.embed:tomcat-embed-jasper")
+    
+    
 }

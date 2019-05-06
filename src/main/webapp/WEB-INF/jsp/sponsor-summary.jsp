@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<c:set var="context" value="${pageContext.request.contextPath}" />
 
 <!DOCTYPE html>
 <html lang="en">
@@ -15,7 +16,7 @@
 		  integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
     <!-- own scripts -->
-    <script src="js/api_client.js"></script>
+    <script src="${context}/js/api_client.js"></script>
 
     <title>Sponsoren-Startseite</title>
 </head>
@@ -23,10 +24,10 @@
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-	<a class="navbar-brand" href="/sponsoren">Sponsoren</a>
+	<a class="navbar-brand" href="${context}/sponsoren">Sponsoren</a>
     <ul class="nav navbar-nav ml-auto">
     </ul>
-            <a class="btn btn-primary btn-secondary" href="/events" role="button"><i class="far fa-calendar"></i>
+            <a class="btn btn-primary btn-secondary" href="${context}/events" role="button"><i class="far fa-calendar"></i>
             </a>
 </nav>
 
@@ -37,10 +38,10 @@
         <c:forEach items="${sponsors}" var="sponsor">
         <div class="col col-lg-2 col-md-3 col-sm-4 col-6 pb-md-4 pb-sm-3 pl-md-4 pl-sm-3">
             <div class="card" >
-                <img src="img/${sponsor.name}_scaled.png" class="card-img-top" alt="${sponsor.name}-Logo">
+                <img src="${context}/img/${sponsor.name}_scaled.png" class="card-img-top" alt="${sponsor.name}-Logo">
                 <div class="card-body">
                     <h5 class="card-title">${sponsor.name}</h5>
-                    <a href="/sponsor?name=${sponsor.name}" class="btn btn-dark">Mehr erfahren</a>
+                    <a href="${context}/sponsor?name=${sponsor.name}" class="btn btn-dark">Mehr erfahren</a>
                 </div>
             </div>
         </div>

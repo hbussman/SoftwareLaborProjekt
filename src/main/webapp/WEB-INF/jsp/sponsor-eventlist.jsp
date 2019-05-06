@@ -3,6 +3,7 @@
 <%--@elvariable id="util" type="sponsoren.Util"--%>
 <%--@elvariable id="events" type="java.lang.List<sponsoren.orm.VeranstaltungEntity>"--%>
 <%--@elvariable id="locations" type="java.util.Map<Integer, sponsoren.orm.LocationEntity>"--%>
+<c:set var="context" value="${pageContext.request.contextPath}" />
 
 <!DOCTYPE html>
 <html lang="en">
@@ -18,13 +19,13 @@
           integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
     <!-- own scripts -->
-    <script src="/js/api_client.js"></script>
+    <script src="${context}/js/api_client.js"></script>
 
     <title>Sponsoren-Veranstaltungsliste</title>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="/sponsoren">Sponsoren &gt; Veranstaltungen</a>
+    <a class="navbar-brand" href="${context}/sponsoren">Sponsoren &gt; Veranstaltungen</a>
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
         <li class="nav-item active ml-1">
 
@@ -42,7 +43,7 @@
     <tbody>
     <c:forEach items="${events}" var="event">
         <tr>
-            <td><a href="/event?id=${event.id}" class="text-decoration-none">${event.name}</a></td>
+            <td><a href="${context}/event?id=${event.id}" class="text-decoration-none">${event.name}</a></td>
             <td>${locations.get(event.locationID).name}</td>
             <td>${util.prettifyTimestamp(event.start)} bis ${util.prettifyTimestamp(event.ende)}</td>
         </tr>

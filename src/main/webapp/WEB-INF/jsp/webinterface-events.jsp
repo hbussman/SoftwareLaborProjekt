@@ -5,6 +5,7 @@
 <%--@elvariable id="sponsorEvents" type="java.util.List<sponsoren.orm.VeranstaltungEntity>"--%>
 <%--@elvariable id="locations" type="java.util.Map<Integer, sponsoren.orm.LocationEntity>"--%>
 <%--@elvariable id="locationList" type="java.util.List<sponsoren.orm.LocationEntity>"--%>
+<c:set var="context" value="${pageContext.request.contextPath}" />
 
 <!DOCTYPE html>
 <html lang="en">
@@ -18,8 +19,8 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
           integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
-    <script src="/js/util.js"></script>
-    <script src="/js/api_client.js"></script>
+    <script src="${context}/js/util.js"></script>
+    <script src="${context}/js/api_client.js"></script>
 
     <title>Eigene Veranstaltungen - Sponsoren</title>
 

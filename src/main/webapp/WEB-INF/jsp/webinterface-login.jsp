@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<c:set var="context" value="${pageContext.request.contextPath}" />
 
 <!DOCTYPE html>
 <html lang="en">
@@ -12,8 +13,8 @@
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
-    <script src="/js/util.js"></script>
-    <script src="/js/api_client.js"></script>
+    <script src="${context}/js/util.js"></script>
+    <script src="${context}/js/api_client.js"></script>
 
     <title>Login für Sponsoren</title>
 
@@ -28,7 +29,7 @@
             setCookie("username", username, 180, "webinterface");
 
             // redirect to dashboard
-            window.location.href = "/webinterface/home?sponsor=" + username;
+            window.location.href = "${context}/webinterface/home?sponsor=" + username;
         }
 
         function Init() {

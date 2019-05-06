@@ -27,9 +27,9 @@
 <script>
     var username = getCookie("username");
     if(username == null) {
-        document.location = "/webinterface/login";
+        document.location = "${context}/webinterface/login";
     } else {
-        document.location = "/webinterface/home?sponsor=" + username;
+        document.location = "${context}/webinterface/home?sponsor=" + username;
     }
 </script>
 </body>

@@ -64,7 +64,7 @@
                             "Ort: " + event.ort + "<br>" +
                             "Zeitraum: " + event.start + " - " + event.ende + "<br>" +
                             (result.headers.has("Location") ?
-                                '<a href="' + result.headers.get("Location") + '" target="_blank">Zur Veranstaltungsseite gehen</a>'
+                                '<a href="${context}' + result.headers.get("Location") + '" target="_blank">Zur Veranstaltungsseite gehen</a>'
                                 : "");
                     });
 
@@ -139,10 +139,10 @@
     <ul class="nav navbar-nav ml-auto">
     </ul>
     <div class="pr-2">
-        <a class="btn btn-primary btn-secondary" href="/webinterface" role="button">Sponsorseite
+        <a class="btn btn-primary btn-secondary" href="${context}/webinterface" role="button">Sponsorseite
         </a>
     </div>
-    <a class="btn btn-primary btn-danger" href="/webinterface/login" role="button"><i class="fa fa-sign-out-alt"></i>
+    <a class="btn btn-primary btn-danger" href="${context}/webinterface/login" role="button"><i class="fa fa-sign-out-alt"></i>
     </a>
 </nav>
 <div class="container">
@@ -217,7 +217,7 @@
                         <div class="col-12 col-md-6" id="event-display-${event.id}">
                             <div class="card-body">
                                 <h5 class="card-title">
-                                    <a id="event${event.id}_name" href="/event?id=${event.id}" class="text-decoration-none">${event.name}</a>
+                                    <a id="event${event.id}_name" href="${context}/event?id=${event.id}" class="text-decoration-none">${event.name}</a>
                                 </h5>
 
                                 <!-- Beschreibung Edit -->

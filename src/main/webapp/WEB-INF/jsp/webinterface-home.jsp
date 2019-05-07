@@ -39,7 +39,7 @@
             var sponsor_homepage = document.getElementById("sponsor_homepage");
 
             var SponsorData = {
-                name: username,
+                name: document.getElementById("sponsor_name").innerText,
                 beschreibung: sponsor_beschreibung.value || sponsor_beschreibung.placeholder,
                 werbetext: sponsor_werbetext.value || sponsor_werbetext.placeholder,
                 adresse: sponsor_adresse.value || sponsor_adresse.placeholder,
@@ -51,12 +51,12 @@
             };
             console.log("Save " + SponsorData);
 
-            db_save_sponsor_info(SponsorData).then(function (value) {
-                console.log(value.status);
-                var result = document.getElementById("ResultStatus");
-                if (value.status == 200) {
-                    result.style.color = "darkgreen";
-                    result.innerText = "Änderungen erfolgreich gespeichert!";
+            db_save_sponsor_info(SponsorData).then(function (result) {
+                console.log(result.status);
+                var resultElement = document.getElementById("ResultStatus");
+                if (result.status == 200) {
+                    resultElement.style.color = "darkgreen";
+                    resultElement.innerText = "Änderungen erfolgreich gespeichert!";
 
                     sponsor_adresse.placeholder = SponsorData.adresse;
                     sponsor_adresse.value = "";
@@ -78,8 +78,10 @@
 
 
                 } else {
-                    result.style.color = "red";
-                    result.innerText = "Es ist ein Fehler aufgetreten";
+                    resultElement.style.color = "red";
+                  result.text().then(value => {
+                    resultElement.innerText = "Es ist ein Fehler aufgetreten: " + result.status + " (" + value + ")";
+                });
                 }
             })
         }
@@ -107,7 +109,7 @@
                          class="card-img-thumbnail" alt="...">
                 </div>
                 <div class="card-body">
-                    <h5 class="card-title">${sponsor.name}</h5>
+                    <h5 id="sponsor_name" class="card-title">${sponsor.name}</h5>
                     <textarea id="sponsor_beschreibung" class="form-control" rows="8"
                               placeholder="Sponsoren Info-Text" aria-label="Username"
                               aria-describedby="basic-addon1">${sponsor.beschreibung}</textarea>

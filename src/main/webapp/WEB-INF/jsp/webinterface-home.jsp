@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%--@elvariable id="sponsor" type="sponsoren.orm.SponsorEntity"--%>
-<c:set var="context" value="${pageContext.request.contextPath}" />
+<c:set var="context" value="${pageContext.request.contextPath}"/>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -79,9 +79,9 @@
 
                 } else {
                     resultElement.style.color = "red";
-                  result.text().then(value => {
-                    resultElement.innerText = "Es ist ein Fehler aufgetreten: " + result.status + " (" + value + ")";
-                });
+                    result.text().then(value => {
+                        resultElement.innerText = "Es ist ein Fehler aufgetreten: " + result.status + " (" + value + ")";
+                    });
                 }
             })
         }
@@ -94,10 +94,12 @@
     <ul class="nav navbar-nav ml-auto">
     </ul>
     <div class="pr-2">
-        <a class="btn btn-primary btn-secondary" href="${context}/webinterface/events?sponsor=${sponsor.name}" role="button">Veranstaltungen
+        <a class="btn btn-primary btn-secondary" href="${context}/webinterface/events?sponsor=${sponsor.name}"
+           role="button">Veranstaltungen
         </a>
     </div>
-    <a class="btn btn-primary btn-danger" href="${context}/webinterface/login" role="button"><i class="fa fa-sign-out-alt"></i>
+    <a class="btn btn-primary btn-danger" href="${context}/webinterface/login" role="button"><i
+            class="fa fa-sign-out-alt"></i>
     </a>
 </nav>
 <div class="container">
@@ -120,102 +122,90 @@
                               placeholder="Sponsoren Info-Text" aria-label="Username"
                               aria-describedby="basic-addon1">${sponsor.werbetext}</textarea>
                 </div>
-                <div class="col-12">
-                    <div class="text-center">
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Kontakt</h5>
-                        <div class="input-group input-group-sm mb-3">
-                            <div class="row">
-                                <div class="col-6">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">Name</span>
-                                        <input id="sponsor_nachname" type="text"
-                                               placeholder="${sponsor.ansprechpartnerNachname}" class="form-control"
-                                               aria-label="Sizing example input"
-                                               aria-describedby="inputGroup-sizing-sm">
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">Vorname</span>
-                                        <input id="sponsor_vorname" type="text"
-                                               placeholder="${sponsor.ansprechpartnerVorname}" class="form-control"
-                                               aria-label="Sizing example input"
-                                               aria-describedby="inputGroup-sizing-sm">
-                                    </div>
-
-                                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Kontakt</h5>
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Name</span>
+                                <input id="sponsor_nachname" type="text"
+                                       placeholder="${sponsor.ansprechpartnerNachname}" class="form-control"
+                                       aria-label="Sizing example input"
+                                       aria-describedby="inputGroup-sizing-sm">
+                            </div>
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Vorname</span>
+                                <input id="sponsor_vorname" type="text"
+                                       placeholder="${sponsor.ansprechpartnerVorname}" class="form-control"
+                                       aria-label="Sizing example input"
+                                       aria-describedby="inputGroup-sizing-sm">
                             </div>
                         </div>
-
-                        <div class="input-group input-group-sm mb-3">
-                            <div class="row">
-                                <div class="col-6">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">Email</span>
-                                        <input id="sponsor_email" type="email" placeholder="${sponsor.email}"
-                                               class="form-control" aria-label="Sizing example input"
-                                               aria-describedby="inputGroup-sizing-sm">
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">Telefonnummer</span>
-                                        <input id="sponsor_telefonnummer" type="tel"
-                                               placeholder="${sponsor.telefonnummer}" class="form-control"
-                                               aria-label="Sizing example input"
-                                               aria-describedby="inputGroup-sizing-sm">
-                                    </div>
-                                </div>
-
+                        <div class="col-4">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Email</span>
+                                <input id="sponsor_email" type="email" placeholder="${sponsor.email}"
+                                       class="form-control" aria-label="Sizing example input"
+                                       aria-describedby="inputGroup-sizing-sm">
+                            </div>
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Telefon</span>
+                                <input id="sponsor_telefonnummer" type="tel"
+                                       placeholder="${sponsor.telefonnummer}" class="form-control"
+                                       aria-label="Sizing example input"
+                                       aria-describedby="inputGroup-sizing-sm">
+                            </div>
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Homepage</span>
+                                <input id="sponsor_homepage" type="text" placeholder="${sponsor.homepage}"
+                                       class="form-control" aria-label="Sizing example input"
+                                       aria-describedby="inputGroup-sizing-sm">
                             </div>
                         </div>
-
-
-                        <div class="input-group input-group-sm mb-3">
-                            <div class="row">
-                                <div class="col-6">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">Homepage</span>
-                                        <input id="sponsor_homepage" type="text" placeholder="${sponsor.homepage}"
-                                               class="form-control" aria-label="Sizing example input"
-                                               aria-describedby="inputGroup-sizing-sm">
-                                    </div>
-                                </div>
-
-
-                                <div class="col-6">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">Adresse</span>
-                                        <input id="sponsor_adresse" type="text" placeholder="${sponsor.adresse}"
-                                               class="form-control" aria-label="Sizing example input"
-                                               aria-describedby="inputGroup-sizing-sm">
-                                    </div>
-                                </div>
+                        <div class="col-4">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Plz/Ort</span>
+                                <input id="sponsor_adresse" type="text" placeholder="${sponsor.adresse}"
+                                       class="form-control" aria-label="Sizing example input"
+                                       aria-describedby="inputGroup-sizing-sm">
+                            </div>
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Adresse</span>
+                                <input id="Strasse/Hausnummer" type="tel"
+                                       placeholder="" class="form-control"
+                                       aria-label="Sizing example input"
+                                       aria-describedby="inputGroup-sizing-sm">
+                            </div>
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Postfach</span>
+                                <input id="Postfach" type="tel"
+                                       placeholder="" class="form-control"
+                                       aria-label="Sizing example input"
+                                       aria-describedby="inputGroup-sizing-sm">
                             </div>
                         </div>
-
-
-                        <button id=submit" class="btn btn-primary btn-block" onclick="Save()" role="button">Änderungen
-                            speichern</button>
-                        <br>
-                        <p id="ResultStatus"></p>
-                        <br>
                     </div>
                 </div>
+
+
+                <button id=submit" class="btn btn-primary btn-block" onclick="Save()" role="button">Änderungen
+                    speichern
+                </button>
+                <br>
+                <p id="ResultStatus"></p>
+                <br>
             </div>
         </div>
     </div>
-</div>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
 </body>
 </html>

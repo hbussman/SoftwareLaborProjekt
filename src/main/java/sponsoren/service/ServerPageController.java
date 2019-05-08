@@ -73,6 +73,10 @@ public class ServerPageController {
                 events.add(event);
             }
         });
+
+        // sort events by start time ascending (earliest event from now first)
+        events.sort(Comparator.comparing(VeranstaltungEntity::getStart));
+
         model.addAttribute("events", events);
     }
 

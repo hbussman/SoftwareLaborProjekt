@@ -51,7 +51,7 @@
                 email: sponsor_email.value || sponsor_email.placeholder,
                 telefonnummer: sponsor_telefonnummer.value || sponsor_telefonnummer.placeholder,
                 homepage: sponsor_homepage.value || sponsor_homepage.placeholder,
-                plz: sponsor_plz.value || sponsor_homepage.placeholder,
+                plz: sponsor_plz.value || sponsor_plz.placeholder,
                 stadt: sponsor_stadt.value || sponsor_stadt.placeholder,
                 postfach: sponsor_postfach.value || sponsor_postfach.placeholder
             };

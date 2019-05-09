@@ -15,6 +15,9 @@ public class SponsorEntity {
     private String email;
     private String telefonnummer;
     private String homepage;
+    private String plz;
+    private String stadt;
+    private String postfach;
 
     @Id
     @Column(name = "Name")
@@ -104,6 +107,36 @@ public class SponsorEntity {
 
     public void setHomepage(String homepage) {
         this.homepage = homepage;
+    }
+
+    @Basic
+    @Column(name = "Plz", nullable = true, length = 5)
+    public String getPlz() {
+        return plz;
+    }
+
+    public void setPlz(String plz) {
+        this.plz = plz;
+    }
+
+    @Basic
+    @Column(name = "Stadt", nullable = true, length = 255)
+    public String getStadt() {
+        return stadt;
+    }
+
+    public void setStadt(String stadt) {
+        this.stadt = stadt;
+    }
+
+    @Basic
+    @Column(name = "Postfach", nullable = true, length = 255)
+    public String getPostfach() {
+        return postfach;
+    }
+
+    public void setPostfach(String postfach) {
+        this.postfach = postfach;
     }
 
     @Override

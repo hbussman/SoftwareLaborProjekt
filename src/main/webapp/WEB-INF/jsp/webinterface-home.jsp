@@ -17,6 +17,7 @@
 
     <script src="${context}/js/util.js"></script>
     <script src="${context}/js/api_client.js"></script>
+    <script>api_set_context("${context}")</script>
 
     <title>Persönliche Seite - Sponsoren</title>
 
@@ -37,6 +38,9 @@
             var sponsor_email = document.getElementById("sponsor_email");
             var sponsor_telefonnummer = document.getElementById("sponsor_telefonnummer");
             var sponsor_homepage = document.getElementById("sponsor_homepage");
+            var sponsor_plz = document.getElementById("sponsor_plz");
+            var sponsor_stadt = document.getElementById("sponsor_stadt");
+            var sponsor_postfach = document.getElementById("sponsor_postfach");
 
             var SponsorData = {
                 name: document.getElementById("sponsor_name").innerText,
@@ -47,7 +51,10 @@
                 ansprechpartnerVorname: sponsor_vorname.value || sponsor_vorname.placeholder,
                 email: sponsor_email.value || sponsor_email.placeholder,
                 telefonnummer: sponsor_telefonnummer.value || sponsor_telefonnummer.placeholder,
-                homepage: sponsor_homepage.value || sponsor_homepage.placeholder
+                homepage: sponsor_homepage.value || sponsor_homepage.placeholder,
+                plz: sponsor_plz.value || sponsor_plz.placeholder,
+                stadt: sponsor_stadt.value || sponsor_stadt.placeholder,
+                postfach: sponsor_postfach.value || sponsor_postfach.placeholder
             };
             console.log("Save " + SponsorData);
 
@@ -75,6 +82,15 @@
 
                     sponsor_homepage.placeholder = SponsorData.homepage;
                     sponsor_homepage.value = "";
+
+                    sponsor_plz.placeholder = SponsorData.plz;
+                    sponsor_plz.value = "";
+
+                    sponsor_stadt.placeholder = SponsorData.stadt;
+                    sponsor_stadt.value = "";
+
+                    sponsor_postfach.placeholder = SponsorData.postfach;
+                    sponsor_postfach.value = "";
 
 
                 } else {
@@ -164,22 +180,28 @@
                         </div>
                         <div class="col-4">
                             <div class="input-group-prepend">
-                                <span class="input-group-text">Plz/Ort</span>
-                                <input id="sponsor_adresse" type="text" placeholder="${sponsor.adresse}"
+                                <span class="input-group-text">Plz</span>
+                                <input id="sponsor_plz" type="text" placeholder="${sponsor.plz}"
+                                       class="form-control" aria-label="Sizing example input"
+                                       aria-describedby="inputGroup-sizing-sm">
+                            </div>
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Stadt</span>
+                                <input id="sponsor_stadt" type="text" placeholder="${sponsor.stadt}"
                                        class="form-control" aria-label="Sizing example input"
                                        aria-describedby="inputGroup-sizing-sm">
                             </div>
                             <div class="input-group-prepend">
                                 <span class="input-group-text">Adresse</span>
-                                <input id="Strasse/Hausnummer" type="tel"
-                                       placeholder="" class="form-control"
+                                <input id="sponsor_adresse" type="tel"
+                                       placeholder="${sponsor.adresse}" class="form-control"
                                        aria-label="Sizing example input"
                                        aria-describedby="inputGroup-sizing-sm">
                             </div>
                             <div class="input-group-prepend">
                                 <span class="input-group-text">Postfach</span>
-                                <input id="Postfach" type="tel"
-                                       placeholder="" class="form-control"
+                                <input id="sponsor_postfach" type="tel"
+                                       placeholder="${sponsor.postfach}" class="form-control"
                                        aria-label="Sizing example input"
                                        aria-describedby="inputGroup-sizing-sm">
                             </div>

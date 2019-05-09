@@ -1,3 +1,14 @@
+var _context = "";
+
+function api_set_context(context) {
+    _context = context;
+    console.log("[API] set context: '" + _context + "'");
+}
+
+function _path(what) {
+    return _context + '/api/' + what;
+}
+
 function _xwwwfurlenc(srcjson){
     if(typeof srcjson !== "object") {
         if (typeof console !== "undefined") {
@@ -16,7 +27,7 @@ function _xwwwfurlenc(srcjson){
 }
 
 function _get(what, args) {
-    return fetch('/api/' + what + _xwwwfurlenc(args), {
+    return fetch(_path(what) + _xwwwfurlenc(args), {
         method: "GET", // *GET, POST, PUT, DELETE, etc.
         mode: "cors", // no-cors, cors, *same-origin
         cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
@@ -32,7 +43,7 @@ function _get(what, args) {
 
 function _post(what, args) {
     console.log("_post " + JSON.stringify(args));
-    return fetch('/api/' + what, {
+    return fetch(_path(what), {
         method: "POST", // *GET, POST, PUT, DELETE, etc.
         mode: "cors", // no-cors, cors, *same-origin
         cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
@@ -48,7 +59,7 @@ function _post(what, args) {
 
 function _patch(what, args) {
     console.log("_patch " + JSON.stringify(args));
-    return fetch('/api/' + what, {
+    return fetch(_path(what), {
         method: "PATCH", // *GET, POST, PUT, DELETE, etc.
         mode: "cors", // no-cors, cors, *same-origin
         cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
@@ -64,7 +75,7 @@ function _patch(what, args) {
 
 function _delete(what, args) {
     console.log("_delete " + JSON.stringify(args));
-    return fetch('/api/' + what, {
+    return fetch(_path(what), {
         method: "DELETE", // *GET, POST, PUT, DELETE, etc.
         mode: "cors", // no-cors, cors, *same-origin
         cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
@@ -150,13 +161,4 @@ function db_delete_veranstaltung(eventId, sponsorName) {
         id: eventId,
         sponsor: sponsorName
     });
-}
-
-/**
- * Returns the Werbetext of a Sponsor
- * @param sponsor_name Name of the sponsor, i.e. the key in the database
- * @returns {Promise<Response>}
- */
-function db_get_werbetext(sponsor_name) {
-    return _get("sponsor/werbetext", { name: sponsor_name }).then(_give_json);
 }

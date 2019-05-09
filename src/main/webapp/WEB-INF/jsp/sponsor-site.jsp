@@ -20,6 +20,7 @@
           integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <!-- own scripts -->
     <script src="${context}/js/api_client.js"></script>
+    <script>api_set_context("${context}")</script>
 
     <title>${sponsor.name} - Sponsoren</title>
 </head>

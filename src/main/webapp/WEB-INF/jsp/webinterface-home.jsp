@@ -17,6 +17,7 @@
 
     <script src="${context}/js/util.js"></script>
     <script src="${context}/js/api_client.js"></script>
+    <script>api_set_context("${context}")</script>
 
     <title>Persönliche Seite - Sponsoren</title>
 

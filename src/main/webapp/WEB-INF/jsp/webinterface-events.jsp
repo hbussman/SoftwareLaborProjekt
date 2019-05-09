@@ -21,6 +21,7 @@
 
     <script src="${context}/js/util.js"></script>
     <script src="${context}/js/api_client.js"></script>
+    <script>api_set_context("${context}")</script>
 
     <title>Eigene Veranstaltungen - Sponsoren</title>
 
@@ -48,7 +49,7 @@
             // make sure all fields are filled out
             if(name == "" || ort[0] == "[" || start == "" || ende == "") {
                 resultElem.style = "color: red;";
-                resultElem.innerText = "Bitte alle Pflichtfelder ausfüllen!";
+                resultElem.innerText = "Bitte alle Pflichtfelder ausfüllen! " + name + "|" + ort + "|" + start + "|" + ende + "|";
                 return;
             }
 

@@ -14,6 +14,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.regex.Pattern;
 
 @Controller
 @RequestMapping(path="/api")
@@ -56,14 +57,26 @@ public class MainController {
 
     // POST save sponsor information
     @PostMapping(path = "/sponsor/set_info")
-    public @ResponseBody void setSponsorInfo(@RequestBody SponsorEntity sponsor) {
+    public ResponseEntity setSponsorInfo(@RequestBody SponsorEntity sponsor) {
         sponsor.setAdresse(sponsor.getAdresse().trim());
         sponsor.setAnsprechpartnerNachname(sponsor.getAnsprechpartnerNachname().trim());
         sponsor.setAnsprechpartnerVorname(sponsor.getAnsprechpartnerVorname().trim());
         sponsor.setEmail(sponsor.getEmail().trim());
         sponsor.setTelefonnummer(sponsor.getTelefonnummer().trim());
         sponsor.setHomepage(sponsor.getHomepage().trim());
+        sponsor.setStadt(sponsor.getStadt().trim());
+
+        // validate plz
+        String plz = sponsor.getPlz().trim();
+        if (plz.length() == 0) {
+            sponsor.setPlz(null);
+        } else if (!plz.matches("\\d{5}")) {
+            return ResponseEntity.unprocessableEntity().body("Plz muss aus 5 Zahlen bestehen");
+        }
+
+        // TODO Add further validations
         sponsorRepository.save(sponsor);
+        return ResponseEntity.ok(null);
     }
 
     // GET list of all locations

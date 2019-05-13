@@ -34,21 +34,22 @@
 <div class="container">
     <div class="row">
         <div class="col-12">
+            <div class="shadow p-3 mb-5 bg-white rounded">
             <div class="card">
                 <div class="text-center">
                     <img src="${context}/img/${sponsor.name}_scaled.png" style="max-height: 250px; max-width: 250px" class="card-img-thumbnail" alt="...">
                 </div>
                 <div class="card-body">
-                    <h5 class="card-title">${sponsor.name}</h5>
+                    <span class="d-block p-1 bg-dark text-white text-center">${sponsor.name}</span>
                     <p class="card-text">${sponsor.beschreibung}</p>
-                    <a href="${sponsor.homepage}" class="btn btn-dark">Website</a>
+                    <a href="${sponsor.homepage}" class="text-decoration-none">Website</a>
                 </div>
                 <div class="card-body">
-                    <h5 class="card-title">Rolle bei der BuGa</h5>
+                    <span class="d-block p-1 bg-dark text-white text-center">Rolle bei der BuGa</span>
                     <p class="card-text">${sponsor.werbetext}</p>
                 </div>
                 <div class="card-body">
-                    <h5 class="card-title">Kontakt</h5>
+                    <span class="d-block p-1 bg-dark text-white text-center">Kontakt</span>
                     <p class="card-text">${sponsor.ansprechpartnerNachname}<c:if test="${sponsor.ansprechpartnerVorname.length() > 0 && sponsor.ansprechpartnerNachname.length() > 0}">, </c:if>${sponsor.ansprechpartnerVorname}</p>
                     <p class="card-text">${sponsor.email} </p>
                     <p class="card-text">${sponsor.telefonnummer}</p>
@@ -57,7 +58,7 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="card-body">
-                            <h2 class="text-start">Veranstaltungen</h2>
+                            <span class="d-block p-1 bg-dark text-white text-center">Veranstaltungen</span>
                         </div>
                     </div>
                     <c:forEach items="${sponsorEvents}" var="event">
@@ -76,7 +77,7 @@
                         </div>
                     </c:forEach>
                 </div>
-
+            </div>
             </div>
         </div>
     </div>

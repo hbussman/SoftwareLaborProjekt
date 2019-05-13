@@ -161,6 +161,7 @@
                             </div>
                             <div class="col-6">
                                 <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fas fa-thumbtack"></i></span>
                                     <button id="veranstaltung-ort" class="btn btn-outline-secondary dropdown-toggle"
                                             type="button" data-toggle="dropdown" aria-haspopup="true"
                                             aria-expanded="false">[Veranstaltungsort]

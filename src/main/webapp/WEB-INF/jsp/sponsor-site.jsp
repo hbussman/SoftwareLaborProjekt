@@ -41,15 +41,18 @@
                 </div>
                 <div class="card-body">
                     <span class="d-block p-1 bg-dark text-white text-center">${sponsor.name}</span>
+                    <br>
                     <p class="card-text">${sponsor.beschreibung}</p>
                     <a href="${sponsor.homepage}" class="text-decoration-none">Website</a>
                 </div>
                 <div class="card-body">
                     <span class="d-block p-1 bg-dark text-white text-center">Rolle bei der BuGa</span>
+                    <br>
                     <p class="card-text">${sponsor.werbetext}</p>
                 </div>
                 <div class="card-body">
                     <span class="d-block p-1 bg-dark text-white text-center">Kontakt</span>
+                    <br>
                     <p class="card-text">${sponsor.ansprechpartnerNachname}<c:if test="${sponsor.ansprechpartnerVorname.length() > 0 && sponsor.ansprechpartnerNachname.length() > 0}">, </c:if>${sponsor.ansprechpartnerVorname}</p>
                     <p class="card-text">${sponsor.email} </p>
                     <p class="card-text">${sponsor.telefonnummer}</p>
@@ -61,6 +64,7 @@
                             <span class="d-block p-1 bg-dark text-white text-center">Veranstaltungen</span>
                         </div>
                     </div>
+                        <br>
                     <c:forEach items="${sponsorEvents}" var="event">
                         <div class="col-12 col-md-6">
                             <div class="card-body">

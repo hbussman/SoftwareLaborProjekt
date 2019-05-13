@@ -52,7 +52,7 @@
                     <p class="card-text">${sponsor.ansprechpartnerNachname}<c:if test="${sponsor.ansprechpartnerVorname.length() > 0 && sponsor.ansprechpartnerNachname.length() > 0}">, </c:if>${sponsor.ansprechpartnerVorname}</p>
                     <p class="card-text">${sponsor.email} </p>
                     <p class="card-text">${sponsor.telefonnummer}</p>
-                    <p class="card-text">${sponsor.adresse}</p>
+                    <p class="card-text">${sponsor.adresse}<c:if test="${sponsor.adresse.length() > 0 && ( sponsor.plz.length() > 0 || sponsor.ort.length() > 0) }">, </c:if> ${sponsor.plz} ${sponsor.ort}</p>
                 </div>
                 <div class="row">
                     <div class="col-12">

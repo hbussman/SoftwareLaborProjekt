@@ -39,7 +39,7 @@
             var sponsor_telefonnummer = document.getElementById("sponsor_telefonnummer");
             var sponsor_homepage = document.getElementById("sponsor_homepage");
             var sponsor_plz = document.getElementById("sponsor_plz");
-            var sponsor_stadt = document.getElementById("sponsor_stadt");
+            var sponsor_ort = document.getElementById("sponsor_ort");
             var sponsor_postfach = document.getElementById("sponsor_postfach");
 
             var SponsorData = {
@@ -53,7 +53,7 @@
                 telefonnummer: sponsor_telefonnummer.value || sponsor_telefonnummer.placeholder,
                 homepage: sponsor_homepage.value || sponsor_homepage.placeholder,
                 plz: sponsor_plz.value || sponsor_plz.placeholder,
-                stadt: sponsor_stadt.value || sponsor_stadt.placeholder,
+                ort: sponsor_ort.value || sponsor_ort.placeholder,
                 postfach: sponsor_postfach.value || sponsor_postfach.placeholder
             };
             console.log("Save " + SponsorData);
@@ -86,8 +86,8 @@
                     sponsor_plz.placeholder = SponsorData.plz;
                     sponsor_plz.value = "";
 
-                    sponsor_stadt.placeholder = SponsorData.stadt;
-                    sponsor_stadt.value = "";
+                    sponsor_ort.placeholder = SponsorData.ort;
+                    sponsor_ort.value = "";
 
                     sponsor_postfach.placeholder = SponsorData.postfach;
                     sponsor_postfach.value = "";
@@ -186,8 +186,8 @@
                                        aria-describedby="inputGroup-sizing-sm">
                             </div>
                             <div class="input-group-prepend">
-                                <span class="input-group-text">Stadt</span>
-                                <input id="sponsor_stadt" type="text" placeholder="${sponsor.stadt}"
+                                <span class="input-group-text">Ort</span>
+                                <input id="sponsor_stadt" type="text" placeholder="${sponsor.ort}"
                                        class="form-control" aria-label="Sizing example input"
                                        aria-describedby="inputGroup-sizing-sm">
                             </div>

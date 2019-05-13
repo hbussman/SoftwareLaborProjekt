@@ -265,6 +265,7 @@
                                 <!-- Ort Edit -->
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Ort</span>
+                                    <span class="input-group-text"><i class="fas fa-thumbtack"></i></span>
                                     <button id="event${event.id}_ort" class="btn btn-outline-secondary dropdown-toggle"
                                             type="button" data-toggle="dropdown" aria-haspopup="true"
                                             aria-expanded="false">${locations.get(event.locationID).name}</button>
@@ -279,22 +280,31 @@
                                 <!-- Start Edit -->
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Start</span>
-                                    <input id="event${event.id}_start" type="date"
-                                           value="${util.parsableDatetimeForHTML(event.start)}"
-                                           placeholder="dd/mm/yyyy"
+                                    <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                    <input id="veranstaltung-start-edit" type="date"
+                                           placeholder="dd/mm/yyyy HH:MM (Datum+Uhrzeit)"
                                            class="form-control" aria-label="Veranstaltung Start"
                                            aria-describedby="inputGroup-sizing-sm">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text"><i class="far fa-clock"></i></span>
+                                    </div>
+                                    <input type="time" class="form-control" placeholder="Zeit HH:MM"
+                                           aria-label="Start-Time" aria-describedby="basic-addon1">
                                 </div>
-
 
                                 <!-- Ende Edit -->
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Ende</span>
-                                    <input id="event${event.id}_ende" type="datetime-local"
-                                           value="${util.parsableDatetimeForHTML(event.ende)}"
+                                    <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                    <input id="veranstaltung-ende-edit" type="date"
                                            placeholder="dd/mm/yyyy HH:MM (Datum+Uhrzeit)"
-                                           class="form-control" aria-label="Veranstaltung Ende"
+                                           class="form-control" aria-label="Veranstaltung Start"
                                            aria-describedby="inputGroup-sizing-sm">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text"><i class="far fa-clock"></i></span>
+                                    </div>
+                                    <input type="time" class="form-control" placeholder="Zeit HH:MM"
+                                           aria-label="Start-Time" aria-describedby="basic-addon1">
                                 </div>
 
                                 <script>

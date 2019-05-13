@@ -64,7 +64,7 @@ public class MainController {
         sponsor.setEmail(sponsor.getEmail().trim());
         sponsor.setTelefonnummer(sponsor.getTelefonnummer().trim());
         sponsor.setHomepage(sponsor.getHomepage().trim());
-        sponsor.setStadt(sponsor.getStadt().trim());
+        sponsor.setOrt(sponsor.getOrt().trim());
 
         // validate plz
         String plz = sponsor.getPlz().trim();

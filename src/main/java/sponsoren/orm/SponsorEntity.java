@@ -16,7 +16,7 @@ public class SponsorEntity {
     private String telefonnummer;
     private String homepage;
     private String plz;
-    private String stadt;
+    private String ort;
     private String postfach;
 
     @Id
@@ -121,12 +121,12 @@ public class SponsorEntity {
 
     @Basic
     @Column(name = "Stadt", nullable = true, length = 255)
-    public String getStadt() {
-        return stadt;
+    public String getOrt() {
+        return ort;
     }
 
-    public void setStadt(String stadt) {
-        this.stadt = stadt;
+    public void setOrt(String stadt) {
+        this.ort = stadt;
     }
 
     @Basic

@@ -165,3 +165,10 @@ function db_delete_veranstaltung(eventId, sponsorName) {
         sponsor: sponsorName
     });
 }
+
+function backend_login(username, password) {
+    return _post("login", {
+        username: username,
+        password: password
+    });
+}

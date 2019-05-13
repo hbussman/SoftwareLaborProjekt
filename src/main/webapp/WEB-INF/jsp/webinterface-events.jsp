@@ -42,18 +42,21 @@
 
             var name = document.getElementById('veranstaltung-name').value;
             var ort = document.getElementById('veranstaltung-ort').innerText;
-            var start = document.getElementById('veranstaltung-start').value;
-            var ende = document.getElementById('veranstaltung-ende').value;
+            var start_date = document.getElementById('veranstaltung-start-date').value;
+            var start_time = document.getElementById('veranstaltung-start-time').value;
+            var ende_date = document.getElementById('veranstaltung-ende-date').value;
+            var ende_time = document.getElementById('veranstaltung-ende-time').value;
             var beschreibung = document.getElementById('veranstaltung-beschreibung').value;
 
             // make sure all fields are filled out
-            if (name == "" || ort[0] == "[" || start == "" || ende == "") {
+            if (name == "" || ort[0] == "[" || start_date == "" || start_time == "" || ende_date == "" || ende_time == "") {
                 resultElem.style = "color: red;";
                 resultElem.innerText = "Bitte alle Pflichtfelder ausfüllen! " + name + "|" + ort + "|" + start + "|" + ende + "|";
                 return;
             }
 
-            db_send_new_veranstaltung(username, name, ort, start, ende, beschreibung).then(result => {
+            // save the data
+            db_send_new_veranstaltung(username, name, ort, start_date, start_time, ende_date, ende_time, beschreibung).then(result => {
                 if (result.ok) {
                     // success
                     resultElem.style = "color: darkgreen;";
@@ -72,8 +75,10 @@
                     // clear out input fields
                     document.getElementById('veranstaltung-name').value = "";
                     document.getElementById('veranstaltung-ort').innerText = "[Veranstaltungsort]";
-                    document.getElementById('veranstaltung-start').value = "";
-                    document.getElementById('veranstaltung-ende').value = "";
+                    document.getElementById('veranstaltung-start-date').value = "";
+                    document.getElementById('veranstaltung-start-time').value = "";
+                    document.getElementById('veranstaltung-ende-date').value = "";
+                    document.getElementById('veranstaltung-ende-time').value = "";
                     document.getElementById('veranstaltung-beschreibung').value = "";
 
                 } else {
@@ -178,35 +183,37 @@
                     </div>
 
                     <div class="row">
+                        <!-- Veranstaltung Start -->
                         <div class="col-6">
                             <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">Start</span>
                                 <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
-                                <input id="veranstaltung-start" type="date"
+                                <input id="veranstaltung-start-date" type="date"
                                        placeholder="dd/mm/yyyy HH:MM (Datum+Uhrzeit)"
-                                       class="form-control" aria-label="Veranstaltung Start"
+                                       class="form-control" aria-label="Veranstaltung Start Datum"
                                        aria-describedby="inputGroup-sizing-sm">
                                 <div class="input-group-append">
                                     <span class="input-group-text"><i class="far fa-clock"></i></span>
                                 </div>
-                                <input type="text" class="form-control" placeholder="Zeit HH:MM" aria-label="Start-Time" aria-describedby="basic-addon1">
+                                <input id="veranstaltung-start-time" type="time" class="form-control" placeholder="Zeit HH:MM" aria-label="Veranstaltung Start Zeit" aria-describedby="basic-addon1">
                             </div>
                             </div>
                         </div>
+                        <!-- Veranstaltung Ende -->
                         <div class="col-6">
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Ende</span>
                                     <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
-                                    <input id="veranstaltung-ende" type="date"
+                                    <input id="veranstaltung-ende-date" type="date"
                                            placeholder="dd/mm/yyyy HH:MM (Datum+Uhrzeit)"
-                                           class="form-control" aria-label="Veranstaltung Start"
+                                           class="form-control" aria-label="Veranstaltung Ende Datum"
                                            aria-describedby="inputGroup-sizing-sm">
                                     <div class="input-group-append">
                                         <span class="input-group-text"><i class="far fa-clock"></i></span>
                                     </div>
-                                    <input type="text" class="form-control" placeholder="Zeit HH:MM" aria-label="Start-Time" aria-describedby="basic-addon1">
+                                    <input id="veranstaltung-ende-time" type="time" class="form-control" placeholder="Zeit HH:MM" aria-label="Veranstaltung Ende Zeit" aria-describedby="basic-addon1">
                                 </div>
                             </div>
                         </div>

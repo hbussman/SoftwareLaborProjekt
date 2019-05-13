@@ -135,13 +135,13 @@ function db_save_sponsor_info(json_info) {
  * @param start
  * @param ende
  */
-function db_send_new_veranstaltung(creator, name, ort, start, ende, beschreibung) {
+function db_send_new_veranstaltung(creator, name, ort, start_date, start_time, ende_date, ende_time, beschreibung) {
     return _post("event/new", {
         creator: creator,
         name: name,
         ort: ort,
-        start: start,
-        ende: ende,
+        start: start_date + "T" + start_time,
+        ende: ende_date + "T" + ende_time,
         beschreibung: beschreibung
     });
 }

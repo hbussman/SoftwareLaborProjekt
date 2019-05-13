@@ -25,7 +25,7 @@
     <title>Sponsoren-Veranstaltungsliste</title>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="min-width: 425px">
     <a class="navbar-brand" href="${context}/sponsoren">Sponsoren &gt; Veranstaltungen</a>
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
         <li class="nav-item active ml-1">
@@ -33,12 +33,12 @@
         </li>
     </ul>
 </nav>
-<table class="table table-bordered table-striped">
+<table class="table table-bordered table-striped text-wrap" style="max-width: none">
     <thead>
     <tr>
-        <th style="width: 150px;">Veranstaltung</th>
-        <th style="width: 150px;">Ort?</th>
-        <th style="width: 150px;">Datum</th>
+        <th style="width: 150px;" class="text-wrap">Veranstaltung</th>
+        <th style="width: 150px;" class="text-wrap">Ort</th>
+        <th style="width: 150px;" class="text-wrap">Datum</th>
     </tr>
     </thead>
     <tbody>

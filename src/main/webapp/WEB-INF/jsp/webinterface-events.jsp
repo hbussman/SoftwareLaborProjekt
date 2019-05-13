@@ -94,21 +94,23 @@
 
         function saveVeranstaltung(eventId) {
             // var name = document.getElementById('event' + eventId + '_name').innerText;
-            var beschreibung = document.getElementById('event' + eventId + '_beschreibung').value;
-            var ort = document.getElementById('event' + eventId + '_ort').innerText;
-            var start = document.getElementById('event' + eventId + '_start').value;
-            var ende = document.getElementById('event' + eventId + '_ende').value;
+            var beschreibung = document.getElementById('veranstaltung' + eventId + '-beschreibung-edit').value;
+            var ort = document.getElementById('veranstaltung' + eventId + '-ort-edit').innerText;
+            var start_date = document.getElementById('veranstaltung' + eventId + '-start-date-edit').value;
+            var start_time = document.getElementById('veranstaltung' + eventId + '-start-time-edit').value;
+            var ende_date = document.getElementById('veranstaltung' + eventId + '-ende-date-edit').value;
+            var ende_time = document.getElementById('veranstaltung' + eventId + '-ende-time-edit').value;
 
-            db_save_event_data(getCookie('username'), eventId, beschreibung, ort, start, ende).then(result => {
+            db_save_event_data(getCookie('username'), eventId, beschreibung, ort, start_date, start_time, ende_date, ende_time).then(result => {
                 if (result.ok) {
                     // success
-                    var resultElem = document.getElementById('event-action-result-' + eventId);
+                    var resultElem = document.getElementById('veranstaltung-edit-result-' + eventId);
                     resultElem.style = "color: darkgreen;";
                     resultElem.innerText = "Änderungen gespeichert!";
                 } else {
                     // error occurred
                     result.text().then(value => {
-                        var resultElem = document.getElementById('event-action-result-' + eventId);
+                        var resultElem = document.getElementById('veranstaltung-edit-result-' + eventId);
                         resultElem.style = "color: red;";
                         resultElem.innerText = "Es ist ein Fehler aufgetreten: " + result.status + " (" + value + ")";
                     });
@@ -126,13 +128,13 @@
                 } else {
                     // error occurred
                     result.text().then(value => {
-                        var resultElem = document.getElementById('event-action-result-' + eventId);
+                        var resultElem = document.getElementById('veranstaltung-edit-result-' + eventId);
                         resultElem.style = "color: red;";
                         resultElem.innerText = "Es ist ein Fehler aufgetreten: " + result.status + " (" + value + ")";
                     });
                 }
                 // remove button
-                var button = document.getElementById('button-delete-event-' + eventId);
+                var button = document.getElementById('button-delete-veranstaltung-' + eventId);
                 button.parentNode.removeChild(button);
             });
         }
@@ -248,14 +250,14 @@
                         <div class="col-12 col-md-6" id="event-display-${event.id}">
                             <div class="card-body">
                                 <h5 class="card-title">
-                                    <a id="event${event.id}_name" href="${context}/event?id=${event.id}"
+                                    <a id="veranstaltung${event.id}-name" href="${context}/event?id=${event.id}"
                                        class="text-decoration-none">${event.name}</a>
                                 </h5>
 
                                 <!-- Beschreibung Edit -->
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Kurzbeschreibung</span>
-                                    <input id="event${event.id}_beschreibung" type="text"
+                                    <input id="veranstaltung${event.id}-beschreibung-edit" type="text"
                                            value="${event.beschreibung}"
                                            placeholder="" class="form-control"
                                            aria-label="Sizing example input"
@@ -266,13 +268,13 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Ort</span>
                                     <span class="input-group-text"><i class="fas fa-thumbtack"></i></span>
-                                    <button id="event${event.id}_ort" class="btn btn-outline-secondary dropdown-toggle"
+                                    <button id="veranstaltung${event.id}-ort-edit" class="btn btn-outline-secondary dropdown-toggle"
                                             type="button" data-toggle="dropdown" aria-haspopup="true"
                                             aria-expanded="false">${locations.get(event.locationID).name}</button>
                                     <div class="dropdown-menu">
                                         <c:forEach items="${locationList}" var="location">
                                             <button class="dropdown-item"
-                                                    onclick="document.getElementById('event${event.id}_ort').innerText='${location.name}'">${location.name}</button>
+                                                    onclick="document.getElementById('veranstaltung${event.id}-ort-edit').innerText='${location.name}'">${location.name}</button>
                                         </c:forEach>
                                     </div>
                                 </div>
@@ -281,14 +283,17 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Start</span>
                                     <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
-                                    <input id="veranstaltung-start-edit" type="date"
+                                    <input id="veranstaltung${event.id}-start-date-edit" type="date"
+                                           value="${util.parsableDateForHTML(event.start)}"
                                            placeholder="dd/mm/yyyy HH:MM (Datum+Uhrzeit)"
-                                           class="form-control" aria-label="Veranstaltung Start"
+                                           class="form-control" aria-label="Veranstaltung Start Datum"
                                            aria-describedby="inputGroup-sizing-sm">
                                     <div class="input-group-append">
                                         <span class="input-group-text"><i class="far fa-clock"></i></span>
                                     </div>
-                                    <input type="time" class="form-control" placeholder="Zeit HH:MM"
+                                    <input id="veranstaltung${event.id}-start-time-edit" type="time" class="form-control"
+                                           value="${util.parsableTimeForHTML(event.start)}"
+                                           placeholder="Zeit HH:MM"
                                            aria-label="Start-Time" aria-describedby="basic-addon1">
                                 </div>
 
@@ -296,20 +301,23 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Ende</span>
                                     <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
-                                    <input id="veranstaltung-ende-edit" type="date"
+                                    <input id="veranstaltung${event.id}-ende-date-edit" type="date"
+                                           value="${util.parsableDateForHTML(event.ende)}"
                                            placeholder="dd/mm/yyyy HH:MM (Datum+Uhrzeit)"
-                                           class="form-control" aria-label="Veranstaltung Start"
+                                           class="form-control" aria-label="Veranstaltung Start Datum"
                                            aria-describedby="inputGroup-sizing-sm">
                                     <div class="input-group-append">
                                         <span class="input-group-text"><i class="far fa-clock"></i></span>
                                     </div>
-                                    <input type="time" class="form-control" placeholder="Zeit HH:MM"
+                                    <input id="veranstaltung${event.id}-ende-time-edit" type="time" class="form-control"
+                                           value="${util.parsableTimeForHTML(event.ende)}"
+                                           placeholder="Zeit HH:MM"
                                            aria-label="Start-Time" aria-describedby="basic-addon1">
                                 </div>
 
                                 <script>
                                     function onClickDelete${event.id}() {
-                                        var button = document.getElementById('button-delete-event-${event.id}');
+                                        var button = document.getElementById('button-delete-veranstaltung-${event.id}');
                                         if (button.innerText === "WIRKLICH?") {
                                             deleteVeranstaltung(${event.id}, '${event.name}');
                                         } else {
@@ -318,13 +326,13 @@
                                         }
                                     }
                                 </script>
-                                <button id="button-save-event-${event.id}" class="btn btn-primary btn-success"
+                                <button id="button-save-veranstaltung-${event.id}" class="btn btn-primary btn-success"
                                         onclick="saveVeranstaltung(${event.id});" role="button">Änderungen speichern
                                 </button>
-                                <button id="button-delete-event-${event.id}" class="btn btn-primary btn-danger"
+                                <button id="button-delete-veranstaltung-${event.id}" class="btn btn-primary btn-danger"
                                         onclick="onClickDelete${event.id}();" role="button">Löschen
                                 </button>
-                                <p id="event-action-result-${event.id}"></p>
+                                <p id="veranstaltung-edit-result-${event.id}"></p>
                             </div>
                         </div>
                     </c:forEach>

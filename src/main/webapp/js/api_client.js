@@ -132,8 +132,11 @@ function db_save_sponsor_info(json_info) {
  * @param creator Name of the Sponsor who created this Veranstaltung
  * @param name
  * @param ort
- * @param start
- * @param ende
+ * @param start_date
+ * @param start_time
+ * @param ende_date
+ * @param ende_time
+ * @param beschreibung
  */
 function db_send_new_veranstaltung(creator, name, ort, start_date, start_time, ende_date, ende_time, beschreibung) {
     return _post("event/new", {
@@ -146,13 +149,13 @@ function db_send_new_veranstaltung(creator, name, ort, start_date, start_time, e
     });
 }
 
-function db_save_event_data(sponsor, eventId, beschreibung, ort, start, ende) {
+function db_save_event_data(sponsor, eventId, beschreibung, ort, start_date, start_time, ende_date, ende_time) {
     return _patch("event/edit", {
         id: eventId,
         beschreibung: beschreibung,
         ort: ort,
-        start: start,
-        ende: ende
+        start: start_date + "T" + start_time,
+        ende: ende_date + "T" + ende_time
     });
 }
 

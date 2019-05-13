@@ -13,11 +13,19 @@ public class Util {
         return String.format("%s.%s.%s %s", day, month, year, time);
     }
 
-    public String parsableDatetimeForHTML(String s) {
+    public String parsableDateForHTML(String s) {
         // incoming format: yyyy-mm-dd HH:MM
         //                  0123456789ABCDEF
         // required format: yyyy-mm-ddTHH:MM
-        String parsable = s.replaceFirst(" ", "T").substring(0, 16);
+        String parsable = s.substring(0, 10);
+        return parsable;
+    }
+
+    public String parsableTimeForHTML(String s) {
+        // incoming format: yyyy-mm-dd HH:MM
+        //                  0123456789ABCDEF
+        // required format: yyyy-mm-ddTHH:MM
+        String parsable = s.substring(11, 11+5);
         return parsable;
     }
 }

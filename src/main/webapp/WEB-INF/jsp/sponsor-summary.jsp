@@ -26,26 +26,28 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="${context}/sponsoren">Sponsoren</a>
-    <ul class="nav navbar-nav ml-auto">
+    <ul class="nav navbar-nav ml-auto ">
     </ul>
     <a class="btn btn-primary btn-secondary" href="${context}/events" role="button"><i class="far fa-calendar"></i>
     </a>
 </nav>
 
-<div class="container-fluid">
+<div class="container-fluid pt-1">
     <div class="row no-gutters">
 
         <%--@elvariable id="sponsors" type="java.util.List"--%>
         <c:forEach items="${sponsors}" var="sponsor">
-            <div class="col col-lg-2 col-md-3 col-sm-4 col-6 pb-md-4 pb-sm-3 pl-md-4 pl-sm-3">
+            <div class="col d-flex align-items-stretch col-lg-2 col-md-3 col-sm-4 col-6 pb-md-4 pb-sm-3 pl-md-4 pl-sm-3 px-1 py-1">
 
                     <div class="card">
                         <img src="${context}/img/${sponsor.name}_scaled.png" class="card-img-top"
                              alt="${sponsor.name}-Logo">
-                        <div class="card-body">
+                        <div class="card-body pb-0">
                             <h5 class="card-title">${sponsor.name}</h5>
-                            <a href="${context}/sponsor?name=${sponsor.name}" class="btn btn-dark ">Mehr erfahren</a>
                         </div>
+                        <div class="card-footer px-0 py-0 border-0 ">
+      						<a href="${context}/sponsor?name=${sponsor.name}" class="btn btn-dark w-100">Mehr erfahren</a>
+    					</div>
                     </div>
             </div>
         </c:forEach>

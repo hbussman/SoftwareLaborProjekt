@@ -1,10 +1,12 @@
 package sponsoren.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import sponsoren.orm.AccountEntity;
 import sponsoren.orm.LocationEntity;
 import sponsoren.orm.SponsorEntity;
 import sponsoren.orm.SponsorVeranstaltungEntity;
@@ -158,13 +160,14 @@ public class ServerPageController {
     }
 
     @GetMapping("/webinterface/home")
-    public String getWebinterfaceHome(Model model, @RequestParam String sponsor) {
-        publishSponsor(model, sponsor);
+    public String getWebinterfaceHome(Model model, @AuthenticationPrincipal AccountEntity user) {
+        publishSponsor(model, user.getSponsorName());
         return "webinterface-home";
     }
 
     @GetMapping("/webinterface/events")
-    public String getWebinterfaceEvents(Model model, @RequestParam String sponsor) {
+    public String getWebinterfaceEvents(Model model, @AuthenticationPrincipal AccountEntity user) {
+        String sponsor = user.getSponsorName();
         publishUtil(model);
         publishLocations(model);
         publishSponsor(model, sponsor);

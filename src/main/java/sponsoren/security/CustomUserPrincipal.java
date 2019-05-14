@@ -30,6 +30,11 @@ public class CustomUserPrincipal extends AccountEntity implements UserDetails {
     }
 
     @Override
+    public String getSponsorName() {
+        return user.getSponsorName();
+    }
+
+    @Override
     public boolean isAccountNonExpired() {
         return true;
     }

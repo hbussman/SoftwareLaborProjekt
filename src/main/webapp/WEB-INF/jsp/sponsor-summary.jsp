@@ -33,10 +33,12 @@
 </nav>
 
 <div class="container-fluid pt-1">
-    <div class="row no-gutters">
+   
 
-        <%--@elvariable id="sponsors" type="java.util.List"--%>
-        <c:forEach items="${sponsors}" var="sponsor">
+        <%--@elvariable id="sponsorsSorted" type="java.util.List"--%>
+        <c:forEach items="${sponsorsSorted}" var="sponsorlist">
+         <div class="row no-gutters">
+         <c:forEach items="${sponsorlist}" var="sponsor">
             <div class="col d-flex align-items-stretch col-lg-2 col-md-3 col-sm-4 col-6 pb-md-4 pb-sm-3 pl-md-4 pl-sm-3 px-1 py-1">
 
                     <div class="card">
@@ -51,8 +53,13 @@
                     </div>
             </div>
         </c:forEach>
+        <div class="col  col-12 px-1 py-1">
+        			<div class="card"></div>
+        </div>
+         </div>
+        </c:forEach>
 
-    </div>
+    
 </div>
 
 

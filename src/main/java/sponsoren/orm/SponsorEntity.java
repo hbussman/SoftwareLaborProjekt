@@ -5,7 +5,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "sponsor", schema = "buga19sponsoren", catalog = "")
-public class SponsorEntity {
+public class SponsorEntity implements Comparable<SponsorEntity> {
     private String name;
     private String beschreibung;
     private String werbetext;
@@ -18,6 +18,7 @@ public class SponsorEntity {
     private String plz;
     private String ort;
     private String postfach;
+    private byte spendenklasse;
 
     @Id
     @Column(name = "Name")
@@ -139,6 +140,16 @@ public class SponsorEntity {
         this.postfach = postfach;
     }
 
+    @Basic
+    @Column(name = "Spendenklasse", nullable = true)
+	public byte getSpendenklasse() {
+		return spendenklasse;
+	}
+
+	public void setSpendenklasse(byte spendenklasse) {
+		this.spendenklasse = spendenklasse;
+	}
+	
     @Override
     public boolean equals(Object o) {
         if(this == o) return true;
@@ -158,4 +169,14 @@ public class SponsorEntity {
     public int hashCode() {
         return Objects.hash(name, beschreibung, werbetext, adresse, ansprechpartnerNachname, ansprechpartnerVorname, email, telefonnummer);
     }
+
+	@Override
+	public int compareTo(SponsorEntity comparedSopnsor) {
+		// TODO Auto-generated method stub
+		return name.compareTo(comparedSopnsor.name);
+	}
+    
+    
+
+   
 }

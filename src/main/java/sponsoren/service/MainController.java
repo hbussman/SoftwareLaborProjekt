@@ -63,8 +63,11 @@ public class MainController {
         sponsor.setAnsprechpartnerVorname(sponsor.getAnsprechpartnerVorname().trim());
         sponsor.setEmail(sponsor.getEmail().trim());
         sponsor.setTelefonnummer(sponsor.getTelefonnummer().trim());
-        sponsor.setHomepage(sponsor.getHomepage().trim());
         sponsor.setOrt(sponsor.getOrt().trim());
+        String homepage = sponsor.getHomepage().trim();
+        if(!homepage.startsWith("http://") && !homepage.startsWith("https://"))
+            homepage = "https://" + homepage;
+        sponsor.setHomepage(homepage);
 
         // validate plz
         String plz = sponsor.getPlz().trim();
@@ -170,12 +173,13 @@ public class MainController {
         }
 
         VeranstaltungEntity veranstaltung = veranstaltungEntity.get();
+        veranstaltung.setName(event.get("name"));
         veranstaltung.setBeschreibung(event.get("beschreibung"));
         try {
             veranstaltung.setStart(parseDate(event.get("start")));
         } catch(ParseException e) {
             e.printStackTrace();
-            return ResponseEntity.unprocessableEntity().body("Start: Fehlerhaftes Datumsformat " + event.get("start") + " - "
+            return ResponseEntity.unprocessableEntity().body("Start: Fehlerhaftes Datumsformat '" + event.get("start") + "' - "
                     + e.getMessage());
         }
         try {

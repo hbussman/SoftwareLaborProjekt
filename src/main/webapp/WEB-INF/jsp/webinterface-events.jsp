@@ -51,7 +51,7 @@
             // make sure all fields are filled out
             if (name == "" || ort[0] == "[" || start_date == "" || start_time == "" || ende_date == "" || ende_time == "") {
                 resultElem.style = "color: red;";
-                resultElem.innerText = "Bitte alle Pflichtfelder ausfüllen! " + name + "|" + ort + "|" + start + "|" + ende + "|";
+                resultElem.innerText = "Bitte alle Pflichtfelder ausfüllen!";
                 return;
             }
 
@@ -94,6 +94,7 @@
 
         function saveVeranstaltung(eventId) {
             // var name = document.getElementById('event' + eventId + '_name').innerText;
+            var name = document.getElementById('veranstaltung' + eventId + '-name-edit').value;
             var beschreibung = document.getElementById('veranstaltung' + eventId + '-beschreibung-edit').value;
             var ort = document.getElementById('veranstaltung' + eventId + '-ort-edit').innerText;
             var start_date = document.getElementById('veranstaltung' + eventId + '-start-date-edit').value;
@@ -101,16 +102,22 @@
             var ende_date = document.getElementById('veranstaltung' + eventId + '-ende-date-edit').value;
             var ende_time = document.getElementById('veranstaltung' + eventId + '-ende-time-edit').value;
 
-            db_save_event_data(getCookie('username'), eventId, beschreibung, ort, start_date, start_time, ende_date, ende_time).then(result => {
+            var resultElem = document.getElementById('veranstaltung-edit-result-' + eventId);
+            // make sure all fields are filled out
+            if (name == "" || ort[0] == "[" || start_date == "" || start_time == "" || ende_date == "" || ende_time == "") {
+                resultElem.style = "color: red;";
+                resultElem.innerText = "Bitte alle Pflichtfelder ausfüllen!";
+                return;
+            }
+
+            db_save_event_data(getCookie('username'), eventId, name, beschreibung, ort, start_date, start_time, ende_date, ende_time).then(result => {
                 if (result.ok) {
                     // success
-                    var resultElem = document.getElementById('veranstaltung-edit-result-' + eventId);
                     resultElem.style = "color: darkgreen;";
                     resultElem.innerText = "Änderungen gespeichert!";
                 } else {
                     // error occurred
                     result.text().then(value => {
-                        var resultElem = document.getElementById('veranstaltung-edit-result-' + eventId);
                         resultElem.style = "color: red;";
                         resultElem.innerText = "Es ist ein Fehler aufgetreten: " + result.status + " (" + value + ")";
                     });
@@ -134,8 +141,8 @@
                     });
                 }
                 // remove button
-                var button = document.getElementById('button-delete-veranstaltung-' + eventId);
-                button.parentNode.removeChild(button);
+                // var button = document.getElementById('button-delete-veranstaltung-' + eventId);
+                // button.parentNode.removeChild(button);
             });
         }
     </script>
@@ -253,6 +260,16 @@
                                     <a id="veranstaltung${event.id}-name" href="${context}/event?id=${event.id}"
                                        class="text-decoration-none">${event.name}</a>
                                 </h5>
+
+                                <!-- Name Edit -->
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Name</span>
+                                    <input id="veranstaltung${event.id}-name-edit" type="text"
+                                           value="${event.name}"
+                                           placeholder="" class="form-control"
+                                           aria-label="Sizing example input"
+                                           aria-describedby="inputGroup-sizing-sm">
+                                </div>
 
                                 <!-- Beschreibung Edit -->
                                 <div class="input-group-prepend">

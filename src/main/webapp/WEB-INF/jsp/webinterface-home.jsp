@@ -78,6 +78,52 @@
                 }
             })
         }
+
+
+        function changeLogo() {
+
+            var formData  = new FormData(document.getElementById("logo-form"));
+
+            formData.append("sponsor", "${sponsor.name}");
+
+
+            for (var pair of formData.entries()) {
+                alert(pair[0] + ': ' + pair[1]);
+            }
+
+            fetch("${context}/webinterface/home/image_upload", {
+
+                body: formData,
+                method: "POST"
+
+            }).then(result => {
+
+                var resultElem = document.getElementById('change-logo-result');
+
+                if(result.ok) {
+                    // successful
+                    resultElem.style = "color:darkgreen;";
+                    resultElem.innerText = "Bild erfolgreich geändert!";
+
+                    // reload image
+                    var oldImage = document.getElementById('sponsor-logo');
+                    var newImage = new Image();
+                    newImage.src = oldImage.src + "?_=" + Math.random();
+                    newImage.style = "max-height: 250px; max-width: 250px";
+
+                    oldImage.parentNode.insertBefore(newImage, oldImage);
+                    oldImage.parentNode.removeChild(oldImage);
+                } else {
+                    // error
+                    result.text().then(error => {
+                        resultElem.style = "color:red;";
+                        resultElem.innerText = "Fehler beim Upload: " + error;
+                    });
+                }
+            });
+
+        }
+
     </script>
 
 </head>
@@ -99,16 +145,32 @@
     <div class="row">
         <div class="col-12">
             <div class="card">
+
+                <!-- Sponsor Logo -->
                 <div class="text-center">
-                    <img src="${context}/img/${sponsor.name}_scaled.png" style="max-height: 250px; max-width: 250px"
+                    <img id="sponsor-logo" src="${imagesBase}/${sponsor.name}_scaled.png" style="max-height: 250px; max-width: 250px"
                          class="card-img-thumbnail" alt="...">
                 </div>
+
+                <!-- Logo Bild ändern Upload -->
+                <div class="text-center">
+                    <form id="logo-form" enctype="multipart/form-data">
+                        <input type="file" name="uploadedFileName" id="fileToUpload" accept="image/png">
+                        <label for="fileToUpload"> Neues Logo auswählen</label>
+                        <input type="button" value="Abschicken" onclick="changeLogo();">
+                    </form>
+                    <p id="change-logo-result"></p>
+                </div>
+
+                <!-- Sponsor Name und Beschreibung -->
                 <div class="card-body">
                     <h5 id="sponsor_name" class="card-title">${sponsor.name}</h5>
                     <textarea id="sponsor_beschreibung" class="form-control" rows="8"
                               placeholder="Sponsoren Info-Text" aria-label="Username"
                               aria-describedby="basic-addon1">${sponsor.beschreibung}</textarea>
                 </div>
+
+                <!-- Werbetext -->
                 <div class="card-body">
                     <h5 class="card-title">Werbetext</h5>
                     <textarea id="sponsor_werbetext" class="form-control" rows="5"

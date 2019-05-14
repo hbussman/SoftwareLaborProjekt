@@ -40,7 +40,7 @@
             <div class="col col-lg-2 col-md-3 col-sm-4 col-6 pb-md-4 pb-sm-3 pl-md-4 pl-sm-3">
 
                     <div class="card">
-                        <img src="${context}/img/${sponsor.name}_scaled.png" class="card-img-top"
+                        <img src="${imagesBase}/${sponsor.name}_scaled.png" class="card-img-top"
                              alt="${sponsor.name}-Logo">
                         <div class="card-body">
                             <h5 class="card-title">${sponsor.name}</h5>

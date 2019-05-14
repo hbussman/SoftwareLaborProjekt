@@ -37,7 +37,7 @@
             <div class="shadow p-3 mb-5 bg-white rounded">
             <div class="card">
                 <div class="text-center">
-                    <img src="${context}/img/${sponsor.name}_scaled.png" style="max-height: 250px; max-width: 250px" class="card-img-thumbnail" alt="...">
+                    <img src="${imagesBase}/${sponsor.name}_scaled.png" style="max-height: 250px; max-width: 250px" class="card-img-thumbnail" alt="...">
                 </div>
                 <div class="card-body">
                     <span class="d-block p-1 bg-dark text-white text-center">${sponsor.name}</span>

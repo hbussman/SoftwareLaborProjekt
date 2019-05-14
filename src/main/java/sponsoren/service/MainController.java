@@ -173,12 +173,13 @@ public class MainController {
         }
 
         VeranstaltungEntity veranstaltung = veranstaltungEntity.get();
+        veranstaltung.setName(event.get("name"));
         veranstaltung.setBeschreibung(event.get("beschreibung"));
         try {
             veranstaltung.setStart(parseDate(event.get("start")));
         } catch(ParseException e) {
             e.printStackTrace();
-            return ResponseEntity.unprocessableEntity().body("Start: Fehlerhaftes Datumsformat " + event.get("start") + " - "
+            return ResponseEntity.unprocessableEntity().body("Start: Fehlerhaftes Datumsformat '" + event.get("start") + "' - "
                     + e.getMessage());
         }
         try {

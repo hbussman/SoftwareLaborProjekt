@@ -149,9 +149,10 @@ function db_send_new_veranstaltung(creator, name, ort, start_date, start_time, e
     });
 }
 
-function db_save_event_data(sponsor, eventId, beschreibung, ort, start_date, start_time, ende_date, ende_time) {
+function db_save_event_data(sponsor, eventId, name, beschreibung, ort, start_date, start_time, ende_date, ende_time) {
     return _patch("event/edit", {
         id: eventId,
+        name: name,
         beschreibung: beschreibung,
         ort: ort,
         start: start_date + "T" + start_time,

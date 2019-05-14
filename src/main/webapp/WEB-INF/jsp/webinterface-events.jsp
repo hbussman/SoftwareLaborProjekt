@@ -51,7 +51,7 @@
             // make sure all fields are filled out
             if (name == "" || ort[0] == "[" || start_date == "" || start_time == "" || ende_date == "" || ende_time == "") {
                 resultElem.style = "color: red;";
-                resultElem.innerText = "Bitte alle Pflichtfelder ausfüllen! " + name + "|" + ort + "|" + start + "|" + ende + "|";
+                resultElem.innerText = "Bitte alle Pflichtfelder ausfüllen!";
                 return;
             }
 
@@ -102,16 +102,22 @@
             var ende_date = document.getElementById('veranstaltung' + eventId + '-ende-date-edit').value;
             var ende_time = document.getElementById('veranstaltung' + eventId + '-ende-time-edit').value;
 
+            var resultElem = document.getElementById('veranstaltung-edit-result-' + eventId);
+            // make sure all fields are filled out
+            if (name == "" || ort[0] == "[" || start_date == "" || start_time == "" || ende_date == "" || ende_time == "") {
+                resultElem.style = "color: red;";
+                resultElem.innerText = "Bitte alle Pflichtfelder ausfüllen!";
+                return;
+            }
+
             db_save_event_data(getCookie('username'), eventId, name, beschreibung, ort, start_date, start_time, ende_date, ende_time).then(result => {
                 if (result.ok) {
                     // success
-                    var resultElem = document.getElementById('veranstaltung-edit-result-' + eventId);
                     resultElem.style = "color: darkgreen;";
                     resultElem.innerText = "Änderungen gespeichert!";
                 } else {
                     // error occurred
                     result.text().then(value => {
-                        var resultElem = document.getElementById('veranstaltung-edit-result-' + eventId);
                         resultElem.style = "color: red;";
                         resultElem.innerText = "Es ist ein Fehler aufgetreten: " + result.status + " (" + value + ")";
                     });

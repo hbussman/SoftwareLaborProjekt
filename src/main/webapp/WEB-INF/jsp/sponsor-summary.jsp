@@ -38,7 +38,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <p class="navbar-text navbar-center text-white">Sponsoren</p>
-    <a class="navbar-brand" href="${context}/sponsoren"><i class="fas fa-home"></i></a>
+    <a class="btn btn-primary btn-secondary" href="${context}/sponsoren"><i class="fas fa-home"></i></a>
     <ul class="nav navbar-nav ml-auto "></ul>
     <a class="btn btn-primary btn-secondary" href="${context}/events" role="button"><i class="far fa-calendar"></i>
     </a>

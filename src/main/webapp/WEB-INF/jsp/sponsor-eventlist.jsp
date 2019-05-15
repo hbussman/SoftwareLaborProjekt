@@ -39,7 +39,7 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="min-width: 425px">
     <p class="navbar-text navbar-center text-white">Veranstaltungen</p>
-    <a class="navbar-brand" href="${context}/sponsoren"><i class="fas fa-home"></i></a>
+    <a class="btn btn-primary btn-secondary" href="${context}/sponsoren"><i class="fas fa-home"></i></a>
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
         <li class="nav-item active ml-1">
 

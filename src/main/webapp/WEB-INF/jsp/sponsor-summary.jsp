@@ -49,25 +49,23 @@
 
         <%--@elvariable id="sponsorsSorted" type="java.util.List"--%>
         <c:forEach items="${sponsorsSorted}" var="sponsorlist">
-         <div class="row no-gutters">
+         <div class="row no-gutters justify-content-center">
          <c:forEach items="${sponsorlist}" var="sponsor">
-            <div class="col d-flex align-items-stretch col-lg-2 col-md-3 col-sm-4 col-6 pb-md-4 pb-sm-3 pl-md-4 pl-sm-3 px-1 py-1">
+            <div class="col d-flex align-items-stretch col-lg-3 col-md-3 col-sm-4 col-6 pt-md-4 pl-md-4 pt-sm-3  pl-sm-3 pt-2  pl-2">
 
                     <div class="card">
-                        <img src="${context}/img/${sponsor.name}_scaled.png" class="card-img-top"
+                        <img src="${imagesBase}/${sponsor.name}_scaled.png" class="card-img-top"
                              alt="${sponsor.name}-Logo">
                         <div class="card-body pb-0">
                             <h5 class="card-title">${sponsor.name}</h5>
                         </div>
-                        <div class="card-footer px-0 py-0 border-0 ">
+                        <div class="card-footer px-0  py-0 border-0 ">
       						<a href="${context}/sponsor?name=${sponsor.name}" class="btn btn-dark w-100">Mehr erfahren</a>
     					</div>
                     </div>
             </div>
         </c:forEach>
-          <div class="col  col-12 px-1 py-1 ">
-        			<div class="card"></div>
-         </div>
+          <div class="col col-12   pt-md-4 pl-md-4 pt-sm-3  pl-sm-3 pt-2  pl-2"><div class="border-top"></div></div>
          </div>
         </c:forEach>
 

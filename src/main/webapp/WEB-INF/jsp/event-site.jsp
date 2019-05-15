@@ -69,7 +69,7 @@
     <c:forEach items="${eventSponsors}" var="sponsor">
         <div class="col col-lg-4 col-md-4 col-sm-4 col-6 pb-md-4 pb-sm-3 pl-md-4 pl-sm-3 d-flex align-items-stretch">
             <div class="card px-0">
-                <img src="${context}/img/${sponsor.name}_scaled.png" class="card-img-top" alt="${sponsor.name}-Logo">
+                <img src="${imagesBase}/${sponsor.name}_scaled.png" class="card-img-top" alt="${sponsor.name}-Logo">
                 <div class="card-body  px-0 pt-0 pb-0">
                     <p class="text--nowrap">${sponsor.name}</p>
                 </div>

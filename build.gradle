@@ -52,6 +52,9 @@ dependencies {
     // To support jsp
     compile("javax.servlet:jstl")
     compile("org.apache.tomcat.embed:tomcat-embed-jasper")
+
+    // Spring Security
+    compile "org.springframework.boot:spring-boot-starter-security"
     
     
 }

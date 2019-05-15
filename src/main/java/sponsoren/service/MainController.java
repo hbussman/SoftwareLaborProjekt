@@ -2,6 +2,7 @@ package sponsoren.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import sponsoren.Util;
@@ -13,12 +14,16 @@ import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
-import java.util.regex.Pattern;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
+
 
 @Controller
 @RequestMapping(path="/api")
 public class MainController {
+
     @Autowired private SponsorRepository sponsorRepository;
     @Autowired private VeranstaltungRepository veranstaltungRepository;
     @Autowired private SponsorVeranstaltungRepository sponsorVeranstaltungRepository;
@@ -57,7 +62,8 @@ public class MainController {
 
     // POST save sponsor information
     @PostMapping(path = "/sponsor/set_info")
-    public ResponseEntity setSponsorInfo(@RequestBody SponsorEntity sponsor) {
+    public ResponseEntity setSponsorInfo(@AuthenticationPrincipal AccountEntity user, @RequestBody SponsorEntity sponsor) {
+        sponsor.setName(user.getSponsorName());
         sponsor.setAdresse(sponsor.getAdresse().trim());
         sponsor.setAnsprechpartnerNachname(sponsor.getAnsprechpartnerNachname().trim());
         sponsor.setAnsprechpartnerVorname(sponsor.getAnsprechpartnerVorname().trim());
@@ -101,8 +107,8 @@ public class MainController {
     }
 
     // POST create new event
-    @PostMapping(path="/event/new", consumes="application/json", produces="application/json")
-    public ResponseEntity createNewVeranstaltung(@RequestBody Map<String, String> event) {
+    @PostMapping(path = "/event/new", consumes = "application/json", produces = "application/json")
+    public ResponseEntity createNewVeranstaltung(@AuthenticationPrincipal AccountEntity user, @RequestBody Map<String, String> event) {
         // create Veranstaltung
         VeranstaltungEntity veranstaltung = new VeranstaltungEntity();
         veranstaltung.setName(event.get("name"));
@@ -142,7 +148,7 @@ public class MainController {
         System.out.println("Veranstaltung saved; ID=" + veranstaltung.getId());
 
         // create veranstaltung-sponsor association
-        String creator = event.get("creator");
+        String creator = user.getSponsorName();
         SponsorVeranstaltungEntity sponsorVeranstaltung = new SponsorVeranstaltungEntity();
         sponsorVeranstaltung.setSponsorName(creator);
         sponsorVeranstaltung.setVeranstaltungId(veranstaltung.getId());

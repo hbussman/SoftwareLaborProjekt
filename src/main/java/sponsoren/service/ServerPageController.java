@@ -2,27 +2,40 @@ package sponsoren.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import sponsoren.orm.AccountEntity;
+import org.springframework.web.multipart.MultipartFile;
 import sponsoren.orm.LocationEntity;
 import sponsoren.orm.SponsorEntity;
 import sponsoren.orm.SponsorVeranstaltungEntity;
 import sponsoren.orm.VeranstaltungEntity;
-
+import javax.validation.Valid;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.*;
 
 @Controller
 public class ServerPageController {
+
+    public final String SPONSOR_LOGO_PATH = System.getProperty("os.name").contains("Windows")
+            ? "D:\\pub\\http\\Studenten\\LabSWPPS2019\\BuGa19Sponsoren"
+            : "./data/uploaded_images";
 
     @Autowired private SponsorRepository sponsorRepository;
     @Autowired private SponsorVeranstaltungRepository sponsorVeranstaltungRepository;
     @Autowired private VeranstaltungRepository veranstaltungRepository;
     @Autowired private LocationRepository locationRepository;
 
+    private void publishCommon(Model model) {
+        model.addAttribute("imagesBase", "http://seserver.se.hs-heilbronn.de/Studenten/LabSWPPS2019/BuGa19Sponsoren/Bilder");
+    }
 
     private void publishUtil(Model model) {
         model.addAttribute("util", new sponsoren.Util());
@@ -141,6 +154,32 @@ public class ServerPageController {
     }
 
 
+    @RequestMapping(value="/webinterface/home/image_upload", method = RequestMethod.POST, consumes = {"multipart/form-data"})
+    public ResponseEntity importQuestion(@Valid @RequestParam("uploadedFileName") MultipartFile multipart, @RequestParam String sponsor) {
+
+        System.out.println("IMAGE IMAGE IMAGE");
+        System.out.println("sponsor: " + sponsor);
+        System.out.println(SPONSOR_LOGO_PATH);
+
+        String file_dest = SPONSOR_LOGO_PATH + "/" + sponsor + "_scaled.png";
+        if (!multipart.isEmpty()) {
+            try {
+                byte[] bytes = multipart.getBytes();
+                BufferedOutputStream stream =
+                        new BufferedOutputStream(new FileOutputStream(new File(file_dest)));
+                stream.write(bytes);
+                stream.close();
+                return ResponseEntity.ok().body("Successfully uploaded " + multipart.getName() + " as " + file_dest);
+            } catch (Exception e) {
+                return ResponseEntity.unprocessableEntity().body("Failed to upload " + multipart.getName() + " => " + e.getMessage());
+            }
+        } else {
+            return ResponseEntity.unprocessableEntity().body("Failed to upload " + multipart.getName() + " because the file was empty.");
+        }
+    }
+
+
+
     @GetMapping({"/", "/index"})
     public String getIndex(Model model) {
         return "index";
@@ -148,6 +187,7 @@ public class ServerPageController {
 
     @GetMapping("/sponsor")
     public String getSponsorSite(Model model, @RequestParam String name) {
+        publishCommon(model);
         publishSponsor(model, name);
         publishUtil(model);
         publishSponsorEvents(model, name);
@@ -157,6 +197,7 @@ public class ServerPageController {
 
     @GetMapping("/sponsoren")
     public String getSponsorSummary(Model model) {
+        publishCommon(model);
         publishSponsors(model);
         return "sponsor-summary";
     }
@@ -176,6 +217,7 @@ public class ServerPageController {
         Optional<VeranstaltungEntity> event = veranstaltungRepository.findById(id);
         model.addAttribute("event", event.orElse(null));
 
+        publishCommon(model);
         publishUtil(model);
         publishLocations(model);
         publishEventSponsors(model, id);
@@ -187,9 +229,17 @@ public class ServerPageController {
         return "webinterface-login";
     }
 
+    @GetMapping("/webinterface/account")
+    public String getWebinterfaceAccount(Model model,@RequestParam String sponsor) {
+        publishSponsor(model, sponsor);
+        return "webinterface-account";
+    }
+
     @GetMapping("/webinterface/home")
     public String getWebinterfaceHome(Model model, @AuthenticationPrincipal AccountEntity user) {
+        publishCommon(model);
         publishSponsor(model, user.getSponsorName());
+
         return "webinterface-home";
     }
 

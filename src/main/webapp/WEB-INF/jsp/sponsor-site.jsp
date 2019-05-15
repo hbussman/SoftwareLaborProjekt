@@ -41,7 +41,7 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <p class="navbar-text navbar-center text-white">${sponsor.name}</p>
-    <a class="navbar-brand" href="${context}/sponsoren"><i class="fas fa-home"></i></a>
+    <a class="btn btn-primary btn-secondary" href="${context}/sponsoren"><i class="fas fa-home"></i></a>
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
     </ul>
 </nav>
@@ -51,7 +51,7 @@
             <div class="shadow p-3 mb-5 bg-white rounded">
             <div class="card">
                 <div class="text-center">
-                    <img src="${context}/img/${sponsor.name}_scaled.png" style="max-height: 250px; max-width: 250px" class="card-img-thumbnail" alt="...">
+                    <img src="${imagesBase}/${sponsor.name}_scaled.png" style="max-height: 250px; max-width: 250px" class="card-img-thumbnail" alt="...">
                 </div>
                 <div class="card-body">
                     <span class="d-block p-1 bg-dark text-white text-center">Zum Sponsor</span>

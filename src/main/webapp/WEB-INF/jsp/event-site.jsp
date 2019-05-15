@@ -40,7 +40,7 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <p class="navbar-text navbar-center text-white">${event.name}</p>
-    <a class="navbar-brand" href="${context}/sponsoren"><i class="fas fa-home"></i></a>
+    <a class="btn btn-primary btn-secondary" href="${context}/sponsoren"><i class="fas fa-home"></i></a>
     <ul class="nav navbar-nav ml-auto "></ul>
     <a class="btn btn-primary btn-secondary" href="${context}/events" role="button"><i class="far fa-calendar"></i>
     </a>
@@ -69,7 +69,7 @@
     <c:forEach items="${eventSponsors}" var="sponsor">
         <div class="col col-lg-4 col-md-4 col-sm-4 col-6 pb-md-4 pb-sm-3 pl-md-4 pl-sm-3 d-flex align-items-stretch">
             <div class="card px-0">
-                <img src="${context}/img/${sponsor.name}_scaled.png" class="card-img-top" alt="${sponsor.name}-Logo">
+                <img src="${imagesBase}/${sponsor.name}_scaled.png" class="card-img-top" alt="${sponsor.name}-Logo">
                 <div class="card-body  px-0 pt-0 pb-0">
                     <p class="text--nowrap">${sponsor.name}</p>
                 </div>

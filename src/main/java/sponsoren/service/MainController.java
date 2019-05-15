@@ -14,11 +14,16 @@ import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
+
 
 @Controller
 @RequestMapping(path="/api")
 public class MainController {
+
     @Autowired private SponsorRepository sponsorRepository;
     @Autowired private VeranstaltungRepository veranstaltungRepository;
     @Autowired private SponsorVeranstaltungRepository sponsorVeranstaltungRepository;

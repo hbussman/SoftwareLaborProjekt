@@ -38,15 +38,26 @@
             deleteCookie("username", "webinterface");
         }
     </script>
+    <style>
+        .navbar-center
+        {
+            position: absolute;
+            width: 100%;
+            left: 0;
+            top: 0;
+            text-align: center;
+        }
+    </style>
 
 </head>
 <body onload="Init()">
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" style="color: whitesmoke">Sponsoren-Login</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
-            aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark justify-content-center">
+<ul class="nav navbar-nav ml-auto">
+</ul>
+<p class="navbar-text navbar-center text-white">Sponsoren Login</p>
+    <a class="btn btn-primary btn-danger disabled" href="${context}/webinterface/login" role="button"><i
+            class="fa fa-sign-out-alt" aria-disabled="true"></i>
+    </a>
 </nav>
 <div class="container mt-5">
     <div class="row">

@@ -87,7 +87,7 @@
     <ul class="nav navbar-nav ml-auto">
     </ul>
     <div class="pr-2">
-        <a class="btn btn-primary btn-secondary" href="${context}/webinterface/events?sponsor=${sponsor.name}"
+        <a class="btn btn-primary btn-secondary" href="${context}/webinterface/events"
            role="button">Veranstaltungen
         </a>
     </div>

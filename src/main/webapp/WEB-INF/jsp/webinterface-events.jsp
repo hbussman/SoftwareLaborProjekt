@@ -154,7 +154,7 @@
     <ul class="nav navbar-nav ml-auto">
     </ul>
     <div class="pr-2">
-        <a class="btn btn-primary btn-secondary" href="${context}/webinterface" role="button">Sponsorseite
+        <a class="btn btn-primary btn-secondary" href="${context}/webinterface/home" role="button">Sponsorseite
         </a>
     </div>
     <a class="btn btn-primary btn-danger" href="${context}/webinterface/login" role="button"><i

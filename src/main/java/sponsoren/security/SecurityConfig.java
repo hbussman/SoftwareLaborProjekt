@@ -21,11 +21,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-                .authorizeRequests().antMatchers("/webinterface/**")
+        http.csrf().disable()
+                .authorizeRequests()
+                .antMatchers("/webinterface/**", "/api/**")
                 .authenticated()
                 .and()
-                .formLogin();
+                .formLogin()
+                .loginPage("/webinterface/login")
+                .permitAll()
+                .defaultSuccessUrl("/webinterface/home");
     }
 
     @Bean

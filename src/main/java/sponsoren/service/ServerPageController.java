@@ -2,6 +2,7 @@ package sponsoren.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +22,7 @@ public class ServerPageController {
     @Autowired private SponsorVeranstaltungRepository sponsorVeranstaltungRepository;
     @Autowired private VeranstaltungRepository veranstaltungRepository;
     @Autowired private LocationRepository locationRepository;
+
 
     private void publishUtil(Model model) {
         model.addAttribute("util", new sponsoren.Util());

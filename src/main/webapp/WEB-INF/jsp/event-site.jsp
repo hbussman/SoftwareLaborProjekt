@@ -23,18 +23,27 @@
     <script>api_set_context("${context}")</script>
 
     <title>Event-site</title>
+    <style>
+        .navbar-center
+        {
+            position: absolute;
+            overflow: visible;
+            height: 0;
+            width: 100%;
+            left: 0;
+            top: 0;
+            text-align: center;
+        }
+    </style>
 </head>
 
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="${context}/sponsoren">Veranstaltung</a>
-    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-        <li class="nav-item active ml-1">
-            <a class="nav-link" href="${context}/events">
-                <i class="far fa-calendar"></i>
-                <span class="sr-only">(current)</span></a>
-        </li>
-    </ul>
+    <p class="navbar-text navbar-center text-white">${event.name}</p>
+    <a class="navbar-brand" href="${context}/sponsoren"><i class="fas fa-home"></i></a>
+    <ul class="nav navbar-nav ml-auto "></ul>
+    <a class="btn btn-primary btn-secondary" href="${context}/events" role="button"><i class="far fa-calendar"></i>
+    </a>
 </nav>
 
 <div class="container-fluid">

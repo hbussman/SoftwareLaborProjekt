@@ -23,10 +23,23 @@
     <script>api_set_context("${context}")</script>
 
     <title>Sponsoren-Veranstaltungsliste</title>
+    <style>
+        .navbar-center
+        {
+            position: absolute;
+            overflow: visible;
+            height: 0;
+            width: 100%;
+            left: 0;
+            top: 0;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="min-width: 425px">
-    <a class="navbar-brand" href="${context}/sponsoren">Sponsoren &gt; Veranstaltungen</a>
+    <p class="navbar-text navbar-center text-white">Veranstaltungen</p>
+    <a class="navbar-brand" href="${context}/sponsoren"><i class="fas fa-home"></i></a>
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
         <li class="nav-item active ml-1">
 

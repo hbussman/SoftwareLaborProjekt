@@ -131,7 +131,7 @@
                               aria-describedby="basic-addon1">${sponsor.beschreibung}</textarea>
                 </div>
                 <div class="card-body">
-                    <h5 class="card-title">Werbetext</h5>
+                    <h5 class="card-title">Rolle bei der Buga</h5>
                     <textarea id="sponsor_werbetext" class="form-control" rows="5"
                               placeholder="Sponsoren Info-Text" aria-label="Username"
                               aria-describedby="basic-addon1">${sponsor.werbetext}</textarea>

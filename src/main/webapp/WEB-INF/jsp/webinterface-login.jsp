@@ -84,8 +84,12 @@
                                name="${_csrf.parameterName}"
                                value="${_csrf.token}"/>
                     </form>
-
                 </div>
+                <c:if test="${param.error != null}">
+                    <p style="color:red;">
+                        Falscher Username oder Passwort!
+                    </p>
+                </c:if>
             </div>
         </div>
     </div>

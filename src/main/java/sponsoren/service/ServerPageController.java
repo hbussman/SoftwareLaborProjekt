@@ -40,17 +40,20 @@ public class ServerPageController {
         List<SponsorEntity> sponsor1 = sponsorRepository.findBySpendenklasse((byte) 1);
         List<SponsorEntity> sponsor2 = sponsorRepository.findBySpendenklasse((byte) 2);
         List<SponsorEntity> sponsor3 = sponsorRepository.findBySpendenklasse((byte) 3);
+        List<SponsorEntity> sponsor4 = sponsorRepository.findBySpendenklasse((byte) 4);
         
         Collections.sort(sponsor0);
         Collections.sort(sponsor1);
         Collections.sort(sponsor2);
         Collections.sort(sponsor3);
+        Collections.sort(sponsor4);
         
         List<List<SponsorEntity>> sortedSponsors = new ArrayList<List<SponsorEntity>>();
         sortedSponsors.add(sponsor0);
         sortedSponsors.add(sponsor1);
         sortedSponsors.add(sponsor2);
         sortedSponsors.add(sponsor3);
+        sortedSponsors.add(sponsor4);
 
         // convert iterable to List
         //kann eventuell gelöscht werden

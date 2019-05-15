@@ -53,9 +53,9 @@
                     </div>
             </div>
         </c:forEach>
-        <div class="col  col-12 px-1 py-1">
+          <div class="col  col-12 px-1 py-1 ">
         			<div class="card"></div>
-        </div>
+         </div>
          </div>
         </c:forEach>
 

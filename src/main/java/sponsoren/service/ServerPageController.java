@@ -38,11 +38,37 @@ public class ServerPageController {
     private void publishSponsors(Model model) {
         // get all Sponsors
         Iterable<SponsorEntity> sponsorEntities = sponsorRepository.findAll();
+        
+        //get a list off all different sponsors (divided by Spendenklasse)
+        List<SponsorEntity> sponsor0 = sponsorRepository.findBySpendenklasse((byte) 0);
+        List<SponsorEntity> sponsor1 = sponsorRepository.findBySpendenklasse((byte) 1);
+        List<SponsorEntity> sponsor2 = sponsorRepository.findBySpendenklasse((byte) 2);
+        List<SponsorEntity> sponsor3 = sponsorRepository.findBySpendenklasse((byte) 3);
+        List<SponsorEntity> sponsor4 = sponsorRepository.findBySpendenklasse((byte) 4);
+        
+        Collections.sort(sponsor0);
+        Collections.sort(sponsor1);
+        Collections.sort(sponsor2);
+        Collections.sort(sponsor3);
+        Collections.sort(sponsor4);
+        
+        List<List<SponsorEntity>> sortedSponsors = new ArrayList<List<SponsorEntity>>();
+        sortedSponsors.add(sponsor0);
+        sortedSponsors.add(sponsor1);
+        sortedSponsors.add(sponsor2);
+        sortedSponsors.add(sponsor3);
+        sortedSponsors.add(sponsor4);
 
         // convert iterable to List
+        //kann eventuell gelöscht werden
         List<SponsorEntity> sponsors = new ArrayList<>();
         sponsorEntities.forEach(sponsors::add);
         model.addAttribute("sponsors", sponsors);
+        //bis hier
+        
+        
+        //model.addAttribute("sponsors0", sponsor0);
+        model.addAttribute("sponsorsSorted", sortedSponsors);
     }
 
     private void publishSponsorEvents(Model model, String sponsorName) {

@@ -20,23 +20,37 @@
     <script>api_set_context("${context}")</script>
 
     <title>Sponsoren-Startseite</title>
+    <style>
+        .navbar-center
+        {
+            position: absolute;
+            overflow: visible;
+            height: 0;
+            width: 100%;
+            left: 0;
+            top: 0;
+            text-align: center;
+        }
+    </style>
 </head>
 
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="${context}/sponsoren">Sponsoren</a>
-    <ul class="nav navbar-nav ml-auto ">
-    </ul>
+    <p class="navbar-text navbar-center text-white">Sponsoren</p>
+    <a class="navbar-brand" href="${context}/sponsoren"><i class="fas fa-home"></i></a>
+    <ul class="nav navbar-nav ml-auto "></ul>
     <a class="btn btn-primary btn-secondary" href="${context}/events" role="button"><i class="far fa-calendar"></i>
     </a>
 </nav>
 
 <div class="container-fluid pt-1">
-    <div class="row no-gutters">
+   
 
-        <%--@elvariable id="sponsors" type="java.util.List"--%>
-        <c:forEach items="${sponsors}" var="sponsor">
+        <%--@elvariable id="sponsorsSorted" type="java.util.List"--%>
+        <c:forEach items="${sponsorsSorted}" var="sponsorlist">
+         <div class="row no-gutters">
+         <c:forEach items="${sponsorlist}" var="sponsor">
             <div class="col d-flex align-items-stretch col-lg-2 col-md-3 col-sm-4 col-6 pb-md-4 pb-sm-3 pl-md-4 pl-sm-3 px-1 py-1">
 
                     <div class="card">
@@ -51,8 +65,13 @@
                     </div>
             </div>
         </c:forEach>
+          <div class="col  col-12 px-1 py-1 ">
+        			<div class="card"></div>
+         </div>
+         </div>
+        </c:forEach>
 
-    </div>
+    
 </div>
 
 

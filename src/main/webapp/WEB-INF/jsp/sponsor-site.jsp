@@ -23,11 +23,25 @@
     <script>api_set_context("${context}")</script>
 
     <title>${sponsor.name} - Sponsoren</title>
+
+    <style>
+        .navbar-center
+        {
+            position: absolute;
+            overflow: visible;
+            height: 0;
+            width: 100%;
+            left: 0;
+            top: 0;
+            text-align: center;
+        }
+    </style>
 </head>
 
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="${context}/sponsoren">Sponsor</a>
+    <p class="navbar-text navbar-center text-white">${sponsor.name}</p>
+    <a class="navbar-brand" href="${context}/sponsoren"><i class="fas fa-home"></i></a>
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
     </ul>
 </nav>
@@ -40,7 +54,7 @@
                     <img src="${context}/img/${sponsor.name}_scaled.png" style="max-height: 250px; max-width: 250px" class="card-img-thumbnail" alt="...">
                 </div>
                 <div class="card-body">
-                    <span class="d-block p-1 bg-dark text-white text-center">${sponsor.name}</span>
+                    <span class="d-block p-1 bg-dark text-white text-center">Zum Sponsor</span>
                     <br>
                     <p class="card-text">${sponsor.beschreibung}</p>
                     <a href="${sponsor.homepage}" class="text-decoration-none">Website</a>

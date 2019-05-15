@@ -183,6 +183,12 @@ public class ServerPageController {
         return "webinterface-login";
     }
 
+    @GetMapping("/webinterface/account")
+    public String getWebinterfaceAccount(Model model,@RequestParam String sponsor) {
+        publishSponsor(model, sponsor);
+        return "webinterface-account";
+    }
+
     @GetMapping("/webinterface/home")
     public String getWebinterfaceHome(Model model, @RequestParam String sponsor) {
         publishSponsor(model, sponsor);

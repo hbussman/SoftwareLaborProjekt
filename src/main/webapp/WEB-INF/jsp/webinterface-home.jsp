@@ -79,13 +79,34 @@
             })
         }
     </script>
-
+    <style>
+        .navbar-center
+        {
+            position: absolute;
+            overflow: visible;
+            height: 0;
+            width: 100%;
+            left: 0;
+            top: 0;
+            text-align: center;
+        }
+    </style>
 </head>
 <body onload="Init()">
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark justify-content-center">
-    <a class="navbar-brand" style="color: whitesmoke">Sponsoren-Webinterface</a>
+    <div class="pr-2">
+        <a class="btn btn-primary btn-secondary disabled" href="${context}/webinterface/home?sponsor=${sponsor.name}"
+           role="button" aria-disabled="true">Sponsorenseite
+        </a>
+    </div>
+    <div class="pr-2">
+        <a class="btn btn-primary btn-secondary" href="${context}/webinterface/account?sponsor=${sponsor.name}"
+           role="button">Account
+        </a>
+    </div>
     <ul class="nav navbar-nav ml-auto">
     </ul>
+    <p class="navbar-text navbar-center text-white">${sponsor.name} Sponsorenseite</p>
     <div class="pr-2">
         <a class="btn btn-primary btn-secondary" href="${context}/webinterface/events?sponsor=${sponsor.name}"
            role="button">Veranstaltungen

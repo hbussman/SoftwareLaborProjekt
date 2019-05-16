@@ -45,50 +45,47 @@
 </head>
 
 <body>
-<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
-    <p class="navbar-text navbar-center text-white"style="font-size: x-large">${event.name}</p>
-    <a class="btn btn-primary btn-light" href="${context}/sponsoren"><i class="fas fa-home"></i></a>
-    <ul class="nav navbar-nav ml-auto "></ul>
-    <a class="btn btn-primary btn-light" href="${context}/events" role="button"><i class="far fa-calendar-alt"></i>
-    </a>
+<nav class="navbar fixed-top navbar-dark bg-dark" style="min-height: 50px">
+    <p class="navbar-text navbar-center text-white" style="font-size: x-large">${event.name}</p>
+</nav>
+<nav class="navbar fixed-bottom navbar-expand-lg navbar-dark bg-dark justify-content-center">
+    <div class="btn-group" role="group" aria-label="Basic example" style="min-width: 100%">
+        <a class="btn btn-primary btn-light " aria-disabled="false" href="${context}/attractions" role="button"><i class="fas fa-landmark"></i></a>
+        <a class="btn btn-primary btn-light" aria-disabled="false" href="${context}/sponsoren" style= "background: aquamarine"><i class="fas fa-home"></i></a>
+        <a class="btn btn-primary btn-light " href="${context}/events" role="button" aria-disabled="false"><i class="far fa-calendar-alt"></i>
+        </a>
+    </div>
 </nav>
 
-<div class="container-fluid bg-image">
-    <div class="row">
-        <div class="col-12">
-            <p class="h4 pt-4 pb-0">${event.name}
-            <p>
-                <div class="card border-0 pt-0">
-                    <div class="card-body">
-                        <div class="text-start">
-            <p class="card-text">${event.beschreibung}</p>
-            <p class="card-text">
-                Ort: ${locations.get(event.locationID).name}<br>
-                Zeitraum: ${util.prettifyTimestamp(event.start)} bis ${util.prettifyTimestamp(event.ende)}
-            </p>
-        </div>
+<div class="container-fluid bg-image pt-5">
+
+                <div class="card pb-5 justify-content-center">
+                    <span class="d-block p-1 bg-light text-dark text-center"><b>${event.name}</b></span>
+                    <div class="container">
+                        <div class="card-text text-dark">
+                            ${event.beschreibung}
+                        </div>
+                    <div class="card-body text-dark"><i class="fas fa-thumbtack"></i>
+                            ${locations.get(event.locationID).name}
+                        <div class="card-text text-dark"><i class="far fa-calendar-alt"></i> ${util.prettifyTimestamp(event.start)} - ${util.prettifyTimestamp(event.ende)}</div>
+                    </div>
+                        <span class="d-block p-1 bg-light text-dark text-center"><b>Gesponsort von</b></span>
+                        <div class="row no-gutters justify-content-xs-center">
+
+                            <c:forEach items="${eventSponsors}" var="sponsor">
+                                <a href="${context}/sponsor?name=${sponsor.name}">
+                                <div class="card shadow p-3 mb-5 bg-white rounded">
+                                        <img src="${imagesBase}/${sponsor.name}_scaled.png" class="card-img-top" alt="${sponsor.name}-Logo">
+                                </div>
+                                </a>
+
+                                </div>
+                                </div>
+                            </c:forEach>
+
+                        </div>
+                </div>
     </div>
-</div>
-
-<p class="h4">Gesponsort durch</p>
-<div class="row no-gutters justify-content-xs-center">
-
-    <c:forEach items="${eventSponsors}" var="sponsor">
-        <div class="col col-lg-4 col-md-4 col-sm-4 col-6 pb-md-4 pb-sm-3 pl-md-4 pl-sm-3 d-flex align-items-stretch">
-            <div class="card px-0">
-                <img src="${imagesBase}/${sponsor.name}_scaled.png" class="card-img-top" alt="${sponsor.name}-Logo">
-                <div class="card-body  px-0 pt-0 pb-0">
-                    <p class="text--nowrap">${sponsor.name}</p>
-                </div>
-                <div class="card-footer bg-transparent px-0 pt-0 pb-0 border-0">
-                    <a href="${context}/sponsor?name=${sponsor.name}" class="btn btn-dark mt-auto">Mehr Erfahren</a>
-                </div>
-            </div>
-        </div>
-    </c:forEach>
-
-</div>
-
 
 </body>
 </html>

@@ -212,6 +212,12 @@ public class ServerPageController {
         return "sponsor-eventlist";
     }
 
+    @GetMapping("/attractions")
+    public String getAttractionlist(Model model) {
+
+        return "sponsor-attractionlist";
+    }
+
     @GetMapping("/event")
     public String getEventSite(Model model, @RequestParam Integer id) {
         Optional<VeranstaltungEntity> event = veranstaltungRepository.findById(id);

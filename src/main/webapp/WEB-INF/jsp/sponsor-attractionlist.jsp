@@ -22,7 +22,7 @@
     <script src="${context}/js/api_client.js"></script>
     <script>api_set_context("${context}")</script>
 
-    <title>Sponsoren-Veranstaltungsliste</title>
+    <title>Sponsoren-Attraktionenliste</title>
     <style>
         .navbar-center
         {
@@ -33,9 +33,6 @@
             left: 0;
             top: 0;
             text-align: center;
-        }
-        .table-striped>tbody>tr:nth-child(odd)>th {
-            background-color: aquamarine;
         }
         .bg-image {
             background-image: url(https://imgur.com/LkSvZHY.jpg);
@@ -49,29 +46,33 @@
 </head>
 <body>
 <nav class="navbar fixed-top navbar-dark bg-dark" style="min-height: 50px">
-    <p class="navbar-text navbar-center text-white" style="font-size: x-large">Veranstaltungen</p>
+    <p class="navbar-text navbar-center text-white" style="font-size: x-large">Attraktionen</p>
 </nav>
 <nav class="navbar fixed-bottom navbar-expand-lg navbar-dark bg-dark justify-content-center">
     <div class="btn-group" role="group" aria-label="Basic example" style="min-width: 100%">
-        <a class="btn btn-primary btn-light" href="${context}/attractions" role="button"><i class="fas fa-landmark"></i></a>
+        <a class="btn btn-primary btn-light disabled" aria-disabled="true" href="${context}/attracions" role="button"><i class="fas fa-landmark"></i></a>
         <a class="btn btn-primary btn-light" aria-disabled="false" href="${context}/sponsoren" style= "background: aquamarine"><i class="fas fa-home"></i></a>
-        <a class="btn btn-primary btn-light disabled" href="${context}/events" role="button" aria-disabled="true"><i class="far fa-calendar-alt"></i>
+        <a class="btn btn-primary btn-light " href="${context}/events" role="button" aria-disabled="false"><i class="far fa-calendar-alt"></i>
         </a>
     </div>
 </nav>
 <div class="pt-5"></div>
-<div class="row justify-content-center bg-image pb-5">
-    <c:forEach items="${events}" var="event">
-        <a href="${context}/event?id=${event.id}">
-        <div class="card mb-2" style="max-height: 200px">
-            <span class="d-block p-1 bg-light text-dark text-center"><b>${event.name}</b></span>
-            <div class="card-body text-dark"><i class="fas fa-thumbtack"></i>
-                    ${locations.get(event.locationID).name}
-            <div class="card-text text-dark"><i class="far fa-calendar-alt"></i> ${util.prettifyTimestamp(event.start)} - ${util.prettifyTimestamp(event.ende)}</div>
+<div class="row justify-content-center bg-image mb-5">
+
+
+
+    <a href="ATTRAKIONSSEITE">
+        <div class="card mb-2" style=" width: 312px;">
+            <span class="d-block p-1 bg-light text-dark text-center"><b>PLACEHOLDER</b></span>
+            <div class="container">
+            <div class="card-text text-dark" style="font-size: small">
+                    PLACEHOLDER BESCHREIBUNG DER ATTRAKTION
+            </div>
         </div>
         </div>
-            </a>
-</c:forEach>
+    </a>
+
+
 </div>
 </body>
 </html>

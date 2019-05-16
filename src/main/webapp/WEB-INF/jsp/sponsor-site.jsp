@@ -36,11 +36,12 @@
             text-align: center;
         }
         .bg-image {
-            background-image: url(https://i.imgur.com/zh6A23R.jpg);
+            background-image: url(https://imgur.com/LkSvZHY.jpg);
             height: 100%;
-            background-position: center;
+            background-position: bottom center;
+            background-attachment: fixed;
             background-repeat: no-repeat;
-            background-size: cover;
+            background-size: cover;;
         }
     </style>
 </head>

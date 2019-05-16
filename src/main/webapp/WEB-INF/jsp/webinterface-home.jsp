@@ -152,7 +152,7 @@
     </div>
     <ul class="nav navbar-nav ml-auto">
     </ul>
-    <p class="navbar-text navbar-center text-white">${sponsor.name} Sponsorenseite</p>
+    <p class="navbar-text navbar-center text-white"style="font-size: x-large">${sponsor.name} Sponsorenseite</p>
     <div class="pr-2">
         <a class="btn btn-primary btn-secondary" href="${context}/webinterface/events"
            role="button">Veranstaltungen

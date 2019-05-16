@@ -64,12 +64,13 @@
     <c:forEach items="${attractions}" var="attraction">
         <a id="attraction-${attraction.name}" href="https://seserver.se.hs-heilbronn.de:9443/buga19bugascout?attraction=${attraction.name}">
             <div class="card mb-2" style=" width: 312px;">
-                <span class="d-block p-1 bg-light text-dark text-center"><b>${attraction.name}</b></span>
+                <span class="d-block p-1 bg-light border-bottom text-dark text-center"><b>${attraction.name}</b></span>
                 <div class="container">
                     <div class="card-text text-dark" style="font-size: small">
                         ${util.truncateLongText(attraction.beschreibung, 350)}
                     </div>
                 </div>
+                <span class="d-block p-1 bg-light border-top text-dark text-center"><b>Gesponsort von PLACEHOLDER</b></span>
             </div>
         </a>
     </c:forEach>

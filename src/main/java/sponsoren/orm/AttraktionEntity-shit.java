@@ -1,3 +1,4 @@
+/*
 package sponsoren.orm;
 
 import javax.persistence.*;
@@ -5,9 +6,10 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "sponsor_attraktion", schema = "buga19sponsoren", catalog = "")
+//@IdClass(SponsorVeranstaltungEntityPK.class)
 public class AttraktionEntity {
-    private String name;
-    // TODO add all the shitz;
+    private String sponsorName;
+    private int attraktionID;
 
     @Id
     @Column(name = "SponsorName")
@@ -21,12 +23,12 @@ public class AttraktionEntity {
 
     @Id
     @Column(name = "AttraktionID")
-    public int getAttraktionId() {
-        return attraktionId;
+    public int getAttraktionID() {
+        return attraktionID;
     }
 
-    public void setAttraktionId(int attraktionId) {
-        this.attraktionId = attraktionId;
+    public void setAttraktionID(int attraktionID) {
+        this.attraktionID = attraktionID;
     }
 
     @Override
@@ -34,12 +36,13 @@ public class AttraktionEntity {
         if(this == o) return true;
         if(o == null || getClass() != o.getClass()) return false;
         AttraktionEntity that = (AttraktionEntity)o;
-        return attraktionId == that.attraktionId &&
+        return attraktionID == that.attraktionID &&
                 Objects.equals(sponsorName, that.sponsorName);
-    }
+            }
 
     @Override
     public int hashCode() {
-        return Objects.hash(sponsorName, attraktionId);
+        return Objects.hash(sponsorName, attraktionID);
     }
 }
+*/

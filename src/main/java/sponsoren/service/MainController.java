@@ -29,6 +29,7 @@ public class MainController {
     @Autowired private SponsorVeranstaltungRepository sponsorVeranstaltungRepository;
     @Autowired private LocationRepository locationRepository;
     @Autowired private AccountRepository accountRepository;
+    @Autowired private AttraktionRepository attraktionRepository;
 
     // GET sponsor.Werbetext
     @GetMapping(path="/sponsor/werbetext")
@@ -247,6 +248,14 @@ public class MainController {
         // otherwise, delete the entire event
         return ResponseEntity.ok().body(null);
     }
+
+    @GetMapping(path="/dbg/update_attraktionen")
+    public void dbgUpdateAttraktionen() {
+        AttraktionApi attraktionApi = new AttraktionApi();
+        System.out.println(attraktionApi.getAttraktionen().get(2));
+
+    }
+
 
     private Timestamp parseDate(String dateString) throws ParseException {
         DateFormat fmt = new SimpleDateFormat("yyyy-MM-dd HH:mm");

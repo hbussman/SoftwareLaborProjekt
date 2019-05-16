@@ -35,19 +35,26 @@
             top: 0;
             text-align: center;
         }
+        .bg-image {
+            background-image: url(https://i.imgur.com/zh6A23R.jpg);
+            height: 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
     </style>
 </head>
 
 <body>
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
     <p class="navbar-text navbar-center text-white"style="font-size: x-large">${sponsor.name}</p>
-    <a class="btn btn-primary btn-secondary" href="${context}/sponsoren"><i class="fas fa-home"></i></a>
+    <a class="btn btn-primary btn-light" href="${context}/sponsoren"><i class="fas fa-home"></i></a>
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
     </ul>
-    <a class="btn btn-primary btn-secondary" href="${context}/events" role="button"><i class="far fa-calendar-alt"></i>
+    <a class="btn btn-primary btn-light" href="${context}/events" role="button"><i class="far fa-calendar-alt"></i>
     </a>
 </nav>
-<div class="container">
+<div class="container bg-image pt-5">
     <div class="row">
         <div class="col-12">
             <div class="shadow p-3 mb-5 bg-white rounded">
@@ -56,18 +63,18 @@
                     <img src="${imagesBase}/${sponsor.name}_scaled.png" style="max-height: 250px; max-width: 250px" class="card-img-thumbnail" alt="...">
                 </div>
                 <div class="card-body">
-                    <span class="d-block p-1 bg-dark text-white text-center">Zum Sponsor</span>
+                    <span class="d-block p-1 bg-light text-dark text-center"><b>Zum Sponsor</b></span>
                     <br>
                     <p class="card-text">${sponsor.beschreibung}</p>
-                    <a href="${sponsor.homepage}" class="text-decoration-none">Website</a>
+                    <a href="${sponsor.homepage}" class="text-decoration-none"><b>Website</b></a>
                 </div>
                 <div class="card-body">
-                    <span class="d-block p-1 bg-dark text-white text-center">Rolle bei der BuGa</span>
+                    <span class="d-block p-1 bg-light text-dark text-center"><b>Rolle bei der BuGa</b></span>
                     <br>
                     <p class="card-text">${sponsor.werbetext}</p>
                 </div>
                 <div class="card-body">
-                    <span class="d-block p-1 bg-dark text-white text-center">Kontakt</span>
+                    <span class="d-block p-1 bg-light text-dark text-center"><b>Kontakt</b></span>
                     <br>
                     <p class="card-text">${sponsor.ansprechpartnerNachname}<c:if test="${sponsor.ansprechpartnerVorname.length() > 0 && sponsor.ansprechpartnerNachname.length() > 0}">, </c:if>${sponsor.ansprechpartnerVorname}</p>
                     <p class="card-text">${sponsor.email} </p>
@@ -77,7 +84,7 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="card-body">
-                            <span class="d-block p-1 bg-dark text-white text-center">Veranstaltungen</span>
+                            <span class="d-block p-1 bg-light text-dark text-center"><b>Veranstaltungen</b></span>
                         </div>
                     </div>
                         <br>

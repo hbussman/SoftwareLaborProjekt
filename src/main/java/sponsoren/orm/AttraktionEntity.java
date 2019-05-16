@@ -4,43 +4,63 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "sponsor_veranstaltung", schema = "buga19sponsoren", catalog = "")
-@IdClass(SponsorVeranstaltungEntityPK.class)
+@Table(name = "attraktion", schema = "buga19sponsoren", catalog = "")
 public class AttraktionEntity {
-    private String sponsorName;
-    private int veranstaltungId;
+    private String name;
+    private String beschreibung;
+    private double lat;
+    private double lon;
 
     @Id
-    @Column(name = "SponsorName")
-    public String getSponsorName() {
-        return sponsorName;
+    @Column(name = "Name", nullable = false, unique = true)
+    public String getName() {
+        return name;
     }
 
-    public void setSponsorName(String sponsorName) {
-        this.sponsorName = sponsorName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    @Id
-    @Column(name = "VeranstaltungID")
-    public int getVeranstaltungId() {
-        return veranstaltungId;
+    @Basic
+    @Column(name = "Beschreibung")
+    public String getBeschreibung() {
+        return beschreibung;
     }
 
-    public void setVeranstaltungId(int veranstaltungId) {
-        this.veranstaltungId = veranstaltungId;
+    public void setBeschreibung(String beschreibung) {
+        this.beschreibung = beschreibung;
+    }
+
+    @Basic
+    @Column(name = "Lat")
+    public double getLat() {
+        return lat;
+    }
+
+    public void setLat(double lat) {
+        this.lat = lat;
+    }
+
+    @Basic
+    @Column(name = "Lon")
+    public double getLon() {
+        return lon;
+    }
+
+    public void setLon(double lon) {
+        this.lon = lon;
     }
 
     @Override
     public boolean equals(Object o) {
         if(this == o) return true;
         if(o == null || getClass() != o.getClass()) return false;
-        SponsorVeranstaltungEntity that = (SponsorVeranstaltungEntity)o;
-        return veranstaltungId == that.veranstaltungId &&
-                Objects.equals(sponsorName, that.sponsorName);
+        AttraktionEntity that = (AttraktionEntity)o;
+        return Objects.equals(name, that.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(sponsorName, veranstaltungId);
+        return Objects.hash(name);
     }
 }

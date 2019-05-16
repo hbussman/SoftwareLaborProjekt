@@ -1,4 +1,4 @@
-package sponsoren.service.external;
+package sponsoren.service.external.Attraktionen;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 

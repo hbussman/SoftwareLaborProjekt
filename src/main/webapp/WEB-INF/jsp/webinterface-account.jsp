@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%--@elvariable id="sponsor" type="sponsoren.orm.SponsorEntity"--%>
+<%--@elvariable id="currentUsername" type="java.lang.String"--%>
 <c:set var="context" value="${pageContext.request.contextPath}"/>
 
 <!DOCTYPE html>
@@ -34,19 +35,45 @@
 
     <script>
         function saveAccount() {
-            // TODO
+            var resultElem = document.getElementById('save-result');
+            var pwElem = document.getElementById('passwort');
+            var pw2Elem = document.getElementById('passwort-repeat');
+
+            var username = document.getElementById('username').value;
+            var pw1 = pwElem.value;
+            var pw2 = pw2Elem.value;
+
+            if(pw1 !== "" && pw1 !== pw2) {
+                resultElem.style = "color:red;";
+                resultElem.innerText = "Passwörter stimmen nicht überein!";
+                return;
+            }
+
+            db_save_account(username, pw1).then(result => {
+                if(result.ok) {
+                    resultElem.style = "color:darkgreen;";
+                    resultElem.innerText = "Informationen gespeichert!";
+                    pwElem.value = "";
+                    pw2Elem.value = "";
+                } else {
+                    result.text().then(error => {
+                        resultElem.style = "color:red;";
+                        resultElem.innerText = "Ein Fehler ist aufgetreten: " + error;
+                    });
+                }
+            });
         }
     </script>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark justify-content-center">
     <div class="pr-2">
-        <a class="btn btn-primary btn-secondary" href="${context}/webinterface/home?sponsor=${sponsor.name}"
+        <a class="btn btn-light" href="${context}/webinterface/home?sponsor=${sponsor.name}"
            role="button">Sponsorenseite
         </a>
     </div>
     <div class="pr-2">
-        <a class="btn btn-primary btn-secondary disabled" href="${context}/webinterface/home?sponsor=${sponsor.name}"
+        <a class="btn btn-light disabled" href="${context}/webinterface/home?sponsor=${sponsor.name}"
            role="button" aria-disabled="true">Account
         </a>
     </div>
@@ -54,11 +81,11 @@
         <p class="navbar-text navbar-center text-white" style="font-size: x-large">Ihr Account</p>
     </ul>
     <div class="pr-2">
-        <a class="btn btn-primary btn-secondary" href="${context}/webinterface/events?sponsor=${sponsor.name}"
+        <a class="btn btn-light" href="${context}/webinterface/events?sponsor=${sponsor.name}"
            role="button">Veranstaltungen
         </a>
     </div>
-    <a class="btn btn-primary btn-danger" href="${context}/webinterface/login" role="button"><i
+    <a class="btn btn-danger" href="${context}/webinterface/login" role="button"><i
             class="fa fa-sign-out-alt"></i>
     </a>
 </nav>
@@ -79,7 +106,7 @@
                                     <i class="fa fa-user"></i>
                                 </span>
                         </div>
-                        <input id="username" type="text" class="form-control" value="${sponsor.name}"
+                        <input id="username" type="text" class="form-control" value="${currentUsername}"
                                aria-label="Username"
                                aria-describedby="addon-wrapping">
                     </div>
@@ -118,6 +145,7 @@
                                 aria-describedby="addon-wrapping">Speichern
                         </button>
                     </div>
+                    <p id="save-result"></p>
 
                 </div>
             </div>

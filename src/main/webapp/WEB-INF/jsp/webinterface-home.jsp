@@ -139,7 +139,7 @@
     </style>
 </head>
 <body onload="Init()">
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark justify-content-center">
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark justify-content-center">
     <div class="pr-2">
         <a class="btn btn-light disabled" href="${context}/webinterface/home?sponsor=${sponsor.name}"
            role="button" aria-disabled="true">Sponsorenseite
@@ -158,11 +158,11 @@
            role="button">Veranstaltungen
         </a>
     </div>
-    <a class="btn btn-light" href="${context}/webinterface/login" role="button"><i
+    <a class="btn btn-danger" href="${context}/webinterface/login" role="button"><i
             class="fa fa-sign-out-alt"></i>
     </a>
 </nav>
-<div class="container">
+<div class="container pt-5">
     <div class="row">
         <div class="col-12">
             <div class="card">

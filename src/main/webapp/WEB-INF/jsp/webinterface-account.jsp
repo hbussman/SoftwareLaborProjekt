@@ -46,7 +46,7 @@
     <p class="navbar-text navbar-center text-white"style="font-size: x-large">Ihr Account</p>
 </ul>
     <div class="pr-2">
-        <a class="btnbtn-light" href="${context}/webinterface/events?sponsor=${sponsor.name}"
+        <a class="btn btn-light" href="${context}/webinterface/events?sponsor=${sponsor.name}"
            role="button">Veranstaltungen
         </a>
     </div>

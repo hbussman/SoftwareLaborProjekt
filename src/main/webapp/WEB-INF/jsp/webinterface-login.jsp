@@ -54,8 +54,8 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark justify-content-center">
 <ul class="nav navbar-nav ml-auto">
 </ul>
-<p class="navbar-text navbar-center text-white">Sponsoren Login</p>
-    <a class="btn btn-primary btn-danger disabled" href="${context}/webinterface/login" role="button"><i
+<p class="navbar-text navbar-center text-white"style="font-size: x-large">Sponsoren Login</p>
+    <a class="btn btn-danger disabled" href="${context}/webinterface/login" role="button"><i
             class="fa fa-sign-out-alt" aria-disabled="true"></i>
     </a>
 </nav>

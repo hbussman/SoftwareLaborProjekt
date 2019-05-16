@@ -167,9 +167,9 @@ function db_delete_veranstaltung(eventId, sponsorName) {
     });
 }
 
-function backend_login(username, password) {
-    return _post("login", {
-        username: username,
-        password: password
+function db_save_account(newUsername, newPassword) {
+    return _patch("account/save", {
+        username: newUsername,
+        password: newPassword
     });
 }

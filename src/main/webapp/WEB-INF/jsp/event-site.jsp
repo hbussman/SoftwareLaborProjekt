@@ -44,7 +44,7 @@
     </style>
 </head>
 
-<body>
+<body class="bg-image">
 <nav class="navbar fixed-top navbar-dark bg-dark" style="min-height: 50px">
     <p class="navbar-text navbar-center text-white" style="font-size: x-large">${event.name}</p>
 </nav>
@@ -60,7 +60,7 @@
     </div>
 </nav>
 
-<div class="container-fluid bg-image pt-5">
+<div class="container-fluid pt-5">
 
     <div class="card pb-5 justify-content-center">
         <span class="d-block p-1 bg-light text-dark text-center"></span>

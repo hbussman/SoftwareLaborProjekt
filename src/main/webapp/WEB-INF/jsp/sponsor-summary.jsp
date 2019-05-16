@@ -37,13 +37,12 @@
             background-position: bottom center;
             background-attachment: fixed;
             background-repeat: no-repeat;
-            background-size: cover;;
-            image-rendering: high-quality;
+            background-size: cover;
         }
     </style>
 </head>
 
-<body>
+<body class="bg-image">
 
 <nav class="navbar fixed-top navbar-dark bg-dark" style="min-height: 50px">
     <p class="navbar-text navbar-center text-white" style="font-size: x-large">Sponsoren</p>
@@ -58,7 +57,7 @@
     </div>
 </nav>
 
-<div class="container-fluid pt-5 pb-5 bg-image">
+<div class="container-fluid pt-5 pb-5">
     <%--@elvariable id="sponsorsSorted" type="java.util.List"--%>
     <c:forEach items="${sponsorsSorted}" var="sponsorlist">
     <div class="row no-gutters justify-content-center">

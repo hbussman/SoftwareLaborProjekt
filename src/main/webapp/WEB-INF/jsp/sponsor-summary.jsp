@@ -64,15 +64,16 @@
     <div class="row no-gutters justify-content-center">
         <c:forEach items="${sponsorlist}" var="sponsor">
         <div class="col d-flex align-items-stretch col-lg-3 col-md-3 col-sm-4 col-6 py-md-4 px-md-4 py-sm-3  px-sm-3 py-2  px-2">
-            <a id="${sponsor.name}card" href="${context}/sponsor?name=${sponsor.name}">
+            
                 <div class="card bg-light shadow-sm rounded">
+                <a id="${sponsor.name}-image" href="${context}/sponsor?name=${sponsor.name}">
                     <img src="${imagesBase}/${sponsor.name}_scaled.png" class="card-img-top"
                          alt="${sponsor.name}-Logo">
-                    <div class="card-body pb-0">
-                       <h5>${sponsor.name}</h5> 
-                  	</div>
+                </a>
+                <a id="${sponsor.name}-title" href="${context}/sponsor?name=${sponsor.name}"
+                	class="card-body text-dark">${sponsor.name}</a>
                 </div>
-             </a>        
+                     
         </div>
         </c:forEach>
          </div>

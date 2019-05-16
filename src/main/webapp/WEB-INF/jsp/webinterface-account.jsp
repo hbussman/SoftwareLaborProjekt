@@ -31,6 +31,12 @@
             text-align: center;
         }
     </style>
+
+    <script>
+        function saveAccount() {
+            // TODO
+        }
+    </script>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark justify-content-center">
@@ -64,16 +70,20 @@
                     Accountdaten ändern
                 </div>
                 <div class="card-body">
-                    <label>Username ändern:</label>
+
+                    <!-- Username ändern -->
+                    <label>Login-Username ändern:</label>
                     <div class="input-group flex-nowrap">
                         <div class="input-group-prepend">
                                 <span class="input-group-text">
                                     <i class="fa fa-user"></i>
                                 </span>
                         </div>
-                        <input id="username" type="text" class="form-control" value="Username" aria-label="Username"
+                        <input id="username" type="text" class="form-control" value="${sponsor.name}" aria-label="Username"
                                aria-describedby="addon-wrapping">
                     </div>
+
+                    <!-- Passwort ändern -->
                     <div class="container mt-2"></div>
                     <label>Passwort ändern:</label>
                     <div class="input-group flex-nowrap">
@@ -86,6 +96,8 @@
                                aria-label="Username"
                                aria-describedby="addon-wrapping">
                     </div>
+
+                    <!-- Passwort wiederholen -->
                     <div class="container mt-2"></div>
                     <div class="input-group flex-nowrap">
                         <div class="input-group-prepend">
@@ -97,6 +109,13 @@
                                placeholder="Passwort wiederholen" aria-label="Username"
                                aria-describedby="addon-wrapping">
                     </div>
+
+                    <!-- Speichern -->
+                    <div class="container mt-2"></div>
+                    <div class="input-group flex-nowrap">
+                        <button class="form-control" onclick="saveAccount();" role="button" aria-describedby="addon-wrapping">Speichern</button>
+                    </div>
+
                 </div>
             </div>
         </div>

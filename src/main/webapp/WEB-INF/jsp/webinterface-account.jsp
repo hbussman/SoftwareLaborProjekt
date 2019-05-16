@@ -1,11 +1,9 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: felix
-  Date: 15.05.2019
-  Time: 12:22
-  To change this template use File | Settings | File Templates.
---%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%--@elvariable id="sponsor" type="sponsoren.orm.SponsorEntity"--%>
+<c:set var="context" value="${pageContext.request.contextPath}"/>
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -16,7 +14,12 @@
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
           integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+    <script src="${context}/js/api_client.js"></script>
+    <script>api_set_context("${context}")</script>
+
     <title>Webinterface-Account</title>
+
     <style>
         .navbar-center
         {
@@ -69,7 +72,7 @@
                                     <i class="fa fa-user"></i>
                                 </span>
                         </div>
-                        <input id="username" type="text" class="form-control" value="PLACEHOLDER" aria-label="Username"
+                        <input id="username" type="text" class="form-control" value="Username" aria-label="Username"
                                aria-describedby="addon-wrapping">
                     </div>
                     <div class="container mt-2"></div>
@@ -99,7 +102,5 @@
 
             </div>
         </div>
-    </div>
-</div>
 </body>
 </html>

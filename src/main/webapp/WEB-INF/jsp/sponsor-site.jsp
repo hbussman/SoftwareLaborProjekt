@@ -44,6 +44,8 @@
     <a class="btn btn-primary btn-secondary" href="${context}/sponsoren"><i class="fas fa-home"></i></a>
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
     </ul>
+    <a class="btn btn-primary btn-secondary" href="${context}/events" role="button"><i class="far fa-calendar-alt"></i>
+    </a>
 </nav>
 <div class="container">
     <div class="row">

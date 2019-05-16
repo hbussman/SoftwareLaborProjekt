@@ -3,7 +3,7 @@
 <%--@elvariable id="util" type="sponsoren.Util"--%>
 <%--@elvariable id="events" type="java.lang.List<sponsoren.orm.VeranstaltungEntity>"--%>
 <%--@elvariable id="locations" type="java.util.Map<Integer, sponsoren.orm.LocationEntity>"--%>
-<c:set var="context" value="${pageContext.request.contextPath}" />
+<c:set var="context" value="${pageContext.request.contextPath}"/>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -24,8 +24,7 @@
 
     <title>Sponsoren-Veranstaltungsliste</title>
     <style>
-        .navbar-center
-        {
+        .navbar-center {
             position: absolute;
             overflow: visible;
             height: 0;
@@ -34,9 +33,11 @@
             top: 0;
             text-align: center;
         }
-        .table-striped>tbody>tr:nth-child(odd)>th {
+
+        .table-striped > tbody > tr:nth-child(odd) > th {
             background-color: aquamarine;
         }
+
         .bg-image {
             background-image: url(https://imgur.com/LkSvZHY.jpg);
             height: 100%;
@@ -53,9 +54,12 @@
 </nav>
 <nav class="navbar fixed-bottom navbar-expand-lg navbar-dark bg-dark justify-content-center">
     <div class="btn-group" role="group" aria-label="Basic example" style="min-width: 100%">
-        <a id="Attractionbutton" class="btn btn-primary btn-light" href="${context}/attractions" role="button"><i class="fas fa-landmark"></i></a>
-        <a id="Homebutton" class="btn btn-primary btn-light" aria-disabled="false" href="${context}/sponsoren" style= "background: aquamarine"><i class="fas fa-home"></i></a>
-        <a id="Eventbutton" class="btn btn-primary btn-light disabled" href="${context}/events" role="button" aria-disabled="true"><i class="far fa-calendar-alt"></i>
+        <a id="Attractionbutton" class="btn btn-primary btn-light" href="${context}/attractions" role="button"><i
+                class="fas fa-landmark"></i></a>
+        <a id="Homebutton" class="btn btn-primary btn-light" aria-disabled="false" href="${context}/sponsoren"
+           style="background: aquamarine"><i class="fas fa-home"></i></a>
+        <a id="Eventbutton" class="btn btn-primary btn-light disabled" href="${context}/events" role="button"
+           aria-disabled="true"><i class="far fa-calendar-alt"></i>
         </a>
     </div>
 </nav>
@@ -63,15 +67,17 @@
 <div class="row justify-content-center bg-image pb-5">
     <c:forEach items="${events}" var="event">
         <a id="${event.id}card" href="${context}/event?id=${event.id}">
-        <div class="card mb-2" style="max-height: 200px">
-            <span class="d-block p-1 bg-light text-dark text-center"><b>${event.name}</b></span>
-            <div class="card-body text-dark"><i class="fas fa-thumbtack"></i>
-                    ${locations.get(event.locationID).name}
-            <div class="card-text text-dark"><i class="far fa-calendar-alt"></i> ${util.prettifyTimestamp(event.start)} - ${util.prettifyTimestamp(event.ende)}</div>
-        </div>
-        </div>
-            </a>
-</c:forEach>
+            <div class="card mb-2" style="max-height: 200px">
+                <span class="d-block p-1 bg-light text-dark text-center"><b>${event.name}</b></span>
+                <div class="card-body text-dark"><i class="fas fa-thumbtack"></i>
+                        ${locations.get(event.locationID).name}
+                    <div class="card-text text-dark"><i
+                            class="far fa-calendar-alt"></i> ${util.prettifyTimestamp(event.start)}
+                        - ${util.prettifyTimestamp(event.ende)}</div>
+                </div>
+            </div>
+        </a>
+    </c:forEach>
 </div>
 </body>
 </html>

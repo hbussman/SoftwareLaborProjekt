@@ -4,7 +4,7 @@
 <%--@elvariable id="event" type="sponsoren.orm.VeranstaltungEntity"--%>
 <%--@elvariable id="eventSponsors" type="java.util.List<sponsoren.orm.SponsorEntity>"--%>
 <%--@elvariable id="locations" type="java.util.Map<Integer, sponsoren.orm.LocationEntity>"--%>
-<c:set var="context" value="${pageContext.request.contextPath}" />
+<c:set var="context" value="${pageContext.request.contextPath}"/>
 
 <!DOCTYPE html>
 <html>
@@ -24,8 +24,7 @@
 
     <title>Event-site</title>
     <style>
-        .navbar-center
-        {
+        .navbar-center {
             position: absolute;
             overflow: visible;
             height: 0;
@@ -34,6 +33,7 @@
             top: 0;
             text-align: center;
         }
+
         .bg-image {
             background-image: url(https://i.imgur.com/zh6A23R.jpg);
             height: 100%;
@@ -50,42 +50,48 @@
 </nav>
 <nav class="navbar fixed-bottom navbar-expand-lg navbar-dark bg-dark justify-content-center">
     <div class="btn-group" role="group" aria-label="Basic example" style="min-width: 100%">
-        <a id="Attractionbutton" class="btn btn-primary btn-light " aria-disabled="false" href="${context}/attractions" role="button"><i class="fas fa-landmark"></i></a>
-        <a id="Homebutton" class="btn btn-primary btn-light" aria-disabled="false" href="${context}/sponsoren" style= "background: aquamarine"><i class="fas fa-home"></i></a>
-        <a id="Eventbutton" class="btn btn-primary btn-light " href="${context}/events" role="button" aria-disabled="false"><i class="far fa-calendar-alt"></i>
+        <a id="Attractionbutton" class="btn btn-primary btn-light " aria-disabled="false" href="${context}/attractions"
+           role="button"><i class="fas fa-landmark"></i></a>
+        <a id="Homebutton" class="btn btn-primary btn-light" aria-disabled="false" href="${context}/sponsoren"
+           style="background: aquamarine"><i class="fas fa-home"></i></a>
+        <a id="Eventbutton" class="btn btn-primary btn-light " href="${context}/events" role="button"
+           aria-disabled="false"><i class="far fa-calendar-alt"></i>
         </a>
     </div>
 </nav>
 
 <div class="container-fluid bg-image pt-5">
 
-                <div class="card pb-5 justify-content-center">
-                    <span class="d-block p-1 bg-light text-dark text-center"><b>${event.name}</b></span>
-                    <div class="container">
-                        <div class="card-text text-dark">
-                            ${event.beschreibung}
-                        </div>
-                    <div class="card-body text-dark"><i class="fas fa-thumbtack"></i>
-                            ${locations.get(event.locationID).name}
-                        <div class="card-text text-dark"><i class="far fa-calendar-alt"></i> ${util.prettifyTimestamp(event.start)} - ${util.prettifyTimestamp(event.ende)}</div>
+    <div class="card pb-5 justify-content-center">
+        <span class="d-block p-1 bg-light text-dark text-center"><b>${event.name}</b></span>
+        <div class="container">
+            <div class="card-text text-dark">
+                ${event.beschreibung}
+            </div>
+            <div class="card-body text-dark"><i class="fas fa-thumbtack"></i>
+                ${locations.get(event.locationID).name}
+                <div class="card-text text-dark"><i
+                        class="far fa-calendar-alt"></i> ${util.prettifyTimestamp(event.start)}
+                    - ${util.prettifyTimestamp(event.ende)}</div>
+            </div>
+            <span class="d-block p-1 bg-light text-dark text-center"><b>Gesponsort von</b></span>
+            <div class="row no-gutters justify-content-xs-center">
+
+                <c:forEach items="${eventSponsors}" var="sponsor">
+                <a id="${event.id}" href="${context}/sponsor?name=${sponsor.name}">
+                    <div class="card shadow p-3 mb-5 bg-white rounded">
+                        <img src="${imagesBase}/${sponsor.name}_scaled.png" class="card-img-top"
+                             alt="${sponsor.name}-Logo">
                     </div>
-                        <span class="d-block p-1 bg-light text-dark text-center"><b>Gesponsort von</b></span>
-                        <div class="row no-gutters justify-content-xs-center">
+                </a>
 
-                            <c:forEach items="${eventSponsors}" var="sponsor">
-                                <a id="${event.id}" href="${context}/sponsor?name=${sponsor.name}">
-                                <div class="card shadow p-3 mb-5 bg-white rounded">
-                                        <img src="${imagesBase}/${sponsor.name}_scaled.png" class="card-img-top" alt="${sponsor.name}-Logo">
-                                </div>
-                                </a>
+            </div>
+        </div>
+        </c:forEach>
 
-                                </div>
-                                </div>
-                            </c:forEach>
-
-                        </div>
-                </div>
     </div>
+</div>
+</div>
 
 </body>
 </html>

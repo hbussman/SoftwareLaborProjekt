@@ -21,8 +21,7 @@
 
     <title>Sponsoren-Startseite</title>
     <style>
-        .navbar-center
-        {
+        .navbar-center {
             position: absolute;
             overflow: visible;
             height: 0;
@@ -31,6 +30,7 @@
             top: 0;
             text-align: center;
         }
+
         .bg-image {
             background-image: url(https://imgur.com/LkSvZHY.jpg);
             height: 100%;
@@ -44,39 +44,43 @@
 
 <body>
 
-        <nav class="navbar fixed-top navbar-dark bg-dark" style="min-height: 50px">
-            <p class="navbar-text navbar-center text-white"style="font-size: x-large">Sponsoren</p>
-        </nav>
+<nav class="navbar fixed-top navbar-dark bg-dark" style="min-height: 50px">
+    <p class="navbar-text navbar-center text-white" style="font-size: x-large">Sponsoren</p>
+</nav>
 <nav class="navbar fixed-bottom navbar-expand-lg navbar-dark bg-dark justify-content-center">
     <div class="btn-group" role="group" aria-label="Basic example" style="min-width: 100%">
         <a class="btn btn-primary btn-light" href="${context}/attractions" role="button"><i class="fas fa-landmark"></i></a>
-            <a class="btn btn-primary btn-light disabled" aria-disabled="true" href="${context}/sponsoren" style= "background: aquamarine"><i class="fas fa-home"></i></a>
-    <a class="btn btn-primary btn-light" href="${context}/events" role="button"><i class="far fa-calendar-alt"></i>
-    </a>
+        <a class="btn btn-primary btn-light disabled" aria-disabled="true" href="${context}/sponsoren"
+           style="background: aquamarine"><i class="fas fa-home"></i></a>
+        <a class="btn btn-primary btn-light" href="${context}/events" role="button"><i class="far fa-calendar-alt"></i>
+        </a>
     </div>
 </nav>
 
 <div class="container-fluid pt-5 bg-image">
-        <%--@elvariable id="sponsorsSorted" type="java.util.List"--%>
-        <c:forEach items="${sponsorsSorted}" var="sponsorlist">
-         <div class="row no-gutters justify-content-center">
-         <c:forEach items="${sponsorlist}" var="sponsor">
-            <div class="col d-flex align-items-stretch col-lg-3 col-md-3 col-sm-4 col-6 pt-md-4 pl-md-4 pt-sm-3  pl-sm-3 pt-2  pl-2">
-                <a id="${sponsor.name}button" href="${context}/sponsor?name=${sponsor.name}">
-                    <div class="card bg-light shadow-sm rounded">
-                        <img src="${imagesBase}/${sponsor.name}_scaled.png" class="card-img-top"
-                                                                               alt="${sponsor.name}-Logo"></a>
-                        <div class="card-body pb-0">
-                            <h5 class="card-title">${sponsor.name}</h5>
-                        </div>
-                    </div>
+    <%--@elvariable id="sponsorsSorted" type="java.util.List"--%>
+    <c:forEach items="${sponsorsSorted}" var="sponsorlist">
+    <div class="row no-gutters justify-content-center">
+        <c:forEach items="${sponsorlist}" var="sponsor">
+        <div class="col d-flex align-items-stretch col-lg-3 col-md-3 col-sm-4 col-6 pt-md-4 pl-md-4 pt-sm-3  pl-sm-3 pt-2  pl-2">
+            <a id="${sponsor.name}button" href="${context}/sponsor?name=${sponsor.name}">
+                <div class="card bg-light shadow-sm rounded">
+                    <img src="${imagesBase}/${sponsor.name}_scaled.png" class="card-img-top"
+                         alt="${sponsor.name}-Logo">
+            </a>
+            <div class="card-body pb-0">
+                <h5 class="card-title">${sponsor.name}</h5>
             </div>
-        </c:forEach>
-          <div class="col col-12   pt-md-4 pl-md-4 pt-sm-3  pl-sm-3 pt-2  pl-2"><div class="border-top"></div></div>
-         </div>
-        </c:forEach>
+        </div>
+    </div>
+    </c:forEach>
+    <div class="col col-12   pt-md-4 pl-md-4 pt-sm-3  pl-sm-3 pt-2  pl-2">
+        <div class="border-top"></div>
+    </div>
+</div>
+</c:forEach>
 
-    
+
 </div>
 
 

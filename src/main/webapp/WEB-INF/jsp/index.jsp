@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<c:set var="context" value="${pageContext.request.contextPath}" />
+<c:set var="context" value="${pageContext.request.contextPath}"/>
 
 <!DOCTYPE HTML>
 <html>
@@ -23,22 +23,22 @@
 </head>
 <body>
 
-    <!-- Temporary redirect until the index page is done -->
-    <script>
-        document.location = "${context}/sponsoren";
-    </script>
+<!-- Temporary redirect until the index page is done -->
+<script>
+    document.location = "${context}/sponsoren";
+</script>
 
 
-    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-            <li class="nav-item active">
-                <a class="nav-link" href="/sponsoren">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="/webinterface/login">Login <span class="sr-only">(current)</span></a>
-            </li>
-        </ul>
-    </div>
+<div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+        <li class="nav-item active">
+            <a class="nav-link" href="/sponsoren">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item active">
+            <a class="nav-link" href="/webinterface/login">Login <span class="sr-only">(current)</span></a>
+        </li>
+    </ul>
+</div>
 </nav>
 
 </body>

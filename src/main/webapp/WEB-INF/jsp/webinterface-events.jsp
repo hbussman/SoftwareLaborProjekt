@@ -68,7 +68,7 @@
                             (result.headers.has("Location") ?
                                 '<a href="${context}' + result.headers.get("Location") + '" target="_blank">Zur Veranstaltungsseite gehen</a>'
                                 : "");               // success
-                    resultElem.style = "color: darkgreen;";
+                        resultElem.style = "color: darkgreen;";
 
                     });
 
@@ -115,7 +115,7 @@
                     // success
                     resultElem.style = "color: darkgreen;";
                     resultElem.innerText = "Änderungen gespeichert!";
-                    document.getElementById("veranstaltung"+eventId+"-name").innerText = name;
+                    document.getElementById("veranstaltung" + eventId + "-name").innerText = name;
                 } else {
                     // error occurred
                     result.text().then(value => {
@@ -146,11 +146,10 @@
                 // button.parentNode.removeChild(button);
             });
         }
-        
+
     </script>
     <style>
-        .navbar-center
-        {
+        .navbar-center {
             position: absolute;
             overflow: visible;
             height: 0;
@@ -169,18 +168,18 @@
         </a>
     </div>
     <div class="pr-2">
-    <a class="btn btn-light" href="${context}/webinterface/account?sponsor=${sponsor.name}"
-       role="button">Account
-    </a>
-</div>
-    <ul class="nav navbar-nav ml-auto">
-    <p class="navbar-text navbar-center text-white"style="font-size: x-large">Veranstaltungen verwalten</p>
-    <div class="pr-2">
-        <a class="btn btn-light disabled" href="${context}/webinterface/events?sponsor=${sponsor.name}"
-           role="button" aria-disabled="true">Veranstaltungen
+        <a class="btn btn-light" href="${context}/webinterface/account?sponsor=${sponsor.name}"
+           role="button">Account
         </a>
     </div>
-</ul>
+    <ul class="nav navbar-nav ml-auto">
+        <p class="navbar-text navbar-center text-white" style="font-size: x-large">Veranstaltungen verwalten</p>
+        <div class="pr-2">
+            <a class="btn btn-light disabled" href="${context}/webinterface/events?sponsor=${sponsor.name}"
+               role="button" aria-disabled="true">Veranstaltungen
+            </a>
+        </div>
+    </ul>
     <a class="btn btn-danger" href="${context}/webinterface/login" role="button"><i
             class="fa fa-sign-out-alt"></i>
     </a>
@@ -219,18 +218,20 @@
                         <!-- Veranstaltung Start -->
                         <div class="col-6">
                             <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">Start</span>
-                                <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
-                                <input id="veranstaltung-start-date" type="date"
-                                       placeholder="dd/mm/yyyy HH:MM (Datum+Uhrzeit)"
-                                       class="form-control" aria-label="Veranstaltung Start Datum"
-                                       aria-describedby="inputGroup-sizing-sm">
-                                <div class="input-group-append">
-                                    <span class="input-group-text"><i class="far fa-clock"></i></span>
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Start</span>
+                                    <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                    <input id="veranstaltung-start-date" type="date"
+                                           placeholder="dd/mm/yyyy HH:MM (Datum+Uhrzeit)"
+                                           class="form-control" aria-label="Veranstaltung Start Datum"
+                                           aria-describedby="inputGroup-sizing-sm">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text"><i class="far fa-clock"></i></span>
+                                    </div>
+                                    <input id="veranstaltung-start-time" type="time" class="form-control"
+                                           placeholder="Zeit HH:MM" aria-label="Veranstaltung Start Zeit"
+                                           aria-describedby="basic-addon1">
                                 </div>
-                                <input id="veranstaltung-start-time" type="time" class="form-control" placeholder="Zeit HH:MM" aria-label="Veranstaltung Start Zeit" aria-describedby="basic-addon1">
-                            </div>
                             </div>
                         </div>
                         <!-- Veranstaltung Ende -->
@@ -246,7 +247,9 @@
                                     <div class="input-group-append">
                                         <span class="input-group-text"><i class="far fa-clock"></i></span>
                                     </div>
-                                    <input id="veranstaltung-ende-time" type="time" class="form-control" placeholder="Zeit HH:MM" aria-label="Veranstaltung Ende Zeit" aria-describedby="basic-addon1">
+                                    <input id="veranstaltung-ende-time" type="time" class="form-control"
+                                           placeholder="Zeit HH:MM" aria-label="Veranstaltung Ende Zeit"
+                                           aria-describedby="basic-addon1">
                                 </div>
                             </div>
                         </div>
@@ -309,7 +312,8 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Ort</span>
                                     <span class="input-group-text"><i class="fas fa-thumbtack"></i></span>
-                                    <button id="veranstaltung${event.id}-ort-edit" class="btn btn-outline-secondary dropdown-toggle"
+                                    <button id="veranstaltung${event.id}-ort-edit"
+                                            class="btn btn-outline-secondary dropdown-toggle"
                                             type="button" data-toggle="dropdown" aria-haspopup="true"
                                             aria-expanded="false">${locations.get(event.locationID).name}</button>
                                     <div class="dropdown-menu">
@@ -332,7 +336,8 @@
                                     <div class="input-group-append">
                                         <span class="input-group-text"><i class="far fa-clock"></i></span>
                                     </div>
-                                    <input id="veranstaltung${event.id}-start-time-edit" type="time" class="form-control"
+                                    <input id="veranstaltung${event.id}-start-time-edit" type="time"
+                                           class="form-control"
                                            value="${util.parsableTimeForHTML(event.start)}"
                                            placeholder="Zeit HH:MM"
                                            aria-label="Start-Time" aria-describedby="basic-addon1">

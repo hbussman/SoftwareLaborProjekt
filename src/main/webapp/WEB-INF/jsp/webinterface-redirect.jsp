@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<c:set var="context" value="${pageContext.request.contextPath}" />
+<c:set var="context" value="${pageContext.request.contextPath}"/>
 
 <!DOCTYPE HTML>
 <html>
@@ -27,7 +27,7 @@
 <!-- Redirect to home if we are logged in or to login page otherwise -->
 <script>
     var username = getCookie("username");
-    if(username == null) {
+    if (username == null) {
         document.location = "${context}/webinterface/login";
     } else {
         document.location = "${context}/webinterface/home?sponsor=" + username;

@@ -43,14 +43,14 @@
             var pw1 = pwElem.value;
             var pw2 = pw2Elem.value;
 
-            if(pw1 !== "" && pw1 !== pw2) {
+            if (pw1 !== "" && pw1 !== pw2) {
                 resultElem.style = "color:red;";
                 resultElem.innerText = "Passwörter stimmen nicht überein!";
                 return;
             }
 
             db_save_account(username, pw1).then(result => {
-                if(result.ok) {
+                if (result.ok) {
                     resultElem.style = "color:darkgreen;";
                     resultElem.innerText = "Informationen gespeichert!";
                     pwElem.value = "";

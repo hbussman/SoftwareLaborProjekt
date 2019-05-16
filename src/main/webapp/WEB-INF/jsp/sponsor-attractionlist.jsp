@@ -3,7 +3,7 @@
 <%--@elvariable id="util" type="sponsoren.Util"--%>
 <%--@elvariable id="events" type="java.lang.List<sponsoren.orm.VeranstaltungEntity>"--%>
 <%--@elvariable id="locations" type="java.util.Map<Integer, sponsoren.orm.LocationEntity>"--%>
-<c:set var="context" value="${pageContext.request.contextPath}" />
+<c:set var="context" value="${pageContext.request.contextPath}"/>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -24,8 +24,7 @@
 
     <title>Sponsoren-Attraktionenliste</title>
     <style>
-        .navbar-center
-        {
+        .navbar-center {
             position: absolute;
             overflow: visible;
             height: 0;
@@ -34,6 +33,7 @@
             top: 0;
             text-align: center;
         }
+
         .bg-image {
             background-image: url(https://imgur.com/LkSvZHY.jpg);
             height: 100%;
@@ -50,9 +50,12 @@
 </nav>
 <nav class="navbar fixed-bottom navbar-expand-lg navbar-dark bg-dark justify-content-center">
     <div class="btn-group" role="group" aria-label="Basic example" style="min-width: 100%">
-        <a id="Attractionbutton" class="btn btn-primary btn-light disabled" aria-disabled="true" href="${context}/attracions" role="button"><i class="fas fa-landmark"></i></a>
-        <a id="Homebutton" class="btn btn-primary btn-light" aria-disabled="false" href="${context}/sponsoren" style= "background: aquamarine"><i class="fas fa-home"></i></a>
-        <a id="Eventbutton" class="btn btn-primary btn-light " href="${context}/events" role="button" aria-disabled="false"><i class="far fa-calendar-alt"></i>
+        <a id="Attractionbutton" class="btn btn-primary btn-light disabled" aria-disabled="true"
+           href="${context}/attracions" role="button"><i class="fas fa-landmark"></i></a>
+        <a id="Homebutton" class="btn btn-primary btn-light" aria-disabled="false" href="${context}/sponsoren"
+           style="background: aquamarine"><i class="fas fa-home"></i></a>
+        <a id="Eventbutton" class="btn btn-primary btn-light " href="${context}/events" role="button"
+           aria-disabled="false"><i class="far fa-calendar-alt"></i>
         </a>
     </div>
 </nav>
@@ -60,15 +63,14 @@
 <div class="row justify-content-center bg-image mb-5">
 
 
-
     <a id="HIER ID ADDEN" href="ATTRAKIONSSEITE">
         <div class="card mb-2" style=" width: 312px;">
             <span class="d-block p-1 bg-light text-dark text-center"><b>PLACEHOLDER</b></span>
             <div class="container">
-            <div class="card-text text-dark" style="font-size: small">
+                <div class="card-text text-dark" style="font-size: small">
                     PLACEHOLDER BESCHREIBUNG DER ATTRAKTION
+                </div>
             </div>
-        </div>
         </div>
     </a>
 

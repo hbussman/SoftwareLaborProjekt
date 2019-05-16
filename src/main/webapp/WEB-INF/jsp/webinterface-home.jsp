@@ -82,7 +82,7 @@
 
         function changeLogo() {
 
-            var formData  = new FormData(document.getElementById("logo-form"));
+            var formData = new FormData(document.getElementById("logo-form"));
 
             formData.append("sponsor", "${sponsor.name}");
 
@@ -100,7 +100,7 @@
 
                 var resultElem = document.getElementById('change-logo-result');
 
-                if(result.ok) {
+                if (result.ok) {
                     // successful
                     resultElem.style = "color:darkgreen;";
                     resultElem.innerText = "Bild erfolgreich geändert!";
@@ -126,8 +126,7 @@
 
     </script>
     <style>
-        .navbar-center
-        {
+        .navbar-center {
             position: absolute;
             overflow: visible;
             height: 0;
@@ -152,7 +151,7 @@
     </div>
     <ul class="nav navbar-nav ml-auto">
     </ul>
-    <p class="navbar-text navbar-center text-white"style="font-size: x-large">${sponsor.name} Sponsorenseite</p>
+    <p class="navbar-text navbar-center text-white" style="font-size: x-large">${sponsor.name} Sponsorenseite</p>
     <div class="pr-2">
         <a id="Veranstaltungsbutton" class="btn btn-light" href="${context}/webinterface/events"
            role="button">Veranstaltungen
@@ -169,7 +168,8 @@
 
                 <!-- Sponsor Logo -->
                 <div class="text-center">
-                    <img id="sponsor-logo" src="${imagesBase}/${sponsor.name}_scaled.png" style="max-height: 250px; max-width: 250px"
+                    <img id="sponsor-logo" src="${imagesBase}/${sponsor.name}_scaled.png"
+                         style="max-height: 250px; max-width: 250px"
                          class="card-img-thumbnail" alt="...">
                 </div>
 

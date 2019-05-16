@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "sponsor_attraktion", schema = "buga19sponsoren", catalog = "")
+@Table(name = "attraktion", schema = "buga19sponsoren", catalog = "")
 public class AttraktionEntity {
     private String name;
     private String beschreibung;
@@ -12,7 +12,7 @@ public class AttraktionEntity {
     private double lon;
 
     @Id
-    @Column(name = "Name")
+    @Column(name = "Name", nullable = false, unique = true)
     public String getName() {
         return name;
     }
@@ -21,6 +21,7 @@ public class AttraktionEntity {
         this.name = name;
     }
 
+    @Basic
     @Column(name = "Beschreibung")
     public String getBeschreibung() {
         return beschreibung;
@@ -30,6 +31,7 @@ public class AttraktionEntity {
         this.beschreibung = beschreibung;
     }
 
+    @Basic
     @Column(name = "Lat")
     public double getLat() {
         return lat;
@@ -39,6 +41,7 @@ public class AttraktionEntity {
         this.lat = lat;
     }
 
+    @Basic
     @Column(name = "Lon")
     public double getLon() {
         return lon;

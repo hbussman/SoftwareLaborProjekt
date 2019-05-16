@@ -1,18 +1,18 @@
-/*
 package sponsoren.orm;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
 @Table(name = "sponsor_attraktion", schema = "buga19sponsoren", catalog = "")
-//@IdClass(SponsorVeranstaltungEntityPK.class)
-public class AttraktionEntity {
+@IdClass(SponsorAttraktionEntity.class)
+public class SponsorAttraktionEntity implements Serializable {
     private String sponsorName;
-    private int attraktionID;
+    private String attraktion;
 
-    @Id
     @Column(name = "SponsorName")
+    @Id
     public String getSponsorName() {
         return sponsorName;
     }
@@ -21,28 +21,27 @@ public class AttraktionEntity {
         this.sponsorName = sponsorName;
     }
 
+    @Column(name = "Attraktion")
     @Id
-    @Column(name = "AttraktionID")
-    public int getAttraktionID() {
-        return attraktionID;
+    public String getAttraktion() {
+        return attraktion;
     }
 
-    public void setAttraktionID(int attraktionID) {
-        this.attraktionID = attraktionID;
+    public void setAttraktion(String attraktion) {
+        this.attraktion = attraktion;
     }
 
     @Override
     public boolean equals(Object o) {
         if(this == o) return true;
         if(o == null || getClass() != o.getClass()) return false;
-        AttraktionEntity that = (AttraktionEntity)o;
-        return attraktionID == that.attraktionID &&
-                Objects.equals(sponsorName, that.sponsorName);
-            }
+        SponsorAttraktionEntity that = (SponsorAttraktionEntity)o;
+        return Objects.equals(sponsorName, that.sponsorName) &&
+                Objects.equals(attraktion, that.attraktion);
+    }
 
     @Override
     public int hashCode() {
-        return Objects.hash(sponsorName, attraktionID);
+        return Objects.hash(sponsorName, attraktion);
     }
 }
-*/

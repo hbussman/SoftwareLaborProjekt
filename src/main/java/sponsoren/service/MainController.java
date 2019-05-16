@@ -95,17 +95,11 @@ public class MainController {
         return locationRepository.findAll();
     }
 
-    // GET list of all accounts
-    @GetMapping(path="/account/all")
+    // GET list of all accounts - LOL NO
+    /*@GetMapping(path="/account/all")
     public @ResponseBody Iterable<AccountEntity> getAllAccounts() {
         return accountRepository.findAll();
-    }
-
-    // GET list of sponsor_veranstaltung
-    @GetMapping(path="/sponsor_veranstaltung/all")
-    public @ResponseBody Iterable<SponsorVeranstaltungEntity> getAllVeranst() {
-        return sponsorVeranstaltungRepository.findAll();
-    }
+    }*/
 
     // PATCH account data
     @PatchMapping(path="/account/save", consumes = "application/json")
@@ -139,6 +133,12 @@ public class MainController {
         accountRepository.save(account);
 
         return ResponseEntity.ok("");
+    }
+
+    // GET list of sponsor_veranstaltung
+    @GetMapping(path="/event/all/sponsor_mapping")
+    public @ResponseBody Iterable<SponsorVeranstaltungEntity> getAllVeranst() {
+        return sponsorVeranstaltungRepository.findAll();
     }
 
     // GET list of all events

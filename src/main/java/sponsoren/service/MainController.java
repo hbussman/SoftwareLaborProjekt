@@ -106,6 +106,12 @@ public class MainController {
         return sponsorVeranstaltungRepository.findAll();
     }
 
+    // GET list of all events
+    @GetMapping(path="/event/all")
+    public @ResponseBody Iterable<VeranstaltungEntity> getAllEvents() {
+        return veranstaltungRepository.findAll();
+    }
+
     // POST create new event
     @PostMapping(path = "/event/new", consumes = "application/json", produces = "application/json")
     public ResponseEntity createNewVeranstaltung(@AuthenticationPrincipal AccountEntity user, @RequestBody Map<String, String> event) {
@@ -169,6 +175,7 @@ public class MainController {
             return ResponseEntity.accepted().body(body);
         }
     }
+
 
     @PatchMapping(path="/event/edit", consumes="application/json")
     public ResponseEntity editVeranstaltung(@RequestBody Map<String, String> event) {

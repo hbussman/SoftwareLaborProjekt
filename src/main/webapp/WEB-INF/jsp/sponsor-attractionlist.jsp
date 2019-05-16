@@ -2,6 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%--@elvariable id="util" type="sponsoren.Util"--%>
 <%--@elvariable id="attractions" type="java.util.List<sponsoren.orm.AttraktionEntity>"--%>
+<%--@elvariable id="attractionSponsors" type="java.util.Map<java.lang.String, java.lang.String>"--%>
 <c:set var="context" value="${pageContext.request.contextPath}"/>
 
 <!DOCTYPE html>
@@ -43,7 +44,7 @@
         }
     </style>
 </head>
-<body>
+<body class="bg-image">
 <nav class="navbar fixed-top navbar-dark bg-dark" style="min-height: 50px">
     <p class="navbar-text navbar-center text-white" style="font-size: x-large">Attraktionen</p>
 </nav>
@@ -59,20 +60,22 @@
     </div>
 </nav>
 <div class="pt-5"></div>
-<div class="container bg-image">
+<div class="container">
     <div class="row justify-content-center pb-5 mx-1">
     <c:forEach items="${attractions}" var="attraction">
-        <a id="attraction-${attraction.name}" href="https://seserver.se.hs-heilbronn.de:9443/buga19bugascout?attraction=${attraction.name}">
-            <div class="card mb-2" style=" width: 312px;">
-                <span class="d-block p-1 bg-light border-bottom text-dark text-center"><b>${attraction.name}</b></span>
-                <div class="container">
-                    <div class="card-text text-dark" style="font-size: small">
-                        ${util.truncateLongText(attraction.beschreibung, 350)}
+        <c:if test="${attractionSponsors.containsKey(attraction.name)}">
+            <a id="attraction-${attraction.name}" href="https://seserver.se.hs-heilbronn.de:9443/buga19bugascout?attraction=${attraction.name}">
+                <div class="card mb-2" style=" width: 312px;">
+                    <span class="d-block p-1 bg-light border-bottom text-dark text-center"><b>${attraction.name}</b></span>
+                    <div class="container">
+                        <div class="card-text text-dark" style="font-size: small">
+                            ${util.truncateLongText(attraction.beschreibung, 350)}
+                        </div>
                     </div>
+                    <span class="d-block p-1 bg-light border-top text-dark text-center"><b>Gesponsort von ${attractionSponsors.get(attraction.name)}</b></span>
                 </div>
-                <span class="d-block p-1 bg-light border-top text-dark text-center"><b>Gesponsort von PLACEHOLDER</b></span>
-            </div>
-        </a>
+            </a>
+        </c:if>
     </c:forEach>
     </div>
 </div>

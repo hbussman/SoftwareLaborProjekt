@@ -90,8 +90,9 @@
                         ${sponsor.ansprechpartnerVorname}</p>
                         <p class="card-text"><a href="mailto:${sponsor.email}">${sponsor.email}</a></p>
                         <p class="card-text"><a href="tel:${sponsor.telefonnummer}">${sponsor.telefonnummer}</a></p>
-                        <p class="card-text">${sponsor.adresse}
-                        <c:if test="${sponsor.adresse.length() > 0 && ( sponsor.plz.length() > 0 || sponsor.ort.length() > 0) }">, </c:if> ${sponsor.plz} ${sponsor.ort}</p>
+                        <p class="card-text"><a href="https://www.google.com/maps/place/${sponsor.adresse} ${sponsor.plz.length() > 0 || sponsor.ort.length() > 0 ? "," : ""} ${sponsor.plz} ${sponsor.ort}" target="_blank">${sponsor.adresse}
+                            <c:if test="${sponsor.adresse.length() > 0 && ( sponsor.plz.length() > 0 || sponsor.ort.length() > 0) }">, </c:if> ${sponsor.plz} ${sponsor.ort}
+                        </a></p>
                     </div>
                     <div class="row">
                         <div class="col-12">

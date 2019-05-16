@@ -28,4 +28,26 @@ public class Util {
         String parsable = s.substring(11, 11+5);
         return parsable;
     }
+
+    public String truncateLongText(String text, int max_len) {
+        max_len = Math.min(text.length(), max_len - 1);
+
+        if(text.length() <= max_len || max_len < 0) {
+            return text;
+        }
+
+        if(max_len == 0) {
+            return "";
+        }
+
+        // search for the last space before the limit
+        for(int i = max_len; i >= 0; i--) {
+            if(text.charAt(i) == ' ') {
+                return text.substring(0, i) + "…";
+            }
+        }
+
+        return "";
+    }
+
 }

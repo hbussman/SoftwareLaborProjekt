@@ -9,12 +9,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import sponsoren.orm.AccountEntity;
+import sponsoren.orm.*;
 import org.springframework.web.multipart.MultipartFile;
-import sponsoren.orm.LocationEntity;
-import sponsoren.orm.SponsorEntity;
-import sponsoren.orm.SponsorVeranstaltungEntity;
-import sponsoren.orm.VeranstaltungEntity;
+import sponsoren.service.external.Attraktionen.Attraktion;
+
 import javax.validation.Valid;
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -32,6 +30,7 @@ public class ServerPageController {
     @Autowired private SponsorVeranstaltungRepository sponsorVeranstaltungRepository;
     @Autowired private VeranstaltungRepository veranstaltungRepository;
     @Autowired private LocationRepository locationRepository;
+    @Autowired private AttraktionRepository attractionRepository;
 
     private void publishCommon(Model model) {
         model.addAttribute("imagesBase", "http://seserver.se.hs-heilbronn.de/Studenten/LabSWPPS2019/BuGa19Sponsoren/Bilder");
@@ -153,6 +152,16 @@ public class ServerPageController {
         model.addAttribute("locations", locations);
     }
 
+    private void publishAttractions(Model model) {
+        // get all Attractions
+        Iterable<AttraktionEntity> attractionEntities = attractionRepository.findAll();
+
+        // convert iterable to List
+        List<AttraktionEntity> attractionList = new ArrayList<>();
+        attractionEntities.forEach(attractionList::add);
+        model.addAttribute("attractions", attractionList);
+    }
+
 
     @RequestMapping(value="/webinterface/home/image_upload", method = RequestMethod.POST, consumes = {"multipart/form-data"})
     public ResponseEntity importQuestion(@Valid @RequestParam("uploadedFileName") MultipartFile multipart, @RequestParam String sponsor) {
@@ -214,7 +223,8 @@ public class ServerPageController {
 
     @GetMapping("/attractions")
     public String getAttractionlist(Model model) {
-
+        publishAttractions(model);
+        publishUtil(model);
         return "sponsor-attractionlist";
     }
 

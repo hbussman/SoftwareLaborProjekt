@@ -1,8 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%--@elvariable id="util" type="sponsoren.Util"--%>
-<%--@elvariable id="events" type="java.lang.List<sponsoren.orm.VeranstaltungEntity>"--%>
-<%--@elvariable id="locations" type="java.util.Map<Integer, sponsoren.orm.LocationEntity>"--%>
+<%--@elvariable id="attractions" type="java.util.List<sponsoren.orm.AttraktionEntity>"--%>
 <c:set var="context" value="${pageContext.request.contextPath}"/>
 
 <!DOCTYPE html>
@@ -62,18 +61,18 @@
 <div class="pt-5"></div>
 <div class="row justify-content-center bg-image mb-5">
 
-
-    <a id="HIER ID ADDEN" href="ATTRAKIONSSEITE">
-        <div class="card mb-2" style=" width: 312px;">
-            <span class="d-block p-1 bg-light text-dark text-center"><b>PLACEHOLDER</b></span>
-            <div class="container">
-                <div class="card-text text-dark" style="font-size: small">
-                    PLACEHOLDER BESCHREIBUNG DER ATTRAKTION
+    <c:forEach items="${attractions}" var="attraction">
+        <a id="attraction-${attraction.name}" href="https://seserver.se.hs-heilbronn.de:9443/buga19bugascout?attraction=${attraction.name}">
+            <div class="card mb-2" style=" width: 312px;">
+                <span class="d-block p-1 bg-light text-dark text-center"><b>${attraction.name}</b></span>
+                <div class="container">
+                    <div class="card-text text-dark" style="font-size: small">
+                        ${util.truncateLongText(attraction.beschreibung, 350)}
+                    </div>
                 </div>
             </div>
-        </div>
-    </a>
-
+        </a>
+    </c:forEach>
 
 </div>
 </body>

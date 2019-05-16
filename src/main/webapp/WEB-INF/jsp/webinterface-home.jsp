@@ -146,7 +146,7 @@
         </a>
     </div>
     <div class="pr-2">
-        <a class="btn btn-primary btn-secondary" href="${context}/webinterface/account?sponsor=${sponsor.name}"
+        <a class="btn btn-primary btn-secondary" href="${context}/webinterface/account"
            role="button">Account
         </a>
     </div>

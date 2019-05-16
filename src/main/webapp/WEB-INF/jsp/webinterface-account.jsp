@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%--@elvariable id="sponsor" type="sponsoren.orm.SponsorEntity"--%>
+<%--@elvariable id="currentUsername" type="java.lang.String"--%>
 <c:set var="context" value="${pageContext.request.contextPath}"/>
 
 <!DOCTYPE html>
@@ -34,7 +35,33 @@
 
     <script>
         function saveAccount() {
-            // TODO
+            var resultElem = document.getElementById('save-result');
+            var pwElem = document.getElementById('passwort');
+            var pw2Elem = document.getElementById('passwort-repeat');
+
+            var username = document.getElementById('username').value;
+            var pw1 = pwElem.value;
+            var pw2 = pw2Elem.value;
+
+            if(pw1 !== "" && pw1 !== pw2) {
+                resultElem.style = "color:red;";
+                resultElem.innerText = "Passwörter stimmen nicht überein!";
+                return;
+            }
+
+            db_save_account(username, pw1).then(result => {
+                if(result.ok) {
+                    resultElem.style = "color:darkgreen;";
+                    resultElem.innerText = "Informationen gespeichert!";
+                    pwElem.value = "";
+                    pw2Elem.value = "";
+                } else {
+                    result.text().then(error => {
+                        resultElem.style = "color:red;";
+                        resultElem.innerText = "Ein Fehler ist aufgetreten: " + error;
+                    });
+                }
+            });
         }
     </script>
 </head>
@@ -79,7 +106,7 @@
                                     <i class="fa fa-user"></i>
                                 </span>
                         </div>
-                        <input id="username" type="text" class="form-control" value="${sponsor.name}"
+                        <input id="username" type="text" class="form-control" value="${currentUsername}"
                                aria-label="Username"
                                aria-describedby="addon-wrapping">
                     </div>
@@ -118,6 +145,7 @@
                                 aria-describedby="addon-wrapping">Speichern
                         </button>
                     </div>
+                    <p id="save-result"></p>
 
                 </div>
             </div>

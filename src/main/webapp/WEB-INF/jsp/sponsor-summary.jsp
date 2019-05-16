@@ -43,12 +43,16 @@
 
 <body>
 
-<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
-    <p class="navbar-text navbar-center text-white"style="font-size: x-large">Sponsoren</p>
-    <a class="btn btn-primary btn-light disabled" aria-disabled="true" href="${context}/sponsoren"><i class="fas fa-home"></i></a>
-    <ul class="nav navbar-nav ml-auto "></ul>
+        <nav class="navbar fixed-top navbar-dark bg-dark" style="min-height: 50px">
+            <p class="navbar-text navbar-center text-white"style="font-size: x-large">Sponsoren</p>
+        </nav>
+<nav class="navbar fixed-bottom navbar-expand-lg navbar-dark bg-dark justify-content-center">
+    <div class="btn-group" role="group" aria-label="Basic example" style="min-width: 100%">
+        <a class="btn btn-primary btn-light" href="${context}/events" role="button"><i class="fas fa-landmark"></i></a>
+            <a class="btn btn-primary btn-light disabled" aria-disabled="true" href="${context}/sponsoren" style= "background: aquamarine"><i class="fas fa-home"></i></a>
     <a class="btn btn-primary btn-light" href="${context}/events" role="button"><i class="far fa-calendar-alt"></i>
     </a>
+    </div>
 </nav>
 
 <div class="container-fluid pt-5 bg-image">

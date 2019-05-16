@@ -46,13 +46,15 @@
 </head>
 
 <body>
-<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
-    <p class="navbar-text navbar-center text-white"style="font-size: x-large">${sponsor.name}</p>
-    <a class="btn btn-primary btn-light" href="${context}/sponsoren"><i class="fas fa-home"></i></a>
-    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-    </ul>
-    <a class="btn btn-primary btn-light" href="${context}/events" role="button"><i class="far fa-calendar-alt"></i>
-    </a>
+<nav class="navbar fixed-top navbar-dark bg-dark" style="min-height: 50px">
+    <p class="navbar-text navbar-center text-white"style="font-size: x-large">${sponsor.name}</p></nav>
+<nav class="navbar fixed-bottom navbar-expand-lg navbar-dark bg-dark justify-content-center">
+    <div class="btn-group" role="group" aria-label="Basic example" style="min-width: 100%">
+        <a class="btn btn-primary btn-light" href="${context}/events" role="button"><i class="fas fa-landmark"></i></a>
+        <a class="btn btn-primary btn-light" aria-disabled="false" href="${context}/sponsoren" style= "background: aquamarine"><i class="fas fa-home"></i></a>
+        <a class="btn btn-primary btn-light" href="${context}/events" role="button"><i class="far fa-calendar-alt"></i>
+        </a>
+    </div>
 </nav>
 <div class="container bg-image pt-5">
     <div class="row">

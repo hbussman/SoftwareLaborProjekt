@@ -34,34 +34,44 @@
             top: 0;
             text-align: center;
         }
+        .table-striped>tbody>tr:nth-child(odd)>th {
+            background-color: aquamarine;
+        }
+        .bg-image {
+            background-image: url(https://imgur.com/LkSvZHY.jpg);
+            height: 100%;
+            background-position: bottom center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            background-size: cover;;
+        }
     </style>
 </head>
 <body>
-<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark" style="min-width: 425px">
+<nav class="navbar fixed-top navbar-dark bg-dark" style="min-height: 50px">
     <p class="navbar-text navbar-center text-white" style="font-size: x-large">Veranstaltungen</p>
-    <a class="btn btn-primary btn-light" href="${context}/sponsoren"><i class="fas fa-home"></i></a>
-    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-        <li class="nav-item active ml-1">
-        </li>
-    </ul>
 </nav>
-<table class="table table-bordered table-striped text-wrap" style="max-width: none">
-    <thead>
-    <tr>
-        <th style="width: 150px;" class="text-wrap">Veranstaltung</th>
-        <th style="width: 150px;" class="text-wrap">Ort</th>
-        <th style="width: 150px;" class="text-wrap">Datum</th>
-    </tr>
-    </thead>
-    <tbody>
+<nav class="navbar fixed-bottom navbar-expand-lg navbar-dark bg-dark justify-content-center">
+    <div class="btn-group" role="group" aria-label="Basic example" style="min-width: 100%">
+        <a class="btn btn-primary btn-light" href="${context}/events" role="button"><i class="fas fa-landmark"></i></a>
+        <a class="btn btn-primary btn-light" aria-disabled="false" href="${context}/sponsoren" style= "background: aquamarine"><i class="fas fa-home"></i></a>
+        <a class="btn btn-primary btn-light disabled" href="${context}/events" role="button" aria-disabled="true"><i class="far fa-calendar-alt"></i>
+        </a>
+    </div>
+</nav>
+<div class="pt-5"></div>
+<div class="row justify-content-center bg-image pb-5">
     <c:forEach items="${events}" var="event">
-        <tr>
-            <td><a href="${context}/event?id=${event.id}" class="text-decoration-none">${event.name}</a></td>
-            <td>${locations.get(event.locationID).name}</td>
-            <td>${util.prettifyTimestamp(event.start)} bis ${util.prettifyTimestamp(event.ende)}</td>
-        </tr>
-    </c:forEach>
-    </tbody>
-</table>
+        <a href="${context}/event?id=${event.id}">
+        <div class="card mb-2" style="max-height: 200px">
+            <span class="d-block p-1 bg-light text-dark text-center"><b>${event.name}</b></span>
+            <div class="card-body text-dark"><i class="fas fa-thumbtack"></i>
+                    ${locations.get(event.locationID).name}
+            <div class="card-text text-dark"><i class="far fa-calendar-alt"></i> ${util.prettifyTimestamp(event.start)} - ${util.prettifyTimestamp(event.ende)}</div>
+        </div>
+        </div>
+            </a>
+</c:forEach>
+
 </body>
 </html>

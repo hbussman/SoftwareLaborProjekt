@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import sponsoren.Util;
 import sponsoren.orm.*;
 import sponsoren.service.external.Attraktionen.Attraktion;
-import sponsoren.service.external.Attraktionen.AttraktionenApi;
+import sponsoren.service.external.ExternalServices;
+import sponsoren.service.external.Lageplan.Poi;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -295,8 +296,8 @@ public class MainController {
         System.out.println("Requesting Attraktionen from service");
 
         // request attraktionen from their database
-        AttraktionenApi attraktionenApi = new AttraktionenApi();
-        List<Attraktion> attraktionen = attraktionenApi.getAttraktionen();
+        ExternalServices externalServices = new ExternalServices();
+        List<Attraktion> attraktionen = externalServices.getAttraktionen();
 
         // add all attraktionen to our database
         int ctr = 0;
@@ -312,7 +313,29 @@ public class MainController {
         }
 
         System.out.println("Saved " + ctr + " Attraktionen to our database.");
+    }
 
+    @GetMapping(path="/dbg/update_pois")
+    public void dbgUpdatePois() {
+        System.out.println("Requesting Pois from service");
+
+        // request locations from their database
+        ExternalServices externalServices = new ExternalServices();
+        List<Poi> pois = externalServices.getPois();
+
+        // add all locations to our database
+        int ctr = 0;
+        for(Poi poi : pois) {
+            LocationEntity locationEntity = new LocationEntity();
+            locationEntity.setName(poi.getName());
+            locationEntity.setLat(Double.parseDouble(poi.getLatitude()));
+            locationEntity.setLon(Double.parseDouble(poi.getLongitude()));
+
+            locationRepository.save(locationEntity);
+            ctr++;
+        }
+
+        System.out.println("Saved " + ctr + " Locations to our database.");
     }
 
 

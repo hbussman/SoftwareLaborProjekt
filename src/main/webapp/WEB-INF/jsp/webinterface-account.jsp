@@ -45,7 +45,7 @@
         </a>
     </div>
     <ul class="nav navbar-nav ml-auto">
-        <p class="navbar-text navbar-center text-white">Ihr Account</p>
+        <p class="navbar-text navbar-center text-white" style="font-size: x-large">Ihr Account</p>
     </ul>
     <div class="pr-2">
         <a class="btn btn-primary btn-secondary" href="${context}/webinterface/events?sponsor=${sponsor.name}"

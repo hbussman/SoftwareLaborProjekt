@@ -8,6 +8,7 @@ import java.util.Objects;
 public class AccountEntity {
     private String username;
     private String password;
+    private String sponsorName;
 
     @Id
     @Column(name = "Username")
@@ -27,6 +28,16 @@ public class AccountEntity {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @Basic
+    @Column(name = "SponsorName", nullable = false, length = 255)
+    public String getSponsorName() {
+        return sponsorName;
+    }
+
+    public void setSponsorName(String sponsorName) {
+        this.sponsorName = sponsorName;
     }
 
     @Override

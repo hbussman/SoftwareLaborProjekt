@@ -54,7 +54,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark justify-content-center">
 <ul class="nav navbar-nav ml-auto">
 </ul>
-<p class="navbar-text navbar-center text-white">Sponsoren Login</p>
+<p class="navbar-text navbar-center text-white"style="font-size: x-large">Sponsoren Login</p>
     <a class="btn btn-primary btn-danger disabled" href="${context}/webinterface/login" role="button"><i
             class="fa fa-sign-out-alt" aria-disabled="true"></i>
     </a>
@@ -69,7 +69,7 @@
                 <div class="card-body">
                     <h5 class="card-title">Login</h5>
 
-                    <form action="javascript:DoLogin();">
+                    <form name="f" action="${context}/webinterface/login" method="POST">
                         <div class="input-group flex-nowrap">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">
@@ -77,7 +77,7 @@
                                 </span>
 
                             </div>
-                            <input id="username" type="text" class="form-control" placeholder="Username" aria-label="Username"
+                            <input name="username" id="username" type="text" class="form-control" placeholder="Username" aria-label="Username"
                                    aria-describedby="addon-wrapping">
                         </div>
                         <div class="input-group flex-nowrap">
@@ -86,14 +86,21 @@
                                     <i class="fa fa-unlock-alt"></i>
                                 </span>
                             </div>
-                            <input id="password" type="password" class="form-control" placeholder="Password" aria-label="Password"
+                            <input name="password" id="password" type="password" class="form-control" placeholder="Password" aria-label="Password"
                                    aria-describedby="addon-wrapping">
                         </div>
                         <p class="card-text"></p>
-                        <input type="submit" class="btn btn-dark" onclick="DoLogin()" value="Anmelden">
+                        <input type="submit" class="btn btn-dark"  value="Anmelden">
+                        <input type="hidden"
+                               name="${_csrf.parameterName}"
+                               value="${_csrf.token}"/>
                     </form>
-
                 </div>
+                <c:if test="${param.error != null}">
+                    <p style="color:red;">
+                        Falscher Username oder Passwort!
+                    </p>
+                </c:if>
             </div>
         </div>
     </div>

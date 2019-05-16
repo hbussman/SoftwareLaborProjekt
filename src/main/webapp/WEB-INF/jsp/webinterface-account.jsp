@@ -79,7 +79,8 @@
                                     <i class="fa fa-user"></i>
                                 </span>
                         </div>
-                        <input id="username" type="text" class="form-control" value="${sponsor.name}" aria-label="Username"
+                        <input id="username" type="text" class="form-control" value="${sponsor.name}"
+                               aria-label="Username"
                                aria-describedby="addon-wrapping">
                     </div>
 
@@ -113,7 +114,9 @@
                     <!-- Speichern -->
                     <div class="container mt-2"></div>
                     <div class="input-group flex-nowrap">
-                        <button class="form-control" onclick="saveAccount();" role="button" aria-describedby="addon-wrapping">Speichern</button>
+                        <button class="form-control" onclick="saveAccount();" role="button"
+                                aria-describedby="addon-wrapping">Speichern
+                        </button>
                     </div>
 
                 </div>

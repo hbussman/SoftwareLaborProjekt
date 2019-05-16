@@ -72,7 +72,8 @@
                             ${util.truncateLongText(attraction.beschreibung, 350)}
                         </div>
                     </div>
-                    <span class="d-block p-1 bg-light border-top text-dark text-center"><b>Gesponsort von ${attractionSponsors.get(attraction.name)}</b></span>
+                    <a href="${context}/sponsor?name=${attractionSponsors.get(attraction.name)}"><span class="d-block p-1 bg-light border-top text-center"><b>Gesponsort von ${attractionSponsors.get(attraction.name)}</b></span>
+                    </a>
                 </div>
             </a>
         </c:if>

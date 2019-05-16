@@ -64,7 +64,7 @@
         <c:forEach items="${sponsorlist}" var="sponsor">
         <div class="col d-flex align-items-stretch col-lg-3 col-md-3 col-sm-4 col-6 py-md-4 px-md-4 py-sm-3  px-sm-3 py-2  px-2">
             
-                <div class="card bg-light shadow-sm rounded">
+                <div class="card bg-light shadow rounded">
                 <a id="${sponsor.name}-image" href="${context}/sponsor?name=${sponsor.name}">
                     <img src="${imagesBase}/${sponsor.name}_scaled.png" class="card-img-top"
                          alt="${sponsor.name}-Logo">
@@ -75,12 +75,12 @@
                      
         </div>
         </c:forEach>
-         </div>
+     </div>
+         <div class="col col-12 justify-content-center py-md-4 px-md-4 py-sm-3  px-sm-3 py-2  px-2">
+        	<div class="border-top"></div>
+    	 </div>
         </c:forEach>
     
-    <div class="col col-12 justify-content-center py-md-4 px-md-4 py-sm-3  px-sm-3 py-2  px-2">
-        <div class="border-top"></div>
-    </div>
 </div>
 
 

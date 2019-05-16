@@ -164,8 +164,9 @@ public class ServerPageController {
 
 
     @RequestMapping(value="/webinterface/home/image_upload", method = RequestMethod.POST, consumes = {"multipart/form-data"})
-    public ResponseEntity importQuestion(@Valid @RequestParam("uploadedFileName") MultipartFile multipart, @RequestParam String sponsor) {
+    public ResponseEntity importQuestion(@Valid @RequestParam("uploadedFileName") MultipartFile multipart, @AuthenticationPrincipal AccountEntity user) {
 
+        String sponsor = user.getSponsorName();
         System.out.println("IMAGE IMAGE IMAGE");
         System.out.println("sponsor: " + sponsor);
         System.out.println(SPONSOR_LOGO_PATH);

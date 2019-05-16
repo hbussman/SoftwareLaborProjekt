@@ -58,8 +58,6 @@
             // save the data
             db_send_new_veranstaltung(username, name, ort, start_date, start_time, ende_date, ende_time, beschreibung).then(result => {
                 if (result.ok) {
-                    // success
-                    resultElem.style = "color: darkgreen;";
                     resultElem.innerText = "Veranstaltung erfolgreich erstellt!";
 
                     result.json().then(event => {
@@ -69,7 +67,9 @@
                             "Zeitraum: " + event.start + " - " + event.ende + "<br>" +
                             (result.headers.has("Location") ?
                                 '<a href="${context}' + result.headers.get("Location") + '" target="_blank">Zur Veranstaltungsseite gehen</a>'
-                                : "");
+                                : "");               // success
+                    resultElem.style = "color: darkgreen;";
+
                     });
 
                     // clear out input fields
@@ -162,30 +162,30 @@
     </style>
 </head>
 <body onload="Init()">
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark justify-content-center">
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark justify-content-center">
     <div class="pr-2">
-        <a class="btn btn-primary btn-secondary" href="${context}/webinterface/home?sponsor=${sponsor.name}"
+        <a class="btn btn-light" href="${context}/webinterface/home?sponsor=${sponsor.name}"
            role="button">Sponsorenseite
         </a>
     </div>
     <div class="pr-2">
-    <a class="btn btn-primary btn-secondary" href="${context}/webinterface/account"
+    <a class="btn btn-light" href="${context}/webinterface/account?sponsor=${sponsor.name}"
        role="button">Account
     </a>
 </div>
     <ul class="nav navbar-nav ml-auto">
     <p class="navbar-text navbar-center text-white"style="font-size: x-large">Veranstaltungen verwalten</p>
     <div class="pr-2">
-        <a class="btn btn-primary btn-secondary disabled" href="${context}/webinterface/events?sponsor=${sponsor.name}"
+        <a class="btn btn-light disabled" href="${context}/webinterface/events?sponsor=${sponsor.name}"
            role="button" aria-disabled="true">Veranstaltungen
         </a>
     </div>
 </ul>
-    <a class="btn btn-primary btn-danger" href="${context}/webinterface/login" role="button"><i
+    <a class="btn btn-danger" href="${context}/webinterface/login" role="button"><i
             class="fa fa-sign-out-alt"></i>
     </a>
 </nav>
-<div class="container">
+<div class="container pt-5">
     <div class="row">
         <div class="col-12">
             <div class="card">

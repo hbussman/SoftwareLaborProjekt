@@ -34,19 +34,26 @@
             top: 0;
             text-align: center;
         }
+        .bg-image {
+            background-image: url(https://i.imgur.com/zh6A23R.jpg);
+            height: 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
     </style>
 </head>
 
 <body>
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
     <p class="navbar-text navbar-center text-white"style="font-size: x-large">${event.name}</p>
-    <a class="btn btn-primary btn-secondary" href="${context}/sponsoren"><i class="fas fa-home"></i></a>
+    <a class="btn btn-primary btn-light" href="${context}/sponsoren"><i class="fas fa-home"></i></a>
     <ul class="nav navbar-nav ml-auto "></ul>
-    <a class="btn btn-primary btn-secondary" href="${context}/events" role="button"><i class="far fa-calendar"></i>
+    <a class="btn btn-primary btn-light" href="${context}/events" role="button"><i class="far fa-calendar-alt"></i>
     </a>
 </nav>
 
-<div class="container-fluid">
+<div class="container-fluid bg-image">
     <div class="row">
         <div class="col-12">
             <p class="h4 pt-4 pb-0">${event.name}

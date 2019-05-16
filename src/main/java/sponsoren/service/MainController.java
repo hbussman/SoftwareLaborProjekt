@@ -8,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import sponsoren.Util;
 import sponsoren.orm.*;
+import sponsoren.service.external.Attraktionen.Attraktion;
+import sponsoren.service.external.Attraktionen.AttraktionenApi;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -15,10 +17,7 @@ import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 
 @Controller
@@ -30,6 +29,7 @@ public class MainController {
     @Autowired private SponsorVeranstaltungRepository sponsorVeranstaltungRepository;
     @Autowired private LocationRepository locationRepository;
     @Autowired private AccountRepository accountRepository;
+    @Autowired private AttraktionRepository attraktionRepository;
 
     // GET sponsor.Werbetext
     @GetMapping(path="/sponsor/werbetext")
@@ -95,17 +95,11 @@ public class MainController {
         return locationRepository.findAll();
     }
 
-    // GET list of all accounts
-    @GetMapping(path="/account/all")
+    // GET list of all accounts - LOL NO
+    /*@GetMapping(path="/account/all")
     public @ResponseBody Iterable<AccountEntity> getAllAccounts() {
         return accountRepository.findAll();
-    }
-
-    // GET list of sponsor_veranstaltung
-    @GetMapping(path="/sponsor_veranstaltung/all")
-    public @ResponseBody Iterable<SponsorVeranstaltungEntity> getAllVeranst() {
-        return sponsorVeranstaltungRepository.findAll();
-    }
+    }*/
 
     // PATCH account data
     @PatchMapping(path="/account/save", consumes = "application/json")
@@ -139,6 +133,12 @@ public class MainController {
         accountRepository.save(account);
 
         return ResponseEntity.ok("");
+    }
+
+    // GET list of sponsor_veranstaltung
+    @GetMapping(path="/event/all/sponsor_mapping")
+    public @ResponseBody Iterable<SponsorVeranstaltungEntity> getAllVeranst() {
+        return sponsorVeranstaltungRepository.findAll();
     }
 
     // GET list of all events
@@ -289,6 +289,32 @@ public class MainController {
         // otherwise, delete the entire event
         return ResponseEntity.ok().body(null);
     }
+
+    @GetMapping(path="/dbg/update_attraktionen")
+    public void dbgUpdateAttraktionen() {
+        System.out.println("Requesting Attraktionen from service");
+
+        // request attraktionen from their database
+        AttraktionenApi attraktionenApi = new AttraktionenApi();
+        List<Attraktion> attraktionen = attraktionenApi.getAttraktionen();
+
+        // add all attraktionen to our database
+        int ctr = 0;
+        for(Attraktion attraktion : attraktionen) {
+            AttraktionEntity attraktionEntity = new AttraktionEntity();
+            attraktionEntity.setName(attraktion.getName());
+            attraktionEntity.setBeschreibung(attraktion.getDescription());
+            attraktionEntity.setLat(Double.parseDouble(attraktion.getLatitude()));
+            attraktionEntity.setLon(Double.parseDouble(attraktion.getLongitude()));
+
+            attraktionRepository.save(attraktionEntity);
+            ctr++;
+        }
+
+        System.out.println("Saved " + ctr + " Attraktionen to our database.");
+
+    }
+
 
     private Timestamp parseDate(String dateString) throws ParseException {
         DateFormat fmt = new SimpleDateFormat("yyyy-MM-dd HH:mm");

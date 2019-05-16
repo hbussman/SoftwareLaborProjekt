@@ -63,7 +63,7 @@
 <div class="container-fluid bg-image pt-5">
 
     <div class="card pb-5 justify-content-center">
-        <span class="d-block p-1 bg-light text-dark text-center"><b>${event.name}</b></span>
+        <span class="d-block p-1 bg-light text-dark text-center"></span>
         <div class="container">
             <div class="card-text text-dark">
                 ${event.beschreibung}

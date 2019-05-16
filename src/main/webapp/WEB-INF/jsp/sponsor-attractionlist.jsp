@@ -2,6 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%--@elvariable id="util" type="sponsoren.Util"--%>
 <%--@elvariable id="attractions" type="java.util.List<sponsoren.orm.AttraktionEntity>"--%>
+<%--@elvariable id="attractionSponsors" type="java.util.Map<java.lang.String, java.lang.String>"--%>
 <c:set var="context" value="${pageContext.request.contextPath}"/>
 
 <!DOCTYPE html>
@@ -64,7 +65,7 @@
     <c:forEach items="${attractions}" var="attraction">
         <a id="attraction-${attraction.name}" href="https://seserver.se.hs-heilbronn.de:9443/buga19bugascout?attraction=${attraction.name}">
             <div class="card mb-2" style=" width: 312px;">
-                <span class="d-block p-1 bg-light text-dark text-center"><b>${attraction.name}</b></span>
+                <span class="d-block p-1 bg-light text-dark text-center"><b>${attraction.name} von ${attractionSponsors.get(attraction.name)}</b></span>
                 <div class="container">
                     <div class="card-text text-dark" style="font-size: small">
                         ${util.truncateLongText(attraction.beschreibung, 350)}

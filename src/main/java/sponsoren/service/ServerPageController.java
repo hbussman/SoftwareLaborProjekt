@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import sponsoren.orm.*;
 import org.springframework.web.multipart.MultipartFile;
-import sponsoren.service.external.Attraktionen.Attraktion;
 
 import javax.validation.Valid;
 import java.io.BufferedOutputStream;
@@ -31,6 +30,7 @@ public class ServerPageController {
     @Autowired private VeranstaltungRepository veranstaltungRepository;
     @Autowired private LocationRepository locationRepository;
     @Autowired private AttraktionRepository attractionRepository;
+    @Autowired private SponsorAttraktionRepository sponsorAttraktionRepository;
 
     private void publishCommon(Model model) {
         model.addAttribute("imagesBase", "http://seserver.se.hs-heilbronn.de/Studenten/LabSWPPS2019/BuGa19Sponsoren/Bilder");
@@ -162,6 +162,18 @@ public class ServerPageController {
         model.addAttribute("attractions", attractionList);
     }
 
+    private void publishAttractionSponsors(Model model) {
+        // get sponsor-event mapping
+        Iterable<SponsorAttraktionEntity> sponsorAttraktionEntities = sponsorAttraktionRepository.findAll();
+
+        // convert iterable to Map, resolving foreign key association to sponsor
+        Map<String, String> attraktionSponsorMapping = new HashMap<>();
+        for(SponsorAttraktionEntity sponsorVeranstaltungEntity : sponsorAttraktionEntities) {
+            attraktionSponsorMapping.put(sponsorVeranstaltungEntity.getAttraktion(), sponsorVeranstaltungEntity.getSponsorName());
+        }
+        model.addAttribute("attractionSponsors", attraktionSponsorMapping);
+    }
+
 
     @RequestMapping(value="/webinterface/home/image_upload", method = RequestMethod.POST, consumes = {"multipart/form-data"})
     public ResponseEntity importQuestion(@Valid @RequestParam("uploadedFileName") MultipartFile multipart, @AuthenticationPrincipal AccountEntity user) {
@@ -225,6 +237,7 @@ public class ServerPageController {
     @GetMapping("/attractions")
     public String getAttractionlist(Model model) {
         publishAttractions(model);
+        publishAttractionSponsors(model);
         publishUtil(model);
         return "sponsor-attractionlist";
     }

@@ -140,7 +140,7 @@
 <body onload="Init()">
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark justify-content-center">
     <div class="pr-2">
-        <a class="btn btn-light disabled" href="${context}/webinterface/home?sponsor=${sponsor.name}"
+        <a id="Sponsorenseitebutton" class="btn btn-light disabled" href="${context}/webinterface/home?sponsor=${sponsor.name}"
            role="button" aria-disabled="true">Sponsorenseite
         </a>
     </div>

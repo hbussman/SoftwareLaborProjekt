@@ -163,24 +163,24 @@
 <body onload="Init()">
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark justify-content-center">
     <div class="pr-2">
-        <a class="btn btn-light" href="${context}/webinterface/home?sponsor=${sponsor.name}"
+        <a id="Sponsorenseitebutton" class="btn btn-light" href="${context}/webinterface/home?sponsor=${sponsor.name}"
            role="button">Sponsorenseite
         </a>
     </div>
     <div class="pr-2">
-        <a class="btn btn-light" href="${context}/webinterface/account?sponsor=${sponsor.name}"
+        <a id="Accountbutton" class="btn btn-light" href="${context}/webinterface/account?sponsor=${sponsor.name}"
            role="button">Account
         </a>
     </div>
     <ul class="nav navbar-nav ml-auto">
         <p class="navbar-text navbar-center text-white" style="font-size: x-large">Veranstaltungen verwalten</p>
         <div class="pr-2">
-            <a class="btn btn-light disabled" href="${context}/webinterface/events?sponsor=${sponsor.name}"
+            <a id="Veranstaltungsbutton" class="btn btn-light disabled" href="${context}/webinterface/events?sponsor=${sponsor.name}"
                role="button" aria-disabled="true">Veranstaltungen
             </a>
         </div>
     </ul>
-    <a class="btn btn-danger" href="${context}/webinterface/login" role="button"><i
+    <a id="logoutbutton" class="btn btn-danger" href="${context}/webinterface/login" role="button"><i
             class="fa fa-sign-out-alt"></i>
     </a>
 </nav>

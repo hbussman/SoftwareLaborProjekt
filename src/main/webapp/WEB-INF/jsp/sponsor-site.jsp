@@ -42,12 +42,12 @@
             background-position: bottom center;
             background-attachment: fixed;
             background-repeat: no-repeat;
-            background-size: cover;;
+            background-size: cover;
         }
     </style>
 </head>
 
-<body>
+<body class="bg-image">
 <nav class="navbar fixed-top navbar-dark bg-dark" style="min-height: 50px">
     <p class="navbar-text navbar-center text-white" style="font-size: x-large">${sponsor.name}</p></nav>
 <nav class="navbar fixed-bottom navbar-expand-lg navbar-dark bg-dark justify-content-center">
@@ -61,7 +61,7 @@
         </a>
     </div>
 </nav>
-<div class="container bg-image pt-5">
+<div class="container pt-5">
     <div class="row">
         <div class="col-12">
             <div class="shadow p-3 mb-5 bg-white rounded">

@@ -34,21 +34,17 @@
             text-align: center;
         }
 
-        .table-striped > tbody > tr:nth-child(odd) > th {
-            background-color: aquamarine;
-        }
-
         .bg-image {
             background-image: url(https://imgur.com/LkSvZHY.jpg);
             height: 100%;
             background-position: bottom center;
             background-attachment: fixed;
             background-repeat: no-repeat;
-            background-size: cover;;
+            background-size: cover;
         }
     </style>
 </head>
-<body>
+<body class="bg-image">
 <nav class="navbar fixed-top navbar-dark bg-dark" style="min-height: 50px">
     <p class="navbar-text navbar-center text-white" style="font-size: x-large">Veranstaltungen</p>
 </nav>
@@ -64,7 +60,7 @@
     </div>
 </nav>
 <div class="pt-5"></div>
-<div class="container bg-image">
+<div class="container">
 <div class="row justify-content-center pb-5 mx-1">
     <c:forEach items="${events}" var="event">
         <a id="${event.id}card" href="${context}/event?id=${event.id}">

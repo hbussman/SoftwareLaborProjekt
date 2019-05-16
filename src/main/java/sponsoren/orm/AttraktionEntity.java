@@ -7,26 +7,45 @@ import java.util.Objects;
 @Table(name = "sponsor_attraktion", schema = "buga19sponsoren", catalog = "")
 public class AttraktionEntity {
     private String name;
-    // TODO add all the shitz;
+    private String beschreibung;
+    private double lat;
+    private double lon;
 
     @Id
-    @Column(name = "SponsorName")
-    public String getSponsorName() {
-        return sponsorName;
+    @Column(name = "Name")
+    public String getName() {
+        return name;
     }
 
-    public void setSponsorName(String sponsorName) {
-        this.sponsorName = sponsorName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    @Id
-    @Column(name = "AttraktionID")
-    public int getAttraktionId() {
-        return attraktionId;
+    @Column(name = "Beschreibung")
+    public String getBeschreibung() {
+        return beschreibung;
     }
 
-    public void setAttraktionId(int attraktionId) {
-        this.attraktionId = attraktionId;
+    public void setBeschreibung(String beschreibung) {
+        this.beschreibung = beschreibung;
+    }
+
+    @Column(name = "Lat")
+    public double getLat() {
+        return lat;
+    }
+
+    public void setLat(double lat) {
+        this.lat = lat;
+    }
+
+    @Column(name = "Lon")
+    public double getLon() {
+        return lon;
+    }
+
+    public void setLon(double lon) {
+        this.lon = lon;
     }
 
     @Override
@@ -34,12 +53,11 @@ public class AttraktionEntity {
         if(this == o) return true;
         if(o == null || getClass() != o.getClass()) return false;
         AttraktionEntity that = (AttraktionEntity)o;
-        return attraktionId == that.attraktionId &&
-                Objects.equals(sponsorName, that.sponsorName);
+        return Objects.equals(name, that.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(sponsorName, attraktionId);
+        return Objects.hash(name);
     }
 }

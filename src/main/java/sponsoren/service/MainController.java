@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import sponsoren.Util;
 import sponsoren.orm.*;
+import sponsoren.service.external.Attraktion;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -15,10 +16,7 @@ import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 
 @Controller
@@ -30,6 +28,7 @@ public class MainController {
     @Autowired private SponsorVeranstaltungRepository sponsorVeranstaltungRepository;
     @Autowired private LocationRepository locationRepository;
     @Autowired private AccountRepository accountRepository;
+    @Autowired private AttraktionRepository attraktionRepository;
 
     // GET sponsor.Werbetext
     @GetMapping(path="/sponsor/werbetext")
@@ -289,6 +288,32 @@ public class MainController {
         // otherwise, delete the entire event
         return ResponseEntity.ok().body(null);
     }
+
+    @GetMapping(path="/dbg/update_attraktionen")
+    public void dbgUpdateAttraktionen() {
+        System.out.println("Requesting Attraktionen from service");
+
+        // request attraktionen from their database
+        AttraktionApi attraktionApi = new AttraktionApi();
+        List<Attraktion> attraktionen = attraktionApi.getAttraktionen();
+
+        // add all attraktionen to our database
+        int ctr = 0;
+        for(Attraktion attraktion : attraktionen) {
+            AttraktionEntity attraktionEntity = new AttraktionEntity();
+            attraktionEntity.setName(attraktion.getName());
+            attraktionEntity.setBeschreibung(attraktion.getDescription());
+            attraktionEntity.setLat(Double.parseDouble(attraktion.getLatitude()));
+            attraktionEntity.setLon(Double.parseDouble(attraktion.getLongitude()));
+
+            attraktionRepository.save(attraktionEntity);
+            ctr++;
+        }
+
+        System.out.println("Saved " + ctr + " Attraktionen to our database.");
+
+    }
+
 
     private Timestamp parseDate(String dateString) throws ParseException {
         DateFormat fmt = new SimpleDateFormat("yyyy-MM-dd HH:mm");

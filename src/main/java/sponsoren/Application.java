@@ -4,6 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import sponsoren.service.AttraktionApi;
 
 @SpringBootApplication
 public class Application extends SpringBootServletInitializer {
@@ -15,5 +16,9 @@ public class Application extends SpringBootServletInitializer {
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
+
+        AttraktionApi attraktionApi = new AttraktionApi();
+        System.out.println(attraktionApi.getAttraktionen().get(2));
+
     }
 }

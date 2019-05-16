@@ -37,8 +37,7 @@
             background-position: bottom center;
             background-attachment: fixed;
             background-repeat: no-repeat;
-            background-size: cover;;
-            image-rendering: high-quality;
+            background-size: cover;
         }
     </style>
 </head>

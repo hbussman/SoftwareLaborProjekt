@@ -36,7 +36,7 @@
 
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
     <p class="navbar-text navbar-center text-white">Sponsoren</p>
     <a class="btn btn-primary btn-secondary" href="${context}/sponsoren"><i class="fas fa-home"></i></a>
     <ul class="nav navbar-nav ml-auto "></ul>
@@ -44,8 +44,7 @@
     </a>
 </nav>
 
-<div class="container-fluid pt-1">
-   
+<div class="container-fluid pt-5">
 
         <%--@elvariable id="sponsorsSorted" type="java.util.List"--%>
         <c:forEach items="${sponsorsSorted}" var="sponsorlist">

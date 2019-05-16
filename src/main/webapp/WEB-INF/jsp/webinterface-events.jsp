@@ -180,7 +180,7 @@
             </a>
         </div>
     </ul>
-    <a id="logoutbutton" class="btn btn-danger" href="${context}/webinterface/login" role="button"><i
+    <a id="logoutbutton" class="btn btn-danger" href= "${context}/logout" role="button"><i
             class="fa fa-sign-out-alt"></i>
     </a>
 </nav>

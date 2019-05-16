@@ -4,6 +4,7 @@
 <%--@elvariable id="sponsor" type="sponsoren.orm.SponsorEntity"--%>
 <%--@elvariable id="sponsorEvents" type="java.util.List<sponsoren.orm.VeranstaltungEntity>"--%>
 <%--@elvariable id="locations" type="java.util.Map<Integer, sponsoren.orm.LocationEntity>"--%>
+<%--@elvariable id="imagesBase" type="java.lang.String"--%>
 <c:set var="context" value="${pageContext.request.contextPath}"/>
 
 <!DOCTYPE html>
@@ -87,10 +88,11 @@
                         <p class="card-text">${sponsor.ansprechpartnerNachname}
                         <c:if test="${sponsor.ansprechpartnerVorname.length() > 0 && sponsor.ansprechpartnerNachname.length() > 0}">, </c:if>
                         ${sponsor.ansprechpartnerVorname}</p>
-                        <p class="card-text">${sponsor.email} </p>
-                        <p class="card-text">${sponsor.telefonnummer}</p>
-                        <p class="card-text">${sponsor.adresse}
-                        <c:if test="${sponsor.adresse.length() > 0 && ( sponsor.plz.length() > 0 || sponsor.ort.length() > 0) }">, </c:if> ${sponsor.plz} ${sponsor.ort}</p>
+                        <p class="card-text"><a href="mailto:${sponsor.email}">${sponsor.email}</a></p>
+                        <p class="card-text"><a href="tel:${sponsor.telefonnummer}">${sponsor.telefonnummer}</a></p>
+                        <p class="card-text"><a href="https://www.google.com/maps/place/${sponsor.adresse} ${sponsor.plz.length() > 0 || sponsor.ort.length() > 0 ? "," : ""} ${sponsor.plz} ${sponsor.ort}" target="_blank">${sponsor.adresse}
+                            <c:if test="${sponsor.adresse.length() > 0 && ( sponsor.plz.length() > 0 || sponsor.ort.length() > 0) }">, </c:if> ${sponsor.plz} ${sponsor.ort}
+                        </a></p>
                     </div>
                     <div class="row">
                         <div class="col-12">

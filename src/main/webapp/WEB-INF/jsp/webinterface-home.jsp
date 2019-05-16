@@ -84,13 +84,6 @@
 
             var formData = new FormData(document.getElementById("logo-form"));
 
-            formData.append("sponsor", "${sponsor.name}");
-
-
-            for (var pair of formData.entries()) {
-                alert(pair[0] + ': ' + pair[1]);
-            }
-
             fetch("${context}/webinterface/home/image_upload", {
 
                 body: formData,

@@ -3,11 +3,11 @@ package sponsoren.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import sponsoren.Util;
 import sponsoren.orm.*;
+import sponsoren.security.SponsorenPasswordEncoder;
 import sponsoren.service.external.Attraktionen.Attraktion;
 import sponsoren.service.external.ExternalServices;
 import sponsoren.service.external.Lageplan.Poi;
@@ -130,7 +130,7 @@ public class MainController {
 
         account.setUsername(username);
         if(!password.isEmpty())
-            account.setPassword(new BCryptPasswordEncoder().encode(password));
+            account.setPassword(new SponsorenPasswordEncoder().encode(password));
         accountRepository.save(account);
 
         return ResponseEntity.ok("");

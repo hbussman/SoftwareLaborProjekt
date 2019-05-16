@@ -21,8 +21,7 @@
     <title>Webinterface-Account</title>
 
     <style>
-        .navbar-center
-        {
+        .navbar-center {
             position: absolute;
             overflow: visible;
             height: 0;
@@ -46,8 +45,8 @@
         </a>
     </div>
     <ul class="nav navbar-nav ml-auto">
-    <p class="navbar-text navbar-center text-white">Ihr Account</p>
-</ul>
+        <p class="navbar-text navbar-center text-white">Ihr Account</p>
+    </ul>
     <div class="pr-2">
         <a class="btn btn-primary btn-secondary" href="${context}/webinterface/events?sponsor=${sponsor.name}"
            role="button">Veranstaltungen
@@ -83,7 +82,8 @@
                                     <i class="fa fa-unlock-alt"></i>
                                 </span>
                         </div>
-                        <input id="passwort" type="password" class="form-control" placeholder="Neues Passwort" aria-label="Username"
+                        <input id="passwort" type="password" class="form-control" placeholder="Neues Passwort"
+                               aria-label="Username"
                                aria-describedby="addon-wrapping">
                     </div>
                     <div class="container mt-2"></div>
@@ -93,14 +93,16 @@
                                     <i class="fa fa-unlock-alt"></i>
                                 </span>
                         </div>
-                        <input id="passwort-repeat" type="password" class="form-control" placeholder="Passwort wiederholen" aria-label="Username"
+                        <input id="passwort-repeat" type="password" class="form-control"
+                               placeholder="Passwort wiederholen" aria-label="Username"
                                aria-describedby="addon-wrapping">
                     </div>
                 </div>
-                    </div>
-                </div>
-
             </div>
         </div>
+
+    </div>
+</div>
+
 </body>
 </html>

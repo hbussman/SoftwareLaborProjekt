@@ -172,7 +172,7 @@
     </a>
 </div>
     <ul class="nav navbar-nav ml-auto">
-    <p class="navbar-text navbar-center text-white">Veranstaltungen verwalten</p>
+    <p class="navbar-text navbar-center text-white"style="font-size: x-large">Veranstaltungen verwalten</p>
     <div class="pr-2">
         <a class="btn btn-primary btn-secondary disabled" href="${context}/webinterface/events?sponsor=${sponsor.name}"
            role="button" aria-disabled="true">Veranstaltungen

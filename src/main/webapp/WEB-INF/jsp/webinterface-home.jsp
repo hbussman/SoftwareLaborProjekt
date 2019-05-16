@@ -152,7 +152,7 @@
     </div>
     <ul class="nav navbar-nav ml-auto">
     </ul>
-    <p class="navbar-text navbar-center text-white">${sponsor.name} Sponsorenseite</p>
+    <p class="navbar-text navbar-center text-white"style="font-size: x-large">${sponsor.name} Sponsorenseite</p>
     <div class="pr-2">
         <a class="btn btn-primary btn-secondary" href="${context}/webinterface/events"
            role="button">Veranstaltungen
@@ -193,7 +193,7 @@
 
                 <!-- Werbetext -->
                 <div class="card-body">
-                    <h5 class="card-title">Werbetext</h5>
+                    <h5 class="card-title">Rolle bei der Buga</h5>
                     <textarea id="sponsor_werbetext" class="form-control" rows="5"
                               placeholder="Sponsoren Info-Text" aria-label="Username"
                               aria-describedby="basic-addon1">${sponsor.werbetext}</textarea>

@@ -64,10 +64,11 @@
     </div>
 </nav>
 <div class="pt-5"></div>
-<div class="row justify-content-center bg-image pb-5">
+<div class="container bg-image">
+<div class="row justify-content-center pb-5 mx-1">
     <c:forEach items="${events}" var="event">
         <a id="${event.id}card" href="${context}/event?id=${event.id}">
-            <div class="card mb-2" style="max-height: 200px">
+            <div class="card mb-2 col-12" style="max-height: 200px">
                 <span class="d-block p-1 bg-light text-dark text-center"><b>${event.name}</b></span>
                 <div class="card-body text-dark"><i class="fas fa-thumbtack"></i>
                         ${locations.get(event.locationID).name}
@@ -78,6 +79,7 @@
             </div>
         </a>
     </c:forEach>
+</div>
 </div>
 </body>
 </html>

@@ -57,12 +57,12 @@
     </div>
 </nav>
 
-<div class="container-fluid pt-5 bg-image">
+<div class="container-fluid pt-5 pb-5 bg-image">
     <%--@elvariable id="sponsorsSorted" type="java.util.List"--%>
     <c:forEach items="${sponsorsSorted}" var="sponsorlist">
     <div class="row no-gutters justify-content-center">
         <c:forEach items="${sponsorlist}" var="sponsor">
-        <div class="col d-flex align-items-stretch col-lg-3 col-md-3 col-sm-4 col-6 pt-md-4 pl-md-4 pt-sm-3  pl-sm-3 pt-2  pl-2">
+        <div class="col d-flex align-items-stretch col-lg-3 col-md-3 col-sm-4 col-6 py-md-4 px-md-4 py-sm-3  px-sm-3 py-2  px-2">
             <a id="${sponsor.name}button" href="${context}/sponsor?name=${sponsor.name}">
                 <div class="card bg-light shadow-sm rounded">
                     <img src="${imagesBase}/${sponsor.name}_scaled.png" class="card-img-top"
@@ -74,7 +74,7 @@
         </div>
     </div>
     </c:forEach>
-    <div class="col col-12   pt-md-4 pl-md-4 pt-sm-3  pl-sm-3 pt-2  pl-2">
+    <div class="col col-12 justify-content-center py-md-4 px-md-4 py-sm-3  px-sm-3 py-2  px-2">
         <div class="border-top"></div>
     </div>
 </div>

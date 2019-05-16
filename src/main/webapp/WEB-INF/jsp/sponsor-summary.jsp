@@ -72,10 +72,7 @@
                        <h5>${sponsor.name}</h5> 
                   	</div>
                 </div>
-                </a>
-            
-            
-            
+             </a>        
         </div>
         </c:forEach>
          </div>
@@ -86,9 +83,6 @@
     </div>
 </div>
 
-
-
-</div>
 
 
 <!-- Optional JavaScript -->

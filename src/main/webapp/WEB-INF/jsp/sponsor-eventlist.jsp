@@ -34,17 +34,13 @@
             text-align: center;
         }
 
-        .table-striped > tbody > tr:nth-child(odd) > th {
-            background-color: aquamarine;
-        }
-
         .bg-image {
             background-image: url(https://imgur.com/LkSvZHY.jpg);
             height: 100%;
             background-position: bottom center;
             background-attachment: fixed;
             background-repeat: no-repeat;
-            background-size: cover;;
+            background-size: cover;
         }
     </style>
 </head>

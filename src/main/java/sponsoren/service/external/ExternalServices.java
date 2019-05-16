@@ -25,7 +25,7 @@ public class ExternalServices {
     public List<Poi> getPois () {
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<List<Poi>> rateResponse = restTemplate.exchange(
-                "http://www.se.hs-heilbronn.de:3000/pois",
+                "https://seserver.se.hs-heilbronn.de:3000/pois",
                 HttpMethod.GET, null, new ParameterizedTypeReference<List<Poi>>() {});
         List<Poi> pois = rateResponse.getBody();
         return pois;

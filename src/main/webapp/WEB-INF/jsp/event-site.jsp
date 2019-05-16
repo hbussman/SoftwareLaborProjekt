@@ -78,16 +78,18 @@
             <div class="row no-gutters justify-content-xs-center">
 
                 <c:forEach items="${eventSponsors}" var="sponsor">
-                <a id="${event.id}" href="${context}/sponsor?name=${sponsor.name}">
+                
                     <div class="card shadow p-3 mb-5 bg-white rounded">
+                    <a id="${event.id}" href="${context}/sponsor?name=${sponsor.name}">
                         <img src="${imagesBase}/${sponsor.name}_scaled.png" class="card-img-top"
                              alt="${sponsor.name}-Logo">
+                    </a>
                     </div>
-                </a>
-
+                
+                </c:forEach>
             </div>
         </div>
-        </c:forEach>
+        
 
     </div>
 </div>

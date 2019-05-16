@@ -59,8 +59,8 @@
     </div>
 </nav>
 <div class="pt-5"></div>
-<div class="row justify-content-center bg-image mb-5">
-
+<div class="container bg-image">
+    <div class="row justify-content-center pb-5 mx-1">
     <c:forEach items="${attractions}" var="attraction">
         <a id="attraction-${attraction.name}" href="https://seserver.se.hs-heilbronn.de:9443/buga19bugascout?attraction=${attraction.name}">
             <div class="card mb-2" style=" width: 312px;">

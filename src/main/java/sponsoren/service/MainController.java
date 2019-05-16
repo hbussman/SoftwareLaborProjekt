@@ -3,6 +3,7 @@ package sponsoren.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import sponsoren.Util;
@@ -106,6 +107,46 @@ public class MainController {
         return sponsorVeranstaltungRepository.findAll();
     }
 
+    // PATCH account data
+    @PatchMapping(path="/account/save", consumes = "application/json")
+    public @ResponseBody ResponseEntity saveAccount(@AuthenticationPrincipal AccountEntity user, @RequestBody Map<String, String> data) {
+        String sponsor = user.getSponsorName();
+        String username = data.get("username");
+        String password = data.get("password");
+
+        if(username.isEmpty()) {
+            return ResponseEntity.unprocessableEntity().body("Der Login-Username kann nicht leer sein!");
+        }
+
+        Iterable<AccountEntity> all = accountRepository.findAll();
+        AccountEntity account = null;
+        for(AccountEntity accountEntity : all) {
+            if(accountEntity.getSponsorName().equals(sponsor)) {
+                account = accountEntity;
+                break;
+            }
+        }
+
+        if(account == null) {
+            return ResponseEntity.unprocessableEntity().body("Fehlerhafter Sponsor-Name " + sponsor);
+        }
+
+        accountRepository.delete(account);
+
+        account.setUsername(username);
+        if(!password.isEmpty())
+            account.setPassword(new BCryptPasswordEncoder().encode(password));
+        accountRepository.save(account);
+
+        return ResponseEntity.ok("");
+    }
+
+    // GET list of all events
+    @GetMapping(path="/event/all")
+    public @ResponseBody Iterable<VeranstaltungEntity> getAllEvents() {
+        return veranstaltungRepository.findAll();
+    }
+
     // POST create new event
     @PostMapping(path = "/event/new", consumes = "application/json", produces = "application/json")
     public ResponseEntity createNewVeranstaltung(@AuthenticationPrincipal AccountEntity user, @RequestBody Map<String, String> event) {
@@ -169,6 +210,7 @@ public class MainController {
             return ResponseEntity.accepted().body(body);
         }
     }
+
 
     @PatchMapping(path="/event/edit", consumes="application/json")
     public ResponseEntity editVeranstaltung(@RequestBody Map<String, String> event) {

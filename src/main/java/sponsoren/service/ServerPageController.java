@@ -230,8 +230,9 @@ public class ServerPageController {
     }
 
     @GetMapping("/webinterface/account")
-    public String getWebinterfaceAccount(Model model,@RequestParam String sponsor) {
-        publishSponsor(model, sponsor);
+    public String getWebinterfaceAccount(Model model, @AuthenticationPrincipal AccountEntity user) {
+        publishSponsor(model, user.getSponsorName());
+        model.addAttribute("currentUsername", user.getUsername());
         return "webinterface-account";
     }
 

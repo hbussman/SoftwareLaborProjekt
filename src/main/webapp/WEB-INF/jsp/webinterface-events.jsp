@@ -115,6 +115,7 @@
                     // success
                     resultElem.style = "color: darkgreen;";
                     resultElem.innerText = "Änderungen gespeichert!";
+                    document.getElementById("veranstaltung"+eventId+"-name").innerText = name;
                 } else {
                     // error occurred
                     result.text().then(value => {
@@ -145,6 +146,7 @@
                 // button.parentNode.removeChild(button);
             });
         }
+        
     </script>
     <style>
         .navbar-center
@@ -366,7 +368,7 @@
                                     }
                                 </script>
                                 <button id="button-save-veranstaltung-${event.id}" class="btn btn-primary btn-success"
-                                        onclick="saveVeranstaltung(${event.id});" role="button">Änderungen speichern
+                                        onclick="saveVeranstaltung(${event.id})" role="button">Änderungen speichern
                                 </button>
                                 <button id="button-delete-veranstaltung-${event.id}" class="btn btn-primary btn-danger"
                                         onclick="onClickDelete${event.id}();" role="button">Löschen

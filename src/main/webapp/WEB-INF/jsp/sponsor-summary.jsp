@@ -38,6 +38,7 @@
             background-attachment: fixed;
             background-repeat: no-repeat;
             background-size: cover;;
+            image-rendering: high-quality;
         }
     </style>
 </head>

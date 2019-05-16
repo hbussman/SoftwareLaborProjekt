@@ -51,9 +51,9 @@
     <p class="navbar-text navbar-center text-white"style="font-size: x-large">${sponsor.name}</p></nav>
 <nav class="navbar fixed-bottom navbar-expand-lg navbar-dark bg-dark justify-content-center">
     <div class="btn-group" role="group" aria-label="Basic example" style="min-width: 100%">
-        <a class="btn btn-primary btn-light" href="${context}/events" role="button"><i class="fas fa-landmark"></i></a>
-        <a class="btn btn-primary btn-light" aria-disabled="false" href="${context}/sponsoren" style= "background: aquamarine"><i class="fas fa-home"></i></a>
-        <a class="btn btn-primary btn-light" href="${context}/events" role="button"><i class="far fa-calendar-alt"></i>
+        <a id="Attractionbutton" class="btn btn-primary btn-light" href="${context}/attractions" role="button"><i class="fas fa-landmark"></i></a>
+        <a id="Homebutton" class="btn btn-primary btn-light" aria-disabled="false" href="${context}/sponsoren" style= "background: aquamarine"><i class="fas fa-home"></i></a>
+        <a id="Eventbutton" class="btn btn-primary btn-light" href="${context}/events" role="button"><i class="far fa-calendar-alt"></i>
         </a>
     </div>
 </nav>
@@ -69,7 +69,7 @@
                     <span class="d-block p-1 bg-light text-dark text-center"><b>Zum Sponsor</b></span>
                     <br>
                     <p class="card-text">${sponsor.beschreibung}</p>
-                    <a href="${sponsor.homepage}" class="text-decoration-none"><b>Website</b></a>
+                    <a id="Sponsorwebsite" href="${sponsor.homepage}" class="text-decoration-none"><b>Website</b></a>
                 </div>
                 <div class="card-body">
                     <span class="d-block p-1 bg-light text-dark text-center"><b>Rolle bei der BuGa</b></span>
@@ -94,7 +94,7 @@
                     <c:forEach items="${sponsorEvents}" var="event">
                         <div class="col-12 col-md-6">
                             <div class="card-body">
-                                <h5 class="card-title"><a href="${context}/event?id=${event.id}" class="text-decoration-none">${event.name}</a></h5>
+                                <h5 class="card-title"><a id="${event.id}button" href="${context}/event?id=${event.id}" class="text-decoration-none">${event.name}</a></h5>
                                 <p class="card-text">
                                     <c:if test="${event.beschreibung.length() > 0}">${event.beschreibung}</c:if>
                                     <c:if test="${event.beschreibung == null || event.beschreibung.length() == 0}"><i>(keine Beschreibung vorhanden)</i></c:if>

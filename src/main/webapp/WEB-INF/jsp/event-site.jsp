@@ -50,9 +50,9 @@
 </nav>
 <nav class="navbar fixed-bottom navbar-expand-lg navbar-dark bg-dark justify-content-center">
     <div class="btn-group" role="group" aria-label="Basic example" style="min-width: 100%">
-        <a class="btn btn-primary btn-light " aria-disabled="false" href="${context}/attractions" role="button"><i class="fas fa-landmark"></i></a>
-        <a class="btn btn-primary btn-light" aria-disabled="false" href="${context}/sponsoren" style= "background: aquamarine"><i class="fas fa-home"></i></a>
-        <a class="btn btn-primary btn-light " href="${context}/events" role="button" aria-disabled="false"><i class="far fa-calendar-alt"></i>
+        <a id="Attractionbutton" class="btn btn-primary btn-light " aria-disabled="false" href="${context}/attractions" role="button"><i class="fas fa-landmark"></i></a>
+        <a id="Homebutton" class="btn btn-primary btn-light" aria-disabled="false" href="${context}/sponsoren" style= "background: aquamarine"><i class="fas fa-home"></i></a>
+        <a id="Eventbutton" class="btn btn-primary btn-light " href="${context}/events" role="button" aria-disabled="false"><i class="far fa-calendar-alt"></i>
         </a>
     </div>
 </nav>
@@ -73,7 +73,7 @@
                         <div class="row no-gutters justify-content-xs-center">
 
                             <c:forEach items="${eventSponsors}" var="sponsor">
-                                <a href="${context}/sponsor?name=${sponsor.name}">
+                                <a id="${event.id}" href="${context}/sponsor?name=${sponsor.name}">
                                 <div class="card shadow p-3 mb-5 bg-white rounded">
                                         <img src="${imagesBase}/${sponsor.name}_scaled.png" class="card-img-top" alt="${sponsor.name}-Logo">
                                 </div>

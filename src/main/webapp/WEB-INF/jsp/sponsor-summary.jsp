@@ -62,7 +62,7 @@
          <div class="row no-gutters justify-content-center">
          <c:forEach items="${sponsorlist}" var="sponsor">
             <div class="col d-flex align-items-stretch col-lg-3 col-md-3 col-sm-4 col-6 pt-md-4 pl-md-4 pt-sm-3  pl-sm-3 pt-2  pl-2">
-                <a href="${context}/sponsor?name=${sponsor.name}">
+                <a id="${sponsor.name}button" href="${context}/sponsor?name=${sponsor.name}">
                     <div class="card bg-light shadow-sm rounded">
                         <img src="${imagesBase}/${sponsor.name}_scaled.png" class="card-img-top"
                                                                                alt="${sponsor.name}-Logo"></a>

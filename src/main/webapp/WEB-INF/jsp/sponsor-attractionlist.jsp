@@ -50,9 +50,9 @@
 </nav>
 <nav class="navbar fixed-bottom navbar-expand-lg navbar-dark bg-dark justify-content-center">
     <div class="btn-group" role="group" aria-label="Basic example" style="min-width: 100%">
-        <a class="btn btn-primary btn-light disabled" aria-disabled="true" href="${context}/attracions" role="button"><i class="fas fa-landmark"></i></a>
-        <a class="btn btn-primary btn-light" aria-disabled="false" href="${context}/sponsoren" style= "background: aquamarine"><i class="fas fa-home"></i></a>
-        <a class="btn btn-primary btn-light " href="${context}/events" role="button" aria-disabled="false"><i class="far fa-calendar-alt"></i>
+        <a id="Attractionbutton" class="btn btn-primary btn-light disabled" aria-disabled="true" href="${context}/attracions" role="button"><i class="fas fa-landmark"></i></a>
+        <a id="Homebutton" class="btn btn-primary btn-light" aria-disabled="false" href="${context}/sponsoren" style= "background: aquamarine"><i class="fas fa-home"></i></a>
+        <a id="Eventbutton" class="btn btn-primary btn-light " href="${context}/events" role="button" aria-disabled="false"><i class="far fa-calendar-alt"></i>
         </a>
     </div>
 </nav>
@@ -61,7 +61,7 @@
 
 
 
-    <a href="ATTRAKIONSSEITE">
+    <a id="HIER ID ADDEN" href="ATTRAKIONSSEITE">
         <div class="card mb-2" style=" width: 312px;">
             <span class="d-block p-1 bg-light text-dark text-center"><b>PLACEHOLDER</b></span>
             <div class="container">

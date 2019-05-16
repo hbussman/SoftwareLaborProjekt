@@ -53,16 +53,16 @@
 </nav>
 <nav class="navbar fixed-bottom navbar-expand-lg navbar-dark bg-dark justify-content-center">
     <div class="btn-group" role="group" aria-label="Basic example" style="min-width: 100%">
-        <a class="btn btn-primary btn-light" href="${context}/attractions" role="button"><i class="fas fa-landmark"></i></a>
-        <a class="btn btn-primary btn-light" aria-disabled="false" href="${context}/sponsoren" style= "background: aquamarine"><i class="fas fa-home"></i></a>
-        <a class="btn btn-primary btn-light disabled" href="${context}/events" role="button" aria-disabled="true"><i class="far fa-calendar-alt"></i>
+        <a id="Attractionbutton" class="btn btn-primary btn-light" href="${context}/attractions" role="button"><i class="fas fa-landmark"></i></a>
+        <a id="Homebutton" class="btn btn-primary btn-light" aria-disabled="false" href="${context}/sponsoren" style= "background: aquamarine"><i class="fas fa-home"></i></a>
+        <a id="Eventbutton" class="btn btn-primary btn-light disabled" href="${context}/events" role="button" aria-disabled="true"><i class="far fa-calendar-alt"></i>
         </a>
     </div>
 </nav>
 <div class="pt-5"></div>
 <div class="row justify-content-center bg-image pb-5">
     <c:forEach items="${events}" var="event">
-        <a href="${context}/event?id=${event.id}">
+        <a id="${event.id}card" href="${context}/event?id=${event.id}">
         <div class="card mb-2" style="max-height: 200px">
             <span class="d-block p-1 bg-light text-dark text-center"><b>${event.name}</b></span>
             <div class="card-body text-dark"><i class="fas fa-thumbtack"></i>

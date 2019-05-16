@@ -8,7 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import sponsoren.Util;
 import sponsoren.orm.*;
-import sponsoren.service.external.Attraktion;
+import sponsoren.service.external.Attraktionen.Attraktion;
+import sponsoren.service.external.Attraktionen.AttraktionenApi;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -294,8 +295,8 @@ public class MainController {
         System.out.println("Requesting Attraktionen from service");
 
         // request attraktionen from their database
-        AttraktionApi attraktionApi = new AttraktionApi();
-        List<Attraktion> attraktionen = attraktionApi.getAttraktionen();
+        AttraktionenApi attraktionenApi = new AttraktionenApi();
+        List<Attraktion> attraktionen = attraktionenApi.getAttraktionen();
 
         // add all attraktionen to our database
         int ctr = 0;

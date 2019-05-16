@@ -1,17 +1,16 @@
-package sponsoren.service;
+package sponsoren.service.external.Attraktionen;
 
 import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.data.domain.Page;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.client.RestTemplate;
-import sponsoren.service.external.Attraktion;
+import sponsoren.service.external.Attraktionen.Attraktion;
 
 import java.util.List;
 
 @Repository
-public class AttraktionApi {
+public class AttraktionenApi {
 
     public List<Attraktion> getAttraktionen () {
         RestTemplate restTemplate = new RestTemplate();

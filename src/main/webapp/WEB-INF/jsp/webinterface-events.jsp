@@ -58,8 +58,6 @@
             // save the data
             db_send_new_veranstaltung(username, name, ort, start_date, start_time, ende_date, ende_time, beschreibung).then(result => {
                 if (result.ok) {
-                    // success
-                    resultElem.style = "color: darkgreen;";
                     resultElem.innerText = "Veranstaltung erfolgreich erstellt!";
 
                     result.json().then(event => {
@@ -69,7 +67,9 @@
                             "Zeitraum: " + event.start + " - " + event.ende + "<br>" +
                             (result.headers.has("Location") ?
                                 '<a href="${context}' + result.headers.get("Location") + '" target="_blank">Zur Veranstaltungsseite gehen</a>'
-                                : "");
+                                : "");               // success
+                    resultElem.style = "color: darkgreen;";
+
                     });
 
                     // clear out input fields

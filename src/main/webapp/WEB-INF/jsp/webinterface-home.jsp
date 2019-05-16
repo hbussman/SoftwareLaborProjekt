@@ -141,12 +141,12 @@
 <body onload="Init()">
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark justify-content-center">
     <div class="pr-2">
-        <a class="btn btn-primary btn-secondary disabled" href="${context}/webinterface/home?sponsor=${sponsor.name}"
+        <a class="btn btn-light disabled" href="${context}/webinterface/home?sponsor=${sponsor.name}"
            role="button" aria-disabled="true">Sponsorenseite
         </a>
     </div>
     <div class="pr-2">
-        <a class="btn btn-primary btn-secondary" href="${context}/webinterface/account?sponsor=${sponsor.name}"
+        <a class="btn btn-light" href="${context}/webinterface/account?sponsor=${sponsor.name}"
            role="button">Account
         </a>
     </div>
@@ -154,11 +154,11 @@
     </ul>
     <p class="navbar-text navbar-center text-white"style="font-size: x-large">${sponsor.name} Sponsorenseite</p>
     <div class="pr-2">
-        <a class="btn btn-primary btn-secondary" href="${context}/webinterface/events"
+        <a class="btn btn-light" href="${context}/webinterface/events"
            role="button">Veranstaltungen
         </a>
     </div>
-    <a class="btn btn-primary btn-danger" href="${context}/webinterface/login" role="button"><i
+    <a class="btn btn-light" href="${context}/webinterface/login" role="button"><i
             class="fa fa-sign-out-alt"></i>
     </a>
 </nav>

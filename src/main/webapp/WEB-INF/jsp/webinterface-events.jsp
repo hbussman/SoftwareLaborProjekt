@@ -203,7 +203,7 @@
                                             type="button" data-toggle="dropdown" aria-haspopup="true"
                                             aria-expanded="false">[Veranstaltungsort]
                                     </button>
-                                    <div class="dropdown-menu">
+                                    <div class="dropdown-menu" style="height: 400px; overflow: auto;">
                                         <c:forEach items="${locationList}" var="location">
                                             <button class="dropdown-item"
                                                     onclick="document.getElementById('veranstaltung-ort').innerText='${location.name}'">${location.name}</button>

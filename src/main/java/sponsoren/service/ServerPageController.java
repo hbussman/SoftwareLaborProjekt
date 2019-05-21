@@ -209,8 +209,15 @@ public class ServerPageController {
 
     @GetMapping("/sponsor")
     public String getSponsorSite(Model model, @RequestParam String name) {
-        publishCommon(model);
         publishSponsor(model, name);
+
+        // Aufrufe zaehlen der Besucher
+        Optional<SponsorEntity> sponsor = sponsorRepository.findById(name);
+        int aktuell = sponsor.get().getAufrufe();
+        sponsor.get().setAufrufe(aktuell+1);
+        sponsorRepository.save(sponsor.get());
+
+        publishCommon(model);
         publishUtil(model);
         publishSponsorEvents(model, name);
         publishLocations(model);

@@ -262,13 +262,26 @@
                     </div>
                 </div>
 
+                <br>
+
+                <div class="row">
+                    <div class="col" align="center"> <br> <p style="font-size: xx-large" id="ResultStatus"></p>
+                    </div>
+                </div>
+
+                <br>
+
 
                 <button id="submit" class="btn btn-primary btn-block" onclick="Save()" role="button">Änderungen
                     speichern
                 </button>
-                <br>
-                <p id="ResultStatus"></p>
-                <br>
+
+
+
+                <div class="card-body">
+                    <h5 id="aufruf" class="card-title">Aufrufstatistik</h5>
+                    Ihre Sponsorseite wurde seit Ihrer letzten Änderung ${sponsor.aufrufe}x aufgerufen!
+                </div>
             </div>
         </div>
     </div>

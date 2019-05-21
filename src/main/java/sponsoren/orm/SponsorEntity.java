@@ -19,6 +19,7 @@ public class SponsorEntity implements Comparable<SponsorEntity> {
     private String ort;
     private String postfach;
     private byte spendenklasse;
+    private int aufrufe;
 
     @Id
     @Column(name = "Name")
@@ -149,6 +150,16 @@ public class SponsorEntity implements Comparable<SponsorEntity> {
 	public void setSpendenklasse(byte spendenklasse) {
 		this.spendenklasse = spendenklasse;
 	}
+
+    @Basic
+    @Column(name = "Aufrufe")
+    public int getAufrufe() {
+        return aufrufe;
+    }
+
+    public void setAufrufe(int aufrufe) {
+        this.aufrufe = aufrufe;
+    }
 	
     @Override
     public boolean equals(Object o) {
@@ -162,7 +173,13 @@ public class SponsorEntity implements Comparable<SponsorEntity> {
                 Objects.equals(ansprechpartnerNachname, that.ansprechpartnerNachname) &&
                 Objects.equals(ansprechpartnerVorname, that.ansprechpartnerVorname) &&
                 Objects.equals(email, that.email) &&
-                Objects.equals(telefonnummer, that.telefonnummer);
+                Objects.equals(telefonnummer, that.telefonnummer) &&
+                Objects.equals(homepage, that.homepage) &&
+                Objects.equals(plz, that.plz) &&
+                Objects.equals(ort, that.ort) &&
+                Objects.equals(postfach, that.postfach) &&
+                Objects.equals(spendenklasse, that.spendenklasse) &&
+                Objects.equals(aufrufe, that.aufrufe);
     }
 
     @Override

@@ -64,7 +64,7 @@
     <div class="row justify-content-center pb-5 mx-1">
     <c:forEach items="${attractions}" var="attraction">
         <c:if test="${attractionSponsors.containsKey(attraction.name)}">
-            <a id="attraction-${attraction.name}" href="https://seserver.se.hs-heilbronn.de:9443/buga19bugascout?attraction=${attraction.name}">
+            <a id="attraction-${attraction.name}" href="https://seserver.se.hs-heilbronn.de:9443/buga19bugascout/#/details/${attraction.id}" target="_blank">
                 <div class="card mb-2" style=" width: 312px;">
                     <span class="d-block p-1 bg-light border-bottom text-dark text-center"><b>${attraction.name}</b></span>
                     <div class="container">

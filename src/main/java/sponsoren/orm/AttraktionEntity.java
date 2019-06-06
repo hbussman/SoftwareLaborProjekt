@@ -10,6 +10,7 @@ public class AttraktionEntity {
     private String beschreibung;
     private double lat;
     private double lon;
+    private int id;
 
     @Id
     @Column(name = "Name", nullable = false, unique = true)
@@ -49,6 +50,16 @@ public class AttraktionEntity {
 
     public void setLon(double lon) {
         this.lon = lon;
+    }
+
+    @Basic
+    @Column(name = "ID")
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Override

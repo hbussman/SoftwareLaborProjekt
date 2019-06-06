@@ -292,7 +292,7 @@ public class MainController {
     }
 
     @GetMapping(path="/dbg/update_attraktionen")
-    public void dbgUpdateAttraktionen() {
+    public ResponseEntity dbgUpdateAttraktionen() {
         System.out.println("Requesting Attraktionen from service");
 
         // request attraktionen from their database
@@ -307,16 +307,18 @@ public class MainController {
             attraktionEntity.setBeschreibung(attraktion.getDescription());
             attraktionEntity.setLat(Double.parseDouble(attraktion.getLatitude()));
             attraktionEntity.setLon(Double.parseDouble(attraktion.getLongitude()));
+            attraktionEntity.setId(Integer.parseInt(attraktion.getId()));
 
             attraktionRepository.save(attraktionEntity);
             ctr++;
         }
 
         System.out.println("Saved " + ctr + " Attraktionen to our database.");
+        return ResponseEntity.ok("success, " + ctr + " updated.");
     }
 
     @GetMapping(path="/dbg/update_pois")
-    public void dbgUpdatePois() {
+    public ResponseEntity dbgUpdatePois() {
         System.out.println("Requesting Pois from service");
 
         // request locations from their database
@@ -336,6 +338,7 @@ public class MainController {
         }
 
         System.out.println("Saved " + ctr + " Locations to our database.");
+        return ResponseEntity.ok("success, " + ctr + " updated.");
     }
 
 

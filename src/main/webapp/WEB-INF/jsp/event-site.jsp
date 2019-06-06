@@ -69,7 +69,17 @@
                 ${event.beschreibung}
             </div>
             <div class="card-body text-dark"><i class="fas fa-thumbtack"></i>
-                ${locations.get(event.locationID).name}
+                <c:choose>
+    			<c:when test="${event.discriminator=='Betriebsfeier'}">
+    				<a target="_blank" href="https://seserver.se.hs-heilbronn.de:3000/api/map/id=${event.locationID}S" class="btn btn-secondary btn-lg active" role="button" 
+    					aria-pressed="true">${locations.get(event.locationID).name}</a> 
+    			</c:when>
+    			<c:otherwise>
+        			${locations.get(event.locationID).name}
+        		<br />
+    			</c:otherwise>
+				</c:choose>
+                
                 <div class="card-text text-dark"><i
                         class="far fa-calendar-alt"></i> ${util.prettifyTimestamp(event.start)}
                     - ${util.prettifyTimestamp(event.ende)}</div>

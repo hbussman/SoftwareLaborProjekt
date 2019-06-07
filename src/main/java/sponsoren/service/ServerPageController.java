@@ -22,6 +22,8 @@ public class ServerPageController {
             ? "D:\\pub\\http\\Studenten\\LabSWPPS2019\\BuGa19Sponsoren\\Bilder"
             : "./data/uploaded_images";
 
+    private Map<String, CachedImage> imagesCache = new HashMap<>();
+
     @Autowired private SponsorRepository sponsorRepository;
     @Autowired private SponsorVeranstaltungRepository sponsorVeranstaltungRepository;
     @Autowired private VeranstaltungRepository veranstaltungRepository;
@@ -312,6 +314,14 @@ public class ServerPageController {
             // Retrieve image from the classpath.
             File f = new File(SPONSOR_LOGO_PATH + "/" + name);
 
+            // look up image in cache
+            CachedImage cached = imagesCache.get(name);
+            if(cached != null && f.lastModified() <= cached.lastModified) {
+                // got the image cached and it's up to date
+                System.out.println("Serving image '" + name + "' from cache");
+                return cached.data;
+            }
+
             // Prepare buffered image.
             BufferedImage img = ImageIO.read(f);
 
@@ -321,7 +331,13 @@ public class ServerPageController {
             // Write to output stream
             ImageIO.write(img, "png", bao);
 
-            return bao.toByteArray();
+            byte[] imageData = bao.toByteArray();
+
+            // cache the image
+            imagesCache.put(name, new CachedImage(f.lastModified(), imageData));
+            System.out.println("Updated image '" + name + "' in cache");
+
+            return imageData;
 
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -340,4 +356,14 @@ public class ServerPageController {
 		return "companyparty-map";
     }
 
+}
+
+class CachedImage {
+    long lastModified;
+    byte[] data;
+
+    public CachedImage(long lastModified, byte[] data) {
+        this.lastModified = lastModified;
+        this.data = data;
+    }
 }

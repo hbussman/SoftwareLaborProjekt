@@ -103,6 +103,7 @@ public class ServerPageController {
     private void publishEvents(Model model) {
         // get all Veranstaltungen
         Iterable<VeranstaltungEntity> eventEntities = veranstaltungRepository.findAll();
+        Iterable<VeranstaltungEntity> companyPartyEntities = veranstaltungRepository.findAll();
 
         // convert iterable to List and filter by Discriminator
         List<VeranstaltungEntity> events = new ArrayList<>();
@@ -110,13 +111,23 @@ public class ServerPageController {
             if(event.getDiscriminator().equals("Veranstaltung")) {
                 events.add(event);
             }
+            
+        });
+        List<VeranstaltungEntity> companyPartys = new ArrayList<>();
+        companyPartyEntities.forEach(event -> {
+        	if(event.getDiscriminator().equals("Betriebsfeier")) {
+                companyPartys.add(event);
+            }
         });
 
         // sort events by start time ascending (earliest event from now first)
         events.sort(Comparator.comparing(VeranstaltungEntity::getStart));
-
+        companyPartys.sort(Comparator.comparing(VeranstaltungEntity::getStart));
+        
+        model.addAttribute("companyPartys", companyPartys);
         model.addAttribute("events", events);
     }
+    
 
     private void publishEventSponsors(Model model, Integer id) {
         // get sponsor-event mapping
@@ -315,6 +326,18 @@ public class ServerPageController {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @GetMapping("/companyparty-map")
+    public String getCompanypartymap(Model model, @RequestParam Integer id) {
+    	 Optional<VeranstaltungEntity> event = veranstaltungRepository.findById(id);
+         model.addAttribute("event", event.orElse(null));
+
+         publishCommon(model);
+         publishUtil(model);
+         publishLocations(model);
+         publishEventSponsors(model, id);
+		return "companyparty-map";
     }
 
 }

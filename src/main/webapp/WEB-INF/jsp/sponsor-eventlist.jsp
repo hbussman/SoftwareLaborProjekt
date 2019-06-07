@@ -77,5 +77,27 @@
     </c:forEach>
 </div>
 </div>
+
+<nav class="navbar navbar-dark bg-dark justify-content-center" style="min-height: 50px">
+  <p class="navbar-text navbar-center text-white" style="font-size: x-large">Betriebsfeiern</p>
+</nav>
+<div class="container">
+<div class="row justify-content-center pb-5 mx-1">
+    <c:forEach items="${companyPartys}" var="event">
+        <a id="${event.id}card" href="${context}/event?id=${event.id}">
+            <div class="card mb-2 col-12" style="max-height: 200px">
+                <span class="d-block p-1 bg-light text-dark text-center"><b>${event.name}</b></span>
+                <div class="card-body text-dark"><i class="fas fa-thumbtack"></i>
+                        ${locations.get(event.locationID).name}
+                    <div class="card-text text-dark"><i
+                            class="far fa-calendar-alt"></i> ${util.prettifyTimestamp(event.start)}
+                        - ${util.prettifyTimestamp(event.ende)}</div>
+                </div>
+            </div>
+        </a>
+    </c:forEach>
+</div>
+</div>
+
 </body>
 </html>

@@ -306,4 +306,33 @@ public class ServerPageController {
     public String getWebinterface(Model model) {
         return "webinterface-redirect";
     }
+    
+    @GetMapping("/companyparty-map")
+    public String getCompanypartymap(Model model, @RequestParam Integer id) {
+    	 Optional<VeranstaltungEntity> event = veranstaltungRepository.findById(id);
+         model.addAttribute("event", event.orElse(null));
+
+         publishCommon(model);
+         publishUtil(model);
+         publishLocations(model);
+         publishEventSponsors(model, id);
+		return "companyparty-map";
+    	
+    }
+//    @GetMapping("/sponsor")
+//    public String getSponsorSite(Model model, @RequestParam String name) {
+//        publishSponsor(model, name);
+//
+//        // Aufrufe zaehlen der Besucher
+//        Optional<SponsorEntity> sponsor = sponsorRepository.findById(name);
+//        int aktuell = sponsor.get().getAufrufe();
+//        sponsor.get().setAufrufe(aktuell+1);
+//        sponsorRepository.save(sponsor.get());
+//
+//        publishCommon(model);
+//        publishUtil(model);
+//        publishSponsorEvents(model, name);
+//        publishLocations(model);
+//        return "sponsor-site";
+//    }
 }

@@ -71,7 +71,7 @@
             <div class="card-body text-dark"><i class="fas fa-thumbtack"></i>
                 <c:choose>
     			<c:when test="${event.discriminator=='Betriebsfeier'}">
-    				<a target="_blank" href="https://seserver.se.hs-heilbronn.de:3000/api/map/id=${event.locationID}S" class="btn btn-secondary btn-lg active" role="button" 
+    				<a  href="${context}/companyparty-map?id=${event.id}" class="btn btn-secondary btn-lg active" role="button" 
     					aria-pressed="true">${locations.get(event.locationID).name}</a> 
     			</c:when>
     			<c:otherwise>

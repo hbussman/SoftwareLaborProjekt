@@ -5,24 +5,21 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import sponsoren.orm.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.imageio.ImageIO;
 import javax.validation.Valid;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
+import java.awt.image.BufferedImage;
+import java.io.*;
 import java.util.*;
 
 @Controller
 public class ServerPageController {
 
-    public final String SPONSOR_LOGO_PATH = System.getProperty("os.name").contains("Windows")
-            ? "D:\\pub\\http\\Studenten\\LabSWPPS2019\\BuGa19Sponsoren"
+    public static final String SPONSOR_LOGO_PATH = System.getProperty("os.name").contains("Windows")
+            ? "D:\\pub\\http\\Studenten\\LabSWPPS2019\\BuGa19Sponsoren\\Bilder"
             : "./data/uploaded_images";
 
     @Autowired private SponsorRepository sponsorRepository;
@@ -33,7 +30,6 @@ public class ServerPageController {
     @Autowired private SponsorAttraktionRepository sponsorAttraktionRepository;
 
     private void publishCommon(Model model) {
-        model.addAttribute("imagesBase", "http://seserver.se.hs-heilbronn.de/Studenten/LabSWPPS2019/BuGa19Sponsoren/Bilder");
     }
 
     private void publishUtil(Model model) {
@@ -295,4 +291,30 @@ public class ServerPageController {
     public String getWebinterface(Model model) {
         return "webinterface-redirect";
     }
+
+    @RequestMapping(value = "/image/{name}", method = RequestMethod.GET, produces = "image/png")
+    public @ResponseBody byte[] getFile(@PathVariable String name)  {
+
+        System.out.println("GET IMAGE " + SPONSOR_LOGO_PATH + "/" + name);
+
+        try {
+            // Retrieve image from the classpath.
+            File f = new File(SPONSOR_LOGO_PATH + "/" + name);
+
+            // Prepare buffered image.
+            BufferedImage img = ImageIO.read(f);
+
+            // Create a byte array output stream.
+            ByteArrayOutputStream bao = new ByteArrayOutputStream();
+
+            // Write to output stream
+            ImageIO.write(img, "png", bao);
+
+            return bao.toByteArray();
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }

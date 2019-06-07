@@ -81,7 +81,7 @@
                 
                     <div class="card shadow p-3 mb-5 bg-white rounded">
                     <a id="${event.id}" href="${context}/sponsor?name=${sponsor.name}">
-                        <img src="${imagesBase}/${sponsor.name}_scaled.png" class="card-img-top"
+                        <img src="${context}/image/${sponsor.name}_scaled.png" class="card-img-top"
                              alt="${sponsor.name}-Logo">
                     </a>
                     </div>

@@ -341,6 +341,18 @@ public class MainController {
         return ResponseEntity.ok("success, " + ctr + " updated.");
     }
 
+    @GetMapping(path="/dbg/info")
+    public ResponseEntity dbgInfo() {
+        return ResponseEntity.ok(
+                String.format(
+                        "System.getProperty(\"os.name\") = %s<br>" +
+                        "SPONSOR_LOGO_PATH = %s",
+                        System.getProperty("os.name"),
+                        ServerPageController.SPONSOR_LOGO_PATH
+                )
+        );
+    }
+
 
     private Timestamp parseDate(String dateString) throws ParseException {
         DateFormat fmt = new SimpleDateFormat("yyyy-MM-dd HH:mm");

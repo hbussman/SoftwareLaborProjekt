@@ -66,7 +66,7 @@
             
                 <div class="card bg-light shadow rounded">
                 <a id="${sponsor.name}-image" href="${context}/sponsor?name=${sponsor.name}">
-                    <img src="${imagesBase}/${sponsor.name}_scaled.png" class="card-img-top"
+                    <img src="${context}/image/${sponsor.name}_scaled.png" class="card-img-top"
                          alt="${sponsor.name}-Logo">
                 </a>
                 <a id="${sponsor.name}-title" href="${context}/sponsor?name=${sponsor.name}"

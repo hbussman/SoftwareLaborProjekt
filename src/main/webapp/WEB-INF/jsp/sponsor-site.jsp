@@ -4,7 +4,6 @@
 <%--@elvariable id="sponsor" type="sponsoren.orm.SponsorEntity"--%>
 <%--@elvariable id="sponsorEvents" type="java.util.List<sponsoren.orm.VeranstaltungEntity>"--%>
 <%--@elvariable id="locations" type="java.util.Map<Integer, sponsoren.orm.LocationEntity>"--%>
-<%--@elvariable id="imagesBase" type="java.lang.String"--%>
 <c:set var="context" value="${pageContext.request.contextPath}"/>
 
 <!DOCTYPE html>
@@ -67,7 +66,7 @@
             <div class="shadow p-3 mb-5 bg-white rounded">
                 <div class="card">
                     <div class="text-center">
-                        <img src="${imagesBase}/${sponsor.name}_scaled.png" style="max-height: 250px; max-width: 250px"
+                        <img src="${context}/image/${sponsor.name}_scaled.png" style="max-height: 250px; max-width: 250px"
                              class="card-img-thumbnail" alt="...">
                     </div>
                     <div class="card-body">

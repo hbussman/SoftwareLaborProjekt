@@ -161,7 +161,7 @@
 
                 <!-- Sponsor Logo -->
                 <div class="text-center">
-                    <img id="sponsor-logo" src="${imagesBase}/${sponsor.name}_scaled.png"
+                    <img id="sponsor-logo" src="${context}/image/${sponsor.name}_scaled.png"
                          style="max-height: 250px; max-width: 250px"
                          class="card-img-thumbnail" alt="...">
                 </div>

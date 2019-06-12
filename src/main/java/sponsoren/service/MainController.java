@@ -328,6 +328,11 @@ public class MainController {
         // add all locations to our database
         int ctr = 0;
         for(Poi poi : pois) {
+            // https://confluence-student.it.hs-heilbronn.de/pages/viewpage.action?spaceKey=labswp2019lageplan&title=API+-+Icons
+            int CategoryId = Integer.parseInt(poi.getCategoryID());
+            if(CategoryId != 3 && CategoryId != 4 && CategoryId != 5 && CategoryId != 8)
+                continue;
+
             LocationEntity locationEntity = new LocationEntity();
             locationEntity.setName(poi.getName());
             locationEntity.setLat(Double.parseDouble(poi.getLatitude()));

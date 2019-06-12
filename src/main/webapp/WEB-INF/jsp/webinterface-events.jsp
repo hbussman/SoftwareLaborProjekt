@@ -361,23 +361,36 @@
                                            aria-label="Start-Time" aria-describedby="basic-addon1">
                                 </div>
 
-                                <script>
-                                    function onClickDelete${event.id}() {
-                                        var button = document.getElementById('button-delete-veranstaltung-${event.id}');
-                                        if (button.innerText === "WIRKLICH?") {
-                                            deleteVeranstaltung(${event.id}, '${event.name}');
-                                        } else {
-                                            button.innerText = "WIRKLICH?";
-                                            button.className = "btn btn-primary btn-warning";
-                                        }
-                                    }
-                                </script>
+                                <!-- Speichern Button -->
                                 <button id="button-save-veranstaltung-${event.id}" class="btn btn-primary btn-success"
                                         onclick="saveVeranstaltung(${event.id})" role="button">Änderungen speichern
                                 </button>
-                                <button id="button-delete-veranstaltung-${event.id}" class="btn btn-primary btn-danger"
-                                        onclick="onClickDelete${event.id}();" role="button">Löschen
+
+                                <!-- Löschen Button -->
+                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete-modal-${event.id}">
+                                    Löschen
                                 </button>
+
+                                <!-- Löschen Bestätigungs-Modal -->
+                                <div class="modal fade" id="delete-modal-${event.id}" tabindex="-1" role="dialog">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Bestätigen</h5>
+                                                <button type="button" class="close" data-dismiss="modal">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                Soll die Veranstaltung wirklich gelöscht werden?
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Abbrechen</button>
+                                                <button type="button" class="btn btn-danger" onclick="deleteVeranstaltung(${event.id}, '${event.name}');" data-dismiss="modal">Löschen</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 <p id="veranstaltung-edit-result-${event.id}"></p>
                             </div>
                         </div>

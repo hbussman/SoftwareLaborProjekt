@@ -138,14 +138,15 @@ function db_save_sponsor_info(json_info) {
  * @param ende_time
  * @param beschreibung
  */
-function db_send_new_veranstaltung(creator, name, ort, start_date, start_time, ende_date, ende_time, beschreibung) {
+function db_send_new_veranstaltung(creator, name, ort, start_date, start_time, ende_date, ende_time, beschreibung, event_type) {
     return _post("event/new", {
         creator: creator,
         name: name,
         ort: ort,
         start: start_date + "T" + start_time,
         ende: ende_date + "T" + ende_time,
-        beschreibung: beschreibung
+        beschreibung: beschreibung,
+        discriminator: event_type
     });
 }
 
@@ -156,7 +157,8 @@ function db_save_event_data(sponsor, eventId, name, beschreibung, ort, start_dat
         beschreibung: beschreibung,
         ort: ort,
         start: start_date + "T" + start_time,
-        ende: ende_date + "T" + ende_time
+        ende: ende_date + "T" + ende_time,
+        discriminator: event_type
     });
 }
 

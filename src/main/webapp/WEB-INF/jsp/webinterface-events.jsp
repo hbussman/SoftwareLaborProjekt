@@ -47,6 +47,13 @@
             var ende_date = document.getElementById('veranstaltung-ende-date').value;
             var ende_time = document.getElementById('veranstaltung-ende-time').value;
             var beschreibung = document.getElementById('veranstaltung-beschreibung').value;
+            var event_type;
+            
+            if(document.getElementById('radio_veranstaltung_send').checked)
+            	event_type = "Veranstaltung";
+            else
+            	event_type = "Betriebsfeier";		
+                    
 
             // make sure all fields are filled out
             if (name == "" || ort[0] == "[" || start_date == "" || start_time == "" || ende_date == "" || ende_time == "") {
@@ -56,8 +63,9 @@
             }
 
             // save the data
-            db_send_new_veranstaltung(username, name, ort, start_date, start_time, ende_date, ende_time, beschreibung).then(result => {
+            db_send_new_veranstaltung(username, name, ort, start_date, start_time, ende_date, ende_time, beschreibung, event_type).then(result => {
                 if (result.ok) {
+                	
                     resultElem.innerText = "Veranstaltung erfolgreich erstellt!";
 
                     result.json().then(event => {
@@ -101,7 +109,12 @@
             var start_time = document.getElementById('veranstaltung' + eventId + '-start-time-edit').value;
             var ende_date = document.getElementById('veranstaltung' + eventId + '-ende-date-edit').value;
             var ende_time = document.getElementById('veranstaltung' + eventId + '-ende-time-edit').value;
-
+        
+            if(document.getElementById('radio_' + eventId + '_ver').checked)
+            	event_type = "Veranstaltung";
+            else
+            	event_type = "Betriebsfeier";		
+            
             var resultElem = document.getElementById('veranstaltung-edit-result-' + eventId);
             // make sure all fields are filled out
             if (name == "" || ort[0] == "[" || start_date == "" || start_time == "" || ende_date == "" || ende_time == "") {
@@ -110,7 +123,7 @@
                 return;
             }
 
-            db_save_event_data(getCookie('username'), eventId, name, beschreibung, ort, start_date, start_time, ende_date, ende_time).then(result => {
+            db_save_event_data(getCookie('username'), eventId, name, beschreibung, ort, start_date, start_time, ende_date, ende_time, event_type).then(result => {
                 if (result.ok) {
                     // success
                     resultElem.style = "color: darkgreen;";
@@ -192,6 +205,17 @@
                     <h5 class="card-title">Veranstaltung hinzufügen</h5>
                     <div class="input-group input-group-sm mb-3">
                         <div class="row">
+                        	<div class="col-12">
+                        		<!-- Betriebsfeier/Veranstaltung-->
+								<div class="input-group input-group-toggle" data-toggle="buttons">
+  									<label class="btn btn-light active">
+   										 <input type="radio" name="set_event_type" id="radio_veranstaltung_send" autocomplete="off" checked> Öffentliche Veranstaltung
+  									</label>
+  									<label class="btn btn-light">
+   										 <input type="radio" name="set_event_type" id="radio_betriebsfeier_send" autocomplete="off"> Betriebsfeier
+ 									 </label>
+ 								</div>
+                        	</div>
                             <div class="col-6">
                                 <input id="veranstaltung-name" type="text" placeholder="Name" class="form-control"
                                        aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
@@ -280,7 +304,7 @@
                             </c:if>
                         </div>
                     </div>
-                    <c:forEach items="${sponsorEvents}" var="event">
+                    <c:forEach items="${events}" var="event">
                         <div class="col-12 col-md-6" id="event-display-${event.id}">
                             <div class="card-body">
                                 <h5 class="card-title">
@@ -288,6 +312,29 @@
                                        class="text-decoration-none">${event.name}</a>
                                 </h5>
 
+								<!-- Betriebsfeier/Veranstaltung Edit -->
+								<div class="input-group input-group-toggle" data-toggle="buttons">
+								 <c:choose>
+    								<c:when test="${event.discriminator=='Veranstaltung'}">
+    									<label class="btn btn-light active">
+   										 	<input type="radio" name="edit_${event.id}" id="radio_${event.id}_ver" autocomplete="off" checked> Öffentliche Veranstaltung
+  										</label>
+  										<label class="btn btn-light">
+   										 	<input type="radio" name="edit_${event.id}" id="radio_${event.id}_betr" autocomplete="off"> Betriebsfeier
+ 									 	</label>
+    								</c:when>
+    								<c:otherwise>
+        								<label class="btn btn-light">
+   										 	<input type="radio" name="edit_${event.id}" id="radio_${event.id}_ver" autocomplete="off"> Öffentliche Veranstaltung
+  										</label>
+  										<label class="btn btn-light active">
+   											 <input type="radio" name="edit_${event.id}" id="radio_${event.id}_betr" autocomplete="off" checked> Betriebsfeier
+ 									 	</label>
+        							<br />
+    								</c:otherwise>
+									</c:choose>
+  									
+ 								</div>
                                 <!-- Name Edit -->
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Name</span>

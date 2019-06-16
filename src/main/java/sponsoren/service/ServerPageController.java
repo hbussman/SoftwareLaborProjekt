@@ -101,6 +101,23 @@ public class ServerPageController {
         });
         model.addAttribute("sponsorEvents", sponsorEvents);
     }
+    private void publishSponsorEventsAndCompanyPartys(Model model, String sponsorName) {
+        // get sponsor-event mapping
+        Iterable<SponsorVeranstaltungEntity> sponsorEventEntities = sponsorVeranstaltungRepository.findAll();
+
+        // convert iterable to List, resolving the foreign key association to event
+        List<VeranstaltungEntity> events = new ArrayList<>();
+        sponsorEventEntities.forEach(sponsorVeranstaltungEntity -> {
+            if(sponsorVeranstaltungEntity.getSponsorName().equals(sponsorName)) {
+                Optional<VeranstaltungEntity> event = veranstaltungRepository.findById(sponsorVeranstaltungEntity.getVeranstaltungId());
+                if(event.isPresent()) {
+                        events.add(event.get());
+                }
+
+            }
+        });
+        model.addAttribute("events", events);
+    }
 
     private void publishEvents(Model model) {
         // get all Veranstaltungen
@@ -296,7 +313,7 @@ public class ServerPageController {
         publishUtil(model);
         publishLocations(model);
         publishSponsor(model, sponsor);
-        publishSponsorEvents(model, sponsor);
+        publishSponsorEventsAndCompanyPartys(model, sponsor);
         return "webinterface-events";
     }
 

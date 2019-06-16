@@ -184,7 +184,7 @@ public class MainController {
         veranstaltung.setLocationID(location.getId());
 
         // save Veranstaltung to database
-        veranstaltung.setDiscriminator("Veranstaltung");
+        veranstaltung.setDiscriminator(event.get("discriminator"));
         veranstaltungRepository.save(veranstaltung);
         veranstaltung = findNewestVeranstaltung();
         System.out.println("Veranstaltung saved; ID=" + veranstaltung.getId());
@@ -251,6 +251,7 @@ public class MainController {
         }
 
         veranstaltung.setLocationID(location.getId());
+        veranstaltung.setDiscriminator(event.get("discriminator"));
 
         veranstaltungRepository.save(veranstaltung);
         return ResponseEntity.ok(null);

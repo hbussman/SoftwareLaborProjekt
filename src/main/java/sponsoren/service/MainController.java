@@ -354,7 +354,7 @@ public class MainController {
                         "System.getProperty(\"os.name\") = %s<br>" +
                         "SPONSOR_LOGO_PATH = %s",
                         System.getProperty("os.name"),
-                        ServerPageController.SPONSOR_LOGO_PATH
+                        ServerPageController.getSponsorLogoPath()
                 )
         );
     }

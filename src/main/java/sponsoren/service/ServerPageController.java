@@ -18,9 +18,8 @@ import java.util.*;
 @Controller
 public class ServerPageController {
 
-    public static final String SPONSOR_LOGO_PATH = System.getProperty("os.name").contains("Windows")
-            ? "D:\\pub\\http\\Studenten\\LabSWPPS2019\\BuGa19Sponsoren\\Bilder"
-            : "./data/uploaded_images";
+    public static final String SPONSOR_LOGO_PATH_DEPLOYED = "D:\\pub\\http\\Studenten\\LabSWPPS2019\\BuGa19Sponsoren\\Bilder";
+    public static final String SPONSOR_LOGO_PATH_LOCAL = "./data/uploaded_images";
 
     private Map<String, CachedImage> imagesCache = new HashMap<>();
 
@@ -30,6 +29,15 @@ public class ServerPageController {
     @Autowired private LocationRepository locationRepository;
     @Autowired private AttraktionRepository attractionRepository;
     @Autowired private SponsorAttraktionRepository sponsorAttraktionRepository;
+
+    public ServerPageController() {
+    }
+
+    public static String getSponsorLogoPath() {
+        File imagesFolder = new File(SPONSOR_LOGO_PATH_DEPLOYED);
+        boolean isDeployed = imagesFolder.exists() && imagesFolder.isDirectory();
+        return isDeployed ? SPONSOR_LOGO_PATH_DEPLOYED : SPONSOR_LOGO_PATH_LOCAL;
+    }
 
     private void publishCommon(Model model) {
     }
@@ -204,6 +212,8 @@ public class ServerPageController {
     @RequestMapping(value="/webinterface/home/image_upload", method = RequestMethod.POST, consumes = {"multipart/form-data"})
     public ResponseEntity importQuestion(@Valid @RequestParam("uploadedFileName") MultipartFile multipart, @AuthenticationPrincipal AccountEntity user) {
 
+        final String SPONSOR_LOGO_PATH = getSponsorLogoPath();
+
         String sponsor = user.getSponsorName();
         System.out.println("IMAGE IMAGE IMAGE");
         System.out.println("sponsor: " + sponsor);
@@ -325,6 +335,7 @@ public class ServerPageController {
     @RequestMapping(value = "/image/{name}", method = RequestMethod.GET, produces = "image/png")
     public @ResponseBody byte[] getFile(@PathVariable String name)  {
 
+        final String SPONSOR_LOGO_PATH = getSponsorLogoPath();
         System.out.println("GET IMAGE " + SPONSOR_LOGO_PATH + "/" + name);
 
         try {

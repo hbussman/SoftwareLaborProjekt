@@ -75,7 +75,7 @@
                             "Zeitraum: " + event.start + " - " + event.ende + "<br>" +
                             (result.headers.has("Location") ?
                                 '<a href="${context}' + result.headers.get("Location") + '" target="_blank">Zur Veranstaltungsseite gehen</a>'
-                                : "");               // success
+                                : "")+"<br><br>";               // success
                         resultElem.style = "color: darkgreen;";
 
                     });
@@ -203,25 +203,24 @@
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">Veranstaltung hinzufügen</h5>
-                    <div class="input-group input-group-sm mb-3">
-                        <div class="row">
-                        	<div class="col-12">
-                        		<!-- Betriebsfeier/Veranstaltung-->
-								<div class="input-group input-group-toggle" data-toggle="buttons">
-  									<label class="btn btn-light active">
-   										 <input type="radio" name="set_event_type" id="radio_veranstaltung_send" autocomplete="off" checked> Öffentliche Veranstaltung
-  									</label>
-  									<label class="btn btn-light">
-   										 <input type="radio" name="set_event_type" id="radio_betriebsfeier_send" autocomplete="off"> Betriebsfeier
- 									 </label>
- 								</div>
-                        	</div>
-                            <div class="col-6">
+                    <div class="input-group input-group-sm">
+                        <div class="row col-12 mb-2">
+                        	<!-- Betriebsfeier/Veranstaltung-->
+							<div class="input-group input-group-toggle" data-toggle="buttons">
+  								<label class="btn btn-light active">
+   									 <input type="radio" name="set_event_type" id="radio_veranstaltung_send" autocomplete="off" checked> Öffentliche Veranstaltung
+  								</label>
+  								<label class="btn btn-light">
+   									 <input type="radio" name="set_event_type" id="radio_betriebsfeier_send" autocomplete="off"> Betriebsfeier
+ 								 </label>
+							</div>
+                        </div>
+                            <div class="row col-6 mb-3">
                                 <input id="veranstaltung-name" type="text" placeholder="Name" class="form-control"
                                        aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
                             </div>
-                            <div class="col-6">
-                                <div class="input-group-prepend">
+                            <div class="row col-6 mb-3">
+                                <div class="input-group-prepend pl-5">
                                     <span class="input-group-text"><i class="fas fa-thumbtack"></i></span>
                                     <button id="veranstaltung-ort" class="btn btn-outline-secondary dropdown-toggle"
                                             type="button" data-toggle="dropdown" aria-haspopup="true"
@@ -235,67 +234,61 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
+                       
+                    
                         <!-- Veranstaltung Start -->
-                        <div class="col-6">
-                            <div class="input-group mb-3">
+                        <div class="row col-6">
+                            <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Start</span>
                                     <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                     <input id="veranstaltung-start-date" type="date"
                                            placeholder="dd/mm/yyyy HH:MM (Datum+Uhrzeit)"
-                                           class="form-control" aria-label="Veranstaltung Start Datum"
-                                           aria-describedby="inputGroup-sizing-sm">
-                                    <div class="input-group-append">
+                                           class="form-control" style="min-width: 155px;">
+                                    <div class="input-group-append pl-1">
                                         <span class="input-group-text"><i class="far fa-clock"></i></span>
                                     </div>
-                                    <input id="veranstaltung-start-time" type="time" class="form-control"
-                                           placeholder="Zeit HH:MM" aria-label="Veranstaltung Start Zeit"
-                                           aria-describedby="basic-addon1">
+                                    <input id="veranstaltung-start-time" type="time" class="form-control pr-0"
+                                           placeholder="Zeit HH:MM">
                                 </div>
                             </div>
                         </div>
                         <!-- Veranstaltung Ende -->
-                        <div class="col-6">
-                            <div class="input-group mb-3">
+                        <div class="row col-6">
+                            <div class="input-group pl-5">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Ende</span>
                                     <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                     <input id="veranstaltung-ende-date" type="date"
                                            placeholder="dd/mm/yyyy HH:MM (Datum+Uhrzeit)"
-                                           class="form-control" aria-label="Veranstaltung Ende Datum"
-                                           aria-describedby="inputGroup-sizing-sm">
-                                    <div class="input-group-append">
+                                           class="form-control" style="min-width: 155px;">
+                                    <div class="input-group-append pl-1">
                                         <span class="input-group-text"><i class="far fa-clock"></i></span>
                                     </div>
                                     <input id="veranstaltung-ende-time" type="time" class="form-control"
-                                           placeholder="Zeit HH:MM" aria-label="Veranstaltung Ende Zeit"
-                                           aria-describedby="basic-addon1">
+                                           placeholder="Zeit HH:MM">
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="col-12">
+                <div class="col-12 ml-1">
                     <textarea id="veranstaltung-beschreibung" class="form-control" rows="5"
                               placeholder="Beschreibung der Veranstaltung"></textarea>
                 </div>
                 <br>
-                <div class="col-12">
+                <div class="col-12 ml-1">
                     <div class="text-center">
                         <a class="btn btn-primary btn-block" href="#" onclick="sendVeranstaltung();" role="button">Veranstaltung
                             veröffentlichen</a>
                         <br>
                         <p id="veranstaltung-success-text"></p>
                         <div id="veranstaltung-info"></div>
-                        <br>
-                        <br>
+                       
                     </div>
                 </div>
+            </div>
                 <div class="row">
                     <div class="col-12">
                         <div class="card-body">

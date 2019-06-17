@@ -35,11 +35,11 @@
         }
 
         .bg-image {
-            background-image: url(https://i.imgur.com/zh6A23R.jpg);
-            height: 100%;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
+             background: url(https://i.imgur.com/zh6A23R.jpg) no-repeat center center fixed;
+ 			 -webkit-background-size: cover;
+  			 -moz-background-size: cover;
+  			 -o-background-size: cover;
+			 background-size: cover;
         }
     </style>
 </head>
@@ -62,7 +62,7 @@
 
 <div class="container-fluid pt-5">
 
-    <div class="card pb-5 justify-content-center">
+    <div class="card justify-content-center pb-0">
         <span class="d-block p-1 bg-light text-dark text-center"></span>
         <div class="container">
             <div class="card-text text-dark">
@@ -85,11 +85,11 @@
                     - ${util.prettifyTimestamp(event.ende)}</div>
             </div>
             <span class="d-block p-1 bg-light text-dark text-center"><b>Gesponsort von</b></span>
-            <div class="row no-gutters justify-content-xs-center">
+            <div class="row no-gutters justify-content-center">
 
                 <c:forEach items="${eventSponsors}" var="sponsor">
                 
-                    <div class="card shadow p-3 mb-5 bg-white rounded">
+                    <div class="card shadow my-3 bg-white rounded">
                     <a id="${event.id}" href="${context}/sponsor?name=${sponsor.name}">
                         <img src="${context}/image/${sponsor.name}_scaled.png" class="card-img-top"
                              alt="${sponsor.name}-Logo">

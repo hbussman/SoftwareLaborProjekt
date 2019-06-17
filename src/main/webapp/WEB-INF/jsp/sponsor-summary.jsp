@@ -1,5 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%--@elvariable id="util" type="sponsoren.Util"--%>
+<%--@elvariable id="sponsorsSorted" type="java.util.List<java.util.List<sponsoren.orm.SponsorEntity>>"--%>
+<%--@elvariable id="searchString" type="java.lang.String"--%>
 <c:set var="context" value="${pageContext.request.contextPath}"/>
 
 <!DOCTYPE html>
@@ -58,31 +61,33 @@
 </nav>
 
 <div class="container-fluid pt-5 pb-5">
-    <%--@elvariable id="sponsorsSorted" type="java.util.List"--%>
     <c:forEach items="${sponsorsSorted}" var="sponsorlist">
-    <div class="row no-gutters justify-content-center">
-        <c:forEach items="${sponsorlist}" var="sponsor">
-        <div class="col d-flex align-items-stretch col-lg-3 col-md-3 col-sm-4 col-6 py-md-4 px-md-4 py-sm-3  px-sm-3 py-2  px-2">
-            
-                <div class="card bg-light shadow rounded">
-                <a id="${sponsor.name}-image" href="${context}/sponsor?name=${sponsor.name}">
-                    <img src="${context}/image/${sponsor.name}_scaled.png" class="card-img-top"
-                         alt="${sponsor.name}-Logo">
-                </a>
-                <a id="${sponsor.name}-title" href="${context}/sponsor?name=${sponsor.name}"
-                	class="card-body text-dark">${sponsor.name}</a>
-                </div>
-                     
-        </div>
-        </c:forEach>
-     </div>
-         <div class="col col-12 justify-content-center py-md-4 px-md-4 py-sm-3  px-sm-3 py-2  px-2">
-        	<div class="border-top"></div>
-    	 </div>
-        </c:forEach>
-    
-</div>
+        <div class="row no-gutters justify-content-center">
+            <c:forEach items="${sponsorlist}" var="sponsor">
+                <c:if test="${searchString == null || util.searchMatch(searchString, sponsor)}">
 
+                    <div class="col d-flex align-items-stretch col-lg-3 col-md-3 col-sm-4 col-6 py-md-4 px-md-4 py-sm-3  px-sm-3 py-2  px-2">
+
+                        <div class="card bg-light shadow rounded">
+                            <a id="${sponsor.name}-image" href="${context}/sponsor?name=${sponsor.name}">
+                                <img src="${context}/image/${sponsor.name}_scaled.png" class="card-img-top"
+                                     alt="${sponsor.name}-Logo">
+                            </a>
+                            <a id="${sponsor.name}-title" href="${context}/sponsor?name=${sponsor.name}"
+                               class="card-body text-dark">${sponsor.name}</a>
+                        </div>
+
+                    </div>
+                </c:if>
+            </c:forEach>
+
+        </div>
+        <div class="col col-12 justify-content-center py-md-4 px-md-4 py-sm-3  px-sm-3 py-2  px-2">
+            <div class="border-top"></div>
+        </div>
+    </c:forEach>
+
+</div>
 
 
 <!-- Optional JavaScript -->

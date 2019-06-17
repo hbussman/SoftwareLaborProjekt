@@ -1,8 +1,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%--@elvariable id="util" type="sponsoren.Util"--%>
-<%--@elvariable id="events" type="java.lang.List<sponsoren.orm.VeranstaltungEntity>"--%>
 <%--@elvariable id="locations" type="java.util.Map<Integer, sponsoren.orm.LocationEntity>"--%>
+<%--@elvariable id="events" type="java.lang.List<sponsoren.orm.VeranstaltungEntity>"--%>
+<%--@elvariable id="companyPartys" type="java.lang.List<sponsoren.orm.VeranstaltungEntity>"--%>
+<%--@elvariable id="searchString" type="java.lang.String"--%>
 <c:set var="context" value="${pageContext.request.contextPath}"/>
 
 <!DOCTYPE html>
@@ -63,17 +65,21 @@
 <div class="container">
 <div class="row justify-content-center pb-5 mx-1">
     <c:forEach items="${events}" var="event">
-        <a id="${event.id}card" href="${context}/event?id=${event.id}">
-            <div class="card mb-2 col-12" style="max-height: 200px">
-                <span class="d-block p-1 bg-light text-dark text-center"><b>${event.name}</b></span>
-                <div class="card-body text-dark"><i class="fas fa-thumbtack"></i>
-                        ${locations.get(event.locationID).name}
-                    <div class="card-text text-dark"><i
-                            class="far fa-calendar-alt"></i> ${util.prettifyTimestamp(event.start)}
-                        - ${util.prettifyTimestamp(event.ende)}</div>
+        <c:if test="${searchString == null || util.searchMatch(searchString, event)}">
+
+            <a id="${event.id}card" href="${context}/event?id=${event.id}">
+                <div class="card mb-2 col-12" style="max-height: 200px">
+                    <span class="d-block p-1 bg-light text-dark text-center"><b>${event.name}</b></span>
+                    <div class="card-body text-dark"><i class="fas fa-thumbtack"></i>
+                            ${locations.get(event.locationID).name}
+                        <div class="card-text text-dark"><i
+                                class="far fa-calendar-alt"></i> ${util.prettifyTimestamp(event.start)}
+                            - ${util.prettifyTimestamp(event.ende)}</div>
+                    </div>
                 </div>
-            </div>
-        </a>
+            </a>
+
+        </c:if>
     </c:forEach>
 </div>
 </div>
@@ -84,17 +90,21 @@
 <div class="container">
 <div class="row justify-content-center pb-5 mx-1">
     <c:forEach items="${companyPartys}" var="event">
-        <a id="${event.id}card" href="${context}/event?id=${event.id}">
-            <div class="card mb-2 col-12" style="max-height: 200px">
-                <span class="d-block p-1 bg-light text-dark text-center"><b>${event.name}</b></span>
-                <div class="card-body text-dark"><i class="fas fa-thumbtack"></i>
-                        ${locations.get(event.locationID).name}
-                    <div class="card-text text-dark"><i
-                            class="far fa-calendar-alt"></i> ${util.prettifyTimestamp(event.start)}
-                        - ${util.prettifyTimestamp(event.ende)}</div>
+        <c:if test="${searchString == null || util.searchMatch(searchString, event)}">
+
+            <a id="${event.id}card" href="${context}/event?id=${event.id}">
+                <div class="card mb-2 col-12" style="max-height: 200px">
+                    <span class="d-block p-1 bg-light text-dark text-center"><b>${event.name}</b></span>
+                    <div class="card-body text-dark"><i class="fas fa-thumbtack"></i>
+                            ${locations.get(event.locationID).name}
+                        <div class="card-text text-dark"><i
+                                class="far fa-calendar-alt"></i> ${util.prettifyTimestamp(event.start)}
+                            - ${util.prettifyTimestamp(event.ende)}</div>
+                    </div>
                 </div>
-            </div>
-        </a>
+            </a>
+
+        </c:if>
     </c:forEach>
 </div>
 </div>

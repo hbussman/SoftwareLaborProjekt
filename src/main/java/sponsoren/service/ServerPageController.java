@@ -30,9 +30,6 @@ public class ServerPageController {
     @Autowired private AttraktionRepository attractionRepository;
     @Autowired private SponsorAttraktionRepository sponsorAttraktionRepository;
 
-    public ServerPageController() {
-    }
-
     public static String getSponsorLogoPath() {
         File imagesFolder = new File(SPONSOR_LOGO_PATH_DEPLOYED);
         boolean isDeployed = imagesFolder.exists() && imagesFolder.isDirectory();
@@ -40,6 +37,10 @@ public class ServerPageController {
     }
 
     private void publishCommon(Model model) {
+    }
+
+    private void publishSearch(Model model, String searchString) {
+        model.addAttribute("searchString", searchString);
     }
 
     private void publishUtil(Model model) {
@@ -140,6 +141,7 @@ public class ServerPageController {
             }
             
         });
+
         List<VeranstaltungEntity> companyPartys = new ArrayList<>();
         companyPartyEntities.forEach(event -> {
         	if(event.getDiscriminator().equals("Betriebsfeier")) {
@@ -261,15 +263,17 @@ public class ServerPageController {
     }
 
     @GetMapping("/sponsoren")
-    public String getSponsorSummary(Model model) {
+    public String getSponsorSummary(Model model, @RequestParam(required = false) String search) {
         publishCommon(model);
+        publishSearch(model, search);
         publishSponsors(model);
         return "sponsor-summary";
     }
 
     @GetMapping("/events")
-    public String getEventlist(Model model) {
+    public String getEventlist(Model model, @RequestParam(required = false) String search) {
         publishUtil(model);
+        publishSearch(model, search);
         publishSponsors(model);
         publishEvents(model);
         publishLocations(model);
@@ -278,7 +282,8 @@ public class ServerPageController {
     }
 
     @GetMapping("/attractions")
-    public String getAttractionlist(Model model) {
+    public String getAttractionlist(Model model, @RequestParam(required = false) String search) {
+        publishSearch(model, search);
         publishAttractions(model);
         publishAttractionSponsors(model);
         publishUtil(model);

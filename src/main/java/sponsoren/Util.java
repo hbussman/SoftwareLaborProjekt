@@ -1,5 +1,10 @@
 package sponsoren;
 
+import sponsoren.orm.AttraktionEntity;
+import sponsoren.orm.SponsorEntity;
+import sponsoren.orm.VeranstaltungEntity;
+import sponsoren.service.external.Attraktionen.Attraktion;
+
 public class Util {
 
     public String prettifyTimestamp(String s) {
@@ -48,6 +53,41 @@ public class Util {
         }
 
         return "";
+    }
+
+    /**
+     * returns true if the object is a match for the searchString
+     * @param searchString some text to search for
+     * @param object object to match the text with
+     * @return a bool indicating whether object should be shown
+     */
+    public boolean searchMatch(String searchString, Object object) {
+        if(searchString == null || object == null) {
+            return true;
+        }
+
+        if(object instanceof SponsorEntity) {
+            SponsorEntity ent = ((SponsorEntity)object);
+
+            if(ent.getName().contains(searchString))
+                return true;
+            if(ent.getHomepage().contains(searchString))
+                return true;
+
+        } else if(object instanceof VeranstaltungEntity) {
+            VeranstaltungEntity ent = ((VeranstaltungEntity)object);
+
+            if(ent.getName().contains(searchString))
+                return true;
+
+        } else if(object instanceof AttraktionEntity) {
+            AttraktionEntity ent = ((AttraktionEntity)object);
+
+            if(ent.getName().contains(searchString))
+                return true;
+        }
+
+        return false;
     }
 
 }

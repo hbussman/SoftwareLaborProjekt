@@ -62,6 +62,7 @@ public class Util {
      * @return a bool indicating whether object should be shown
      */
     public boolean searchMatch(String searchString, Object object) {
+
         if(searchString == null || object == null) {
             return true;
         }
@@ -69,21 +70,21 @@ public class Util {
         if(object instanceof SponsorEntity) {
             SponsorEntity ent = ((SponsorEntity)object);
 
-            if(ent.getName().contains(searchString))
+            if(ent.getName() != null && ent.getName().contains(searchString))
                 return true;
-            if(ent.getHomepage().contains(searchString))
+            if(ent.getHomepage() != null && ent.getHomepage().contains(searchString))
                 return true;
 
         } else if(object instanceof VeranstaltungEntity) {
             VeranstaltungEntity ent = ((VeranstaltungEntity)object);
 
-            if(ent.getName().contains(searchString))
+            if(ent.getName() != null && ent.getName().contains(searchString))
                 return true;
 
         } else if(object instanceof AttraktionEntity) {
             AttraktionEntity ent = ((AttraktionEntity)object);
 
-            if(ent.getName().contains(searchString))
+            if(ent.getName() != null && ent.getName().contains(searchString))
                 return true;
         }
 

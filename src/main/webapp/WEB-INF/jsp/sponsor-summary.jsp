@@ -64,7 +64,7 @@
     <c:forEach items="${sponsorsSorted}" var="sponsorlist">
         <div class="row no-gutters justify-content-center">
             <c:forEach items="${sponsorlist}" var="sponsor">
-                <c:if test="${searchString == null || util.searchMatch(searchString, sponsor)}">
+                <c:if test="${util.searchMatch(searchString, sponsor)}">
 
                     <div class="col d-flex align-items-stretch col-lg-3 col-md-3 col-sm-4 col-6 py-md-4 px-md-4 py-sm-3  px-sm-3 py-2  px-2">
 

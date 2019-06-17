@@ -64,7 +64,7 @@
 <div class="container">
     <div class="row justify-content-center pb-5 mx-1">
     <c:forEach items="${attractions}" var="attraction">
-        <c:if test="${searchString == null || util.searchMatch(searchString, attraction)}">
+        <c:if test="${util.searchMatch(searchString, attraction)}">
 
             <c:if test="${attractionSponsors.containsKey(attraction.name)}">
                 <a id="attraction-${attraction.name}" href="https://seserver.se.hs-heilbronn.de:9443/buga19bugascout/#/details/${attraction.id}" target="_blank">

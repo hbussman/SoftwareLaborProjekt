@@ -65,7 +65,7 @@
 <div class="container">
 <div class="row justify-content-center pb-5 mx-1">
     <c:forEach items="${events}" var="event">
-        <c:if test="${searchString == null || util.searchMatch(searchString, event)}">
+        <c:if test="${util.searchMatch(searchString, event)}">
 
             <a id="${event.id}card" href="${context}/event?id=${event.id}">
                 <div class="card mb-2 col-12" style="max-height: 200px">
@@ -90,7 +90,7 @@
 <div class="container">
 <div class="row justify-content-center pb-5 mx-1">
     <c:forEach items="${companyPartys}" var="event">
-        <c:if test="${searchString == null || util.searchMatch(searchString, event)}">
+        <c:if test="${util.searchMatch(searchString, event)}">
 
             <a id="${event.id}card" href="${context}/event?id=${event.id}">
                 <div class="card mb-2 col-12" style="max-height: 200px">

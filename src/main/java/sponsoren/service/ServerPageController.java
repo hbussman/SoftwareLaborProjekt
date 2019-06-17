@@ -265,6 +265,7 @@ public class ServerPageController {
     @GetMapping("/sponsoren")
     public String getSponsorSummary(Model model, @RequestParam(required = false) String search) {
         publishCommon(model);
+        publishUtil(model);
         publishSearch(model, search);
         publishSponsors(model);
         return "sponsor-summary";

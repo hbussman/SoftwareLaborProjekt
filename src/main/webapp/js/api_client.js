@@ -127,20 +127,8 @@ function db_save_sponsor_info(json_info) {
     return _post("sponsor/set_info", json_info);
 }
 
-/**
- * Sends a new Veranstaltung to the database
- * @param creator Name of the Sponsor who created this Veranstaltung
- * @param name
- * @param ort
- * @param start_date
- * @param start_time
- * @param ende_date
- * @param ende_time
- * @param beschreibung
- */
-function db_send_new_veranstaltung(creator, name, ort, start_date, start_time, ende_date, ende_time, beschreibung, event_type) {
+function db_send_new_veranstaltung(name, ort, start_date, start_time, ende_date, ende_time, beschreibung, event_type) {
     return _post("event/new", {
-        creator: creator,
         name: name,
         ort: ort,
         start: start_date + "T" + start_time,
@@ -150,7 +138,7 @@ function db_send_new_veranstaltung(creator, name, ort, start_date, start_time, e
     });
 }
 
-function db_save_event_data(sponsor, eventId, name, beschreibung, ort, start_date, start_time, ende_date, ende_time) {
+function db_save_event_data(eventId, name, beschreibung, ort, start_date, start_time, ende_date, ende_time) {
     return _patch("event/edit", {
         id: eventId,
         name: name,
@@ -162,10 +150,9 @@ function db_save_event_data(sponsor, eventId, name, beschreibung, ort, start_dat
     });
 }
 
-function db_delete_veranstaltung(eventId, sponsorName) {
+function db_delete_veranstaltung(eventId) {
     return _delete("event/delete", {
         id: eventId,
-        sponsor: sponsorName
     });
 }
 

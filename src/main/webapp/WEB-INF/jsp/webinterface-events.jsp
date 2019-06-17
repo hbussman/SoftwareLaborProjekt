@@ -19,21 +19,14 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
           integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
-    <script src="${context}/js/util.js"></script>
     <script src="${context}/js/api_client.js"></script>
     <script>api_set_context("${context}")</script>
 
     <title>Eigene Veranstaltungen - Sponsoren</title>
 
     <script>
-        function Init() {
-            var username = getCookie("username");
-        }
 
         function sendVeranstaltung() {
-            var username = getCookie("username");
-            console.log("send veranstaltung of " + username);
-
             var resultElem = document.getElementById('veranstaltung-success-text');
             var resultInfoElem = document.getElementById('veranstaltung-info');
 
@@ -63,7 +56,7 @@
             }
 
             // save the data
-            db_send_new_veranstaltung(username, name, ort, start_date, start_time, ende_date, ende_time, beschreibung, event_type).then(result => {
+            db_send_new_veranstaltung(name, ort, start_date, start_time, ende_date, ende_time, beschreibung, event_type).then(result => {
                 if (result.ok) {
                 	
                     resultElem.innerText = "Veranstaltung erfolgreich erstellt!";
@@ -123,7 +116,7 @@
                 return;
             }
 
-            db_save_event_data(getCookie('username'), eventId, name, beschreibung, ort, start_date, start_time, ende_date, ende_time, event_type).then(result => {
+            db_save_event_data(eventId, name, beschreibung, ort, start_date, start_time, ende_date, ende_time, event_type).then(result => {
                 if (result.ok) {
                     // success
                     resultElem.style = "color: darkgreen;";
@@ -141,7 +134,7 @@
 
         function deleteVeranstaltung(eventId, eventName) {
 
-            db_delete_veranstaltung(eventId, '${sponsor.name}').then(result => {
+            db_delete_veranstaltung(eventId).then(result => {
                 if (result.ok) {
                     // success
                     var resultElem = document.getElementById('event-display-' + eventId);
@@ -173,22 +166,22 @@
         }
     </style>
 </head>
-<body onload="Init()">
+<body>
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark justify-content-center">
     <div class="pr-2">
-        <a id="Sponsorenseitebutton" class="btn btn-light" href="${context}/webinterface/home?sponsor=${sponsor.name}"
+        <a id="Sponsorenseitebutton" class="btn btn-light" href="${context}/webinterface"
            role="button">Sponsorenseite
         </a>
     </div>
     <div class="pr-2">
-        <a id="Accountbutton" class="btn btn-light" href="${context}/webinterface/account?sponsor=${sponsor.name}"
+        <a id="Accountbutton" class="btn btn-light" href="${context}/webinterface/account"
            role="button">Account
         </a>
     </div>
     <ul class="nav navbar-nav ml-auto">
         <p class="navbar-text navbar-center text-white" style="font-size: x-large">Veranstaltungen verwalten</p>
         <div class="pr-2">
-            <a id="Veranstaltungsbutton" class="btn btn-light disabled" href="${context}/webinterface/events?sponsor=${sponsor.name}"
+            <a id="Veranstaltungsbutton" class="btn btn-light disabled" href="${context}/webinterface/events"
                role="button" aria-disabled="true">Veranstaltungen
             </a>
         </div>

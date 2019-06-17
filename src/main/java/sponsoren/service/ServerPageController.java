@@ -209,7 +209,7 @@ public class ServerPageController {
     }
 
 
-    @RequestMapping(value="/webinterface/home/image_upload", method = RequestMethod.POST, consumes = {"multipart/form-data"})
+    @RequestMapping(value="/webinterface/image_upload", method = RequestMethod.POST, consumes = {"multipart/form-data"})
     public ResponseEntity importQuestion(@Valid @RequestParam("uploadedFileName") MultipartFile multipart, @AuthenticationPrincipal AccountEntity user) {
 
         final String SPONSOR_LOGO_PATH = getSponsorLogoPath();
@@ -297,9 +297,19 @@ public class ServerPageController {
         return "event-site";
     }
 
-    @GetMapping("/webinterface/login")
-    public String getWebinterfaceLogin(Model model) {
-        return "webinterface-login";
+    @GetMapping("/webinterface")
+    public String getWebinterfaceLogin(Model model, @AuthenticationPrincipal AccountEntity user) {
+        if(user == null)
+            return "webinterface-login";
+        else
+            return getWebinterfaceHome(model, user);
+    }
+
+    private String getWebinterfaceHome(Model model, @AuthenticationPrincipal AccountEntity user) {
+        publishCommon(model);
+        publishSponsor(model, user.getSponsorName());
+
+        return "webinterface-home";
     }
 
     @GetMapping("/webinterface/account")
@@ -307,14 +317,6 @@ public class ServerPageController {
         publishSponsor(model, user.getSponsorName());
         model.addAttribute("currentUsername", user.getUsername());
         return "webinterface-account";
-    }
-
-    @GetMapping("/webinterface/home")
-    public String getWebinterfaceHome(Model model, @AuthenticationPrincipal AccountEntity user) {
-        publishCommon(model);
-        publishSponsor(model, user.getSponsorName());
-
-        return "webinterface-home";
     }
 
     @GetMapping("/webinterface/events")
@@ -325,11 +327,6 @@ public class ServerPageController {
         publishSponsor(model, sponsor);
         publishSponsorEventsAndCompanyPartys(model, sponsor);
         return "webinterface-events";
-    }
-
-    @GetMapping("/webinterface")
-    public String getWebinterface(Model model) {
-        return "webinterface-redirect";
     }
 
     @RequestMapping(value = "/image/{name}", method = RequestMethod.GET, produces = "image/png")

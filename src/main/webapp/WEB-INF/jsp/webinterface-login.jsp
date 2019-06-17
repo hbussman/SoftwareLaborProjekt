@@ -14,31 +14,11 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
           integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
-    <script src="${context}/js/util.js"></script>
     <script src="${context}/js/api_client.js"></script>
     <script>api_set_context("${context}")</script>
 
     <title>Login für Sponsoren</title>
 
-    <script>
-        function DoLogin() {
-            var username = document.getElementById("username").value;
-            var password = document.getElementById("password").value;
-
-            // TODO: send actual login request to backend
-
-            // pretend we logged in
-            setCookie("username", username, 180, "webinterface");
-
-            // redirect to dashboard
-            window.location.href = "${context}/webinterface/home?sponsor=" + username;
-        }
-
-        function Init() {
-            // logout
-            deleteCookie("username", "webinterface");
-        }
-    </script>
     <style>
         .navbar-center {
             position: absolute;
@@ -69,7 +49,7 @@
                 <div class="card-body">
                     <h5 class="card-title">Login</h5>
 
-                    <form name="f" action="${context}/webinterface/login" method="POST">
+                    <form name="f" action="${context}/webinterface" method="POST">
                         <div class="input-group flex-nowrap">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">

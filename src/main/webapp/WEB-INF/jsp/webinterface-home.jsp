@@ -15,7 +15,6 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
           integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
-    <script src="${context}/js/util.js"></script>
     <script src="${context}/js/api_client.js"></script>
     <script>api_set_context("${context}")</script>
 
@@ -28,11 +27,6 @@
     </style>
 
     <script>
-        var username;
-
-        function Init() {
-            username = getCookie("username");
-        }
 
         function Save() {
 
@@ -84,7 +78,7 @@
 
             var formData = new FormData(document.getElementById("logo-form"));
 
-            fetch("${context}/webinterface/home/image_upload", {
+            fetch("${context}/webinterface/image_upload", {
 
                 body: formData,
                 method: "POST"
@@ -130,15 +124,15 @@
         }
     </style>
 </head>
-<body onload="Init()">
+<body>
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark justify-content-center">
     <div class="pr-2">
-        <a id="Sponsorenseitebutton" class="btn btn-light disabled" href="${context}/webinterface/home?sponsor=${sponsor.name}"
+        <a id="Sponsorenseitebutton" class="btn btn-light disabled" href="${context}/webinterface"
            role="button" aria-disabled="true">Sponsorenseite
         </a>
     </div>
     <div class="pr-2">
-        <a id="Accountbutton" class="btn btn-light" href="${context}/webinterface/account?sponsor=${sponsor.name}"
+        <a id="Accountbutton" class="btn btn-light" href="${context}/webinterface/account"
            role="button">Account
         </a>
     </div>

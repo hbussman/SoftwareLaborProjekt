@@ -35,7 +35,7 @@
             <a class="nav-link" href="${context}/sponsoren">Home <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item active">
-            <a class="nav-link" href="${context}/webinterface/login">Login <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="${context}/webinterface">Login <span class="sr-only">(current)</span></a>
         </li>
     </ul>
 </div>

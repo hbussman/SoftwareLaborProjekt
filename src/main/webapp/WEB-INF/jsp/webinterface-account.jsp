@@ -68,12 +68,12 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark justify-content-center">
     <div class="pr-2">
-        <a id="Homebutton" class="btn btn-light" href="${context}/webinterface/home?sponsor=${sponsor.name}"
+        <a id="Homebutton" class="btn btn-light" href="${context}/webinterface/"
            role="button">Sponsorenseite
         </a>
     </div>
     <div class="pr-2">
-        <a id="Accountbutton" class="btn btn-light disabled" href="${context}/webinterface/home?sponsor=${sponsor.name}"
+        <a id="Accountbutton" class="btn btn-light disabled" href="${context}/webinterface/"
            role="button" aria-disabled="true">Account
         </a>
     </div>

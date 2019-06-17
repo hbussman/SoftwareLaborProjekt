@@ -24,20 +24,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers(
                         "/webinterface/**",
-                        "/api/event/edit",
                         "/api/event/create",
+                        "/api/event/edit",
+                        "/api/event/delete",
                         "/sponsor/set_info",
                         "/account/save"
                 )
                 .authenticated()
                 .and()
                 .formLogin()
-                .loginPage("/webinterface/login")
+                .loginPage("/webinterface")
                 .permitAll()
-                .defaultSuccessUrl("/webinterface/home")
+                .defaultSuccessUrl("/webinterface")
                 .and()
                 .logout()
-                .logoutSuccessUrl("/webinterface/login")
+                .logoutSuccessUrl("/webinterface")
                 .invalidateHttpSession(true);
     }
 

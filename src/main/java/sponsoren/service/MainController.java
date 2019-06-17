@@ -214,11 +214,20 @@ public class MainController {
 
 
     @PatchMapping(path="/event/edit", consumes="application/json")
-    public ResponseEntity editVeranstaltung(@RequestBody Map<String, String> event) {
-        Integer eventId = Integer.parseInt(event.get("id"));
+    public ResponseEntity editVeranstaltung(@AuthenticationPrincipal AccountEntity user, @RequestBody Map<String, String> event) {
+        int eventId = Integer.parseInt(event.get("id"));
         Optional<VeranstaltungEntity> veranstaltungEntity = veranstaltungRepository.findById(eventId);
         if(!veranstaltungEntity.isPresent()) {
             return ResponseEntity.unprocessableEntity().body("Veranstaltung mit ID=" + eventId + " wurde nicht gefunden!");
+        }
+
+        // make sure we have permission to edit this
+        SponsorVeranstaltungEntityPK sponsorVeranstaltungEntityPK = new SponsorVeranstaltungEntityPK();
+        sponsorVeranstaltungEntityPK.setVeranstaltungId(eventId);
+        sponsorVeranstaltungEntityPK.setSponsorName(user.getSponsorName());
+        Optional<SponsorVeranstaltungEntity> sponsorVeranstaltung = sponsorVeranstaltungRepository.findById(sponsorVeranstaltungEntityPK);
+        if(!sponsorVeranstaltung.isPresent()) {
+            return ResponseEntity.status(403).body(user.getSponsorName() + " ist nicht als Mitveranstalter dieser Veranstaltung eingetragen!");
         }
 
         VeranstaltungEntity veranstaltung = veranstaltungEntity.get();
@@ -259,10 +268,10 @@ public class MainController {
 
     // DELETE an event
     @DeleteMapping(path="/event/delete", consumes="application/json")
-    public ResponseEntity deleteVeranstaltung(@RequestBody Map<String, String> event) {
+    public ResponseEntity deleteVeranstaltung(@AuthenticationPrincipal AccountEntity user, @RequestBody Map<String, String> event) {
         System.out.println(event.get("id"));
         System.out.println(event.get("sponsor"));
-        String sponsorName = event.get("sponsor");
+
         int eventId = Integer.parseInt(event.get("id"));
 
         // receive veranstaltung
@@ -272,7 +281,7 @@ public class MainController {
         }
         VeranstaltungEntity veranstaltung = veranstaltungEntity.get();
 
-        // get sponsor-veranstaltung mappings
+        // get list of sponsors who organise this event
         Map<String, SponsorVeranstaltungEntity> sponsoren = new HashMap<>();
         Iterable<SponsorVeranstaltungEntity> sponsorVeranstaltungEntities = sponsorVeranstaltungRepository.findAll();
         sponsorVeranstaltungEntities.forEach(sponsorVeranstaltungEntity -> {
@@ -281,8 +290,15 @@ public class MainController {
             }
         });
 
-        // if this event is organised by multiple sponsors, remove the sponsor from it
-        sponsorVeranstaltungRepository.delete(sponsoren.get(sponsorName));
+        // check if we are one of the organisers of this event
+        if(!sponsoren.containsKey(user.getSponsorName())) {
+            return ResponseEntity.status(403).body(user.getSponsorName() + " ist nicht als Mitveranstalter dieser Veranstaltung eingetragen!");
+        }
+
+        // remove the current user from the list of organisers
+        sponsorVeranstaltungRepository.delete(sponsoren.get(user.getSponsorName()));
+
+        // if we were the only one organising this, delete the event
         if(sponsoren.size() == 1) {
             System.out.println("Lösche Veranstaltung " + veranstaltung.getName());
             veranstaltungRepository.delete(veranstaltung);

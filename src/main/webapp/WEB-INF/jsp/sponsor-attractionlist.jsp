@@ -49,13 +49,11 @@
     <p class="navbar-text navbar-center text-white" style="font-size: x-large">Attraktionen</p>
 </nav>
 <nav class="navbar fixed-bottom navbar-expand-lg navbar-dark bg-dark justify-content-center">
-    <div class="btn-group" role="group" aria-label="Basic example" style="min-width: 100%">
-        <a id="Attractionbutton" class="btn btn-primary btn-light disabled" aria-disabled="true"
-           href="${context}/attracions" role="button"><i class="fas fa-landmark"></i></a>
-        <a id="Homebutton" class="btn btn-primary btn-light" aria-disabled="false" href="${context}/sponsoren"
-           style="background: aquamarine"><i class="fas fa-home"></i></a>
-        <a id="Eventbutton" class="btn btn-primary btn-light " href="${context}/events" role="button"
-           aria-disabled="false"><i class="far fa-calendar-alt"></i>
+    <div class="btn-group" role="group" style="min-width: 100%">
+        <a id="Attractionbutton" class="btn btn btn-light" style="background: aquamarine; border:1px solid black"
+           href="${context}/attractions" role="button"><i class="fas fa-landmark"></i></a>
+        <a id="Homebutton" class="btn btn-light" style="border:1px solid black" href="${context}/sponsoren"><i class="fas fa-home"></i></a>
+        <a id="Eventbutton" class="btn btn-light" style="border:1px solid black" href="${context}/events" role="button"><i class="far fa-calendar-alt"></i>
         </a>
     </div>
 </nav>

@@ -196,7 +196,6 @@
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">Veranstaltung hinzufügen</h5>
-                    <div class="input-group input-group-sm">
                         <div class="row col-12 mb-2">
                         	<!-- Betriebsfeier/Veranstaltung-->
 							<div class="input-group input-group-toggle" data-toggle="buttons">
@@ -208,13 +207,16 @@
  								 </label>
 							</div>
                         </div>
-                            <div class="row col-6 mb-3">
+                        <div class="row">
+                            <div class="col-6 mb-3" style="width: 100%;">
                                 <input id="veranstaltung-name" type="text" placeholder="Name" class="form-control"
                                        aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
                             </div>
-                            <div class="row col-6 mb-3">
-                                <div class="input-group-prepend pl-5">
+                            <div class="col-6 mb-3">
+                                <div class="input-group">
+                                <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fas fa-thumbtack"></i></span>
+                                </div>
                                     <button id="veranstaltung-ort" class="btn btn-outline-secondary dropdown-toggle"
                                             type="button" data-toggle="dropdown" aria-haspopup="true"
                                             aria-expanded="false">[Veranstaltungsort]
@@ -225,16 +227,19 @@
                                                     onclick="document.getElementById('veranstaltung-ort').innerText='${location.name}'">${location.name}</button>
                                         </c:forEach>
                                     </div>
+                                    </div>
                                 </div>
                             </div>
                        
                     
                         <!-- Veranstaltung Start -->
-                        <div class="row col-6">
+                    <div class="row">
+                        <div class="col-6">
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Start</span>
                                     <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                </div>
                                     <input id="veranstaltung-start-date" type="date"
                                            placeholder="dd/mm/yyyy HH:MM (Datum+Uhrzeit)"
                                            class="form-control" style="min-width: 155px;">
@@ -244,14 +249,14 @@
                                     <input id="veranstaltung-start-time" type="time" class="form-control pr-0"
                                            placeholder="Zeit HH:MM">
                                 </div>
-                            </div>
                         </div>
                         <!-- Veranstaltung Ende -->
-                        <div class="row col-6">
-                            <div class="input-group pl-5">
+                        <div class= "col-6">
+                            <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Ende</span>
                                     <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                </div>
                                     <input id="veranstaltung-ende-date" type="date"
                                            placeholder="dd/mm/yyyy HH:MM (Datum+Uhrzeit)"
                                            class="form-control" style="min-width: 155px;">
@@ -261,17 +266,15 @@
                                     <input id="veranstaltung-ende-time" type="time" class="form-control"
                                            placeholder="Zeit HH:MM">
                                 </div>
-                            </div>
                         </div>
                     </div>
-                </div>
-
-                <div class="col-12 ml-1">
+                <div class="row mt-3">
+                <div class="col-12">
                     <textarea id="veranstaltung-beschreibung" class="form-control" rows="5"
                               placeholder="Beschreibung der Veranstaltung"></textarea>
                 </div>
                 <br>
-                <div class="col-12 ml-1">
+                <div class="col-12 mt-1">
                     <div class="text-center">
                         <a class="btn btn-primary btn-block" href="#" onclick="sendVeranstaltung();" role="button">Veranstaltung
                             veröffentlichen</a>
@@ -281,10 +284,12 @@
                        
                     </div>
                 </div>
+                </div>
             </div>
                 <div class="row">
                     <div class="col-12">
                         <div class="card-body">
+                            <h5 class="card-title">Veranstaltungen editieren</h5>
                             <c:if test="${sponsorEvents.size() > 0}">
                                 <h2 class="text-start">Veranstaltungen von ${sponsor.name}</h2>
                             </c:if>
@@ -342,9 +347,11 @@
                                 </div>
 
                                 <!-- Ort Edit -->
+                                <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Ort</span>
                                     <span class="input-group-text"><i class="fas fa-thumbtack"></i></span>
+                                </div>
                                     <button id="veranstaltung${event.id}-ort-edit"
                                             class="btn btn-outline-secondary dropdown-toggle"
                                             type="button" data-toggle="dropdown" aria-haspopup="true"

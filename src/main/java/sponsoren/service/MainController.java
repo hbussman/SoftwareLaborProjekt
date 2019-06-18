@@ -353,6 +353,53 @@ public class MainController {
         return ResponseEntity.ok().body(null);
     }
 
+    // DELETE a sponsor from an event
+    @DeleteMapping(path="/event/{eventId}/{sponsor}")
+    public ResponseEntity deleteSponsorFromVeranstaltung(@AuthenticationPrincipal AccountEntity user, @PathVariable int eventId, @PathVariable String sponsor) {
+        // make sure we have permission to edit this
+        {
+            SponsorVeranstaltungEntityPK sponsorVeranstaltungEntityPK = new SponsorVeranstaltungEntityPK();
+            sponsorVeranstaltungEntityPK.setVeranstaltungId(eventId);
+            sponsorVeranstaltungEntityPK.setSponsorName(user.getSponsorName());
+            Optional<SponsorVeranstaltungEntity> sponsorVeranstaltung = sponsorVeranstaltungRepository.findById(sponsorVeranstaltungEntityPK);
+            if(!sponsorVeranstaltung.isPresent()) {
+                return ResponseEntity.status(403).body(user.getSponsorName() + " ist nicht als Mitveranstalter dieser Veranstaltung eingetragen!");
+            }
+        }
+
+        // we can't remove ourselves (only using the 'Veranstaltung löschen' button)
+        if(sponsor.equals(user.getSponsorName())) {
+            return ResponseEntity.unprocessableEntity().body("Es ist nicht möglich, sich selbst zu entfernen (dafür bitte auf 'Veranstaltung löschen' klicken)");
+        }
+
+        // check if this association exists
+        final SponsorVeranstaltungEntityPK newSponsorVeranstaltungEntityPK = new SponsorVeranstaltungEntityPK();
+        {
+            newSponsorVeranstaltungEntityPK.setVeranstaltungId(eventId);
+            newSponsorVeranstaltungEntityPK.setSponsorName(sponsor);
+            Optional<SponsorVeranstaltungEntity> checkSponsorVeranstaltung = sponsorVeranstaltungRepository.findById(newSponsorVeranstaltungEntityPK);
+            if(!checkSponsorVeranstaltung.isPresent()) {
+                return ResponseEntity.unprocessableEntity().body(user.getSponsorName() + " ist nicht für dieses Event eingetragen!");
+            }
+        }
+
+        // delete it
+        SponsorVeranstaltungEntity entity = new SponsorVeranstaltungEntity();
+        entity.setSponsorName(sponsor);
+        entity.setVeranstaltungId(eventId);
+        sponsorVeranstaltungRepository.delete(entity);
+
+        // check if this association doesn't exist anymore
+        {
+            Optional<SponsorVeranstaltungEntity> testSponsorVeranstaltung = sponsorVeranstaltungRepository.findById(newSponsorVeranstaltungEntityPK);
+            if(testSponsorVeranstaltung.isPresent()) {
+                return ResponseEntity.status(500).body("Beim Löschen ist ein unbekannter Datenbankfehler aufgetreten.");
+            }
+        }
+
+        return ResponseEntity.ok().body(null);
+    }
+
     @GetMapping(path="/dbg/update_attraktionen")
     public ResponseEntity dbgUpdateAttraktionen() {
         System.out.println("Requesting Attraktionen from service");

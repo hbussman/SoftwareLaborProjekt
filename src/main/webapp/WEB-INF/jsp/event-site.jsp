@@ -68,10 +68,14 @@
             <div class="card-text text-dark">
                 ${event.beschreibung}
             </div>
-            <div class="card-body text-dark"><i class="fas fa-thumbtack"></i>
+            <div class="card-body text-dark">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span><i class="fas fa-thumbtack"></i></span>
+                    </div>
                 <c:choose>
     			<c:when test="${event.discriminator=='Betriebsfeier'}">
-    				<a  href="${context}/companyparty-map?id=${event.id}" class="btn btn-secondary btn-lg active" role="button" 
+    				<a  href="${context}/companyparty-map?id=${event.id}" class="btn btn-secondary btn-lg active" role="button"
     					aria-pressed="true">${locations.get(event.locationID).name}</a> 
     			</c:when>
     			<c:otherwise>
@@ -83,6 +87,7 @@
                 <div class="card-text text-dark"><i
                         class="far fa-calendar-alt"></i> ${util.prettifyTimestamp(event.start)}
                     - ${util.prettifyTimestamp(event.ende)}</div>
+                </div>
             </div>
             <span class="d-block p-1 bg-light text-dark text-center"><b>Gesponsort von</b></span>
             <div class="row no-gutters justify-content-center">

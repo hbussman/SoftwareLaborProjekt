@@ -189,15 +189,19 @@
                     <h5 class="card-title">Kontakt</h5>
                     <div class="row">
                         <div class="col-4">
+                            <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">Name</span>
+                            </div>
                                 <input id="sponsor_nachname" type="text"
                                        value="${sponsor.ansprechpartnerNachname}" class="form-control"
                                        aria-label="Sizing example input"
                                        aria-describedby="inputGroup-sizing-sm">
                             </div>
+                            <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">Vorname</span>
+                            </div>
                                 <input id="sponsor_vorname" type="text"
                                        value="${sponsor.ansprechpartnerVorname}" class="form-control"
                                        aria-label="Sizing example input"
@@ -205,48 +209,62 @@
                             </div>
                         </div>
                         <div class="col-4">
+                            <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">Email</span>
+                            </div>
                                 <input id="sponsor_email" type="email" value="${sponsor.email}"
                                        class="form-control" aria-label="Sizing example input"
                                        aria-describedby="inputGroup-sizing-sm">
                             </div>
+                            <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">Telefon</span>
+                            </div>
                                 <input id="sponsor_telefonnummer" type="tel"
                                        value="${sponsor.telefonnummer}" class="form-control"
                                        aria-label="Sizing example input"
                                        aria-describedby="inputGroup-sizing-sm">
                             </div>
+                            <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">Homepage</span>
+                            </div>
                                 <input id="sponsor_homepage" type="text" value="${sponsor.homepage}"
                                        class="form-control" aria-label="Sizing example input"
                                        aria-describedby="inputGroup-sizing-sm">
                             </div>
                         </div>
                         <div class="col-4">
+                            <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">Plz</span>
+                            </div>
                                 <input id="sponsor_plz" type="text" value="${sponsor.plz}"
                                        class="form-control" aria-label="Sizing example input"
                                        aria-describedby="inputGroup-sizing-sm">
                             </div>
+                            <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">Ort</span>
+                            </div>
                                 <input id="sponsor_ort" type="text" value="${sponsor.ort}"
                                        class="form-control" aria-label="Sizing example input"
                                        aria-describedby="inputGroup-sizing-sm">
                             </div>
+                            <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">Adresse</span>
+                            </div>
                                 <input id="sponsor_adresse" type="tel"
                                        value="${sponsor.adresse}" class="form-control"
                                        aria-label="Sizing example input"
                                        aria-describedby="inputGroup-sizing-sm">
                             </div>
+                            <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">Postfach</span>
+                            </div>
                                 <input id="sponsor_postfach" type="tel"
                                        value="${sponsor.postfach}" class="form-control"
                                        aria-label="Sizing example input"

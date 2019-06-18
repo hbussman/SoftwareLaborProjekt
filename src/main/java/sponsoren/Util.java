@@ -3,11 +3,10 @@ package sponsoren;
 import sponsoren.orm.AttraktionEntity;
 import sponsoren.orm.SponsorEntity;
 import sponsoren.orm.VeranstaltungEntity;
-import sponsoren.service.external.Attraktionen.Attraktion;
 
 public class Util {
 
-    public String prettifyTimestamp(String s) {
+    public static String prettifyTimestampImpl(String s) {
         // incoming format: yyyy-mm-dd HH:MM
         //                  0123456789ABCDEF
         // required format: dd.mm.yyyy HH:MM
@@ -16,6 +15,10 @@ public class Util {
         String day = s.substring(8, 8+2);
         String time = s.substring(11, 11+5);
         return String.format("%s.%s.%s %s", day, month, year, time);
+    }
+
+    public String prettifyTimestamp(String s) {
+        return prettifyTimestampImpl(s);
     }
 
     public String parsableDateForHTML(String s) {

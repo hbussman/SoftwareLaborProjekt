@@ -58,7 +58,8 @@
             // save the data
             db_send_new_veranstaltung(name, ort, start_date, start_time, ende_date, ende_time, beschreibung, event_type).then(result => {
                 if (result.ok) {
-                	
+
+                    resultElem.style = "color: darkgreen;";
                     resultElem.innerText = "Veranstaltung erfolgreich erstellt!";
 
                     result.json().then(event => {
@@ -102,11 +103,12 @@
             var start_time = document.getElementById('veranstaltung' + eventId + '-start-time-edit').value;
             var ende_date = document.getElementById('veranstaltung' + eventId + '-ende-date-edit').value;
             var ende_time = document.getElementById('veranstaltung' + eventId + '-ende-time-edit').value;
-        
+
+            var event_type;
             if(document.getElementById('radio_' + eventId + '_ver').checked)
             	event_type = "Veranstaltung";
             else
-            	event_type = "Betriebsfeier";		
+            	event_type = "Betriebsfeier";
             
             var resultElem = document.getElementById('veranstaltung-edit-result-' + eventId);
             // make sure all fields are filled out
@@ -116,7 +118,7 @@
                 return;
             }
 
-            db_save_event_data(eventId, name, beschreibung, ort, start_date, start_time, ende_date, ende_time, event_type).then(result => {
+            db_save_event_data(eventId, name, ort, start_date, start_time, ende_date, ende_time, beschreibung, event_type).then(result => {
                 if (result.ok) {
                     // success
                     resultElem.style = "color: darkgreen;";

@@ -32,22 +32,6 @@ public class MainController {
     @Autowired private AccountRepository accountRepository;
     @Autowired private AttraktionRepository attraktionRepository;
 
-    // GET sponsor.Werbetext
-    @GetMapping(path="/sponsor/werbetext")
-    public @ResponseBody String getSponsorWerbetext(@RequestParam String name) {
-        if(name.isEmpty())
-            return "missing request parameter ?name="; // TODO use error result code
-
-        Optional<SponsorEntity> s = sponsorRepository.findById(name);
-        if(s.isPresent())
-        {
-            // sponsor found in database
-            return jsonify(s.get().getWerbetext());
-        }
-        else
-            return "Unknown Sponsor '" + name + "'"; // TODO use error result code
-    }
-
 
     // GET list of all sponsors
     @GetMapping(path="/sponsor/all")
@@ -55,15 +39,14 @@ public class MainController {
         return sponsorRepository.findAll();
     }
 
-    // GET all table columns of sponsor
-    @GetMapping(path = "/sponsor/get_info")
-    public @ResponseBody SponsorEntity getSponsorInfo(@RequestParam  String name) {
-        Optional<SponsorEntity> optional = sponsorRepository.findById(name);
-        return optional.orElse(null);
+    // GET single sponsor
+    @GetMapping(path="/sponsor/{name}")
+    public @ResponseBody SponsorEntity getSponsor(@PathVariable String name) {
+        return sponsorRepository.findById(name).orElse(null);
     }
 
-    // POST save sponsor information
-    @PostMapping(path = "/sponsor/set_info")
+    // PATCH save sponsor information
+    @PatchMapping(path = "/sponsor")
     public ResponseEntity setSponsorInfo(@AuthenticationPrincipal AccountEntity user, @RequestBody SponsorEntity sponsor) {
         sponsor.setName(user.getSponsorName());
         sponsor.setAdresse(sponsor.getAdresse().trim());
@@ -96,20 +79,12 @@ public class MainController {
         return locationRepository.findAll();
     }
 
-    // GET list of all accounts - LOL NO
-    /*@GetMapping(path="/account/all")
-    public @ResponseBody Iterable<AccountEntity> getAllAccounts() {
-        return accountRepository.findAll();
-    }*/
-
-    // PATCH account data
-    @PatchMapping(path="/account/save", consumes = "application/json")
-    public @ResponseBody ResponseEntity saveAccount(@AuthenticationPrincipal AccountEntity user, @RequestBody Map<String, String> data) {
+    // PATCH save account data
+    @PatchMapping(path="/account")
+    public @ResponseBody ResponseEntity saveAccount(@AuthenticationPrincipal AccountEntity user, @RequestBody AccountInfo data) {
         String sponsor = user.getSponsorName();
-        String username = data.get("username");
-        String password = data.get("password");
 
-        if(username.isEmpty()) {
+        if(data.getUsername().isEmpty()) {
             return ResponseEntity.unprocessableEntity().body("Der Login-Username kann nicht leer sein!");
         }
 
@@ -128,18 +103,12 @@ public class MainController {
 
         accountRepository.delete(account);
 
-        account.setUsername(username);
-        if(!password.isEmpty())
-            account.setPassword(new SponsorenPasswordEncoder().encode(password));
+        account.setUsername(data.getUsername());
+        if(!data.getPassword().isEmpty())
+            account.setPassword(new SponsorenPasswordEncoder().encode(data.getPassword()));
         accountRepository.save(account);
 
         return ResponseEntity.ok("");
-    }
-
-    // GET list of sponsor_veranstaltung
-    @GetMapping(path="/event/all/sponsor_mapping")
-    public @ResponseBody Iterable<SponsorVeranstaltungEntity> getAllVeranst() {
-        return sponsorVeranstaltungRepository.findAll();
     }
 
     // GET list of all events
@@ -148,26 +117,38 @@ public class MainController {
         return veranstaltungRepository.findAll();
     }
 
+    // GET list of sponsor_veranstaltung
+    @GetMapping(path="/event/all/sponsor_mapping")
+    public @ResponseBody Iterable<SponsorVeranstaltungEntity> getAllVeranst() {
+        return sponsorVeranstaltungRepository.findAll();
+    }
+
+    // GET single event
+    @GetMapping(path="/event/{eventId}")
+    public @ResponseBody VeranstaltungEntity getEvent(@PathVariable int eventId) {
+        return veranstaltungRepository.findById(eventId).orElse(null);
+    }
+
     // POST create new event
-    @PostMapping(path = "/event/new", consumes = "application/json", produces = "application/json")
-    public ResponseEntity createNewVeranstaltung(@AuthenticationPrincipal AccountEntity user, @RequestBody Map<String, String> event) {
+    @PostMapping(path = "/event")
+    public ResponseEntity createNewVeranstaltung(@AuthenticationPrincipal AccountEntity user, @RequestBody EventInfo event) {
         // create Veranstaltung
         VeranstaltungEntity veranstaltung = new VeranstaltungEntity();
-        veranstaltung.setName(event.get("name"));
-        veranstaltung.setBeschreibung(event.get("beschreibung"));
-        System.out.println(event.get("beschreibung"));
+        veranstaltung.setName(event.getName());
+        veranstaltung.setBeschreibung(event.getBeschreibung());
+        System.out.println(event.getBeschreibung());
         try {
-            veranstaltung.setStart(parseDate(event.get("start")));
+            veranstaltung.setStart(parseDate(event.getStart()));
         } catch(ParseException e) {
             e.printStackTrace();
-            return ResponseEntity.unprocessableEntity().body("Fehlerhaftes Datumsformat " + event.get("start") + " - "
+            return ResponseEntity.unprocessableEntity().body("Fehlerhaftes Datumsformat " + event.getStart() + " - "
                     + e.getMessage());
         }
         try {
-            veranstaltung.setEnde(parseDate(event.get("ende")));
+            veranstaltung.setEnde(parseDate(event.getEnde()));
         } catch(ParseException e) {
             e.printStackTrace();
-            return ResponseEntity.unprocessableEntity().body("Fehlerhaftes Datumsformat " + event.get("ende") + " - "
+            return ResponseEntity.unprocessableEntity().body("Fehlerhaftes Datumsformat " + event.getEnde() + " - "
                     + e.getMessage());
         }
 
@@ -177,14 +158,14 @@ public class MainController {
         }
 
         // get location id from name
-        String ort = event.get("ort");
+        String ort = event.getOrt();
         LocationEntity location = findLocation(ort);
         if(location == null)
             return ResponseEntity.unprocessableEntity().body("Ort '" + ort + "' existiert nicht");
         veranstaltung.setLocationID(location.getId());
 
         // save Veranstaltung to database
-        veranstaltung.setDiscriminator(event.get("discriminator"));
+        veranstaltung.setDiscriminator(event.getDiscriminator());
         veranstaltungRepository.save(veranstaltung);
         veranstaltung = findNewestVeranstaltung();
         System.out.println("Veranstaltung saved; ID=" + veranstaltung.getId());
@@ -198,12 +179,15 @@ public class MainController {
         // save veranstaltung-sponsor association to database
         sponsorVeranstaltungRepository.save(sponsorVeranstaltung);
 
-        Map<String, String> body = new HashMap<>();
-        body.put("name", veranstaltung.getName());
-        body.put("ort", location.getName());
-        body.put("start", new Util().prettifyTimestamp(veranstaltung.getStart().toString()));
-        body.put("ende", new Util().prettifyTimestamp(veranstaltung.getEnde().toString()));
-        body.put("beschreibung", veranstaltung.getBeschreibung());
+        EventInfo body = new EventInfo(
+                veranstaltung.getName(),
+                location.getName(),
+                Util.prettifyTimestampImpl(veranstaltung.getStart().toString()),
+                Util.prettifyTimestampImpl(veranstaltung.getEnde().toString()),
+                veranstaltung.getBeschreibung(),
+                event.getDiscriminator()
+        );
+
         try {
             return ResponseEntity.created(new URI("/event?id=" + veranstaltung.getId())).body(body);
         } catch(URISyntaxException e) {
@@ -212,10 +196,9 @@ public class MainController {
         }
     }
 
-
-    @PatchMapping(path="/event/edit", consumes="application/json")
-    public ResponseEntity editVeranstaltung(@AuthenticationPrincipal AccountEntity user, @RequestBody Map<String, String> event) {
-        int eventId = Integer.parseInt(event.get("id"));
+    // PATCH edit an event
+    @PatchMapping(path="/event/{eventId}")
+    public ResponseEntity editVeranstaltung(@AuthenticationPrincipal AccountEntity user, @PathVariable int eventId, @RequestBody EventInfo event) {
         Optional<VeranstaltungEntity> veranstaltungEntity = veranstaltungRepository.findById(eventId);
         if(!veranstaltungEntity.isPresent()) {
             return ResponseEntity.unprocessableEntity().body("Veranstaltung mit ID=" + eventId + " wurde nicht gefunden!");
@@ -231,20 +214,20 @@ public class MainController {
         }
 
         VeranstaltungEntity veranstaltung = veranstaltungEntity.get();
-        veranstaltung.setName(event.get("name"));
-        veranstaltung.setBeschreibung(event.get("beschreibung"));
+        veranstaltung.setName(event.getName());
+        veranstaltung.setBeschreibung(event.getBeschreibung());
         try {
-            veranstaltung.setStart(parseDate(event.get("start")));
+            veranstaltung.setStart(parseDate(event.getStart()));
         } catch(ParseException e) {
             e.printStackTrace();
-            return ResponseEntity.unprocessableEntity().body("Start: Fehlerhaftes Datumsformat '" + event.get("start") + "' - "
+            return ResponseEntity.unprocessableEntity().body("Start: Fehlerhaftes Datumsformat '" + event.getStart() + "' - "
                     + e.getMessage());
         }
         try {
-            veranstaltung.setEnde(parseDate(event.get("ende")));
+            veranstaltung.setEnde(parseDate(event.getEnde()));
         } catch(ParseException e) {
             e.printStackTrace();
-            return ResponseEntity.unprocessableEntity().body("Ende: Fehlerhaftes Datumsformat " + event.get("ende") + " - "
+            return ResponseEntity.unprocessableEntity().body("Ende: Fehlerhaftes Datumsformat " + event.getEnde() + " - "
                     + e.getMessage());
         }
 
@@ -254,25 +237,22 @@ public class MainController {
         }
 
         // get location id from name
-        LocationEntity location = findLocation(event.get("ort"));
+        LocationEntity location = findLocation(event.getOrt());
         if(location == null) {
-            return ResponseEntity.unprocessableEntity().body("Ort " + event.get("ort") + " existiert nicht!");
+            return ResponseEntity.unprocessableEntity().body("Ort " + event.getOrt() + " existiert nicht!");
         }
 
         veranstaltung.setLocationID(location.getId());
-        veranstaltung.setDiscriminator(event.get("discriminator"));
+        veranstaltung.setDiscriminator(event.getDiscriminator());
 
         veranstaltungRepository.save(veranstaltung);
         return ResponseEntity.ok(null);
     }
 
     // DELETE an event
-    @DeleteMapping(path="/event/delete", consumes="application/json")
-    public ResponseEntity deleteVeranstaltung(@AuthenticationPrincipal AccountEntity user, @RequestBody Map<String, String> event) {
-        System.out.println(event.get("id"));
-        System.out.println(event.get("sponsor"));
-
-        int eventId = Integer.parseInt(event.get("id"));
+    @DeleteMapping(path="/event/{eventId}")
+    public ResponseEntity deleteVeranstaltung(@AuthenticationPrincipal AccountEntity user, @PathVariable int eventId) {
+        System.out.println(user.getSponsorName() + ": delete event " + eventId);
 
         // receive veranstaltung
         Optional<VeranstaltungEntity> veranstaltungEntity = veranstaltungRepository.findById(eventId);
@@ -409,8 +389,94 @@ public class MainController {
 
         return max;
     }
+}
 
-    private String jsonify(String value) {
-        return String.format("{\"text\":\"%s\"}", value);
+
+class EventInfo {
+    private String name;
+    private String ort;
+    private String start;
+    private String ende;
+    private String beschreibung;
+    private String discriminator;
+
+    EventInfo() {}
+
+    EventInfo(String name, String ort, String start, String ende, String beschreibung, String discriminator) {
+        this.name = name;
+        this.ort = ort;
+        this.start = start;
+        this.ende = ende;
+        this.beschreibung = beschreibung;
+        this.discriminator = discriminator;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getOrt() {
+        return ort;
+    }
+
+    public void setOrt(String ort) {
+        this.ort = ort;
+    }
+
+    public String getStart() {
+        return start;
+    }
+
+    public void setStart(String start) {
+        this.start = start;
+    }
+
+    public String getEnde() {
+        return ende;
+    }
+
+    public void setEnde(String ende) {
+        this.ende = ende;
+    }
+
+    public String getBeschreibung() {
+        return beschreibung;
+    }
+
+    public void setBeschreibung(String beschreibung) {
+        this.beschreibung = beschreibung;
+    }
+
+    public String getDiscriminator() {
+        return discriminator;
+    }
+
+    public void setDiscriminator(String discriminator) {
+        this.discriminator = discriminator;
+    }
+}
+
+class AccountInfo {
+    private String username;
+    private String password;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

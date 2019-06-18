@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -24,13 +25,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers(
                         "/webinterface/**",
-                        "/api/event/create",
-                        "/api/event/edit",
-                        "/api/event/delete",
-                        "/sponsor/set_info",
-                        "/account/save"
+                        "/api/event",
+                        "/api/sponsor",
+                        "/api/account"
                 )
                 .authenticated()
+                .antMatchers(HttpMethod.GET,
+                        "/api/event/**",
+                        "/api/sponsor/**"
+                )
+                .permitAll()
                 .and()
                 .formLogin()
                 .loginPage("/webinterface")

@@ -199,18 +199,23 @@ public class MainController {
     // PATCH edit an event
     @PatchMapping(path="/event/{eventId}")
     public ResponseEntity editVeranstaltung(@AuthenticationPrincipal AccountEntity user, @PathVariable int eventId, @RequestBody EventInfo event) {
-        Optional<VeranstaltungEntity> veranstaltungEntity = veranstaltungRepository.findById(eventId);
-        if(!veranstaltungEntity.isPresent()) {
-            return ResponseEntity.unprocessableEntity().body("Veranstaltung mit ID=" + eventId + " wurde nicht gefunden!");
+        // make sure we have permission to edit this
+        {
+            SponsorVeranstaltungEntityPK sponsorVeranstaltungEntityPK = new SponsorVeranstaltungEntityPK();
+            sponsorVeranstaltungEntityPK.setVeranstaltungId(eventId);
+            sponsorVeranstaltungEntityPK.setSponsorName(user.getSponsorName());
+            Optional<SponsorVeranstaltungEntity> sponsorVeranstaltung = sponsorVeranstaltungRepository.findById(sponsorVeranstaltungEntityPK);
+            if(!sponsorVeranstaltung.isPresent()) {
+                return ResponseEntity.status(403).body(user.getSponsorName() + " ist nicht als Mitveranstalter dieser Veranstaltung eingetragen!");
+            }
         }
 
-        // make sure we have permission to edit this
-        SponsorVeranstaltungEntityPK sponsorVeranstaltungEntityPK = new SponsorVeranstaltungEntityPK();
-        sponsorVeranstaltungEntityPK.setVeranstaltungId(eventId);
-        sponsorVeranstaltungEntityPK.setSponsorName(user.getSponsorName());
-        Optional<SponsorVeranstaltungEntity> sponsorVeranstaltung = sponsorVeranstaltungRepository.findById(sponsorVeranstaltungEntityPK);
-        if(!sponsorVeranstaltung.isPresent()) {
-            return ResponseEntity.status(403).body(user.getSponsorName() + " ist nicht als Mitveranstalter dieser Veranstaltung eingetragen!");
+        // get event
+        Optional<VeranstaltungEntity> veranstaltungEntity = veranstaltungRepository.findById(eventId);
+
+        // check if event exists
+        if(!veranstaltungEntity.isPresent()) {
+            return ResponseEntity.unprocessableEntity().body("Veranstaltung mit ID=" + eventId + " wurde nicht gefunden!");
         }
 
         VeranstaltungEntity veranstaltung = veranstaltungEntity.get();
@@ -285,6 +290,66 @@ public class MainController {
         }
 
         // otherwise, delete the entire event
+        return ResponseEntity.ok().body(null);
+    }
+
+    // PUT a sponsor as a new organiser into the event
+    @PutMapping(path="/event/{eventId}")
+    public ResponseEntity addVeranstaltungSponsor(@AuthenticationPrincipal AccountEntity user, @PathVariable int eventId, @RequestBody String sponsor) {
+        // make sure we have permission to edit this
+        {
+            SponsorVeranstaltungEntityPK sponsorVeranstaltungEntityPK = new SponsorVeranstaltungEntityPK();
+            sponsorVeranstaltungEntityPK.setVeranstaltungId(eventId);
+            sponsorVeranstaltungEntityPK.setSponsorName(user.getSponsorName());
+            Optional<SponsorVeranstaltungEntity> sponsorVeranstaltung = sponsorVeranstaltungRepository.findById(sponsorVeranstaltungEntityPK);
+            if(!sponsorVeranstaltung.isPresent()) {
+                return ResponseEntity.status(403).body(user.getSponsorName() + " ist nicht als Mitveranstalter dieser Veranstaltung eingetragen!");
+            }
+        }
+
+        // check if event exists
+        {
+            Optional<VeranstaltungEntity> veranstaltungEntity = veranstaltungRepository.findById(eventId);
+            if(!veranstaltungEntity.isPresent()) {
+                return ResponseEntity.unprocessableEntity().body("Veranstaltung mit ID=" + eventId + " wurde nicht gefunden!");
+            }
+        }
+
+        // check if the sponsor exists
+        {
+            Optional<SponsorEntity> sponsorEntity = sponsorRepository.findById(sponsor);
+            if(!sponsorEntity.isPresent()) {
+                return ResponseEntity.unprocessableEntity().body(sponsor + " existiert nicht (ist kein bekannter Sponsor der BuGa)");
+            }
+        }
+
+        // check if this association already exists
+        final SponsorVeranstaltungEntityPK newSponsorVeranstaltungEntityPK = new SponsorVeranstaltungEntityPK();
+        {
+            newSponsorVeranstaltungEntityPK.setVeranstaltungId(eventId);
+            newSponsorVeranstaltungEntityPK.setSponsorName(sponsor);
+            Optional<SponsorVeranstaltungEntity> checkSponsorVeranstaltung = sponsorVeranstaltungRepository.findById(newSponsorVeranstaltungEntityPK);
+            if(checkSponsorVeranstaltung.isPresent()) {
+                return ResponseEntity.unprocessableEntity().body(user.getSponsorName() + " ist bereits für dieses Event eingetragen!");
+            }
+        }
+
+        // save it to the database
+        {
+            SponsorVeranstaltungEntity newEntry = new SponsorVeranstaltungEntity();
+            newEntry.setSponsorName(sponsor);
+            newEntry.setVeranstaltungId(eventId);
+            sponsorVeranstaltungRepository.save(newEntry);
+        }
+
+        // check if this association exist now
+        {
+            Optional<SponsorVeranstaltungEntity> testSponsorVeranstaltung = sponsorVeranstaltungRepository.findById(newSponsorVeranstaltungEntityPK);
+            if(!testSponsorVeranstaltung.isPresent()) {
+                return ResponseEntity.status(500).body("Beim Eintragen ist ein unbekannter Datenbankfehler aufgetreten.");
+            }
+        }
+
         return ResponseEntity.ok().body(null);
     }
 

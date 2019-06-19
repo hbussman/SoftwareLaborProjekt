@@ -2,7 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%--@elvariable id="util" type="sponsoren.Util"--%>
 <%--@elvariable id="sponsor" type="sponsoren.orm.SponsorEntity"--%>
-<%--@elvariable id="sponsorEvents" type="java.util.List<sponsoren.orm.VeranstaltungEntity>"--%>
+<%--@elvariable id="events" type="java.util.List<sponsoren.orm.VeranstaltungEntity>"--%>
 <%--@elvariable id="locations" type="java.util.Map<Integer, sponsoren.orm.LocationEntity>"--%>
 <%--@elvariable id="locationList" type="java.util.List<sponsoren.orm.LocationEntity>"--%>
 <c:set var="context" value="${pageContext.request.contextPath}"/>
@@ -197,6 +197,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
+
                     <h5 class="card-title">Veranstaltung hinzufügen</h5>
                     <div class="row col-12 mb-2">
                         <!-- Betriebsfeier/Veranstaltung-->
@@ -290,14 +291,24 @@
                             </div>
                         </div>
                     </div>
+
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!------------------ Veranstaltungen bearbeiten ------------------>
+<c:if test="${events.size() > 0}">
+<div class="container pt-5">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
                 <div class="row">
                     <div class="col-12">
                         <div class="card-body">
                             <h5 class="card-title">Veranstaltungen editieren</h5>
-                            <c:if test="${sponsorEvents.size() > 0}">
-                                <h2 class="text-start">Veranstaltungen von ${sponsor.name}</h2>
-                            </c:if>
                         </div>
                     </div>
                     <c:forEach items="${events}" var="event">
@@ -365,7 +376,7 @@
                                             class="btn btn-outline-secondary dropdown-toggle"
                                             type="button" data-toggle="dropdown" aria-haspopup="true"
                                             aria-expanded="false">${locations.get(event.locationID).name}</button>
-                                    <div class="dropdown-menu">
+                                    <div class="dropdown-menu" style="height: 400px; overflow: auto;">
                                         <c:forEach items="${locationList}" var="location">
                                             <button class="dropdown-item"
                                                     onclick="document.getElementById('veranstaltung${event.id}-ort-edit').innerText='${location.name}'">${location.name}</button>
@@ -450,12 +461,15 @@
                             </div>
                         </div>
                     </c:forEach>
+
                 </div>
             </div>
-
         </div>
     </div>
 </div>
+</c:if>
+
+
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>

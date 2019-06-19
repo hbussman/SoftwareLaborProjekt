@@ -203,33 +203,32 @@
                         <!-- Betriebsfeier/Veranstaltung-->
                         <div class="input-group input-group-toggle" data-toggle="buttons">
                             <label class="btn btn-light active">
-                                <input type="radio" name="set_event_type" id="radio_veranstaltung_send"
-                                       autocomplete="off" checked> Öffentliche Veranstaltung
+                                <input type="radio" name="set_event_type" id="radio_veranstaltung_send" autocomplete="off" checked>
+                                Öffentliche Veranstaltung
                             </label>
                             <label class="btn btn-light">
-                                <input type="radio" name="set_event_type" id="radio_betriebsfeier_send"
-                                       autocomplete="off"> Betriebsfeier
+                                <input type="radio" name="set_event_type" id="radio_betriebsfeier_send" autocomplete="off">
+                                Betriebsfeier
                             </label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-6 mb-3" style="width: 100%;">
-                            <input id="veranstaltung-name" type="text" placeholder="Name" class="form-control"
-                                   aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                            <input id="veranstaltung-name" type="text" placeholder="Name" class="form-control">
                         </div>
                         <div class="col-6 mb-3">
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fas fa-thumbtack"></i></span>
                                 </div>
-                                <button id="veranstaltung-ort" class="btn btn-outline-secondary dropdown-toggle"
-                                        type="button" data-toggle="dropdown" aria-haspopup="true"
-                                        aria-expanded="false">[Veranstaltungsort]
+                                <button id="veranstaltung-ort" class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown">
+                                    [Veranstaltungsort]
                                 </button>
                                 <div class="dropdown-menu" style="height: 400px; overflow: auto;">
                                     <c:forEach items="${locationList}" var="location">
                                         <button class="dropdown-item"
-                                                onclick="document.getElementById('veranstaltung-ort').innerText='${location.name}'">${location.name}</button>
+                                                onclick="document.getElementById('veranstaltung-ort').innerText='${location.name}'">${location.name}
+                                        </button>
                                     </c:forEach>
                                 </div>
                             </div>
@@ -275,15 +274,16 @@
                     </div>
                     <div class="row mt-3">
                         <div class="col-12">
-                    <textarea id="veranstaltung-beschreibung" class="form-control" rows="5"
-                              placeholder="Beschreibung der Veranstaltung"></textarea>
+                            <textarea id="veranstaltung-beschreibung" class="form-control" rows="5"
+                                      placeholder="Beschreibung der Veranstaltung"></textarea>
                         </div>
                         <br>
                         <div class="col-12 mt-1">
                             <div class="text-center">
-                                <a class="btn btn-primary btn-block" href="#" onclick="sendVeranstaltung();"
-                                   role="button">Veranstaltung
-                                    veröffentlichen</a>
+                                <a class="btn btn-primary btn-block" href="#" onclick="sendVeranstaltung();" role="button">
+                                    Veranstaltung veröffentlichen
+                                </a>
+
                                 <br>
                                 <p id="veranstaltung-success-text"></p>
                                 <div id="veranstaltung-info"></div>
@@ -301,172 +301,160 @@
 
 <!------------------ Veranstaltungen bearbeiten ------------------>
 <c:if test="${events.size() > 0}">
-<div class="container pt-5">
-    <div class="row">
-        <div class="col-12">
-            <div class="card">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card-body">
-                            <h5 class="card-title">Veranstaltungen editieren</h5>
-                        </div>
-                    </div>
-                    <c:forEach items="${events}" var="event">
-                        <div class="col-12 col-md-6" id="event-display-${event.id}">
+    <div class="container pt-5">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="row">
+                        <div class="col-12">
                             <div class="card-body">
-                                <h5 class="card-title">
-                                    <a id="veranstaltung${event.id}-name" href="${context}/event?id=${event.id}"
-                                       class="text-decoration-none">${event.name}</a>
-                                </h5>
+                                <h5 class="card-title">Veranstaltungen editieren</h5>
+                            </div>
+                        </div>
+                        <c:forEach items="${events}" var="event">
+                            <div class="col-12 col-md-6" id="event-display-${event.id}">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <a id="veranstaltung${event.id}-name" href="${context}/event?id=${event.id}" class="text-decoration-none">
+                                                ${event.name}
+                                        </a>
+                                    </h5>
 
-                                <!-- Betriebsfeier/Veranstaltung Edit -->
-                                <div class="input-group input-group-toggle" data-toggle="buttons">
-                                    <c:choose>
-                                        <c:when test="${event.discriminator=='Veranstaltung'}">
-                                            <label class="btn btn-light active">
-                                                <input type="radio" name="edit_${event.id}" id="radio_${event.id}_ver"
-                                                       autocomplete="off" checked> Öffentliche Veranstaltung
-                                            </label>
-                                            <label class="btn btn-light">
-                                                <input type="radio" name="edit_${event.id}" id="radio_${event.id}_betr"
-                                                       autocomplete="off"> Betriebsfeier
-                                            </label>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <label class="btn btn-light">
-                                                <input type="radio" name="edit_${event.id}" id="radio_${event.id}_ver"
-                                                       autocomplete="off"> Öffentliche Veranstaltung
-                                            </label>
-                                            <label class="btn btn-light active">
-                                                <input type="radio" name="edit_${event.id}" id="radio_${event.id}_betr"
-                                                       autocomplete="off" checked> Betriebsfeier
-                                            </label>
-                                            <br/>
-                                        </c:otherwise>
-                                    </c:choose>
+                                    <!-- Betriebsfeier/Veranstaltung Edit -->
+                                    <div class="input-group input-group-toggle" data-toggle="buttons">
+                                        <label class="btn btn-light active">
+                                            <input type="radio" name="edit_${event.id}" id="radio_${event.id}_ver" autocomplete="off"
+                                                   <c:if test="${event.discriminator=='Veranstaltung'}">checked</c:if>>
+                                            Öffentliche Veranstaltung
+                                        </label>
+                                        <label class="btn btn-light">
+                                            <input type="radio" name="edit_${event.id}" id="radio_${event.id}_betr" autocomplete="off"
+                                                   <c:if test="${event.discriminator=='Betriebsfeier'}">checked</c:if>>
+                                            Betriebsfeier
+                                        </label>
+                                    </div>
 
-                                </div>
-                                <!-- Name Edit -->
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">Name</span>
-                                    <input id="veranstaltung${event.id}-name-edit" type="text"
-                                           value="${event.name}"
-                                           placeholder="" class="form-control"
-                                           aria-label="Sizing example input"
-                                           aria-describedby="inputGroup-sizing-sm">
-                                </div>
-
-                                <!-- Beschreibung Edit -->
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">Kurzbeschreibung</span>
-                                    <input id="veranstaltung${event.id}-beschreibung-edit" type="text"
-                                           value="${event.beschreibung}"
-                                           placeholder="" class="form-control"
-                                           aria-label="Sizing example input"
-                                           aria-describedby="inputGroup-sizing-sm">
-                                </div>
-
-                                <!-- Ort Edit -->
-                                <div class="input-group">
+                                    <!-- Name Edit -->
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text">Ort</span>
-                                        <span class="input-group-text"><i class="fas fa-thumbtack"></i></span>
+                                        <span class="input-group-text">Name</span>
+                                        <input id="veranstaltung${event.id}-name-edit" type="text"
+                                               value="${event.name}"
+                                               placeholder="" class="form-control"
+                                               aria-label="Sizing example input"
+                                               aria-describedby="inputGroup-sizing-sm">
                                     </div>
-                                    <button id="veranstaltung${event.id}-ort-edit"
-                                            class="btn btn-outline-secondary dropdown-toggle"
-                                            type="button" data-toggle="dropdown" aria-haspopup="true"
-                                            aria-expanded="false">${locations.get(event.locationID).name}</button>
-                                    <div class="dropdown-menu" style="height: 400px; overflow: auto;">
-                                        <c:forEach items="${locationList}" var="location">
-                                            <button class="dropdown-item"
-                                                    onclick="document.getElementById('veranstaltung${event.id}-ort-edit').innerText='${location.name}'">${location.name}</button>
-                                        </c:forEach>
+
+                                    <!-- Beschreibung Edit -->
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Kurzbeschreibung</span>
+                                        <input id="veranstaltung${event.id}-beschreibung-edit" type="text"
+                                               value="${event.beschreibung}"
+                                               placeholder="" class="form-control"
+                                               aria-label="Sizing example input"
+                                               aria-describedby="inputGroup-sizing-sm">
                                     </div>
-                                </div>
 
-                                <!-- Start Edit -->
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">Start</span>
-                                    <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
-                                    <input id="veranstaltung${event.id}-start-date-edit" type="date"
-                                           value="${util.parsableDateForHTML(event.start)}"
-                                           placeholder="dd/mm/yyyy HH:MM (Datum+Uhrzeit)"
-                                           class="form-control" aria-label="Veranstaltung Start Datum"
-                                           aria-describedby="inputGroup-sizing-sm">
-                                    <div class="input-group-append">
-                                        <span class="input-group-text"><i class="far fa-clock"></i></span>
+                                    <!-- Ort Edit -->
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">Ort</span>
+                                            <span class="input-group-text"><i class="fas fa-thumbtack"></i></span>
+                                        </div>
+                                        <button id="veranstaltung${event.id}-ort-edit"
+                                                class="btn btn-outline-secondary dropdown-toggle"
+                                                type="button" data-toggle="dropdown" aria-haspopup="true"
+                                                aria-expanded="false">${locations.get(event.locationID).name}</button>
+                                        <div class="dropdown-menu" style="height: 400px; overflow: auto;">
+                                            <c:forEach items="${locationList}" var="location">
+                                                <button class="dropdown-item"
+                                                        onclick="document.getElementById('veranstaltung${event.id}-ort-edit').innerText='${location.name}'">${location.name}</button>
+                                            </c:forEach>
+                                        </div>
                                     </div>
-                                    <input id="veranstaltung${event.id}-start-time-edit" type="time"
-                                           class="form-control"
-                                           value="${util.parsableTimeForHTML(event.start)}"
-                                           placeholder="Zeit HH:MM"
-                                           aria-label="Start-Time" aria-describedby="basic-addon1">
-                                </div>
 
-                                <!-- Ende Edit -->
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">Ende</span>
-                                    <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
-                                    <input id="veranstaltung${event.id}-ende-date-edit" type="date"
-                                           value="${util.parsableDateForHTML(event.ende)}"
-                                           placeholder="dd/mm/yyyy HH:MM (Datum+Uhrzeit)"
-                                           class="form-control" aria-label="Veranstaltung Start Datum"
-                                           aria-describedby="inputGroup-sizing-sm">
-                                    <div class="input-group-append">
-                                        <span class="input-group-text"><i class="far fa-clock"></i></span>
+                                    <!-- Start Edit -->
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Start</span>
+                                        <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                        <input id="veranstaltung${event.id}-start-date-edit" type="date"
+                                               value="${util.parsableDateForHTML(event.start)}"
+                                               placeholder="dd/mm/yyyy HH:MM (Datum+Uhrzeit)"
+                                               class="form-control" aria-label="Veranstaltung Start Datum"
+                                               aria-describedby="inputGroup-sizing-sm">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text"><i class="far fa-clock"></i></span>
+                                        </div>
+                                        <input id="veranstaltung${event.id}-start-time-edit" type="time"
+                                               class="form-control"
+                                               value="${util.parsableTimeForHTML(event.start)}"
+                                               placeholder="Zeit HH:MM"
+                                               aria-label="Start-Time" aria-describedby="basic-addon1">
                                     </div>
-                                    <input id="veranstaltung${event.id}-ende-time-edit" type="time" class="form-control"
-                                           value="${util.parsableTimeForHTML(event.ende)}"
-                                           placeholder="Zeit HH:MM"
-                                           aria-label="Start-Time" aria-describedby="basic-addon1">
-                                </div>
 
-                                <!-- Speichern Button -->
-                                <button id="button-save-veranstaltung-${event.id}" class="btn btn-primary btn-success"
-                                        onclick="saveVeranstaltung(${event.id})" role="button">Änderungen speichern
-                                </button>
+                                    <!-- Ende Edit -->
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Ende</span>
+                                        <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                        <input id="veranstaltung${event.id}-ende-date-edit" type="date"
+                                               value="${util.parsableDateForHTML(event.ende)}"
+                                               placeholder="dd/mm/yyyy HH:MM (Datum+Uhrzeit)"
+                                               class="form-control" aria-label="Veranstaltung Start Datum"
+                                               aria-describedby="inputGroup-sizing-sm">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text"><i class="far fa-clock"></i></span>
+                                        </div>
+                                        <input id="veranstaltung${event.id}-ende-time-edit" type="time" class="form-control"
+                                               value="${util.parsableTimeForHTML(event.ende)}"
+                                               placeholder="Zeit HH:MM"
+                                               aria-label="Start-Time" aria-describedby="basic-addon1">
+                                    </div>
 
-                                <!-- Löschen Button -->
-                                <button type="button" class="btn btn-danger" data-toggle="modal"
-                                        data-target="#delete-modal-${event.id}">
-                                    Löschen
-                                </button>
+                                    <!-- Speichern Button -->
+                                    <button id="button-save-veranstaltung-${event.id}" class="btn btn-primary btn-success mt-1"
+                                            onclick="saveVeranstaltung(${event.id})" role="button">
+                                        Änderungen speichern
+                                    </button>
 
-                                <!-- Löschen Bestätigungs-Modal -->
-                                <div class="modal fade" id="delete-modal-${event.id}" tabindex="-1" role="dialog">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title">Bestätigen</h5>
-                                                <button type="button" class="close" data-dismiss="modal">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                Soll die Veranstaltung wirklich gelöscht werden?
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                                                    Abbrechen
-                                                </button>
-                                                <button type="button" class="btn btn-danger"
-                                                        onclick="deleteVeranstaltung(${event.id}, '${event.name}');"
-                                                        data-dismiss="modal">Löschen
-                                                </button>
+                                    <!-- Löschen Button -->
+                                    <button type="button" class="btn btn-danger mt-1" data-toggle="modal" data-target="#delete-modal-${event.id}">
+                                        Löschen
+                                    </button>
+
+                                    <!-- Löschen Bestätigungs-Modal -->
+                                    <div class="modal fade" id="delete-modal-${event.id}" tabindex="-1" role="dialog">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">Bestätigen</h5>
+                                                    <button type="button" class="close" data-dismiss="modal">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    Soll die Veranstaltung wirklich gelöscht werden?
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                                        Abbrechen
+                                                    </button>
+                                                    <button type="button" class="btn btn-danger"
+                                                            onclick="deleteVeranstaltung(${event.id}, '${event.name}');"
+                                                            data-dismiss="modal">Löschen
+                                                    </button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
+                                    <p id="veranstaltung-edit-result-${event.id}"></p>
                                 </div>
-                                <p id="veranstaltung-edit-result-${event.id}"></p>
                             </div>
-                        </div>
-                    </c:forEach>
+                        </c:forEach>
 
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 </c:if>
 
 

@@ -331,6 +331,7 @@ public class ServerPageController {
         publishUtil(model);
         publishLocations(model);
         publishSponsor(model, sponsor);
+        publishSponsors(model);
         publishSponsorEventsAndCompanyPartys(model, sponsor);
         return "webinterface-events";
     }

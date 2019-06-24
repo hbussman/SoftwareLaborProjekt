@@ -2,6 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%--@elvariable id="util" type="sponsoren.Util"--%>
 <%--@elvariable id="sponsor" type="sponsoren.orm.SponsorEntity"--%>
+<%--@elvariable id="sponsors" type="java.util.List<sponsoren.orm.SponsorEntity>"--%>
 <%--@elvariable id="events" type="java.util.List<sponsoren.orm.VeranstaltungEntity>"--%>
 <%--@elvariable id="locations" type="java.util.Map<Integer, sponsoren.orm.LocationEntity>"--%>
 <%--@elvariable id="locationList" type="java.util.List<sponsoren.orm.LocationEntity>"--%>
@@ -359,14 +360,16 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fas fa-plus"></i></span>
                                         </div>
-                                        <button id="veranstaltung${event.id}-ort-edit"
+                                        <button id="veranstaltung${event.id}-sponsor-add"
                                                 class="btn btn-outline-secondary dropdown-toggle"
-                                                type="button" data-toggle="dropdown" aria-haspopup="true"
-                                                aria-expanded="false">[Sponsor hinzufügen]</button>
+                                                type="button" data-toggle="dropdown">[Sponsor hinzufügen]</button>
                                         <div class="dropdown-menu" style="height: 400px; overflow: auto;">
-                                            <c:forEach items="${locationList}" var="location">
-                                                <button class="dropdown-item"
-                                                        onclick="document.getElementById('veranstaltung${event.id}-ort-edit').innerText='${location.name}'">${location.name}</button>
+                                            <c:forEach items="${sponsors}" var="sponsorSorted">
+                                                <c:if test="${sponsorSorted.name != sponsor.name}">
+                                                    <button class="dropdown-item"
+                                                            onclick="document.getElementById('veranstaltung${event.id}-sponsor-add').innerText='${sponsorSorted.name}'">${sponsorSorted.name}
+                                                    </button>
+                                                </c:if>
                                             </c:forEach>
                                         </div>
                                     </div>

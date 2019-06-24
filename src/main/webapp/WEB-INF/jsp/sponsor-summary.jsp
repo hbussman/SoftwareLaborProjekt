@@ -27,7 +27,7 @@
 
     <title>Sponsoren-Startseite</title>
 
-
+    <!-- own css -->
     <link rel="stylesheet" type="text/css" href="${context}/css/background.css" media="screen" />
 
 
@@ -35,21 +35,27 @@
 
 <body class="bg-image">
 
-<nav class="navbar fixed-top navbar-dark bg-dark " style="min-height: 50px">
+<nav class="navbar fixed-top navbar-dark bg-dark pb-0" style="min-height: 50px">
     <div class="container justify-content-center">
         <div class="navbar-header">
             <p class="navbar-brand " > Sponsoren </p>
-            <button input class="btn btn-primary" type="submit"  data-toggle="collapse" data-target="#navbar-responsive-65"> <i class="fas fa-search"></i>
+            <button input class="btn btn-light" type="submit"  data-toggle="collapse" data-target="#navbar-responsive-65"> <i class="fas fa-search"></i>
             </button>
         </div>
         <div class="collapse" id="navbar-responsive-65">
             <div class="navbar ">
-                <form class="search-form searchbar" role="search" id="hiddenSearchBox" action="" method="get">
+                <script>
+                    function search() {
+                        var content = document.getElementById("suchFeld").value;
+                        window.location="${context}/sponsoren?search="+content;
+                    }
+                </script>
+                <form class="search-form searchbar" role="search" id="hiddenSearchBox" action="javascript:search()" method="get">
                     <div class="input-group">
                         <input type="hidden" name="id" value="63">
-                        <input type="search" name="keywords" class="form-control" aria-describedby="Suche" placeholder="Suche...">
+                        <input id="suchFeld" type="search" name="keywords" class="form-control" placeholder="Suche...">
                         <div class="input-group-btn">
-                            <input class="btn btn-primary" type="submit" value="Suchen" data-toggle="searchbar" data-target="#hiddenSearchBox">
+                            <input class="btn btn-light" type="submit" value="Suchen" data-toggle="searchbar" data-target="#hiddenSearchBox">
                             </input>
                         </div>
                     </div>

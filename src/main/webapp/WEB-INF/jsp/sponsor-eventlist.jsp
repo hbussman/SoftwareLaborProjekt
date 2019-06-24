@@ -23,32 +23,43 @@
     <!-- own scripts -->
     <script src="${context}/js/api_client.js"></script>
     <script>api_set_context("${context}")</script>
+    <script src="${context}/js/searchbar.js"></script>
 
     <title>Sponsoren-Veranstaltungsliste</title>
-    <style>
-        .navbar-center {
-            position: absolute;
-            overflow: visible;
-            height: 0;
-            width: 100%;
-            left: 0;
-            top: 0;
-            text-align: center;
-        }
 
-        .bg-image {
-            background-image: url(https://imgur.com/LkSvZHY.jpg);
-            height: 100%;
-            background-position: bottom center;
-            background-attachment: fixed;
-            background-repeat: no-repeat;
-            background-size: cover;
-        }
-    </style>
+    <!-- own css -->
+    <link rel="stylesheet" type="text/css" href="${context}/css/background.css" media="screen" />
+
 </head>
 <body class="bg-image">
-<nav class="navbar fixed-top navbar-dark bg-dark" style="min-height: 50px">
-    <p class="navbar-text navbar-center text-white" style="font-size: x-large">Veranstaltungen</p>
+<nav class="navbar fixed-top navbar-dark bg-dark pb-0" style="min-height: 50px">
+    <div class="container justify-content-center">
+        <div class="navbar-header">
+            <p class="navbar-brand " > Veranstaltungen </p>
+            <button input class="btn btn-light" type="submit"  data-toggle="collapse" data-target="#navbar-responsive-65"> <i class="fas fa-search"></i>
+            </button>
+        </div>
+        <div class="collapse" id="navbar-responsive-65">
+            <div class="navbar ">
+                <script>
+                    function search() {
+                        var content = document.getElementById("suchFeld").value;
+                        window.location="${context}/events?search="+content;
+                    }
+                </script>
+                <form class="search-form searchbar" role="search" id="hiddenSearchBox" action="javascript:search()" method="get">
+                    <div class="input-group">
+                        <input type="hidden" name="id" value="63">
+                        <input id="suchFeld" type="search" name="keywords" class="form-control" placeholder="Suche...">
+                        <div class="input-group-btn">
+                            <input class="btn btn-light" type="submit" value="Suchen" data-toggle="searchbar" data-target="#hiddenSearchBox">
+                            </input>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </nav>
 <nav class="navbar fixed-bottom navbar-expand-lg navbar-dark bg-dark justify-content-center">
     <div class="btn-group" role="group" style="min-width: 100%">
@@ -62,7 +73,7 @@
     </div>
 </nav>
 <div class="pt-5"></div>
-<div class="container">
+<div class="container-fluid pt-5 pb-5 mt-5">
 <div class="row justify-content-center pb-5 mx-1">
     <c:forEach items="${events}" var="event">
         <c:if test="${util.searchMatch(searchString, event)}">
@@ -108,6 +119,18 @@
     </c:forEach>
 </div>
 </div>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
 
 </body>
 </html>

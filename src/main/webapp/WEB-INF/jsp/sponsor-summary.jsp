@@ -5,9 +5,10 @@
 <%--@elvariable id="searchString" type="java.lang.String"--%>
 <c:set var="context" value="${pageContext.request.contextPath}"/>
 
+
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head >
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -18,38 +19,47 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
           integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
+
     <!-- own scripts -->
     <script src="${context}/js/api_client.js"></script>
     <script>api_set_context("${context}")</script>
+    <script src="${context}/js/searchbar.js"></script>
 
     <title>Sponsoren-Startseite</title>
-    <style>
-        .navbar-center {
-            position: absolute;
-            overflow: visible;
-            height: 0;
-            width: 100%;
-            left: 0;
-            top: 0;
-            text-align: center;
-        }
 
-        .bg-image {
-            background-image: url(https://imgur.com/LkSvZHY.jpg);
-            height: 100%;
-            background-position: bottom center;
-            background-attachment: fixed;
-            background-repeat: no-repeat;
-            background-size: cover;
-        }
-    </style>
+
+    <link rel="stylesheet" type="text/css" href="${context}/css/background.css" media="screen" />
+
+
 </head>
 
 <body class="bg-image">
 
-<nav class="navbar fixed-top navbar-dark bg-dark" style="min-height: 50px">
-    <p class="navbar-text navbar-center text-white" style="font-size: x-large">Sponsoren</p>
+<nav class="navbar fixed-top navbar-dark bg-dark " style="min-height: 50px">
+    <div class="container justify-content-center">
+        <div class="navbar-header">
+            <p class="navbar-brand " > Sponsoren </p>
+            <button input class="btn btn-primary" type="submit"  data-toggle="collapse" data-target="#navbar-responsive-65"> <i class="fas fa-search"></i>
+            </button>
+        </div>
+        <div class="collapse" id="navbar-responsive-65">
+            <div class="navbar ">
+                <form class="search-form searchbar" role="search" id="hiddenSearchBox" action="" method="get">
+                    <div class="input-group">
+                        <input type="hidden" name="id" value="63">
+                        <input type="search" name="keywords" class="form-control" aria-describedby="Suche" placeholder="Suche...">
+                        <div class="input-group-btn">
+                            <input class="btn btn-primary" type="submit" value="Suchen" data-toggle="searchbar" data-target="#hiddenSearchBox">
+                            </input>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </nav>
+
+
 <nav class="navbar fixed-bottom navbar-expand-lg navbar-dark bg-dark justify-content-center">
     <div class="btn-group" role="group" style="min-width: 100%">
         <a id="Attractionbutton" class="btn btn-light" style="border:1px solid black" href="${context}/attractions" role="button"><i
@@ -61,7 +71,7 @@
     </div>
 </nav>
 
-<div class="container-fluid pt-5 pb-5">
+<div class="container-fluid pt-5 pb-5 mt-5">
     <c:forEach items="${sponsorsSorted}" var="sponsorlist">
         <div class="row no-gutters justify-content-center">
             <c:forEach items="${sponsorlist}" var="sponsor">
@@ -104,4 +114,6 @@
         crossorigin="anonymous"></script>
 
 </body>
+
+
 </html>

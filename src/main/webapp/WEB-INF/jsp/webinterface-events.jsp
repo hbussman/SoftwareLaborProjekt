@@ -354,6 +354,23 @@
                                                aria-describedby="inputGroup-sizing-sm">
                                     </div>
 
+                                    <!-- Sponsor Hinzufügen -->
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-plus"></i></span>
+                                        </div>
+                                        <button id="veranstaltung${event.id}-ort-edit"
+                                                class="btn btn-outline-secondary dropdown-toggle"
+                                                type="button" data-toggle="dropdown" aria-haspopup="true"
+                                                aria-expanded="false">[Sponsor hinzufügen]</button>
+                                        <div class="dropdown-menu" style="height: 400px; overflow: auto;">
+                                            <c:forEach items="${locationList}" var="location">
+                                                <button class="dropdown-item"
+                                                        onclick="document.getElementById('veranstaltung${event.id}-ort-edit').innerText='${location.name}'">${location.name}</button>
+                                            </c:forEach>
+                                        </div>
+                                    </div>
+
                                     <!-- Ort Edit -->
                                     <div class="input-group">
                                         <div class="input-group-prepend">

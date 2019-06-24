@@ -14,6 +14,7 @@ import sponsoren.service.external.Lageplan.Poi;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.security.SecureRandom;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -465,6 +466,45 @@ public class MainController {
                         ServerPageController.getSponsorLogoPath()
                 )
         );
+    }
+
+    // TODO: use once and then disable this!
+    @GetMapping(path="/dbg/genpws")
+    public ResponseEntity dbgGenPws() {
+        StringBuilder result = new StringBuilder("<table>");
+        SecureRandom prng = new SecureRandom();
+
+        Iterable<AccountEntity> allAccounts = accountRepository.findAll();
+        for(AccountEntity account : allAccounts) {
+
+            // generate random 16-character password
+            StringBuilder randomPw = new StringBuilder();
+            for(int i = 0; i < 16; i++) {
+                int ascii = 32;
+                switch(prng.nextInt(3)) {
+                    case 0:
+                        ascii = prng.nextInt(57-48) + 48;
+                        break;
+                    case 1:
+                        ascii = prng.nextInt(90-65) + 65;
+                        break;
+                    case 2:
+                        ascii = prng.nextInt(122-97) + 97;
+                        break;
+                }
+                randomPw.append((char)ascii);
+            }
+
+            final String randomPwStr = randomPw.toString();
+
+            account.setPassword(new SponsorenPasswordEncoder().encode(randomPwStr));
+            accountRepository.save(account);
+
+            result.append("<tr><td>").append(account.getUsername()).append("</td><td><code>").append(randomPwStr).append("</code></td></tr>");
+        }
+
+        result.append("</table>");
+        return ResponseEntity.ok(result.toString());
     }
 
 

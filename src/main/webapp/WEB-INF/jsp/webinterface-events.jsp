@@ -356,8 +356,8 @@
                                     </div>
 
                                     <!-- Sponsor Hinzufügen -->
+                                    <h6 class="pt-1">Sponsoren</h6>
                                     <div class="input-group">
-
                                                 <c:forEach items="${sponsors}" var="sponsorSorted">
                                                     <c:if test="${sponsorSorted.name != sponsor.name}">
                                                         <div class="input-group-prepend pr-2 pb-1">

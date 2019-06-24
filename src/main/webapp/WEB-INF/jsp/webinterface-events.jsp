@@ -357,9 +357,18 @@
 
                                     <!-- Sponsor Hinzufügen -->
                                     <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="fas fa-plus"></i></span>
-                                        </div>
+
+                                                <c:forEach items="${sponsors}" var="sponsorSorted">
+                                                    <c:if test="${sponsorSorted.name != sponsor.name}">
+                                                        <div class="input-group-prepend pr-2 pb-1">
+                                                            <span class="input-group-text"><i>${sponsorSorted.name}</i></span>
+                                                            <div>
+                                                            <button id="sponsor entfernen" class="btn btn-danger">X</button>
+                                                            </div>
+                                                        </div>
+
+                                                    </c:if>
+                                                </c:forEach>
                                         <button id="veranstaltung${event.id}-sponsor-add"
                                                 class="btn btn-outline-secondary dropdown-toggle"
                                                 type="button" data-toggle="dropdown">[Sponsor hinzufügen]</button>

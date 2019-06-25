@@ -363,7 +363,11 @@
         								<button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span> <span class="caret"></span></button>
 											<ul class="dropdown-menu" style="height: 400px; overflow: auto;">
 												<c:forEach items="${sponsors}" var="sponsor">
-													<li class="dropdown-item"><input type="checkbox"/>&nbsp;${sponsor.name}</li>
+													<li class="dropdown-item"><input type="checkbox" 
+													<c:if test="${eventsSponsors.get(event.id).contains(sponsor)}">
+														checked  </c:if>
+													/>&nbsp; 
+														${sponsor.name}</li>
   												 </c:forEach>
   												
 											</ul>

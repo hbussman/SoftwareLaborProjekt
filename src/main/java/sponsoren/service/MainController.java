@@ -295,9 +295,9 @@ public class MainController {
         return ResponseEntity.ok().body(null);
     }
 
-    // PUT a sponsor as a new organiser into the event
-    @PutMapping(path="/event/{eventId}")
-    public ResponseEntity addVeranstaltungSponsor(@AuthenticationPrincipal AccountEntity user, @PathVariable int eventId, @RequestBody String sponsor) {
+    // PATCH set the Mitveranstalters of this Veranstaltung
+    @PatchMapping(path="/event/{eventId}/sponsor")
+    public ResponseEntity addVeranstaltungSponsor(@AuthenticationPrincipal AccountEntity user, @PathVariable int eventId, @RequestBody List<String> sponsors) {
         // make sure we have permission to edit this
         {
             SponsorVeranstaltungEntityPK sponsorVeranstaltungEntityPK = new SponsorVeranstaltungEntityPK();
@@ -317,38 +317,53 @@ public class MainController {
             }
         }
 
-        // check if the sponsor exists
-        {
-            Optional<SponsorEntity> sponsorEntity = sponsorRepository.findById(sponsor);
-            if(!sponsorEntity.isPresent()) {
-                return ResponseEntity.unprocessableEntity().body(sponsor + " existiert nicht (ist kein bekannter Sponsor der BuGa)");
+        // first, delete all sponsors from this event
+        Iterable<SponsorVeranstaltungEntity> allOldSponsors = sponsorVeranstaltungRepository.findAll();
+        for(SponsorVeranstaltungEntity it : allOldSponsors) {
+            if(it.getVeranstaltungId() == eventId) {
+                sponsorVeranstaltungRepository.delete(it);
             }
         }
 
-        // check if this association already exists
-        final SponsorVeranstaltungEntityPK newSponsorVeranstaltungEntityPK = new SponsorVeranstaltungEntityPK();
-        {
-            newSponsorVeranstaltungEntityPK.setVeranstaltungId(eventId);
-            newSponsorVeranstaltungEntityPK.setSponsorName(sponsor);
-            Optional<SponsorVeranstaltungEntity> checkSponsorVeranstaltung = sponsorVeranstaltungRepository.findById(newSponsorVeranstaltungEntityPK);
-            if(checkSponsorVeranstaltung.isPresent()) {
-                return ResponseEntity.unprocessableEntity().body(user.getSponsorName() + " ist bereits für dieses Event eingetragen!");
+        // then add all wanted sponsors
+        for(String sponsor : sponsors) {
+
+            // check if the sponsor exists
+            {
+                Optional<SponsorEntity> sponsorEntity = sponsorRepository.findById(sponsor);
+                if(!sponsorEntity.isPresent()) {
+                    return ResponseEntity.unprocessableEntity().body(sponsor + " existiert nicht (ist kein bekannter Sponsor der BuGa)");
+                }
             }
-        }
 
-        // save it to the database
-        {
-            SponsorVeranstaltungEntity newEntry = new SponsorVeranstaltungEntity();
-            newEntry.setSponsorName(sponsor);
-            newEntry.setVeranstaltungId(eventId);
-            sponsorVeranstaltungRepository.save(newEntry);
-        }
+            // check if this association already exists
+            final SponsorVeranstaltungEntityPK newSponsorVeranstaltungEntityPK = new SponsorVeranstaltungEntityPK();
+            {
+                newSponsorVeranstaltungEntityPK.setVeranstaltungId(eventId);
+                newSponsorVeranstaltungEntityPK.setSponsorName(sponsor);
+                Optional<SponsorVeranstaltungEntity> checkSponsorVeranstaltung = sponsorVeranstaltungRepository.findById(newSponsorVeranstaltungEntityPK);
+                if(checkSponsorVeranstaltung.isPresent()) {
+                    //return ResponseEntity.unprocessableEntity().body(sponsor + " ist bereits für dieses Event eingetragen!");
+                    // this shouldn't happen but if it does it would be an application error so don't bother the user with it
+                    System.out.println("ERROR: addVeranstaltungSponsor(): " + sponsor + " ist bereits für dieses Event eingetragen!");
+                    continue;
+                }
+            }
 
-        // check if this association exist now
-        {
-            Optional<SponsorVeranstaltungEntity> testSponsorVeranstaltung = sponsorVeranstaltungRepository.findById(newSponsorVeranstaltungEntityPK);
-            if(!testSponsorVeranstaltung.isPresent()) {
-                return ResponseEntity.status(500).body("Beim Eintragen ist ein unbekannter Datenbankfehler aufgetreten.");
+            // save it to the database
+            {
+                SponsorVeranstaltungEntity newEntry = new SponsorVeranstaltungEntity();
+                newEntry.setSponsorName(sponsor);
+                newEntry.setVeranstaltungId(eventId);
+                sponsorVeranstaltungRepository.save(newEntry);
+            }
+
+            // check if this association exist now
+            {
+                Optional<SponsorVeranstaltungEntity> testSponsorVeranstaltung = sponsorVeranstaltungRepository.findById(newSponsorVeranstaltungEntityPK);
+                if(!testSponsorVeranstaltung.isPresent()) {
+                    return ResponseEntity.status(500).body("Beim Eintragen von " + sponsor + " ist ein unbekannter Datenbankfehler aufgetreten.");
+                }
             }
         }
 
@@ -356,7 +371,7 @@ public class MainController {
     }
 
     // DELETE a sponsor from an event
-    @DeleteMapping(path="/event/{eventId}/{sponsor}")
+    @DeleteMapping(path="/event/{eventId}/sponsor/{sponsor}")
     public ResponseEntity deleteSponsorFromVeranstaltung(@AuthenticationPrincipal AccountEntity user, @PathVariable int eventId, @PathVariable String sponsor) {
         // make sure we have permission to edit this
         {

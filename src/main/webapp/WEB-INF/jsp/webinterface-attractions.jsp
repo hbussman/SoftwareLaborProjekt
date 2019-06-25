@@ -1,11 +1,9 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: danie
-  Date: 25.06.2019
-  Time: 14:02
-  To change this template use File | Settings | File Templates.
---%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%--@elvariable id="sponsors" type="java.util.List<sponsoren.orm.SponsorEntity>"--%>
+<c:set var="context" value="${pageContext.request.contextPath}"/>
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -23,7 +21,7 @@
 
 <body>
 
-<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark mb-5">
     <div class="pr-2">
         <a id="Sponsorenseitebutton" class="btn btn-light" href="${context}/webinterface"
            role="button" aria-disabled="true">Sponsorenseite
@@ -49,6 +47,28 @@
             class="fa fa-sign-out-alt"></i>
     </a>
 </nav>
+
+
+<div class="container fluid pt-5 mt-5">
+    <div class="button-group">
+        <div class="input-group-prepend">
+            <span class="input-group-text"><i class="fas fa-thumbtack"></i></span>
+        </div>
+        <button id="sponsor" class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown">
+            [sponsor]
+        </button>
+        <ul class="dropdown-menu" style="height: 400px; overflow: auto;">
+            <c:forEach items="${sponsors}" var="sponsor">
+                <li class="dropdown-item">
+                    <input type="checkbox" >
+                </li>
+            </c:forEach>
+        </ul>
+    </div>
+</div>
+
+
+
 
 </body>
 </html>

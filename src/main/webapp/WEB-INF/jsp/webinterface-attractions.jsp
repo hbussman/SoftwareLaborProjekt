@@ -56,7 +56,7 @@
         <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
             <span class="glyphicon glyphicon-cog"></span><span class="caret"></span>
         </button>
-        <ul class="dropdown-menu disabled" style="height: 400px; overflow: auto;">
+        <ul class="dropdown-menu keep-open disabled" style="height: 400px; overflow: auto;">
             <c:forEach items="${sponsors}" var="sponsor">
                 <li>
                     <label class="dropdown-item">
@@ -75,7 +75,7 @@
         <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
             <span class="glyphicon glyphicon-cog"></span><span class="caret"></span>
         </button>
-        <ul class="dropdown-menu disabled" style="height: 400px; overflow: auto;">
+        <ul class="dropdown-menu keep-open disabled" style="height: 400px; overflow: auto;">
             <c:forEach items="${attractions}" var="attraktion">
                 <li>
                     <label class="dropdown-item">
@@ -86,16 +86,7 @@
             </c:forEach>
         </ul>
     </div>
-
-    <div class="dropdown">
-        <button id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Dropdown trigger
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dLabel">
-            ...
-        </div>
     </div>
-</div>
 
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -107,6 +98,11 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
+
+<!-- own scripts -->
+<script src="${context}/js/dropdownmenue.js"></script>
+
+
 
 </body>
 </html>

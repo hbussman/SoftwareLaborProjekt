@@ -394,7 +394,7 @@
                                         <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
                                             <span class="glyphicon glyphicon-cog"></span><span class="caret"></span>
                                         </button>
-                                        <ul class="dropdown-menu disabled" style="height: 400px; overflow: auto;">
+                                        <ul class="dropdown-menu keep-open disabled" style="height: 400px; overflow: auto;">
                                             <c:forEach items="${sponsors}" var="sponsor">
                                             	<li >
                                             		<label class="dropdown-item">
@@ -419,7 +419,7 @@
                                                 class="btn btn-outline-secondary dropdown-toggle"
                                                 type="button" data-toggle="dropdown" aria-haspopup="true"
                                                 aria-expanded="false">${locations.get(event.locationID).name}</button>
-                                        <div class="dropdown-menu" style="height: 400px; overflow: auto;">
+                                        <div class="dropdown-menu keep-open" style="height: 400px; overflow: auto;">
                                             <c:forEach items="${locationList}" var="location">
                                                 <button class="dropdown-item"
                                                         onclick="document.getElementById('veranstaltung${event.id}-ort-edit').innerText='${location.name}'">${location.name}</button>
@@ -522,5 +522,8 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
+
+<!-- own scripts -->
+<script src="${context}/js/dropdownmenue.js"></script>
 </body>
 </html>

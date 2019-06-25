@@ -184,6 +184,9 @@
     <ul class="nav navbar-nav ml-auto">
         <p class="navbar-text navbar-center text-white" style="font-size: x-large">Veranstaltungen verwalten</p>
         <div class="pr-2">
+            <a id="Attraktionsbutton" class="btn btn-light" href="${context}/webinterface/attractions"
+               role="button">Attraktionen
+            </a>
             <a id="Veranstaltungsbutton" class="btn btn-light disabled" href="${context}/webinterface/events"
                role="button" aria-disabled="true">Veranstaltungen
             </a>

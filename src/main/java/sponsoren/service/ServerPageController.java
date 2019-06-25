@@ -173,6 +173,22 @@ public class ServerPageController {
         model.addAttribute("eventSponsors", eventSponsors);
     }
 
+    private void publishEventsSponsors(Model model) {
+        // get sponsor-event mapping
+        Iterable<SponsorVeranstaltungEntity> sponsorEventEntities = sponsorVeranstaltungRepository.findAll();
+
+        // convert iterable to List, resolving foreign key association to sponsor
+        Map<Integer, List<SponsorEntity>> eventsSponsors = new HashMap<>();
+        sponsorEventEntities.forEach(sponsorVeranstaltungEntity -> {
+            if(!eventsSponsors.containsKey(sponsorVeranstaltungEntity.getVeranstaltungId()))
+                eventsSponsors.put(sponsorVeranstaltungEntity.getVeranstaltungId(), new ArrayList<>());
+            Optional<SponsorEntity> sponsor = sponsorRepository.findById(sponsorVeranstaltungEntity.getSponsorName());
+            sponsor.ifPresent(eventsSponsors.get(sponsorVeranstaltungEntity.getVeranstaltungId())::add);
+        });
+
+        model.addAttribute("eventsSponsors", eventsSponsors);
+    }
+
     private void publishLocations(Model model) {
         // get all Locations
         Iterable<LocationEntity> locationEntities = locationRepository.findAll();
@@ -334,6 +350,11 @@ public class ServerPageController {
         publishSponsors(model);
         publishSponsorEventsAndCompanyPartys(model, sponsor);
         return "webinterface-events";
+    }
+
+    @GetMapping("/webinterface/attractions")
+    public String getWebinterfaceAccounts(Model model, @AuthenticationPrincipal AccountEntity user) {
+        return "webinterface-attractions";
     }
 
     @RequestMapping(value = "/image/{name}", method = RequestMethod.GET, produces = "image/png")

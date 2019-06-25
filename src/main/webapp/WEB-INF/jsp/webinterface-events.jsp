@@ -188,6 +188,7 @@
         }
 
     </script>
+    <!-- Own CSS -->
     <style>
         .navbar-center {
             position: absolute;
@@ -197,6 +198,14 @@
             left: 0;
             top: 0;
             text-align: center;
+        }
+
+        input:checked + strong {
+            color: green;
+        }
+
+        input[type="checkbox"]:checked {
+            box-shadow: 0 0 0 5px darkgreen;
         }
     </style>
 </head>
@@ -402,7 +411,7 @@
                                             				<c:if test="${eventsSponsors.get(event.id).contains(sponsor.name)}">
                                                             	checked
                                                 			</c:if>
-                                            			> &nbsp; ${sponsor.name}
+                                                        > &nbsp; <strong>${sponsor.name}</strong>
                                             		</label>
                                        	 		</li>
                                             </c:forEach>

@@ -20,6 +20,16 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
           integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
+    <!-- Own CSS -->
+    <style>
+        input:checked + strong {
+            color: green;
+        }
+
+        input[type="checkbox"]:checked {
+            box-shadow: 0 0 0 5px darkgreen;
+        }
+    </style>
 
     <title>Attraktionen</title>
 </head>
@@ -73,11 +83,15 @@
                         <span class="caret">Attraktionen</span>
                     </button>
                     <ul class="dropdown-menu keep-open disabled" style="height: 400px; overflow: auto;">
-                        <c:forEach items="${attractions}" var="attraktion">
+                        <c:forEach items="${attractions}" var="attraction">
                             <li>
                                 <label class="dropdown-item">
-                                    <input type="checkbox" id="checkbox-event-sponsor-${attraktion.name}"
-                                    > &nbsp; ${attraktion.name}
+                                    <input type="checkbox"
+                                           id="checkbox-event-${attraction.id}-attraction-${attraction.name}"
+                                    <c:if test="${attractionSponsors.get(attraction.name)==sponsor.name}">
+                                           checked
+                                    </c:if>
+                                    > <strong>${attraction.name}</strong>
                                 </label>
                             </li>
                         </c:forEach>
@@ -106,9 +120,7 @@
             <div class="col-4">
                 <div class="container-fluid ">
                     <div class="row justify-content-center">
-
                         <c:forEach items="${attractions}" var="attraction">
-
                             <c:if test="${attractionSponsors.get(attraction.name)==sponsor.name}">
                                 <a id="attraction-${attraction.name}"
                                    href="https://seserver.se.hs-heilbronn.de:9443/buga19bugascout/#/details/${attraction.id}"
@@ -126,7 +138,6 @@
                                     </div>
                                 </a>
                             </c:if>
-
                         </c:forEach>
                     </div>
                 </div>
@@ -148,7 +159,6 @@
 
 <!-- own scripts -->
 <script src="${context}/js/dropdownmenue.js"></script>
-
 
 </body>
 </html>

@@ -297,7 +297,7 @@ public class MainController {
 
     // PATCH set the Mitveranstalters of this Veranstaltung
     @PatchMapping(path="/event/{eventId}/sponsor")
-    public ResponseEntity addVeranstaltungSponsor(@AuthenticationPrincipal AccountEntity user, @PathVariable int eventId, @RequestBody List<String> sponsors) {
+    public ResponseEntity addVeranstaltungSponsor(@AuthenticationPrincipal AccountEntity user, @PathVariable int eventId, @RequestBody Map<String, Boolean> sponsors) {
         // make sure we have permission to edit this
         {
             SponsorVeranstaltungEntityPK sponsorVeranstaltungEntityPK = new SponsorVeranstaltungEntityPK();
@@ -320,13 +320,15 @@ public class MainController {
         // first, delete all sponsors from this event
         Iterable<SponsorVeranstaltungEntity> allOldSponsors = sponsorVeranstaltungRepository.findAll();
         for(SponsorVeranstaltungEntity it : allOldSponsors) {
-            if(it.getVeranstaltungId() == eventId) {
+            if(it.getVeranstaltungId() == eventId && !it.getSponsorName().equals(user.getSponsorName())) {
                 sponsorVeranstaltungRepository.delete(it);
             }
         }
 
         // then add all wanted sponsors
-        for(String sponsor : sponsors) {
+        for(String sponsor : sponsors.keySet()) {
+            if(sponsors.get(sponsor) == false)
+                continue;
 
             // check if the sponsor exists
             {

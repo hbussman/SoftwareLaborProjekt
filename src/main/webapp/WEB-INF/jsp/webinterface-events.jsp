@@ -122,10 +122,40 @@
 
             db_save_event_data(eventId, name, ort, start_date, start_time, ende_date, ende_time, beschreibung, event_type).then(result => {
                 if (result.ok) {
+
                     // success
-                    resultElem.style = "color: darkgreen;";
-                    resultElem.innerText = "Änderungen gespeichert!";
                     document.getElementById("veranstaltung" + eventId + "-name").innerText = name;
+
+
+                    // ------- save Veranstalter -------
+                    var organisers = {};
+
+                    var ul = document.getElementById('veranstaltung' + eventId + '-organiser-list');
+                    var lis = ul.getElementsByTagName('li');
+                    for(var i = 0; i < lis.length; i++) {
+                        var li = lis[i];
+                        var checked = li.children[0].checked;
+                        var sponsorName = li.children[1].innerText;
+                        console.log(sponsorName + " " + (checked ? "yes" : "no"));
+
+                        organisers[sponsorName] = checked;
+                    }
+
+                    console.log(organisers);
+
+                    db_event_set_organisers(eventId, organisers).then(result => {
+                        if (result.ok) {
+                            // text is already green
+                            resultElem.style = "color: darkgreen;";
+                            resultElem.innerText = "Alle Änderungen gespeichert!";
+                        } else {
+                            // error occurred
+                            result.text().then(value => {
+                                resultElem.style = "color: orange;";
+                                resultElem.innerHTML = "Änderungen nur teilweise gespeichert:<br>Veranstalter-Liste konnte nicht gespeichert werden:<br>" + result.status + " (" + value + ")";
+                            });
+                        }
+                    });
                 } else {
                     // error occurred
                     result.text().then(value => {
@@ -364,14 +394,14 @@
                                         <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
                                             <span class="glyphicon glyphicon-cog"></span><span class="caret"></span>
                                         </button>
-                                        <ul class="dropdown-menu" style="height: 400px; overflow: auto;">
-                                            <c:forEach items="${sponsors}" var="sponsor">
+                                        <ul id="veranstaltung${event.id}-organiser-list" class="dropdown-menu" style="height: 400px; overflow: auto;">
+                                            <c:forEach items="${sponsors}" var="currSponsor">
                                                 <li class="dropdown-item">
-                                                    <input id="checkbox-event-${event.id}-sponsor-${sponsor.name}" type="checkbox"
-                                                        <c:if test="${eventsSponsors.get(event.id).contains(sponsor.name)}">
+                                                    <input id="checkbox-event-${event.id}-sponsor-${currSponsor.name}" type="checkbox"
+                                                        <c:if test="${eventsSponsors.get(event.id).contains(currSponsor.name) && currSponsor.name != sponsor.name}">
                                                             checked
                                                         </c:if>
-                                                    >&nbsp;<label for="checkbox-event-${event.id}-sponsor-${sponsor.name}">${sponsor.name}</label>
+                                                    >&nbsp;<label for="checkbox-event-${event.id}-sponsor-${currSponsor.name}">${currSponsor.name}</label>
                                                 </li>
                                             </c:forEach>
                                         </ul>

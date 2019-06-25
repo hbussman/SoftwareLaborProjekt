@@ -4,6 +4,7 @@
 <%--@elvariable id="sponsor" type="sponsoren.orm.SponsorEntity"--%>
 <%--@elvariable id="sponsors" type="java.util.List<sponsoren.orm.SponsorEntity>"--%>
 <%--@elvariable id="events" type="java.util.List<sponsoren.orm.VeranstaltungEntity>"--%>
+<%--@elvariable id="eventsSponsors" type="java.util.Map<Integer, java.util.List<String>>"--%>
 <%--@elvariable id="locations" type="java.util.Map<Integer, sponsoren.orm.LocationEntity>"--%>
 <%--@elvariable id="locationList" type="java.util.List<sponsoren.orm.LocationEntity>"--%>
 <c:set var="context" value="${pageContext.request.contextPath}"/>
@@ -360,18 +361,21 @@
 
                                     <!-- Sponsor Hinzufügen -->
                                     <div class="button-group">
-        								<button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span> <span class="caret"></span></button>
-											<ul class="dropdown-menu" style="height: 400px; overflow: auto;">
-												<c:forEach items="${sponsors}" var="sponsor">
-													<li class="dropdown-item"><input type="checkbox" 
-													<c:if test="${eventsSponsors.get(event.id).contains(sponsor)}">
-														checked  </c:if>
-													/>&nbsp; 
-														${sponsor.name}</li>
-  												 </c:forEach>
-  												
-											</ul>
- 									</div>
+                                        <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
+                                            <span class="glyphicon glyphicon-cog"></span><span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu" style="height: 400px; overflow: auto;">
+                                            <c:forEach items="${sponsors}" var="sponsor">
+                                                <li class="dropdown-item">
+                                                    <input id="checkbox-event-${event.id}-sponsor-${sponsor.name}" type="checkbox"
+                                                        <c:if test="${eventsSponsors.get(event.id).contains(sponsor.name)}">
+                                                            checked
+                                                        </c:if>
+                                                    >&nbsp;<label for="checkbox-event-${event.id}-sponsor-${sponsor.name}">${sponsor.name}</label>
+                                                </li>
+                                            </c:forEach>
+                                        </ul>
+                                    </div>
 
                                     <!-- Ort Edit -->
                                     <div class="input-group">

@@ -32,6 +32,7 @@ public class MainController {
     @Autowired private LocationRepository locationRepository;
     @Autowired private AccountRepository accountRepository;
     @Autowired private AttraktionRepository attraktionRepository;
+    @Autowired private SponsorAttraktionRepository sponsorAttraktionRepository;
 
 
     // GET list of all sponsors
@@ -399,6 +400,11 @@ public class MainController {
         }
 
         return ResponseEntity.ok().body(null);
+    }
+
+    @GetMapping(path="/sponsor_attraktion")
+    public Iterable<SponsorAttraktionEntity> getSponsorAttraktion() {
+        return sponsorAttraktionRepository.findAll();
     }
 
     @GetMapping(path="/dbg/update_attraktionen")

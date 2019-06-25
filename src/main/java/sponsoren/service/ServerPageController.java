@@ -178,12 +178,12 @@ public class ServerPageController {
         Iterable<SponsorVeranstaltungEntity> sponsorEventEntities = sponsorVeranstaltungRepository.findAll();
 
         // convert iterable to List, resolving foreign key association to sponsor
-        Map<Integer, List<SponsorEntity>> eventsSponsors = new HashMap<>();
+        Map<Integer, List<String>> eventsSponsors = new HashMap<>();
         sponsorEventEntities.forEach(sponsorVeranstaltungEntity -> {
             if(!eventsSponsors.containsKey(sponsorVeranstaltungEntity.getVeranstaltungId()))
                 eventsSponsors.put(sponsorVeranstaltungEntity.getVeranstaltungId(), new ArrayList<>());
             Optional<SponsorEntity> sponsor = sponsorRepository.findById(sponsorVeranstaltungEntity.getSponsorName());
-            sponsor.ifPresent(eventsSponsors.get(sponsorVeranstaltungEntity.getVeranstaltungId())::add);
+            sponsor.ifPresent(ent -> eventsSponsors.get(sponsorVeranstaltungEntity.getVeranstaltungId()).add(ent.getName()));
         });
 
         model.addAttribute("eventsSponsors", eventsSponsors);
@@ -349,6 +349,7 @@ public class ServerPageController {
         publishSponsor(model, sponsor);
         publishSponsors(model);
         publishSponsorEventsAndCompanyPartys(model, sponsor);
+        publishEventsSponsors(model);
         return "webinterface-events";
     }
 

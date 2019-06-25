@@ -297,7 +297,7 @@ public class MainController {
 
     // PATCH set the Mitveranstalters of this Veranstaltung
     @PatchMapping(path="/event/{eventId}/sponsor")
-    public ResponseEntity addVeranstaltungSponsor(@AuthenticationPrincipal AccountEntity user, @PathVariable int eventId, @RequestBody List<String> sponsors) {
+    public ResponseEntity addVeranstaltungSponsor(@AuthenticationPrincipal AccountEntity user, @PathVariable int eventId, @RequestBody Map<String, Boolean> sponsors) {
         // make sure we have permission to edit this
         {
             SponsorVeranstaltungEntityPK sponsorVeranstaltungEntityPK = new SponsorVeranstaltungEntityPK();
@@ -320,13 +320,15 @@ public class MainController {
         // first, delete all sponsors from this event
         Iterable<SponsorVeranstaltungEntity> allOldSponsors = sponsorVeranstaltungRepository.findAll();
         for(SponsorVeranstaltungEntity it : allOldSponsors) {
-            if(it.getVeranstaltungId() == eventId) {
+            if(it.getVeranstaltungId() == eventId && !it.getSponsorName().equals(user.getSponsorName())) {
                 sponsorVeranstaltungRepository.delete(it);
             }
         }
 
         // then add all wanted sponsors
-        for(String sponsor : sponsors) {
+        for(String sponsor : sponsors.keySet()) {
+            if(sponsors.get(sponsor) == false)
+                continue;
 
             // check if the sponsor exists
             {
@@ -498,30 +500,35 @@ public class MainController {
         Iterable<AccountEntity> allAccounts = accountRepository.findAll();
         for(AccountEntity account : allAccounts) {
 
-            // generate random 16-character password
             StringBuilder randomPw = new StringBuilder();
-            for(int i = 0; i < 16; i++) {
-                int ascii = 32;
-                switch(prng.nextInt(3)) {
-                    case 0:
-                        ascii = prng.nextInt(57-48) + 48;
-                        break;
-                    case 1:
-                        ascii = prng.nextInt(90-65) + 65;
-                        break;
-                    case 2:
-                        ascii = prng.nextInt(122-97) + 97;
-                        break;
+            if(account.getPassword() == null || account.getPassword().length() == 0) {
+
+                // generate random 16-character password
+                for(int i = 0; i < 16; i++) {
+                    int ascii = 32;
+                    switch(prng.nextInt(3)) {
+                        case 0:
+                            ascii = prng.nextInt(57-48) + 48;
+                            break;
+                        case 1:
+                            ascii = prng.nextInt(90-65) + 65;
+                            break;
+                        case 2:
+                            ascii = prng.nextInt(122-97) + 97;
+                            break;
+                    }
+                    randomPw.append((char)ascii);
                 }
-                randomPw.append((char)ascii);
+
+                // set new password
+                account.setPassword(new SponsorenPasswordEncoder().encode(randomPw.toString()));
+                accountRepository.save(account);
+
+            } else {
+                randomPw.append("?");
             }
 
-            final String randomPwStr = randomPw.toString();
-
-            account.setPassword(new SponsorenPasswordEncoder().encode(randomPwStr));
-            accountRepository.save(account);
-
-            result.append("<tr><td>").append(account.getUsername()).append("</td><td><code>").append(randomPwStr).append("</code></td></tr>");
+            result.append("<tr><td>").append(account.getUsername()).append("</td><td><code>").append(randomPw).append("</code></td></tr>");
         }
 
         result.append("</table>");

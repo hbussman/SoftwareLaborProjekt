@@ -394,15 +394,17 @@
                                         <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
                                             <span class="glyphicon glyphicon-cog"></span><span class="caret"></span>
                                         </button>
-                                        <ul id="veranstaltung${event.id}-organiser-list" class="dropdown-menu" style="height: 400px; overflow: auto;">
-                                            <c:forEach items="${sponsors}" var="currSponsor">
-                                                <li class="dropdown-item">
-                                                    <input id="checkbox-event-${event.id}-sponsor-${currSponsor.name}" type="checkbox"
-                                                        <c:if test="${eventsSponsors.get(event.id).contains(currSponsor.name) && currSponsor.name != sponsor.name}">
-                                                            checked
-                                                        </c:if>
-                                                    >&nbsp;<label for="checkbox-event-${event.id}-sponsor-${currSponsor.name}">${currSponsor.name}</label>
-                                                </li>
+                                        <ul class="dropdown-menu disabled" style="height: 400px; overflow: auto;">
+                                            <c:forEach items="${sponsors}" var="sponsor">
+                                            	<li >
+                                            		<label class="dropdown-item">
+                                            			<input type="checkbox"  id="checkbox-event-${event.id}-sponsor-${sponsor.name}"
+                                            				<c:if test="${eventsSponsors.get(event.id).contains(sponsor.name)}">
+                                                            	checked
+                                                			</c:if>
+                                            			> &nbsp; ${sponsor.name}
+                                            		</label>
+                                       	 		</li>
                                             </c:forEach>
                                         </ul>
                                     </div>

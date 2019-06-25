@@ -390,11 +390,11 @@
                                     </div>
 
                                     <!-- Sponsor Hinzufügen -->
-                                    <div class="button-group">
-                                        <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
-                                            <span class="glyphicon glyphicon-cog"></span><span class="caret"></span>
+                                    <div class="input-group">
+                                        <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown">
+                                            <span class="caret">Weitere Sponsoren</span>
                                         </button>
-                                        <ul class="dropdown-menu disabled" style="height: 400px; overflow: auto;">
+                                        <ul class="dropdown-menu" style="height: 400px; overflow: auto;">
                                             <c:forEach items="${sponsors}" var="sponsor">
                                             	<li >
                                             		<label class="dropdown-item">

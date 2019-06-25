@@ -336,6 +336,11 @@ public class ServerPageController {
         return "webinterface-events";
     }
 
+    @GetMapping("/webinterface/attractions")
+    public String getWebinterfaceAccounts(Model model, @AuthenticationPrincipal AccountEntity user) {
+        return "webinterface-attractions";
+    }
+
     @RequestMapping(value = "/image/{name}", method = RequestMethod.GET, produces = "image/png")
     public @ResponseBody byte[] getFile(@PathVariable String name)  {
 

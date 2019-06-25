@@ -81,6 +81,9 @@
         <p class="navbar-text navbar-center text-white" style="font-size: x-large">Ihr Account</p>
     </ul>
     <div class="pr-2">
+        <a id="Attraktionsbutton" class="btn btn-light" href="${context}/webinterface/attractions"
+           role="button">Attraktionen
+        </a>
         <a id="Veranstaltungsbutton" class="btn btn-light" href="${context}/webinterface/events?sponsor=${sponsor.name}"
            role="button">Veranstaltungen
         </a>

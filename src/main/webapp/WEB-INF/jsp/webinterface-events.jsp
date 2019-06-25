@@ -394,7 +394,7 @@
                                         <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
                                             <span class="glyphicon glyphicon-cog"></span><span class="caret"></span>
                                         </button>
-                                        <ul class="dropdown-menu keep-open disabled" style="height: 400px; overflow: auto;">
+                                        <ul class="dropdown-menu keep-open" style="height: 400px; overflow: auto;">
                                             <c:forEach items="${sponsors}" var="sponsor">
                                             	<li >
                                             		<label class="dropdown-item">

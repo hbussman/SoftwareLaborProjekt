@@ -355,8 +355,12 @@ public class ServerPageController {
 
     @GetMapping("/webinterface/attractions")
     public String getWebinterfaceAccounts(Model model, @AuthenticationPrincipal AccountEntity user) {
-        publishSponsors(model);
+        String sponsor = user.getSponsorName();
         publishAttractions(model);
+        publishAttractionSponsors(model);
+        publishUtil(model);
+        publishSponsor(model, sponsor);
+        publishSponsors(model);
         return "webinterface-attractions";
     }
 

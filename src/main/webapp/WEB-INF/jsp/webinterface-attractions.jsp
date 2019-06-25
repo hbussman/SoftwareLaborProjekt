@@ -1,5 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%--@elvariable id="util" type="sponsoren.Util"--%>
+<%--@elvariable id="sponsor" type="sponsoren.orm.SponsorEntity"--%>
 <%--@elvariable id="sponsors" type="java.util.List<sponsoren.orm.SponsorEntity>"--%>
 <%--@elvariable id="attractions" type="java.util.List<sponsoren.orm.AttraktionEntity>"--%>
 <%--@elvariable id="attractionSponsors" type="java.util.Map<java.lang.String, java.lang.String>"--%>
@@ -35,7 +38,7 @@
         </a>
     </div>
     <div class="mx-auto">
-        <a class="navbar-brand" href="#">Navbar</a>
+        <p class="navbar-brand">Gesponserte Attraktionen</p>
     </div>
     <div class="pr-2">
         <a id="Attraktionsbutton" class="btn btn-light disabled" href="${context}/webinterface/attractions"
@@ -50,43 +53,87 @@
     </a>
 </nav>
 
-<div class="container fluid pt-5 mt-5">
-    <!-- Sponsor Hinzufügen -->
-    <div class="button-group">
-        <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
-            <span class="glyphicon glyphicon-cog"></span><span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu keep-open disabled" style="height: 400px; overflow: auto;">
-            <c:forEach items="${sponsors}" var="sponsor">
-                <li>
-                    <label class="dropdown-item">
-                        <input type="checkbox" id="checkbox-event-${event.id}-sponsor-${sponsor.name}"
-                        <c:if test="${eventsSponsors.get(event.id).contains(sponsor.name)}">
-                               checked
-                        </c:if>
-                        > &nbsp; ${sponsor.name}
-                    </label>
-                </li>
-            </c:forEach>
-        </ul>
-    </div>
+<div class="container pt-5 mt-5 ">
+    <div class="card pb-3">
+        <div class="row justify-content-center">
+            <div class="col-4">
+                <h4 class="card-title">Attraktionen editieren</h4>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-4">
+                <h6 class="card-title">${sponsor.name} sponsert folgende Attraktionen: </h6>
+            </div>
+        </div>
 
-    <div class="button-group">
-        <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
-            <span class="glyphicon glyphicon-cog"></span><span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu keep-open disabled" style="height: 400px; overflow: auto;">
-            <c:forEach items="${attractions}" var="attraktion">
-                <li>
-                    <label class="dropdown-item">
-                        <input type="checkbox" id="checkbox-event-sponsor-${attraktion.name}"
-                        > &nbsp; ${attraktion.name}
-                    </label>
-                </li>
-            </c:forEach>
-        </ul>
+        <div class="row justify-content-center">
+            <div class="col-4">
+                <div class="button-group">
+                    <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown">
+                        <span class="caret">Attraktionen</span>
+                    </button>
+                    <ul class="dropdown-menu keep-open disabled" style="height: 400px; overflow: auto;">
+                        <c:forEach items="${attractions}" var="attraktion">
+                            <li>
+                                <label class="dropdown-item">
+                                    <input type="checkbox" id="checkbox-event-sponsor-${attraktion.name}"
+                                    > &nbsp; ${attraktion.name}
+                                </label>
+                            </li>
+                        </c:forEach>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-4">
+                <!-- Speichern Button -->
+                <button id="button-save-attraction-" class="btn btn-primary btn-success mt-1"
+                        onclick="saveVeranstaltung()" role="button">
+                    Änderungen speichern
+                </button>
+            </div>
+        </div>
     </div>
+    <div class="card mt-5 pb-3">
+        <div class="row justify-content-center">
+            <div class="col-4">
+                <h4 class="card-title">Überblick über gesponserte Attraktionen</h4>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-4">
+                <div class="container-fluid ">
+                    <div class="row justify-content-center">
+
+                        <c:forEach items="${attractions}" var="attraction">
+
+                            <c:if test="${attractionSponsors.get(attraction.name)==sponsor.name}">
+                                <a id="attraction-${attraction.name}"
+                                   href="https://seserver.se.hs-heilbronn.de:9443/buga19bugascout/#/details/${attraction.id}"
+                                   target="_blank">
+                                    <div class="card mb-2" style=" width: 312px;">
+                                        <span class="d-block p-1 bg-light border-bottom text-dark text-center"><b>${attraction.name}</b></span>
+                                        <div class="container">
+                                            <div class="card-text text-dark" style="font-size: small">
+                                                    ${util.truncateLongText(attraction.beschreibung, 350)}
+                                            </div>
+                                        </div>
+                                        <a href="${context}/sponsor?name=${attractionSponsors.get(attraction.name)}"><span
+                                                class="d-block p-1 bg-light border-top text-center"><b>Gesponsort von ${attractionSponsors.get(attraction.name)}</b></span>
+                                        </a>
+                                    </div>
+                                </a>
+                            </c:if>
+
+                        </c:forEach>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+</div>
 
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -101,7 +148,6 @@
 
 <!-- own scripts -->
 <script src="${context}/js/dropdownmenue.js"></script>
-
 
 
 </body>

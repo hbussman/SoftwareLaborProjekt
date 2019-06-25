@@ -359,32 +359,15 @@
                                     </div>
 
                                     <!-- Sponsor Hinzufügen -->
-                                    <h6 class="pt-1">Sponsoren</h6>
-                                    <div class="input-group">
-                                                <c:forEach items="${sponsors}" var="sponsorSorted">
-                                                    <c:if test="${sponsorSorted.name != sponsor.name}">
-                                                        <div class="input-group-prepend pr-2 pb-1">
-                                                            <span class="input-group-text"><i>${sponsorSorted.name}</i></span>
-                                                            <div>
-                                                            <button id="sponsor entfernen" class="btn btn-danger">X</button>
-                                                            </div>
-                                                        </div>
-
-                                                    </c:if>
-                                                </c:forEach>
-                                        <button id="veranstaltung${event.id}-sponsor-add"
-                                                class="btn btn-outline-secondary dropdown-toggle"
-                                                type="button" data-toggle="dropdown">[Sponsor hinzufügen]</button>
-                                        <div class="dropdown-menu" style="height: 400px; overflow: auto;">
-                                            <c:forEach items="${sponsors}" var="sponsorSorted">
-                                                <c:if test="${sponsorSorted.name != sponsor.name}">
-                                                    <button class="dropdown-item"
-                                                            onclick="document.getElementById('veranstaltung${event.id}-sponsor-add').innerText='${sponsorSorted.name}'">${sponsorSorted.name}
-                                                    </button>
-                                                </c:if>
-                                            </c:forEach>
-                                        </div>
-                                    </div>
+                                    <div class="button-group">
+        								<button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span> <span class="caret"></span></button>
+											<ul class="dropdown-menu" style="height: 400px; overflow: auto;">
+												<c:forEach items="${sponsors}" var="sponsor">
+													<li class="dropdown-item"><input type="checkbox"/>&nbsp;${sponsor.name}</li>
+  												 </c:forEach>
+  												
+											</ul>
+ 									</div>
 
                                     <!-- Ort Edit -->
                                     <div class="input-group">

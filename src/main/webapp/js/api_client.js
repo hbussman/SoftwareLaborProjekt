@@ -144,8 +144,8 @@ function db_save_event_data(eventId, name, ort, start_date, start_time, ende_dat
     });
 }
 
-function db_event_add_organisers(eventId, sponsors) {
-    return _put("event/" + eventId, {
+function db_event_set_organisers(eventId, sponsors) {
+    return _patch("event/" + eventId + "/sponsor", {
         sponsors: sponsors
     });
 }

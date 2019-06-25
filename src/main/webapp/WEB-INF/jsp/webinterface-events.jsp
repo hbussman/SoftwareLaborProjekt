@@ -364,16 +364,18 @@
                                         <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
                                             <span class="glyphicon glyphicon-cog"></span><span class="caret"></span>
                                         </button>
-                                        <ul class="dropdown-menu" style="height: 400px; overflow: auto;">
+                                        <ul class="dropdown-menu disabled" style="height: 400px; overflow: auto;">
                                             <c:forEach items="${sponsors}" var="sponsor">
-                                                <li class="dropdown-item">
-                                                    <input id="checkbox-event-${event.id}-sponsor-${sponsor.name}" type="checkbox"
-                                                        <c:if test="${eventsSponsors.get(event.id).contains(sponsor.name)}">
+                                            <div class="dropdown-item">
+                                            <input type="checkbox"  id="checkbox-event-${event.id}-sponsor-${sponsor.name}"
+                                            	<c:if test="${eventsSponsors.get(event.id).contains(sponsor.name)}">
                                                             checked
-                                                        </c:if>
-                                                    >&nbsp;<label for="checkbox-event-${event.id}-sponsor-${sponsor.name}">${sponsor.name}</label>
-                                                </li>
+                                                </c:if>
+                                            > &nbsp; ${sponsor.name}
+                                       	 	</div>
                                             </c:forEach>
+                                            
+                                            
                                         </ul>
                                     </div>
 

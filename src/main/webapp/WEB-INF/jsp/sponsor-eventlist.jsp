@@ -28,15 +28,16 @@
     <title>Sponsoren-Veranstaltungsliste</title>
 
     <!-- own css -->
-    <link rel="stylesheet" type="text/css" href="${context}/css/background.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="${context}/css/background.css" media="screen"/>
 
 </head>
 <body class="bg-image">
 <nav class="navbar fixed-top navbar-dark bg-dark pb-0" style="min-height: 50px">
     <div class="container justify-content-center">
         <div class="navbar-header">
-            <p class="navbar-brand " > Veranstaltungen </p>
-            <button input class="btn btn-light" type="submit"  data-toggle="collapse" data-target="#navbar-responsive-65"> <i class="fas fa-search"></i>
+            <p class="navbar-brand "> Veranstaltungen </p>
+            <button input class="btn btn-light" type="submit" data-toggle="collapse"
+                    data-target="#navbar-responsive-65"><i class="fas fa-search"></i>
             </button>
         </div>
         <div class="collapse" id="navbar-responsive-65">
@@ -44,15 +45,17 @@
                 <script>
                     function search() {
                         var content = document.getElementById("suchFeld").value;
-                        window.location="${context}/events?search="+content;
+                        window.location = "${context}/events?search=" + content;
                     }
                 </script>
-                <form class="search-form searchbar" role="search" id="hiddenSearchBox" action="javascript:search()" method="get">
+                <form class="search-form searchbar" role="search" id="hiddenSearchBox" action="javascript:search()"
+                      method="get">
                     <div class="input-group">
                         <input type="hidden" name="id" value="63">
                         <input id="suchFeld" type="search" name="keywords" class="form-control" placeholder="Suche...">
                         <div class="input-group-btn">
-                            <input class="btn btn-light" type="submit" value="Suchen" data-toggle="searchbar" data-target="#hiddenSearchBox">
+                            <input class="btn btn-light" type="submit" value="Suchen" data-toggle="searchbar"
+                                   data-target="#hiddenSearchBox">
                             </input>
                         </div>
                     </div>
@@ -63,61 +66,63 @@
 </nav>
 <nav class="navbar fixed-bottom navbar-expand-lg navbar-dark bg-dark justify-content-center">
     <div class="btn-group" role="group" style="min-width: 100%">
-        <a id="Attractionbutton" class="btn btn-primary btn-light" style="border:1px solid black" href="${context}/attractions" role="button"><i
+        <a id="Attractionbutton" class="btn btn-primary btn-light" style="border:1px solid black"
+           href="${context}/attractions" role="button"><i
                 class="fas fa-landmark"></i></a>
         <a id="Homebutton" class="btn btn-primary btn-light" style="border:1px solid black" href="${context}/sponsoren"
         ><i class="fas fa-home"></i></a>
-        <a id="Eventbutton" class="btn btn-primary btn-light" href="${context}/events" role="button" style="background: aquamarine; border:1px solid black"
-           ><i class="far fa-calendar-alt"></i>
+        <a id="Eventbutton" class="btn btn-primary btn-light" href="${context}/events" role="button"
+           style="background: aquamarine; border:1px solid black"
+        ><i class="far fa-calendar-alt"></i>
         </a>
     </div>
 </nav>
-<div class="pt-5"></div>
+<div class="pt-4"></div>
 <div class="container-fluid pt-5 pb-5 mt-5">
-<div class="row justify-content-center pb-5 mx-1">
-    <c:forEach items="${events}" var="event">
-        <c:if test="${util.searchMatch(searchString, event)}">
+    <div class="row justify-content-center pb-5 mx-1">
+        <c:forEach items="${events}" var="event">
+            <c:if test="${util.searchMatch(searchString, event)}">
 
-            <a id="${event.id}card" href="${context}/event?id=${event.id}">
-                <div class="card mb-2 col-12" style="max-height: 200px">
-                    <span class="d-block p-1 bg-light text-dark text-center"><b>${event.name}</b></span>
-                    <div class="card-body text-dark"><i class="fas fa-thumbtack"></i>
-                            ${locations.get(event.locationID).name}
-                        <div class="card-text text-dark"><i
-                                class="far fa-calendar-alt"></i> ${util.prettifyTimestamp(event.start)}
-                            - ${util.prettifyTimestamp(event.ende)}</div>
+                <a id="${event.id}card" href="${context}/event?id=${event.id}">
+                    <div class="card mb-2 col-12" style="max-height: 200px">
+                        <span class="d-block p-1 bg-light text-dark text-center"><b>${event.name}</b></span>
+                        <div class="card-body text-dark"><i class="fas fa-thumbtack"></i>
+                                ${locations.get(event.locationID).name}
+                            <div class="card-text text-dark"><i
+                                    class="far fa-calendar-alt"></i> ${util.prettifyTimestamp(event.start)}
+                                - ${util.prettifyTimestamp(event.ende)}</div>
+                        </div>
                     </div>
-                </div>
-            </a>
+                </a>
 
-        </c:if>
-    </c:forEach>
-</div>
+            </c:if>
+        </c:forEach>
+    </div>
 </div>
 
 <nav class="navbar navbar-dark bg-dark justify-content-center" style="min-height: 50px">
-  <p class="navbar-text navbar-center text-white" style="font-size: x-large">Betriebsfeiern</p>
+    <p class="navbar-text navbar-center text-white" style="font-size: x-large">Betriebsfeiern</p>
 </nav>
-<div class="container">
-<div class="row justify-content-center pb-5 mx-1">
-    <c:forEach items="${companyPartys}" var="event">
-        <c:if test="${util.searchMatch(searchString, event)}">
+<div class="container-fluid mt-3">
+    <div class="row justify-content-center pb-5 mx-1">
+        <c:forEach items="${companyPartys}" var="event">
+            <c:if test="${util.searchMatch(searchString, event)}">
 
-            <a id="${event.id}card" href="${context}/event?id=${event.id}">
-                <div class="card mb-2 col-12" style="max-height: 200px">
-                    <span class="d-block p-1 bg-light text-dark text-center"><b>${event.name}</b></span>
-                    <div class="card-body text-dark"><i class="fas fa-thumbtack"></i>
-                            ${locations.get(event.locationID).name}
-                        <div class="card-text text-dark"><i
-                                class="far fa-calendar-alt"></i> ${util.prettifyTimestamp(event.start)}
-                            - ${util.prettifyTimestamp(event.ende)}</div>
+                <a id="${event.id}card" href="${context}/event?id=${event.id}">
+                    <div class="card mb-2 col-12" style="max-height: 200px">
+                        <span class="d-block p-1 bg-light text-dark text-center"><b>${event.name}</b></span>
+                        <div class="card-body text-dark"><i class="fas fa-thumbtack"></i>
+                                ${locations.get(event.locationID).name}
+                            <div class="card-text text-dark"><i
+                                    class="far fa-calendar-alt"></i> ${util.prettifyTimestamp(event.start)}
+                                - ${util.prettifyTimestamp(event.ende)}</div>
+                        </div>
                     </div>
-                </div>
-            </a>
+                </a>
 
-        </c:if>
-    </c:forEach>
-</div>
+            </c:if>
+        </c:forEach>
+    </div>
 </div>
 
 <!-- Optional JavaScript -->

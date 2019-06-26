@@ -57,10 +57,10 @@
         <div class="card-body text-dark">
             <p class="card-text"> ${event.beschreibung}</p>
             <p class="card-text text-left"><span><i
-                    class="fas fa-thumbtack"></i></span>${locations.get(event.locationID).name}
+                    class="fas fa-thumbtack mr-2"></i></span>${locations.get(event.locationID).name}
             </p>
             <p class="card-text text-left d-flex"><span><i
-                    class="far fa-calendar-alt"></i></span>${util.prettifyTimestamp(event.start)}-
+                    class="far fa-calendar-alt mr-2"></i></span>${util.prettifyTimestamp(event.start)}-
                 <br>${util.prettifyTimestamp(event.ende)}</p>
             <p class="card-text">
                 <a href="${context}/companyparty-map?id=${event.id}"

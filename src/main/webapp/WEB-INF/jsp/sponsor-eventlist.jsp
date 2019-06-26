@@ -84,17 +84,20 @@
             <c:if test="${util.searchMatch(searchString, event)}">
 
                 <a id="${event.id}card" href="${context}/event?id=${event.id}">
-                    <div class="card mb-2 col-12" style="max-height: 200px">
+                    <div class="card mb-2 col-12" style="max-height: 200px; width: 18rem">
                         <span class="d-block p-1 bg-light text-dark text-center"><b>${event.name}</b></span>
-                        <div class="card-body text-dark"><i class="fas fa-thumbtack"></i>
+                        <div class="card-body text-dark"><i class="fas fa-thumbtack mr-2"></i>
                                 ${locations.get(event.locationID).name}
-                            <div class="card-text text-dark"><i
-                                    class="far fa-calendar-alt"></i> ${util.prettifyTimestamp(event.start)}
-                                - ${util.prettifyTimestamp(event.ende)}</div>
+                            <div class="card-text text-dark text-left d-flex"><i
+                                    class="far fa-calendar-alt mr-2"></i>
+                                <p>
+                                        ${util.prettifyTimestamp(event.start)} -<br>
+                                        ${util.prettifyTimestamp(event.ende)}
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </a>
-
             </c:if>
         </c:forEach>
     </div>

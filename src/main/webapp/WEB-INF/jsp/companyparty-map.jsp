@@ -15,7 +15,7 @@
     <script src="${context}/js/api_client.js"></script>
     <script>api_set_context("${context}")</script>
 
-    <title>Betriebsfeier</title>
+    <title>Veranstaltung</title>
 
     <style>
         .navbar-center {

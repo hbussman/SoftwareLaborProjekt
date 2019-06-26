@@ -52,44 +52,39 @@
         </a>
     </div>
 </nav>
-<div class="container-fluid mt-5 pt-5">
-    <div class="card">
-        <div class="container">
-            <div class="card-text text-dark">
-                ${event.beschreibung}
-            </div>
-            <div class="card-body text-dark">
-                <div class="input-group">
-                    <div class="input-group-prepend pr-3">
-                        <span><i class="fas fa-thumbtack"></i></span>
+<div class="container-fluid mt-5 pt-5 pb-5 mb-5">
+    <div class="card" style="width: 18rem;">
+        <div class="card-body text-dark">
+            <p class="card-text"> ${event.beschreibung}</p>
+            <p class="card-text text-left"><span><i
+                    class="fas fa-thumbtack"></i></span>${locations.get(event.locationID).name}
+            </p>
+            <p class="card-text text-left d-flex"><span><i
+                    class="far fa-calendar-alt"></i></span>${util.prettifyTimestamp(event.start)}-
+                <br>${util.prettifyTimestamp(event.ende)}</p>
+            <p class="card-text">
+                <a href="${context}/companyparty-map?id=${event.id}"
+                   class="btn btn-secondary btn-md active"
+                   role="button"
+                   aria-pressed="true">Auf Karte anzeigen
+                </a>
+            </p>
+            <p class="card-text">
+                <b>Gesponsort von</b>
+            </p>
+            <div class="row no-gutters justify-content-center">
+                <c:forEach items="${eventSponsors}" var="sponsor">
+                    <div class="card shadow my-3 bg-white rounded">
+                        <a id="${event.id}" href="${context}/sponsor?name=${sponsor.name}">
+                            <img src="${context}/image/${sponsor.name}_scaled.png" class="card-img-top"
+                                 alt="${sponsor.name}-Logo">
+                        </a>
                     </div>
-                    <span class="align-middle">
-                                            <a href="${context}/companyparty-map?id=${event.id}"
-                                               class="btn btn-secondary btn-lg active"
-                                               role="button"
-                                               aria-pressed="true">${locations.get(event.locationID).name}</a>
-                    </span>
-                    <div class="input-group-prepend pr-3">
-                        <span><i class="far fa-calendar-alt"></i></span>
-                    </div>
-                    <span class="align-middle">
-                        ${util.prettifyTimestamp(event.start)}- <br>${util.prettifyTimestamp(event.ende)}
-                    </span>
-                </div>
+                </c:forEach>
             </div>
-        </div>
-        <span class="d-block p-1 bg-light text-dark text-center"><b>Gesponsort von</b></span>
-        <div class="row no-gutters justify-content-center">
-            <c:forEach items="${eventSponsors}" var="sponsor">
-                <div class="card shadow my-3 bg-white rounded">
-                    <a id="${event.id}" href="${context}/sponsor?name=${sponsor.name}">
-                        <img src="${context}/image/${sponsor.name}_scaled.png" class="card-img-top"
-                             alt="${sponsor.name}-Logo">
-                    </a>
-                </div>
-            </c:forEach>
         </div>
     </div>
+</div>
 </div>
 </body>
 </html>

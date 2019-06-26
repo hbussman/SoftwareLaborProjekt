@@ -69,6 +69,7 @@
         </a>
     </div>
 </nav>
+
 <div class="pt-4"></div>
 <div class="container-fluid  pb-5 mt-5">
     <c:if test="${searchString != null}">
@@ -80,7 +81,7 @@
 
             <!-- only show attractions that are sponsored by someone (ignored ${attraction.name}) -->
             <c:if test="${attractionsSponsors.containsKey(attraction.name)}">
-                    <div class="card mb-1 mt-1" style=" width: 312px;">
+                    <div class="card mb-1 mt-1 mx-lg-3 my-lg-3" style=" width: 312px;">
                         <a id="attraction-${attraction.name}" href="https://seserver.se.hs-heilbronn.de:9443/buga19bugascout/#/details/${attraction.id}" target="_blank">
                             <span class="d-block p-1 bg-light border-bottom text-dark text-center"><b>${attraction.name}</b></span>
                             <div class="container">
@@ -92,7 +93,7 @@
 
                         <!-- show all sponsors -->
                         <span class="d-block p-1 bg-light border-top text-center">
-                            <b>Gesponsort von
+                            <b>Gesponsert von
                                 <a href="${context}/sponsor?name=${attractionsSponsors.get(attraction.name).get(0).name}">${attractionsSponsors.get(attraction.name).get(0).name}</a>
                                 <c:forEach items="${attractionsSponsors.get(attraction.name).subList(1, attractionsSponsors.get(attraction.name).size())}" var="sponsor">
                                     , <a href="${context}/sponsor?name=${sponsor.name}">${sponsor.name}</a>

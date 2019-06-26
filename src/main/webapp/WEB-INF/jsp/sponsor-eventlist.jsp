@@ -86,22 +86,21 @@
     <div class="row justify-content-center pb-5 mx-1">
         <c:forEach items="${events}" var="event">
             <c:if test="${util.searchMatch(searchString, event)}">
+                <div class="card mb-1 mt-1 mx-lg-3 my-lg-3" style=" width: 312px;">
+                        <a id="${event.id}card" href="${context}/event?id=${event.id}">
+                            <span class="d-block p-1 bg-light text-dark text-center"><b>${event.name}</b></span>
 
-
-                <div class="card mb-1 mt-1 col-12" style="width: 18rem">
-                    <a id="${event.id}card" href="${context}/event?id=${event.id}">
-                        <span class="d-block p-1 bg-light text-dark text-center"><b>${event.name}</b></span>
-                        <div class="card-body text-dark"><i class="fas fa-thumbtack mr-2"></i>
-                                ${locations.get(event.locationID).name}
-                            <div class="card-text text-dark text-left d-flex"><i
-                                    class="far fa-calendar-alt mr-2"></i>
-                                <p>
+                            <div class="card-body text-dark"><i class="fas fa-thumbtack mr-2"></i>
+                                    ${locations.get(event.locationID).name}
+                                <div class="card-text text-dark text-left d-flex"><i
+                                        class="far fa-calendar-alt mr-2"></i>
                                         ${util.prettifyTimestamp(event.start)} -<br>
                                         ${util.prettifyTimestamp(event.ende)}
-                                </p>
+                                </div>
                             </div>
-                        </div>
-                    </a>
+
+                        </a>
+
                     <span class="d-block p-1 bg-light border-top text-center">
                             <b>
                                 Gesponsort von
@@ -113,8 +112,7 @@
                                 </c:forEach>
                             </b>
                     </span>
-                </div>
-
+                    </div>
             </c:if>
         </c:forEach>
     </div>
@@ -123,25 +121,30 @@
 <nav class="navbar navbar-dark bg-dark justify-content-center" style="min-height: 50px">
     <p class="navbar-text navbar-center text-white" style="font-size: x-large">Betriebsfeiern</p>
 </nav>
-<div class="container-fluid mt-3">
+<div class="container-fluid  pb-5 mt-5">
+    <c:if test="${searchString != null}">
+        <span class="d-block mt-3 p-1 bg-light text-dark text-center"><b>Suchergebnisse für: "${searchString}"</b></span>
+    </c:if>
     <div class="row justify-content-center pb-5 mx-1">
         <c:forEach items="${companyPartys}" var="event">
             <c:if test="${util.searchMatch(searchString, event)}">
 
-
-                <div class="card mb-2 col-12" style="width: 18rem">
+                <div class="card mb-1 mt-1 mx-lg-3 my-lg-3" style=" width: 312px;">
                     <a id="${event.id}card" href="${context}/event?id=${event.id}">
-                        <span class="d-block p-1 bg-light text-dark text-center"><b>${event.name}</b></span>
-                        <div class="card-body text-dark"><i class="fas fa-thumbtack"></i>
-                                ${locations.get(event.locationID).name}
+                        <span class="d-block p-1 bg-light border-bottom text-dark text-center"><b>${event.name}</b></span>
+                        <div class="container">
+                            <div class="card-text text-dark"><i class="fas fa-thumbtack"></i>
+                                    ${locations.get(event.locationID).name}
+                            </div>
                             <div class="card-text text-dark"><i
                                     class="far fa-calendar-alt"></i> ${util.prettifyTimestamp(event.start)}
-                                - ${util.prettifyTimestamp(event.ende)}</div>
+                                - ${util.prettifyTimestamp(event.ende)}
+                            </div>
                         </div>
                     </a>
                     <span class="d-block p-1 bg-light border-top text-center">
                             <b>
-                                Gesponsort von
+                                Gesponsert von
                                 <a href="${context}/sponsor?name=${eventsSponsors.get(event.id).get(0)}">${eventsSponsors.get(event.id).get(0)}</a>
                                 <c:forEach
                                         items="${eventsSponsors.get(event.id).subList(1, eventsSponsors.get(event.id).size())}"
@@ -151,7 +154,6 @@
                             </b>
                     </span>
                 </div>
-
 
             </c:if>
         </c:forEach>

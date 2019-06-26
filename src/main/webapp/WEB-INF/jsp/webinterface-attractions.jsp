@@ -73,14 +73,24 @@
             });
         }
     </script>
+
+    <style>
+        .navbar-center {
+            position: absolute;
+            overflow: visible;
+            height: 0;
+            width: 100%;
+            left: 0;
+            top: 0;
+            text-align: center;
+        }
+    </style>
 </head>
-
 <body>
-
-<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark mb-5">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark justify-content-center">
     <div class="pr-2">
-        <a id="Sponsorenseitebutton" class="btn btn-light" href="${context}/webinterface"
-           role="button" aria-disabled="true">Sponsorenseite
+        <a id="Homebutton" class="btn btn-light" href="${context}/webinterface/"
+           role="button">Sponsorenseite
         </a>
     </div>
     <div class="pr-2">
@@ -88,14 +98,14 @@
            role="button">Account
         </a>
     </div>
-    <div class="mx-auto">
-        <p class="navbar-brand">Gesponserte Attraktionen</p>
-    </div>
+    <ul class="nav navbar-nav ml-auto">
+        <p class="navbar-text navbar-center text-white" style="font-size: x-large">Attraktionen verwalten</p>
+    </ul>
     <div class="pr-2">
         <a id="Attraktionsbutton" class="btn btn-light disabled" href="${context}/webinterface/attractions"
-           role="button">Attraktionen
+           role="button"aria-disabled="true">Attraktionen
         </a>
-        <a id="Veranstaltungsbutton" class="btn btn-light" href="${context}/webinterface/events"
+        <a id="Veranstaltungsbutton" class="btn btn-light" href="${context}/webinterface/events?sponsor=${sponsor.name}"
            role="button">Veranstaltungen
         </a>
     </div>
@@ -107,20 +117,20 @@
 <div class="container pt-5 mt-5 ">
     <div class="card pb-3">
         <div class="row justify-content-center">
-            <div class="col-4">
-                <h4 class="card-title">Attraktionen editieren</h4>
+            <div class="col-3">
+                <h4 class="card-title text-center">Attraktionen editieren</h4>
             </div>
         </div>
         <div class="row justify-content-center">
-            <div class="col-4">
+            <div class="col-3">
                 <h6 class="card-title">${sponsor.name} sponsert folgende Attraktionen: </h6>
             </div>
         </div>
 
         <div class="row justify-content-center">
-            <div class="col-4">
+            <div class="col-3">
                 <div class="button-group">
-                    <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown">
+                    <button type="button" class="btn btn-outline-secondary dropdown-toggle" style="width: 250px;" data-toggle="dropdown">
                         <span class="caret">Attraktionen</span>
                     </button>
                     <ul id="attraction-selector" class="dropdown-menu keep-open disabled" style="height: 400px; overflow: auto;">
@@ -142,9 +152,9 @@
         </div>
 
         <div class="row justify-content-center">
-            <div class="col-4">
+            <div class="col-3">
                 <!-- Speichern Button -->
-                <button id="button-save-attractions" class="btn btn-primary btn-success mt-1" onclick="saveAttractions()" role="button">
+                <button id="button-save-attractions" class="btn btn-primary btn-success mt-1" style="width: 250px;" onclick="saveAttractions()" role="button">
                     Änderungen speichern
                 </button>
                 <div class="row">
@@ -156,9 +166,9 @@
     </div>
     <div class="card mt-5 pb-3">
         <div class="row justify-content-center">
-            <div class="col-4">
+            <div class="col-12">
                 <c:if test="${sponsorAttractions.size() > 0}">
-                    <h4 class="card-title">Überblick über gesponserte Attraktionen</h4>
+                    <h4 class="card-title text-center">Überblick über gesponserte Attraktionen</h4>
                 </c:if>
                 <c:if test="${sponsorAttractions.size() == 0}">
                     <h4 class="card-title">${sponsor.name} hat noch keine Attraktionen eingetragen!</h4>
@@ -166,14 +176,14 @@
             </div>
         </div>
         <div class="row justify-content-center">
-            <div class="col-4">
+            <div class="col-12">
                 <div class="container-fluid ">
                     <div class="row justify-content-center">
                         <c:forEach items="${sponsorAttractions}" var="attraction">
                             <a id="attraction-${attraction.name}"
                                href="https://seserver.se.hs-heilbronn.de:9443/buga19bugascout/#/details/${attraction.id}"
                                target="_blank">
-                                <div class="card mb-2" style=" width: 312px;">
+                                <div class="card mb-2 mx-3 px-3" style=" width: 312px;">
                                     <span class="d-block p-1 bg-light border-bottom text-dark text-center"><b>${attraction.name}</b></span>
                                     <div class="container">
                                         <div class="card-text text-dark" style="font-size: small">

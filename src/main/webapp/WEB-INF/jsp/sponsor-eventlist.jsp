@@ -79,13 +79,16 @@
     </div>
 </nav>
 <div class="pt-4"></div>
-<div class="container-fluid pt-5 pb-5 mt-5">
+<div class="container-fluid  pb-5 mt-5">
+    <c:if test="${searchString != null}">
+        <span class="d-block mt-3 p-1 bg-light text-dark text-center"><b>Suchergebnisse für: "${searchString}"</b></span>
+    </c:if>
     <div class="row justify-content-center pb-5 mx-1">
         <c:forEach items="${events}" var="event">
             <c:if test="${util.searchMatch(searchString, event)}">
 
 
-                <div class="card mb-2 col-12" style="width: 18rem">
+                <div class="card mb-1 mt-1 col-12" style="width: 18rem">
                     <a id="${event.id}card" href="${context}/event?id=${event.id}">
                         <span class="d-block p-1 bg-light text-dark text-center"><b>${event.name}</b></span>
                         <div class="card-body text-dark"><i class="fas fa-thumbtack mr-2"></i>

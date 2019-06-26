@@ -35,7 +35,7 @@
 <nav class="navbar fixed-top navbar-dark bg-dark pb-0" style="min-height: 50px">
     <div class="container justify-content-center">
         <div class="navbar-header">
-            <p class="navbar-brand "> ${event.name} </p>
+            <p class="navbar-brand ">${event.name}</p>
         </div>
     </div>
 </nav>
@@ -52,10 +52,18 @@
         </a>
     </div>
 </nav>
-<div class="container-fluid mt-5 pt-5 pb-5 mb-5">
+<div class="container-fluid justify-content-center pt-5">
+    <div class="row justify-content-center pb-5 mx-1">
     <div class="card" style="width: 18rem;">
         <div class="card-body text-dark">
-            <p class="card-text"> ${event.beschreibung}</p>
+            <p class="card-text">
+                <b>
+                    <span class="d-block p-1 bg-light text-dark text-center">
+                    Beschreibung
+                </span>
+                </b>
+                ${event.beschreibung}
+            </p>
             <p class="card-text text-left"><span><i
                     class="fas fa-thumbtack mr-2"></i></span>${locations.get(event.locationID).name}
             </p>
@@ -70,7 +78,7 @@
                 </a>
             </p>
             <p class="card-text">
-                <b>Gesponsort von</b>
+                <span class="d-block p-1 bg-light text-dark text-center"><b>Gesponsort von</b></span>
             </p>
             <div class="row no-gutters justify-content-center">
                 <c:forEach items="${eventSponsors}" var="sponsor">
@@ -83,6 +91,7 @@
                 </c:forEach>
             </div>
         </div>
+    </div>
     </div>
 </div>
 </div>

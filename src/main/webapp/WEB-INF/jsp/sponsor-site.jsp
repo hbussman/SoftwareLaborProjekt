@@ -47,8 +47,13 @@
 </head>
 
 <body class="bg-image">
-<nav class="navbar fixed-top navbar-dark bg-dark" style="min-height: 50px">
-    <p class="navbar-text navbar-center text-white" style="font-size: x-large">${sponsor.name}</p></nav>
+<nav class="navbar fixed-top navbar-dark bg-dark pb-0" style="min-height: 50px">
+    <div class="container justify-content-center">
+        <div class="navbar-header">
+            <p class="navbar-brand "> ${sponsor.name} </p>
+        </div>
+    </div>
+</nav>
 <nav class="navbar fixed-bottom navbar-expand-lg navbar-dark bg-dark justify-content-center">
     <div class="btn-group" role="group" style="min-width: 100%">
         <a id="Attractionbutton" class="btn btn-light" style="border:1px solid black" href="${context}/attractions" role="button"><i
@@ -59,10 +64,11 @@
         </a>
     </div>
 </nav>
-<div class="container pt-5">
-    <div class="row">
+
+<div class="container-fluid justify-content-center pt-5">
+    <div class="row justify-content-center pb-5 mx-1">
         <div class="col-12">
-            <div class="shadow p-3 mb-5 bg-white rounded">
+            <div class="shadow p-3 bg-white rounded">
                 <div class="card">
                     <div class="text-center">
                         <img src="${context}/image/${sponsor.name}_scaled.png" style="max-height: 250px; max-width: 250px"

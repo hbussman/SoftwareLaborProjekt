@@ -6,21 +6,12 @@ import java.util.Objects;
 @Entity
 @Table(name = "location", schema = "buga19sponsoren", catalog = "")
 public class LocationEntity {
-    private int id;
     private String name;
     private double lat;
     private double lon;
+    private int id;
 
     @Id
-    @Column(name = "ID")
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
     @Basic
     @Column(name = "Name")
     public String getName() {
@@ -49,6 +40,15 @@ public class LocationEntity {
 
     public void setLon(double lon) {
         this.lon = lon;
+    }
+
+    @Column(name = "ID")
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Override

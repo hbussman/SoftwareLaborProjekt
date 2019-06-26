@@ -5,7 +5,7 @@
 <%--@elvariable id="sponsor" type="sponsoren.orm.SponsorEntity"--%>
 <%--@elvariable id="sponsors" type="java.util.List<sponsoren.orm.SponsorEntity>"--%>
 <%--@elvariable id="attractions" type="java.util.List<sponsoren.orm.AttraktionEntity>"--%>
-<%--@elvariable id="attractionSponsors" type="java.util.Map<java.lang.String, java.lang.String>"--%>
+<%--@elvariable id="sponsorAttractions" type="java.util.List<sponsoren.orm.AttraktionEntity>"--%>
 <c:set var="context" value="${pageContext.request.contextPath}"/>
 
 <!DOCTYPE html>
@@ -31,7 +31,48 @@
         }
     </style>
 
+    <script src="${context}/js/api_client.js"></script>
+    <script>api_set_context("${context}")</script>
+
     <title>Attraktionen</title>
+
+    <script>
+        function saveAttractions() {
+
+            var attractions = {};
+
+            var ul = document.getElementById('attraction-selector');
+            var lis = ul.getElementsByTagName('li');
+            for(var i = 0; i < lis.length; i++) {
+                var li = lis[i];
+                var checked = li.children[0].children[0].checked;
+                var sponsorName = li.children[0].children[1].innerText;
+                console.log(sponsorName + " " + (checked ? "yes" : "no"));
+
+                attractions[sponsorName] = checked;
+            }
+
+            console.log(attractions);
+
+            db_save_attractions(attractions).then(result => {
+                console.log(result.status);
+                var resultElement = document.getElementById("ResultStatus");
+                if(result.ok) {
+                    result.text().then(text => {
+                        //resultElement.style.color = "darkgreen";
+                        //resultElement.innerText = "Änderungen erfolgreich gespeichert! " + text;
+                        console.log(text);
+                        location.reload();
+                    });
+                } else {
+                    result.text().then(text => {
+                        resultElement.style.color = "red";
+                        resultElement.innerText = "Ein Fehler ist aufgetreten: " + result.status + " (" + text + ")"
+                    });
+                }
+            });
+        }
+    </script>
 </head>
 
 <body>
@@ -82,13 +123,13 @@
                     <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown">
                         <span class="caret">Attraktionen</span>
                     </button>
-                    <ul class="dropdown-menu keep-open disabled" style="height: 400px; overflow: auto;">
+                    <ul id="attraction-selector" class="dropdown-menu keep-open disabled" style="height: 400px; overflow: auto;">
                         <c:forEach items="${attractions}" var="attraction">
                             <li>
                                 <label class="dropdown-item">
                                     <input type="checkbox"
                                            id="checkbox-event-${attraction.id}-attraction-${attraction.name}"
-                                    <c:if test="${attractionSponsors.get(attraction.name)==sponsor.name}">
+                                    <c:if test="${sponsorAttractions.contains(attraction)}">
                                            checked
                                     </c:if>
                                     > <strong>${attraction.name}</strong>
@@ -103,41 +144,49 @@
         <div class="row justify-content-center">
             <div class="col-4">
                 <!-- Speichern Button -->
-                <button id="button-save-attraction-" class="btn btn-primary btn-success mt-1"
-                        onclick="saveVeranstaltung()" role="button">
+                <button id="button-save-attractions" class="btn btn-primary btn-success mt-1" onclick="saveAttractions()" role="button">
                     Änderungen speichern
                 </button>
+                <div class="row">
+                    <div class="col" align="center"><p id="ResultStatus"></p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
     <div class="card mt-5 pb-3">
         <div class="row justify-content-center">
             <div class="col-4">
-                <h4 class="card-title">Überblick über gesponserte Attraktionen</h4>
+                <c:if test="${sponsorAttractions.size() > 0}">
+                    <h4 class="card-title">Überblick über gesponserte Attraktionen</h4>
+                </c:if>
+                <c:if test="${sponsorAttractions.size() == 0}">
+                    <h4 class="card-title">${sponsor.name} hat noch keine Attraktionen eingetragen!</h4>
+                </c:if>
             </div>
         </div>
         <div class="row justify-content-center">
             <div class="col-4">
                 <div class="container-fluid ">
                     <div class="row justify-content-center">
-                        <c:forEach items="${attractions}" var="attraction">
-                            <c:if test="${attractionSponsors.get(attraction.name)==sponsor.name}">
-                                <a id="attraction-${attraction.name}"
-                                   href="https://seserver.se.hs-heilbronn.de:9443/buga19bugascout/#/details/${attraction.id}"
-                                   target="_blank">
-                                    <div class="card mb-2" style=" width: 312px;">
-                                        <span class="d-block p-1 bg-light border-bottom text-dark text-center"><b>${attraction.name}</b></span>
-                                        <div class="container">
-                                            <div class="card-text text-dark" style="font-size: small">
-                                                    ${util.truncateLongText(attraction.beschreibung, 350)}
-                                            </div>
+                        <c:forEach items="${sponsorAttractions}" var="attraction">
+                            <a id="attraction-${attraction.name}"
+                               href="https://seserver.se.hs-heilbronn.de:9443/buga19bugascout/#/details/${attraction.id}"
+                               target="_blank">
+                                <div class="card mb-2" style=" width: 312px;">
+                                    <span class="d-block p-1 bg-light border-bottom text-dark text-center"><b>${attraction.name}</b></span>
+                                    <div class="container">
+                                        <div class="card-text text-dark" style="font-size: small">
+                                                ${util.truncateLongText(attraction.beschreibung, 350)}
                                         </div>
-                                        <a href="${context}/sponsor?name=${attractionSponsors.get(attraction.name)}"><span
-                                                class="d-block p-1 bg-light border-top text-center"><b>Gesponsort von ${attractionSponsors.get(attraction.name)}</b></span>
-                                        </a>
                                     </div>
-                                </a>
-                            </c:if>
+                                    <a href="${context}/sponsor?name=${sponsor.name}">
+                                        <span class="d-block p-1 bg-light border-top text-center">
+                                            <b>Gesponsort von ${sponsor.name}</b>
+                                        </span>
+                                    </a>
+                                </div>
+                            </a>
                         </c:forEach>
                     </div>
                 </div>

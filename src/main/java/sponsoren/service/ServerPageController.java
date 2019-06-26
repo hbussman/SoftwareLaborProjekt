@@ -226,6 +226,21 @@ public class ServerPageController {
         model.addAttribute("attractionSponsors", attraktionSponsorMapping);
     }
 
+    private void publishSponsorAttractions(Model model, String sponsor) {
+        // get sponsor-event mapping
+        Iterable<SponsorAttraktionEntity> sponsorAttraktionEntities = sponsorAttraktionRepository.findAll();
+
+        // convert iterable to List, resolving foreign key association to attraction
+        List<AttraktionEntity> sponsorAttractions = new ArrayList<>();
+        for(SponsorAttraktionEntity ent : sponsorAttraktionEntities) {
+            if(ent.getSponsorName().equals(sponsor)) {
+                Optional<AttraktionEntity> attraction = attractionRepository.findById(ent.getAttraktion());
+                attraction.ifPresent(sponsorAttractions::add);
+            }
+        }
+        model.addAttribute("sponsorAttractions", sponsorAttractions);
+    }
+
 
     @RequestMapping(value="/webinterface/image_upload", method = RequestMethod.POST, consumes = {"multipart/form-data"})
     public ResponseEntity importQuestion(@Valid @RequestParam("uploadedFileName") MultipartFile multipart, @AuthenticationPrincipal AccountEntity user) {
@@ -354,10 +369,10 @@ public class ServerPageController {
     }
 
     @GetMapping("/webinterface/attractions")
-    public String getWebinterfaceAccounts(Model model, @AuthenticationPrincipal AccountEntity user) {
+    public String getWebinterfaceAttractions(Model model, @AuthenticationPrincipal AccountEntity user) {
         String sponsor = user.getSponsorName();
         publishAttractions(model);
-        publishAttractionSponsors(model);
+        publishSponsorAttractions(model, user.getSponsorName());
         publishUtil(model);
         publishSponsor(model, sponsor);
         publishSponsors(model);

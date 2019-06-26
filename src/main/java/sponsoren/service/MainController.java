@@ -424,6 +424,36 @@ public class MainController {
         return sponsorAttraktionRepository.findAll();
     }
 
+    @PatchMapping(path="/sponsor_attraktion")
+    public ResponseEntity setSponsorAttraktion(@AuthenticationPrincipal AccountEntity user, @RequestBody Map<String, Boolean> attractions) {
+
+        int removed = 0;
+        int added = 0;
+
+        // delete sponsor from all attractions they don't want to be part of
+        Iterable<SponsorAttraktionEntity> sponsorAttractions = sponsorAttraktionRepository.findAll();
+        for(SponsorAttraktionEntity ent : sponsorAttractions) {
+            if(ent.getSponsorName().equals(user.getSponsorName()) && attractions.get(ent.getAttraktion()) == false) {
+                // delete sponsor from this attraction
+                sponsorAttraktionRepository.delete(ent);
+                ++removed;
+            }
+        }
+
+        // add sponsor to all attractions they selected
+        for(String attractionName : attractions.keySet()) {
+            if(attractions.get(attractionName) == true) {
+                SponsorAttraktionEntity newEnt = new SponsorAttraktionEntity();
+                newEnt.setSponsorName(user.getSponsorName());
+                newEnt.setAttraktion(attractionName);
+                sponsorAttraktionRepository.save(newEnt);
+                ++added;
+            }
+        }
+
+        return ResponseEntity.ok(user.getSponsorName() + "wurde erfolgreich von " + removed + " Attraktionen entfernt und zu " + added + " hinzugefügt.");
+    }
+
     @GetMapping(path="/dbg/update_attraktionen")
     public ResponseEntity dbgUpdateAttraktionen() {
         System.out.println("Requesting Attraktionen from service");

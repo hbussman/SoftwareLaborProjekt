@@ -152,6 +152,10 @@ function db_delete_veranstaltung(eventId) {
     return _delete("event/" + eventId, {});
 }
 
+function db_save_attractions(attractions) {
+    return _patch("sponsor_attraktion", attractions)
+}
+
 function db_save_account(newUsername, newPassword) {
     return _patch("account", {
         username: newUsername,

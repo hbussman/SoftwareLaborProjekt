@@ -27,12 +27,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/webinterface/**",
                         "/api/event",
                         "/api/sponsor",
-                        "/api/account"
+                        "/api/account",
+                        "/api/sponsor_attraktion"
                 )
                 .authenticated()
                 .antMatchers(HttpMethod.GET,
                         "/api/event/**",
-                        "/api/sponsor/**"
+                        "/api/sponsor/**",
+                        "/api/sponsor_attraktion"
                 )
                 .permitAll()
                 .and()

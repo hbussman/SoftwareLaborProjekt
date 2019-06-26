@@ -78,9 +78,9 @@
 </nav>
 
 <div class="pt-4"></div>
-<div class="container-fluid pt-3 pb-5 mt-5">
+<div class="container-fluid  pb-5 mt-5">
     <c:if test="${searchString != null}">
-        <h3>Suchergebnisse für '${searchString}'</h3>
+            <span class="d-block mt-3 p-1 bg-light text-dark text-center"><b>Suchergebnisse für: "${searchString}"</b></span>
     </c:if>
     <c:forEach items="${sponsorsSorted}" var="sponsorlist">
         <div class="row no-gutters justify-content-center">

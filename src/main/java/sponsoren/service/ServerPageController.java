@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import sponsoren.orm.*;
 import org.springframework.web.multipart.MultipartFile;
+import sponsoren.service.external.Attraktionen.Attraktion;
 
 import javax.imageio.ImageIO;
 import javax.validation.Valid;
@@ -212,18 +213,27 @@ public class ServerPageController {
         List<AttraktionEntity> attractionList = new ArrayList<>();
         attractionEntities.forEach(attractionList::add);
         model.addAttribute("attractions", attractionList);
+
+        Map<String, AttraktionEntity> attractionsByName = new HashMap<>();
+        attractionList.forEach(ent -> attractionsByName.put(ent.getName(), ent));
+        model.addAttribute("attractionsByName", attractionsByName);
     }
 
-    private void publishAttractionSponsors(Model model) {
+    private void publishAttractionsSponsors(Model model) {
         // get sponsor-event mapping
         Iterable<SponsorAttraktionEntity> sponsorAttraktionEntities = sponsorAttraktionRepository.findAll();
 
         // convert iterable to Map, resolving foreign key association to sponsor
-        Map<String, String> attraktionSponsorMapping = new HashMap<>();
-        for(SponsorAttraktionEntity sponsorVeranstaltungEntity : sponsorAttraktionEntities) {
-            attraktionSponsorMapping.put(sponsorVeranstaltungEntity.getAttraktion(), sponsorVeranstaltungEntity.getSponsorName());
+        Map<String, List<SponsorEntity>> attraktionSponsorMapping = new HashMap<>();
+        for(SponsorAttraktionEntity ent : sponsorAttraktionEntities) {
+            if(!attraktionSponsorMapping.containsKey(ent.getAttraktion()))
+                attraktionSponsorMapping.put(ent.getAttraktion(), new ArrayList<>());
+
+            // resolve sponsor
+            Optional<SponsorEntity> sponsor = sponsorRepository.findById(ent.getSponsorName());
+            sponsor.ifPresent(attraktionSponsorMapping.get(ent.getAttraktion())::add);
         }
-        model.addAttribute("attractionSponsors", attraktionSponsorMapping);
+        model.addAttribute("attractionsSponsors", attraktionSponsorMapping);
     }
 
     private void publishSponsorAttractions(Model model, String sponsor) {
@@ -317,7 +327,7 @@ public class ServerPageController {
     public String getAttractionlist(Model model, @RequestParam(required = false) String search) {
         publishSearch(model, search);
         publishAttractions(model);
-        publishAttractionSponsors(model);
+        publishAttractionsSponsors(model);
         publishUtil(model);
         return "sponsor-attractionlist";
     }

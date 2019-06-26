@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<c:set var="context" value="${pageContext.request.contextPath}" />
+<c:set var="context" value="${pageContext.request.contextPath}"/>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -11,41 +11,33 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+          integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
-    <script src="${context}/js/util.js"></script>
     <script src="${context}/js/api_client.js"></script>
+    <script>api_set_context("${context}")</script>
 
     <title>Login für Sponsoren</title>
 
-    <script>
-        function DoLogin() {
-            var username = document.getElementById("username").value;
-            var password = document.getElementById("password").value;
-
-            // TODO: send actual login request to backend
-
-            // pretend we logged in
-            setCookie("username", username, 180, "webinterface");
-
-            // redirect to dashboard
-            window.location.href = "${context}/webinterface/home?sponsor=" + username;
+    <style>
+        .navbar-center {
+            position: absolute;
+            width: 100%;
+            left: 0;
+            top: 0;
+            text-align: center;
         }
-
-        function Init() {
-            // logout
-            deleteCookie("username", "webinterface");
-        }
-    </script>
+    </style>
 
 </head>
 <body onload="Init()">
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" style="color: whitesmoke">Sponsoren-Login</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
-            aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark justify-content-center">
+    <ul class="nav navbar-nav ml-auto">
+    </ul>
+    <p class="navbar-text navbar-center text-white" style="font-size: x-large">Sponsoren Login</p>
+    <a id="logoutbutton" class="btn btn-danger disabled" href="${context}/logout" role="button"><i
+            class="fa fa-sign-out-alt" aria-disabled="true"></i>
+    </a>
 </nav>
 <div class="container mt-5">
     <div class="row">
@@ -57,7 +49,7 @@
                 <div class="card-body">
                     <h5 class="card-title">Login</h5>
 
-                    <form action="javascript:DoLogin();">
+                    <form name="f" action="${context}/webinterface" method="POST">
                         <div class="input-group flex-nowrap">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">
@@ -65,7 +57,8 @@
                                 </span>
 
                             </div>
-                            <input id="username" type="text" class="form-control" placeholder="Username" aria-label="Username"
+                            <input name="username" id="username" type="text" class="form-control" placeholder="Username"
+                                   aria-label="Username"
                                    aria-describedby="addon-wrapping">
                         </div>
                         <div class="input-group flex-nowrap">
@@ -74,14 +67,22 @@
                                     <i class="fa fa-unlock-alt"></i>
                                 </span>
                             </div>
-                            <input id="password" type="password" class="form-control" placeholder="Password" aria-label="Password"
+                            <input name="password" id="password" type="password" class="form-control"
+                                   placeholder="Password" aria-label="Password"
                                    aria-describedby="addon-wrapping">
                         </div>
                         <p class="card-text"></p>
-                        <input type="submit" class="btn btn-dark" onclick="DoLogin()" value="Anmelden">
+                        <input type="submit" class="btn btn-dark" value="Anmelden">
+                        <input type="hidden"
+                               name="${_csrf.parameterName}"
+                               value="${_csrf.token}"/>
                     </form>
-
                 </div>
+                <c:if test="${param.error != null}">
+                    <p style="color:red;">
+                        Falscher Username oder Passwort!
+                    </p>
+                </c:if>
             </div>
         </div>
     </div>

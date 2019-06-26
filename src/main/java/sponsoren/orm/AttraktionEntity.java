@@ -4,22 +4,32 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "location", schema = "buga19sponsoren", catalog = "")
-public class LocationEntity {
+@Table(name = "attraktion", schema = "buga19sponsoren", catalog = "")
+public class AttraktionEntity {
     private String name;
+    private String beschreibung;
     private double lat;
     private double lon;
     private int id;
 
     @Id
-    @Basic
-    @Column(name = "Name")
+    @Column(name = "Name", nullable = false, unique = true)
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Basic
+    @Column(name = "Beschreibung")
+    public String getBeschreibung() {
+        return beschreibung;
+    }
+
+    public void setBeschreibung(String beschreibung) {
+        this.beschreibung = beschreibung;
     }
 
     @Basic
@@ -42,6 +52,7 @@ public class LocationEntity {
         this.lon = lon;
     }
 
+    @Basic
     @Column(name = "ID")
     public int getId() {
         return id;
@@ -55,15 +66,12 @@ public class LocationEntity {
     public boolean equals(Object o) {
         if(this == o) return true;
         if(o == null || getClass() != o.getClass()) return false;
-        LocationEntity that = (LocationEntity)o;
-        return id == that.id &&
-                Double.compare(that.lat, lat) == 0 &&
-                Double.compare(that.lon, lon) == 0 &&
-                Objects.equals(name, that.name);
+        AttraktionEntity that = (AttraktionEntity)o;
+        return Objects.equals(name, that.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, lat, lon);
+        return Objects.hash(name);
     }
 }

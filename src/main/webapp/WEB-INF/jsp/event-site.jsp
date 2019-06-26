@@ -52,10 +52,8 @@
         </a>
     </div>
 </nav>
-<div class="pt-4"></div>
-<div class="container-fluid pt-5 pb-5 mt-5">
-    <div class="card justify-content-center pb-0">
-        <span class="d-block p-1 bg-light text-dark text-center"></span>
+<div class="container-fluid mt-5 pt-5">
+    <div class="card">
         <div class="container">
             <div class="card-text text-dark">
                 ${event.beschreibung}
@@ -65,19 +63,13 @@
                     <div class="input-group-prepend pr-3">
                         <span><i class="fas fa-thumbtack"></i></span>
                     </div>
-                    <c:choose>
-                        <c:when test="${event.discriminator=='Betriebsfeier'}">
-                            <a href="${context}/companyparty-map?id=${event.id}" class="btn btn-secondary btn-lg active"
-                               role="button"
-                               aria-pressed="true">${locations.get(event.locationID).name}</a>
-                        </c:when>
-                        <c:otherwise>
-                            ${locations.get(event.locationID).name}
-                            <br/>
-                        </c:otherwise>
-                    </c:choose>
-
-                    <div class="card-text text-dark">
+                    <span class="align-middle">
+                                            <a href="${context}/companyparty-map?id=${event.id}"
+                                               class="btn btn-secondary btn-lg active"
+                                               role="button"
+                                               aria-pressed="true">${locations.get(event.locationID).name}</a>
+                    </span>
+                    <div class="input-group-prepend pr-3">
                         <span><i class="far fa-calendar-alt"></i></span>
                     </div>
                     <span class="align-middle">

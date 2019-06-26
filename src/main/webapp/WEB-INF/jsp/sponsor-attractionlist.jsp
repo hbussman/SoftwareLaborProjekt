@@ -2,7 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%--@elvariable id="util" type="sponsoren.Util"--%>
 <%--@elvariable id="attractions" type="java.util.List<sponsoren.orm.AttraktionEntity>"--%>
-<%--@elvariable id="attractionSponsors" type="java.util.Map<java.lang.String, java.lang.String>"--%>
+<%--@elvariable id="attractionsSponsors" type="java.util.Map<java.lang.String, java.util.List<sponsoren.orm.SponsorEntity>>"--%>
 <%--@elvariable id="searchString" type="java.lang.String"--%>
 <c:set var="context" value="${pageContext.request.contextPath}"/>
 
@@ -75,19 +75,29 @@
     <c:forEach items="${attractions}" var="attraction">
         <c:if test="${util.searchMatch(searchString, attraction)}">
 
-            <c:if test="${attractionSponsors.containsKey(attraction.name)}">
-                <a id="attraction-${attraction.name}" href="https://seserver.se.hs-heilbronn.de:9443/buga19bugascout/#/details/${attraction.id}" target="_blank">
+            <!-- only show attractions that are sponsored by someone (ignored ${attraction.name}) -->
+            <c:if test="${attractionsSponsors.containsKey(attraction.name)}">
                     <div class="card mb-2" style=" width: 312px;">
-                        <span class="d-block p-1 bg-light border-bottom text-dark text-center"><b>${attraction.name}</b></span>
-                        <div class="container">
-                            <div class="card-text text-dark" style="font-size: small">
-                                ${util.truncateLongText(attraction.beschreibung, 350)}
+                        <a id="attraction-${attraction.name}" href="https://seserver.se.hs-heilbronn.de:9443/buga19bugascout/#/details/${attraction.id}" target="_blank">
+                            <span class="d-block p-1 bg-light border-bottom text-dark text-center"><b>${attraction.name}</b></span>
+                            <div class="container">
+                                <div class="card-text text-dark" style="font-size: small">
+                                    ${util.truncateLongText(attraction.beschreibung, 350)}
+                                </div>
                             </div>
-                        </div>
-                        <a href="${context}/sponsor?name=${attractionSponsors.get(attraction.name)}"><span class="d-block p-1 bg-light border-top text-center"><b>Gesponsort von ${attractionSponsors.get(attraction.name)}</b></span>
                         </a>
+
+                        <!-- show all sponsors -->
+                        <span class="d-block p-1 bg-light border-top text-center">
+                            <b>Gesponsort von
+                                <a href="${context}/sponsor?name=${attractionsSponsors.get(attraction.name).get(0).name}">${attractionsSponsors.get(attraction.name).get(0).name}</a>
+                                <c:forEach items="${attractionsSponsors.get(attraction.name).subList(1, attractionsSponsors.get(attraction.name).size())}" var="sponsor">
+                                    , <a href="${context}/sponsor?name=${sponsor.name}">${sponsor.name}</a>
+                                </c:forEach>
+                            </b>
+                        </span>
+
                     </div>
-                </a>
             </c:if>
 
         </c:if>

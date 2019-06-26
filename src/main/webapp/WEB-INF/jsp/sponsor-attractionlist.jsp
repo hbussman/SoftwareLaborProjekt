@@ -69,6 +69,7 @@
         </a>
     </div>
 </nav>
+<div class="pt-4"></div>
 <div class="container-fluid pt-5 pb-5 mt-5">
     <div class="row justify-content-center pb-5 mx-1">
     <c:forEach items="${attractions}" var="attraction">

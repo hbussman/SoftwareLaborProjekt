@@ -22,92 +22,74 @@
     <script src="${context}/js/api_client.js"></script>
     <script>api_set_context("${context}")</script>
 
+    <!-- own css -->
+    <link rel="stylesheet" type="text/css" href="${context}/css/background.css" media="screen"/>
+
     <title>Event-site</title>
     <style>
-        .navbar-center {
-            position: absolute;
-            overflow: visible;
-            height: 0;
-            width: 100%;
-            left: 0;
-            top: 0;
-            text-align: center;
-        }
-
-        .bg-image {
-             background: url(https://i.imgur.com/zh6A23R.jpg) no-repeat center center fixed;
- 			 -webkit-background-size: cover;
-  			 -moz-background-size: cover;
-  			 -o-background-size: cover;
-			 background-size: cover;
-        }
     </style>
 </head>
 
 <body class="bg-image">
-<nav class="navbar fixed-top navbar-dark bg-dark" style="min-height: 50px">
-    <p class="navbar-text navbar-center text-white" style="font-size: x-large">${event.name}</p>
+
+<nav class="navbar fixed-top navbar-dark bg-dark pb-0" style="min-height: 50px">
+    <div class="container justify-content-center">
+        <div class="navbar-header">
+            <p class="navbar-brand "> ${event.name} </p>
+        </div>
+    </div>
 </nav>
 <nav class="navbar fixed-bottom navbar-expand-lg navbar-dark bg-dark justify-content-center">
-    <div class="btn-group" role="group" aria-label="Basic example" style="min-width: 100%">
-        <a id="Attractionbutton" class="btn btn-primary btn-light " aria-disabled="false" href="${context}/attractions"
-           role="button"><i class="fas fa-landmark"></i></a>
-        <a id="Homebutton" class="btn btn-primary btn-light" aria-disabled="false" href="${context}/sponsoren"
-           style="background: aquamarine"><i class="fas fa-home"></i></a>
-        <a id="Eventbutton" class="btn btn-primary btn-light " href="${context}/events" role="button"
-           aria-disabled="false"><i class="far fa-calendar-alt"></i>
+    <div class="btn-group" role="group" style="min-width: 100%">
+        <a id="Attractionbutton" class="btn btn-primary btn-light" style="border:1px solid black"
+           href="${context}/attractions" role="button"><i
+                class="fas fa-landmark"></i></a>
+        <a id="Homebutton" class="btn btn-primary btn-light" style="border:1px solid black" href="${context}/sponsoren"
+        ><i class="fas fa-home"></i></a>
+        <a id="Eventbutton" class="btn btn-primary btn-light" href="${context}/events" role="button"
+           style="background: aquamarine; border:1px solid black"
+        ><i class="far fa-calendar-alt"></i>
         </a>
     </div>
 </nav>
-
-<div class="container-fluid pt-5">
-
-    <div class="card justify-content-center pb-0">
-        <span class="d-block p-1 bg-light text-dark text-center"></span>
+<div class="container-fluid mt-5 pt-5">
+    <div class="card">
         <div class="container">
             <div class="card-text text-dark">
                 ${event.beschreibung}
             </div>
             <div class="card-body text-dark">
                 <div class="input-group">
-                    <div class="input-group-prepend">
+                    <div class="input-group-prepend pr-3">
                         <span><i class="fas fa-thumbtack"></i></span>
                     </div>
-                <c:choose>
-    			<c:when test="${event.discriminator=='Betriebsfeier'}">
-    				<a  href="${context}/companyparty-map?id=${event.id}" class="btn btn-secondary btn-lg active" role="button"
-    					aria-pressed="true">${locations.get(event.locationID).name}</a> 
-    			</c:when>
-    			<c:otherwise>
-        			${locations.get(event.locationID).name}
-        		<br />
-    			</c:otherwise>
-				</c:choose>
-                
-                <div class="card-text text-dark"><i
-                        class="far fa-calendar-alt"></i> ${util.prettifyTimestamp(event.start)}
-                    - ${util.prettifyTimestamp(event.ende)}</div>
+                    <span class="align-middle">
+                                            <a href="${context}/companyparty-map?id=${event.id}"
+                                               class="btn btn-secondary btn-lg active"
+                                               role="button"
+                                               aria-pressed="true">${locations.get(event.locationID).name}</a>
+                    </span>
+                    <div class="input-group-prepend pr-3">
+                        <span><i class="far fa-calendar-alt"></i></span>
+                    </div>
+                    <span class="align-middle">
+                        ${util.prettifyTimestamp(event.start)}- <br>${util.prettifyTimestamp(event.ende)}
+                    </span>
                 </div>
             </div>
-            <span class="d-block p-1 bg-light text-dark text-center"><b>Gesponsort von</b></span>
-            <div class="row no-gutters justify-content-center">
-
-                <c:forEach items="${eventSponsors}" var="sponsor">
-                
-                    <div class="card shadow my-3 bg-white rounded">
+        </div>
+        <span class="d-block p-1 bg-light text-dark text-center"><b>Gesponsort von</b></span>
+        <div class="row no-gutters justify-content-center">
+            <c:forEach items="${eventSponsors}" var="sponsor">
+                <div class="card shadow my-3 bg-white rounded">
                     <a id="${event.id}" href="${context}/sponsor?name=${sponsor.name}">
                         <img src="${context}/image/${sponsor.name}_scaled.png" class="card-img-top"
                              alt="${sponsor.name}-Logo">
                     </a>
-                    </div>
-                
-                </c:forEach>
-            </div>
+                </div>
+            </c:forEach>
         </div>
-        
-
     </div>
 </div>
-
 </body>
 </html>

@@ -77,7 +77,11 @@
     </div>
 </nav>
 
+<div class="pt-4"></div>
 <div class="container-fluid pt-3 pb-5 mt-5">
+    <c:if test="${searchString != null}">
+        <h3>Suchergebnisse für '${searchString}'</h3>
+    </c:if>
     <c:forEach items="${sponsorsSorted}" var="sponsorlist">
         <div class="row no-gutters justify-content-center">
             <c:forEach items="${sponsorlist}" var="sponsor">
@@ -100,7 +104,9 @@
 
         </div>
         <div class="col col-12 justify-content-center py-md-4 px-md-4 py-sm-3  px-sm-3 py-2  px-2">
-            <div class="border-top"></div>
+            <c:if test="${searchString == null || searchString.length() == 0}">
+                <div class="border-top"></div>
+            </c:if>
         </div>
     </c:forEach>
 

@@ -75,7 +75,7 @@
             <div class="row no-gutters justify-content-center">
                 <c:forEach items="${eventSponsors}" var="sponsor">
                     <div class="card shadow my-3 bg-white rounded">
-                        <a id="${event.id}" href="${context}/sponsor?name=${sponsor.name}">
+                        <a id="${event.id}" href="${context}/sponsor?  name=${sponsor.name}">
                             <img src="${context}/image/${sponsor.name}_scaled.png" class="card-img-top"
                                  alt="${sponsor.name}-Logo">
                         </a>

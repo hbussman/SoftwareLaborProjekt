@@ -77,7 +77,7 @@
     </div>
 </nav>
 
-<div class="container-fluid pt-5 pb-5 mt-5">
+<div class="container-fluid pt-3 pb-5 mt-5">
     <c:forEach items="${sponsorsSorted}" var="sponsorlist">
         <div class="row no-gutters justify-content-center">
             <c:forEach items="${sponsorlist}" var="sponsor">

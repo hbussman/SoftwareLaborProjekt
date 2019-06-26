@@ -1,9 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%--@elvariable id="util" type="sponsoren.Util"--%>
-<%--@elvariable id="locations" type="java.util.Map<Integer, sponsoren.orm.LocationEntity>"--%>
-<%--@elvariable id="events" type="java.lang.List<sponsoren.orm.VeranstaltungEntity>"--%>
-<%--@elvariable id="companyPartys" type="java.lang.List<sponsoren.orm.VeranstaltungEntity>"--%>
+<%--@elvariable id="attractions" type="java.util.List<sponsoren.orm.AttraktionEntity>"--%>
+<%--@elvariable id="attractionSponsors" type="java.util.Map<java.lang.String, java.lang.String>"--%>
 <%--@elvariable id="searchString" type="java.lang.String"--%>
 <c:set var="context" value="${pageContext.request.contextPath}"/>
 
@@ -25,19 +24,18 @@
     <script>api_set_context("${context}")</script>
     <script src="${context}/js/searchbar.js"></script>
 
-    <title>Sponsoren-Veranstaltungsliste</title>
-
     <!-- own css -->
-    <link rel="stylesheet" type="text/css" href="${context}/css/background.css" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="${context}/css/background.css" media="screen" />
+
+    <title>Sponsoren-Attraktionenliste</title>
 
 </head>
 <body class="bg-image">
 <nav class="navbar fixed-top navbar-dark bg-dark pb-0" style="min-height: 50px">
     <div class="container justify-content-center">
         <div class="navbar-header">
-            <p class="navbar-brand "> Veranstaltungen </p>
-            <button input class="btn btn-light" type="submit" data-toggle="collapse"
-                    data-target="#navbar-responsive-65"><i class="fas fa-search"></i>
+            <p class="navbar-brand " > Attraktionen </p>
+            <button input class="btn btn-light" type="submit"  data-toggle="collapse" data-target="#navbar-responsive-65"> <i class="fas fa-search"></i>
             </button>
         </div>
         <div class="collapse" id="navbar-responsive-65">
@@ -45,17 +43,15 @@
                 <script>
                     function search() {
                         var content = document.getElementById("suchFeld").value;
-                        window.location = "${context}/events?search=" + content;
+                        window.location="${context}/attractions?search="+content;
                     }
                 </script>
-                <form class="search-form searchbar" role="search" id="hiddenSearchBox" action="javascript:search()"
-                      method="get">
+                <form class="search-form searchbar" role="search" id="hiddenSearchBox" action="javascript:search()" method="get">
                     <div class="input-group">
                         <input type="hidden" name="id" value="63">
                         <input id="suchFeld" type="search" name="keywords" class="form-control" placeholder="Suche...">
                         <div class="input-group-btn">
-                            <input class="btn btn-light" type="submit" value="Suchen" data-toggle="searchbar"
-                                   data-target="#hiddenSearchBox">
+                            <input class="btn btn-light" type="submit" value="Suchen" data-toggle="searchbar" data-target="#hiddenSearchBox">
                             </input>
                         </div>
                     </div>
@@ -66,62 +62,33 @@
 </nav>
 <nav class="navbar fixed-bottom navbar-expand-lg navbar-dark bg-dark justify-content-center">
     <div class="btn-group" role="group" style="min-width: 100%">
-        <a id="Attractionbutton" class="btn btn-primary btn-light" style="border:1px solid black"
-           href="${context}/attractions" role="button"><i
-                class="fas fa-landmark"></i></a>
-        <a id="Homebutton" class="btn btn-primary btn-light" style="border:1px solid black" href="${context}/sponsoren"
-        ><i class="fas fa-home"></i></a>
-        <a id="Eventbutton" class="btn btn-primary btn-light" href="${context}/events" role="button"
-           style="background: aquamarine; border:1px solid black"
-        ><i class="far fa-calendar-alt"></i>
+        <a id="Attractionbutton" class="btn btn btn-light" style="background: aquamarine; border:1px solid black"
+           href="${context}/attractions" role="button"><i class="fas fa-landmark"></i></a>
+        <a id="Homebutton" class="btn btn-light" style="border:1px solid black" href="${context}/sponsoren"><i class="fas fa-home"></i></a>
+        <a id="Eventbutton" class="btn btn-light" style="border:1px solid black" href="${context}/events" role="button"><i class="far fa-calendar-alt"></i>
         </a>
     </div>
 </nav>
 <div class="pt-4"></div>
 <div class="container-fluid pt-5 pb-5 mt-5">
     <div class="row justify-content-center pb-5 mx-1">
-        <c:forEach items="${events}" var="event">
-            <c:if test="${util.searchMatch(searchString, event)}">
+        <c:forEach items="${attractions}" var="attraction">
+            <c:if test="${util.searchMatch(searchString, attraction)}">
 
-                <a id="${event.id}card" href="${context}/event?id=${event.id}">
-                    <div class="card mb-2 col-12" style="max-height: 200px; width: 18rem">
-                        <span class="d-block p-1 bg-light text-dark text-center"><b>${event.name}</b></span>
-                        <div class="card-body text-dark"><i class="fas fa-thumbtack mr-2"></i>
-                                ${locations.get(event.locationID).name}
-                            <div class="card-text text-dark text-left d-flex"><i
-                                    class="far fa-calendar-alt mr-2"></i>
-                                <p>
-                                        ${util.prettifyTimestamp(event.start)} -<br>
-                                        ${util.prettifyTimestamp(event.ende)}
-                                </p>
+                <c:if test="${attractionSponsors.containsKey(attraction.name)}">
+                    <a id="attraction-${attraction.name}" href="https://seserver.se.hs-heilbronn.de:9443/buga19bugascout/#/details/${attraction.id}" target="_blank">
+                        <div class="card mb-2" style=" width: 312px;">
+                            <span class="d-block p-1 bg-light border-bottom text-dark text-center"><b>${attraction.name}</b></span>
+                            <div class="container">
+                                <div class="card-text text-dark" style="font-size: small">
+                                        ${util.truncateLongText(attraction.beschreibung, 350)}
+                                </div>
                             </div>
+                            <a href="${context}/sponsor?name=${attractionSponsors.get(attraction.name)}"><span class="d-block p-1 bg-light border-top text-center"><b>Gesponsort von ${attractionSponsors.get(attraction.name)}</b></span>
+                            </a>
                         </div>
-                    </div>
-                </a>
-            </c:if>
-        </c:forEach>
-    </div>
-</div>
-
-<nav class="navbar navbar-dark bg-dark justify-content-center" style="min-height: 50px">
-    <p class="navbar-text navbar-center text-white" style="font-size: x-large">Betriebsfeiern</p>
-</nav>
-<div class="container-fluid mt-3">
-    <div class="row justify-content-center pb-5 mx-1">
-        <c:forEach items="${companyPartys}" var="event">
-            <c:if test="${util.searchMatch(searchString, event)}">
-
-                <a id="${event.id}card" href="${context}/event?id=${event.id}">
-                    <div class="card mb-2 col-12" style="max-height: 200px">
-                        <span class="d-block p-1 bg-light text-dark text-center"><b>${event.name}</b></span>
-                        <div class="card-body text-dark"><i class="fas fa-thumbtack"></i>
-                                ${locations.get(event.locationID).name}
-                            <div class="card-text text-dark"><i
-                                    class="far fa-calendar-alt"></i> ${util.prettifyTimestamp(event.start)}
-                                - ${util.prettifyTimestamp(event.ende)}</div>
-                        </div>
-                    </div>
-                </a>
+                    </a>
+                </c:if>
 
             </c:if>
         </c:forEach>
@@ -139,6 +106,5 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
-
 </body>
 </html>

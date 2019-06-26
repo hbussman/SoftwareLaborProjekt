@@ -309,6 +309,7 @@ public class ServerPageController {
         publishSponsors(model);
         publishEvents(model);
         publishLocations(model);
+        publishEventsSponsors(model);
 
         return "sponsor-eventlist";
     }

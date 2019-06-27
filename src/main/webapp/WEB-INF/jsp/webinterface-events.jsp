@@ -481,7 +481,12 @@
 
                                     <!-- Löschen Button -->
                                     <button type="button" class="btn btn-danger mt-1" data-toggle="modal" data-target="#delete-modal-${event.id}">
-                                        Löschen
+                                        <c:if test="${eventsSponsors.get(event.id).size() == 1}">
+                                            Löschen
+                                        </c:if>
+                                        <c:if test="${eventsSponsors.get(event.id).size() >= 2}">
+                                            Austragen
+                                        </c:if>
                                     </button>
 
                                     <!-- Löschen Bestätigungs-Modal -->
@@ -503,7 +508,13 @@
                                                     </button>
                                                     <button type="button" class="btn btn-danger"
                                                             onclick="deleteVeranstaltung(${event.id}, '${event.name}');"
-                                                            data-dismiss="modal">Löschen
+                                                            data-dismiss="modal">
+                                                        <c:if test="${eventsSponsors.get(event.id).size() == 1}">
+                                                            Löschen
+                                                        </c:if>
+                                                        <c:if test="${eventsSponsors.get(event.id).size() >= 2}">
+                                                            Austragen
+                                                        </c:if>
                                                     </button>
                                                 </div>
                                             </div>

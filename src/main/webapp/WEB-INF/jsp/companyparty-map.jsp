@@ -74,7 +74,7 @@
     </div>
 </nav>
 	
-	<iframe src="https://seserver.se.hs-heilbronn.de:3000/api/map/lon=9.20935&lat=49.14788&id=203&zoom=15" frameborder="0" style="width: 100%; height: 100%">
+	<iframe src="https://seserver.se.hs-heilbronn.de:3000/api/map/id=${event.locationID}" frameborder="0" style="width: 100%; height: 100%">
 	</iframe>
 	</body>
 </html>

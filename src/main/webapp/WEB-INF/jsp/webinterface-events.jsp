@@ -500,7 +500,13 @@
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    Soll die Veranstaltung wirklich gelöscht werden?
+                                                    <c:if test="${eventsSponsors.get(event.id).size() == 1}">
+                                                        Soll die Veranstaltung wirklich gelöscht werden?
+                                                    </c:if>
+                                                    <c:if test="${eventsSponsors.get(event.id).size() >= 2}">
+                                                        Wollen Sie sich wirklich aus der Veranstaltung austragen?
+                                                        Sie werden dann nicht mehr in der Lage sein, diese zu bearbeiten.
+                                                    </c:if>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">
